@@ -1,2 +1,2 @@
 # twamp-yang
-GitHub repository for BFD YANG module
+GitHub repository for TWAMP YANG module
