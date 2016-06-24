@@ -149,23 +149,22 @@
 
     <author fullname="Kostas Pentikousis" initials="K.P." role="editor"
             surname="Pentikousis">
-      <organization>Travelping</organization>
+      <organization abbrev="EICT"/>
 
       <address>
         <postal>
-          <street>Koernerstr. 7-10</street>
-		  
-		  <code>10785</code>
-          <city> Berlin</city>
+          <street/>
+
+          <city>Berlin</city>
 
           <country>Germany</country>
         </postal>
 
-        <email>k.pentikousis@travelping.com</email>
+        <email>pentikousis@gmail.com</email>
       </address>
     </author>
 
-    <date year="2016"/>
+    <date day="28" month="June" year="2016"/>
 
     <area>Transport</area>
 
@@ -2335,7 +2334,21 @@ module ietf-twamp {
     </section>
 
     <section anchor="security" title="Security Considerations">
-      <t>TBD</t>
+      <t>The YANG module defined in this draft is designed to be accessed via
+      among other protocols by <xref target="RFC6241">NETCONF</xref>.
+      Protocols like NETCONF use a secure a secure transport layer like SSH
+      that is mandatory to implement. The <xref target="RFC6536">NETCONF
+      Access Control Module (NACM)</xref> provides the means to restrict
+      access for particular users to a pre-configured set of NETCONF protocol
+      operations and attributes.</t>
+
+      <t>There are a number of nodes defined in this YANG module which are
+      writeable. These data nodes may be considered sensitive and vulnerable
+      to attacks in some network environments. Ability to write into these
+      nodes without proper protection can have a negative effect on the
+      devices that support this feature.</t>
+
+      <t>Examples of nodes that are particularly vulnerable include</t>
     </section>
 
     <section anchor="iana" title="IANA Considerations">
@@ -2411,6 +2424,8 @@ module ietf-twamp {
       <?rfc ?>
 
       <?rfc include='reference.RFC.6241'?>
+
+      <?rfc include='reference.RFC.6536'?>
 
       <?rfc include='reference.RFC.7426'?>
 
