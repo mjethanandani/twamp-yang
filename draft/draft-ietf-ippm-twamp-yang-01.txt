@@ -5,15 +5,15 @@
 IPPM WG                                                         R. Civil
 Internet-Draft                                         Ciena Corporation
 Intended status: Standards Track                               A. Morton
-Expires: December 30, 2016                                     AT&T Labs
+Expires: December 29, 2016                                     AT&T Labs
                                                                 L. Zheng
                                                      Huawei Technologies
                                                                R. Rahman
                                                          M. Jethanandani
                                                            Cisco Systems
                                                      K. Pentikousis, Ed.
-                                                                    EICT
-                                                           June 28, 2016
+                                                              Travelping
+                                                           June 27, 2016
 
 
          Two-Way Active Measurement Protocol (TWAMP) Data Model
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 30, 2016.
+   This Internet-Draft will expire on December 29, 2016.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Civil, et al.           Expires December 30, 2016               [Page 1]
+Civil, et al.           Expires December 29, 2016               [Page 1]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Civil, et al.           Expires December 30, 2016               [Page 2]
+Civil, et al.           Expires December 29, 2016               [Page 2]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -127,7 +127,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 1.1.  Motivation
 
-   In current TWAMP deployments, the lack of a standardized data model
+   In current TWAMP deployments the lack of a standardized data model
    limits the flexibility to dynamically instantiate TWAMP-based
    measurements across equipment from different vendors.  In large,
    virtualized, and dynamically instantiated infrastructures where
@@ -165,7 +165,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016               [Page 3]
+Civil, et al.           Expires December 29, 2016               [Page 3]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -206,11 +206,10 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    TWAMP Server and Session-Reflector.  Figure 2 illustrates this
    simplified logical model and indicates the interaction between the
    TWAMP configuration client and server using, for instance, NETCONF
-   [RFC6241] or RESTCONF [I-D.ietf-netconf-restconf].  Note, however,
-   that the specific protocol used to communicate the TWAMP
-   configuration parameters specified herein is outside the scope of
-   this document.  Appendix B considers TWAMP operational commands,
-   which are also outside the scope of this document.
+   [RFC6241] or RESTCONF [I-D.ietf-netconf-restconf].  The data model
+   defined in this document is orthogonal to the specific protocol used
+   between the Config client and Config server to communicate the TWAMP
+   configuration parameters.
 
 
 
@@ -221,7 +220,8 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016               [Page 4]
+
+Civil, et al.           Expires December 29, 2016               [Page 4]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -242,6 +242,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    +-------------------+                       +-------------------+
 
               Figure 2: Simplified TWAMP model and protocols
+
+   Appendix B considers TWAMP operational commands, which are outside
+   the scope of this document.
 
 3.  Data Model Overview
 
@@ -272,16 +275,15 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    control connections.  The main configuration parameters of each
    control connection are:
 
-   o  A name which can be used to uniquely identify at the Control-
-      Client a particular control connection.  This name is necessary
 
 
-
-Civil, et al.           Expires December 30, 2016               [Page 5]
+Civil, et al.           Expires December 29, 2016               [Page 5]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
+   o  A name which can be used to uniquely identify at the Control-
+      Client a particular control connection.  This name is necessary
       for programmability reasons because at the time of creation of a
       TWAMP control connection not all IP and TCP port number
       information needed to uniquely identify the connection is
@@ -331,9 +333,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-
-
-Civil, et al.           Expires December 30, 2016               [Page 6]
+Civil, et al.           Expires December 29, 2016               [Page 6]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -389,7 +389,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016               [Page 7]
+Civil, et al.           Expires December 29, 2016               [Page 7]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -445,7 +445,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016               [Page 8]
+Civil, et al.           Expires December 29, 2016               [Page 8]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -501,7 +501,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016               [Page 9]
+Civil, et al.           Expires December 29, 2016               [Page 9]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -557,7 +557,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 10]
+Civil, et al.           Expires December 29, 2016              [Page 10]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -613,7 +613,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 11]
+Civil, et al.           Expires December 29, 2016              [Page 11]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -669,7 +669,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 12]
+Civil, et al.           Expires December 29, 2016              [Page 12]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -725,7 +725,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 13]
+Civil, et al.           Expires December 29, 2016              [Page 13]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -781,7 +781,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 14]
+Civil, et al.           Expires December 29, 2016              [Page 14]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -837,7 +837,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 15]
+Civil, et al.           Expires December 29, 2016              [Page 15]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -893,7 +893,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 16]
+Civil, et al.           Expires December 29, 2016              [Page 16]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -949,7 +949,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 17]
+Civil, et al.           Expires December 29, 2016              [Page 17]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1005,7 +1005,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 18]
+Civil, et al.           Expires December 29, 2016              [Page 18]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1061,7 +1061,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 19]
+Civil, et al.           Expires December 29, 2016              [Page 19]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1117,7 +1117,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 20]
+Civil, et al.           Expires December 29, 2016              [Page 20]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1173,7 +1173,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 21]
+Civil, et al.           Expires December 29, 2016              [Page 21]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1229,7 +1229,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 22]
+Civil, et al.           Expires December 29, 2016              [Page 22]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1285,7 +1285,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 23]
+Civil, et al.           Expires December 29, 2016              [Page 23]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1341,7 +1341,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 24]
+Civil, et al.           Expires December 29, 2016              [Page 24]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1397,7 +1397,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 25]
+Civil, et al.           Expires December 29, 2016              [Page 25]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1453,7 +1453,7 @@ module: ietf-twamp
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 26]
+Civil, et al.           Expires December 29, 2016              [Page 26]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1509,7 +1509,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 27]
+Civil, et al.           Expires December 29, 2016              [Page 27]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1565,7 +1565,7 @@ module ietf-twamp {
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 28]
+Civil, et al.           Expires December 29, 2016              [Page 28]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1621,7 +1621,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 29]
+Civil, et al.           Expires December 29, 2016              [Page 29]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1677,7 +1677,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 30]
+Civil, et al.           Expires December 29, 2016              [Page 30]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1733,7 +1733,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 31]
+Civil, et al.           Expires December 29, 2016              [Page 31]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1789,7 +1789,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 32]
+Civil, et al.           Expires December 29, 2016              [Page 32]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1845,7 +1845,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 33]
+Civil, et al.           Expires December 29, 2016              [Page 33]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1901,7 +1901,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 34]
+Civil, et al.           Expires December 29, 2016              [Page 34]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -1957,7 +1957,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 35]
+Civil, et al.           Expires December 29, 2016              [Page 35]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2013,7 +2013,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 36]
+Civil, et al.           Expires December 29, 2016              [Page 36]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2069,7 +2069,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 37]
+Civil, et al.           Expires December 29, 2016              [Page 37]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2125,7 +2125,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 38]
+Civil, et al.           Expires December 29, 2016              [Page 38]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2181,7 +2181,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 39]
+Civil, et al.           Expires December 29, 2016              [Page 39]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2237,7 +2237,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 40]
+Civil, et al.           Expires December 29, 2016              [Page 40]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2293,7 +2293,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 41]
+Civil, et al.           Expires December 29, 2016              [Page 41]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2349,7 +2349,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 42]
+Civil, et al.           Expires December 29, 2016              [Page 42]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2405,7 +2405,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 43]
+Civil, et al.           Expires December 29, 2016              [Page 43]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2461,7 +2461,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 44]
+Civil, et al.           Expires December 29, 2016              [Page 44]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2517,7 +2517,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 45]
+Civil, et al.           Expires December 29, 2016              [Page 45]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2573,7 +2573,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 46]
+Civil, et al.           Expires December 29, 2016              [Page 46]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2629,7 +2629,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 47]
+Civil, et al.           Expires December 29, 2016              [Page 47]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2685,7 +2685,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 48]
+Civil, et al.           Expires December 29, 2016              [Page 48]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2741,7 +2741,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 49]
+Civil, et al.           Expires December 29, 2016              [Page 49]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2797,7 +2797,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 50]
+Civil, et al.           Expires December 29, 2016              [Page 50]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2853,7 +2853,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 51]
+Civil, et al.           Expires December 29, 2016              [Page 51]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2909,7 +2909,7 @@ A.1.  Control-Client
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 52]
+Civil, et al.           Expires December 29, 2016              [Page 52]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -2965,7 +2965,7 @@ A.2.  Server
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 53]
+Civil, et al.           Expires December 29, 2016              [Page 53]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -3021,7 +3021,7 @@ A.3.  Session-Sender
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 54]
+Civil, et al.           Expires December 29, 2016              [Page 54]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -3077,7 +3077,7 @@ A.4.  Session-Reflector
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 55]
+Civil, et al.           Expires December 29, 2016              [Page 55]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -3133,7 +3133,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 56]
+Civil, et al.           Expires December 29, 2016              [Page 56]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -3189,7 +3189,7 @@ Authors' Addresses
 
 
 
-Civil, et al.           Expires December 30, 2016              [Page 57]
+Civil, et al.           Expires December 29, 2016              [Page 57]
 
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
@@ -3232,10 +3232,12 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
    Kostas Pentikousis (editor)
-   Berlin
+   Travelping
+   Koernerstr. 7-10
+   Berlin  10785
    Germany
 
-   Email: pentikousis@gmail.com
+   Email: k.pentikousis@travelping.com
 
 
 
@@ -3243,6 +3245,4 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-
-
-Civil, et al.           Expires December 30, 2016              [Page 58]
+Civil, et al.           Expires December 29, 2016              [Page 58]

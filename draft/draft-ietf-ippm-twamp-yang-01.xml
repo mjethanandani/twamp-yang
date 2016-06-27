@@ -149,22 +149,23 @@
 
     <author fullname="Kostas Pentikousis" initials="K.P." role="editor"
             surname="Pentikousis">
-      <organization abbrev="EICT"/>
+      <organization>Travelping</organization>
 
       <address>
         <postal>
-          <street/>
-
-          <city>Berlin</city>
+          <street>Koernerstr. 7-10</street>
+		  
+		  <code>10785</code>
+          <city> Berlin</city>
 
           <country>Germany</country>
         </postal>
 
-        <email>pentikousis@gmail.com</email>
+        <email>k.pentikousis@travelping.com</email>
       </address>
     </author>
 
-    <date day="28" month="June" year="2016"/>
+    <date year="2016"/>
 
     <area>Transport</area>
 
@@ -190,7 +191,7 @@
       this gap by formally specifying the TWAMP data model using YANG.</t>
 
       <section anchor="motivation" title="Motivation">
-        <t>In current TWAMP deployments, the lack of a standardized data model
+        <t>In current TWAMP deployments the lack of a standardized data model
         limits the flexibility to dynamically instantiate TWAMP-based
         measurements across equipment from different vendors. In large,
         virtualized, and dynamically instantiated infrastructures where
@@ -270,12 +271,11 @@
       target="fig:scope2"/> illustrates this simplified logical model and
       indicates the interaction between the TWAMP configuration client and
       server using, for instance, NETCONF <xref target="RFC6241"/> or RESTCONF
-      <xref target="I-D.ietf-netconf-restconf"/>. Note, however, that the
-      specific protocol used to communicate the TWAMP configuration parameters
-      specified herein is outside the scope of this document. <xref
-      target="OperationalCommands"/> considers TWAMP operational commands,
-      which are also outside the scope of this document.</t>
-
+      <xref target="I-D.ietf-netconf-restconf"/>. The data model defined in
+      this document is orthogonal to the specific protocol used between the
+      Config client and Config server to communicate the TWAMP configuration
+      parameters.</t>
+      
       <figure anchor="fig:scope2" title="Simplified TWAMP model and protocols">
         <artwork><![CDATA[
 o-------------------o                       o-------------------o
@@ -294,7 +294,12 @@ o-------------------o                       o-------------------o
 +-------------------+                       +-------------------+
 ]]></artwork>
       </figure>
+
+      <t><xref target="OperationalCommands"/> considers TWAMP operational commands,
+      which are outside the scope of this document.</t>
     </section>
+
+
 
     <section anchor="structure" title="Data Model Overview">
       <t>A TWAMP data model includes four categories of configuration items.
@@ -2349,6 +2354,7 @@ module ietf-twamp {
       devices that support this feature.</t>
 
       <t>Examples of nodes that are particularly vulnerable include</t>
+
     </section>
 
     <section anchor="iana" title="IANA Considerations">
@@ -2424,7 +2430,7 @@ module ietf-twamp {
       <?rfc ?>
 
       <?rfc include='reference.RFC.6241'?>
-
+      
       <?rfc include='reference.RFC.6536'?>
 
       <?rfc include='reference.RFC.7426'?>
