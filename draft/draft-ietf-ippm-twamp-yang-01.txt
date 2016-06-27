@@ -593,7 +593,7 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    exchange (see Section 3.5 of [RFC5357]).  The Control-Client is also
    responsible for scheduling and results collection for TWAMP-Test
    sessions, so twamp-session-request will also hold information related
-   these actions (e.g. pm-index, repeat-interval).
+   to these actions (e.g. pm-index, repeat-interval).
 
    There SHALL be one instance of twamp-session-request for each TWAMP-
    Test session that is to be negotiated by this TWAMP-Control
@@ -648,9 +648,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
            This parameter defines the UDP port number that will be used
            by the Session-Reflector for this TWAMP-Test session.  The
            number is restricted to the dynamic port range (49152 ..
-           65535).  This value will be placed in the Receiver Port field
-           of the Request-TW-Session message.  If this value is not set,
-           the device SHALL use the same port number as defined in the
+           65535) and is to be placed in the Receiver Port field of the
+           Request-TW-Session message.  If this value is not set, the
+           device SHALL use the same port number as defined in the
            server-tcp-port parameter of this twamp-session-request's
            parent twamp-client-ctrl-connection.
 
@@ -683,10 +683,11 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
    start-time
            Time when the session is to be started (but not before the
-           Start-Sessions command is issued).  This value is placed in
-           the Start Time field of the Request-TW-Session message.  The
-           default value of 0 indicates that the session will be started
-           as soon as the Start-Sessions message is received.
+           TWAMP Start-Sessions command is issued; see [RFC5357],
+           Section 3.4).  The start-time value is placed in the Start
+           Time field of the Request-TW-Session message.  The default
+           value of 0 indicates that the session will be started as soon
+           as the Start-Sessions message is received.
 
    repeat
            This value determines if the TWAMP-Test session must be
@@ -719,9 +720,8 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    pm-reg-list
            A list of one or more Performance Metric Registry Index
            values (see [I-D.ietf-ippm-metric-registry], which
-           communicate packet stream characteristics and one or more
-           metrics to be measured.  All members of the pm-reg-list MUST
-           have the same stream characteristics, such that they combine
+           communicate packet stream characteristics along with one or
+           more metrics to be measured.  All members of the pm-reg-list
 
 
 
@@ -730,8 +730,9 @@ Civil, et al.           Expires December 29, 2016              [Page 13]
 Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
-           to specify all metrics that shall be measured on a single
-           stream.
+           MUST have the same stream characteristics, such that they
+           combine to specify all metrics that shall be measured on a
+           single stream.
 
    pm-index
            One or more Numerical index values of a Registered Metric in
@@ -744,7 +745,8 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
    test-session-state
            The TWAMP-Test session state can be either accepted or
-           indicate the respective error code.
+           indicate the respective error code; see Section 3.5 of
+           [RFC5357].
 
    sid     The SID allocated by the Server for this TWAMP-Test session,
            and communicated back to the Control-Client in the SID field
@@ -755,8 +757,6 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    The twamp-server container (see Figure 4) holds items that are
    related to the configuration of the TWAMP Server logical entity
    (recall Figure 1).
-
-
 
 
 

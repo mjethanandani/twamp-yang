@@ -299,8 +299,6 @@ o-------------------o                       o-------------------o
       which are outside the scope of this document.</t>
     </section>
 
-
-
     <section anchor="structure" title="Data Model Overview">
       <t>A TWAMP data model includes four categories of configuration items.
       Global configuration items relate to parameters that are set on a per
@@ -594,7 +592,7 @@ o-------------------o                       o-------------------o
         Request-TW-Session/Accept-Session message exchange (see Section 3.5 of
         <xref target="RFC5357"/>). The Control-Client is also responsible for
         scheduling and results collection for TWAMP-Test sessions, so
-        twamp-session-request will also hold information related these actions
+        twamp-session-request will also hold information related to these actions
         (e.g. pm-index, repeat-interval).</t>
 
         <t>There SHALL be one instance of twamp-session-request for each
@@ -638,7 +636,7 @@ o-------------------o                       o-------------------o
             <t hangText="reflector-udp-port"><vspace/>This parameter defines
             the UDP port number that will be used by the Session-Reflector for
             this TWAMP-Test session. The number is restricted to the dynamic
-            port range (49152 .. 65535). This value will be placed in the
+            port range (49152 .. 65535) and is to  be placed in the
             Receiver Port field of the Request-TW-Session message. If this
             value is not set, the device SHALL use the same port number as
             defined in the server-tcp-port parameter of this
@@ -665,8 +663,9 @@ o-------------------o                       o-------------------o
             (<xref target="RFC5357"/>).</t>
 
             <t hangText="start-time"><vspace/>Time when the session is to be
-            started (but not before the Start-Sessions command is issued).
-            This value is placed in the Start Time field of the
+            started (but not before the TWAMP Start-Sessions command is issued;
+            see <xref target="RFC5357"/>, Section 3.4).
+            The start-time value is placed in the Start Time field of the
             Request-TW-Session message. The default value of 0 indicates that
             the session will be started as soon as the Start-Sessions message
             is received.</t>
@@ -700,8 +699,8 @@ o-------------------o                       o-------------------o
             <t hangText="pm-reg-list"><vspace/> A list of one or more
             Performance Metric Registry Index values (see <xref
             target="I-D.ietf-ippm-metric-registry"/>, which communicate packet
-            stream characteristics and one or more metrics to be measured. All
-            members of the pm-reg-list MUST have the same stream
+            stream characteristics along with one or more metrics to be measured.
+            All members of the pm-reg-list MUST have the same stream
             characteristics, such that they combine to specify all metrics
             that shall be measured on a single stream.</t>
 
@@ -716,7 +715,7 @@ o-------------------o                       o-------------------o
             hangIndent="8" style="hanging">
             <t hangText="test-session-state"><vspace/>The TWAMP-Test session
             state can be either accepted or indicate the respective error
-            code.</t>
+            code; see Section 3.5 of <xref target="RFC5357"/>.</t>
 
             <t hangText="sid">The SID allocated by the Server for this
             TWAMP-Test session, and communicated back to the Control-Client in
