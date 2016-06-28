@@ -209,16 +209,20 @@ module ietf-twamp {
   }
 
   container twamp {
-    description "Top level container";
+    description "The TWAMP data model defines parameters and
+    configuration items for four logical entities:
+    Client, Server, Session-Sender, and Session-Reflector.
+    See also Fig. 1 of Internet-Draft ietf-ippm-twamp-yang.";
     container twamp-client {
       if-feature control-client;
       presence twamp-client;
-      description "TWAMP Control-Client container";
+      description "Configuration of the TWAMP Control-Client
+      logical entity.";
       leaf client-admin-state {
         type boolean;
         mandatory true;
-        description "Indicates whether this device is allowed to run
-        TWAMP to initiate control sessions";
+        description "This administrative parameter controls whether
+        the device is allowed to operate as a TWAMP Client.";
       }
       list mode-preference-chain {
         key priority;
@@ -438,15 +442,16 @@ module ietf-twamp {
       }
     }
 
-    container twamp-server{
+    container twamp-server {
       if-feature server;
       presence twamp-server;
-      description "Twamp sever container";
+      description "Configuration of the TWAMP Server
+      logical entity.";
       leaf server-admin-state{
         type boolean;
         mandatory true;
-        description "Indicates whether this device is allowed to run
-          TWAMP to respond to control sessions";
+        description "This administrative parameter controls whether
+        the device is allowed to operate as a TWAMP Server.";
       }
       leaf server-tcp-port {
         type inet:port-number;
@@ -597,15 +602,16 @@ module ietf-twamp {
       }
     }
 
-    container twamp-session-sender{
+    container twamp-session-sender {
       if-feature session-sender;
       presence twamp-session-sender;
-      description "Twamp session sender container";
+      description "Configuration of the TWAMP Session-Sender
+      logical entity";
       leaf session-sender-admin-state {
         type boolean;
         mandatory true;
-        description "Indicates whether this device is allowed to run
-        TWAMP to initiate test sessions";
+        description "This administrative parameter controls whether
+        the device is allowed to operate as a TWAMP Session-Sender.";
       }
       list twamp-sender-test-session{
         key test-session-name;
@@ -679,12 +685,14 @@ module ietf-twamp {
     container twamp-session-reflector {
       if-feature session-reflector;
       presence twamp-session-reflector;
-      description "Twamp session reflector container";
+      description "Configuration of the TWAMP Session-Reflector
+      logical entity";
       leaf session-reflector-admin-state {
         type boolean;
         mandatory true;
-        description "Indicates whether this device is allowed to run
-        TWAMP to respond to test sessions";
+        description "This administrative parameter controls
+        whether the device is allowed to operate as a
+        TWAMP Session-Reflector.";
       }
       leaf refwait {
         type uint32 {
