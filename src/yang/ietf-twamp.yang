@@ -1,7 +1,7 @@
 module ietf-twamp {
-  namespace "urn:ietf:params:xml:ns:yang:ietf-twamp";
-   //namespace need to be assigned by IANA
-  prefix "ietf-twamp";
+  //namespace need to be assigned by IANA
+  namespace urn:ietf:params:xml:ns:yang:ietf-twamp; 
+  prefix ietf-twamp;
 
   import ietf-inet-types {
     prefix inet;
@@ -9,15 +9,16 @@ module ietf-twamp {
 
   organization "IETF IPPM (IP Performance Metrics) Working Group";
 
-  contact "draft-ietf-ippm-twamp-yang@tools.ietf.org";
+  contact draft-ietf-ippm-twamp-yang@tools.ietf.org;
 
-  description "TWAMP Data Model";
+  description "This YANG module specifies a vendor-independent data
+  model for TWAMP implementations";
 
-  revision "2016-03-21" {
-    description "01 version. RFC5357, RFC5618, RFC5938 and RFC6038
-    is covered. draft-ietf-ippm-metric-registry is also considered";
-
-  reference "draft-ietf-ippm-twamp-yang";
+  revision 2016-06-28 {
+    description "v01 (draft-ietf-ippm-twamp-yang-01).
+    Covers RFC5357, RFC5618, RFC5938 and RFC6038 and
+    draft-ietf-ippm-metric-registry";
+  reference draft-ietf-ippm-twamp-yang;
   }
 
   feature control-client {
@@ -40,53 +41,52 @@ module ietf-twamp {
     the TWAMP Session-Reflector.";
   }
 
-  typedef ctrl-connection-state {
-    type enumeration {
-      enum active {
-        description "Control session is active.";
-      }
-      enum idle {
-        description "Control session is idle.";
-      }
-    }
-    description "Control connection state";
-  }
-
   typedef mode {
     type bits {
       bit unauthenticated {
-        position "0";
+        position 0;
         description "Unauthenticated";
       }
       bit authenticated {
-        position "1";
+        position 1;
         description "Authenticated";
       }
       bit encrypted {
-        position "2";
+        position 2;
         description "Encrypted";
       }
       bit unauth-test-encrpyt-control {
-        position "3";
-
+        position 3;
         description "Mixed Security Mode per RFC 5618. Test
         protocol security mode in Unauthenticated mode,
         Control protocol in Encrypted mode.";
       }
       bit individual-session-control {
-        position "4";
+        position 4;
         description "Individual session control per RFC5938.";
       }
       bit reflect-octets {
-        position "5";
+        position 5;
         description "Reflect octets capability per RFC6038.";
       }
       bit symmetrical-size {
-        position "6";
+        position 6;
         description "Symmetrical size per RFC6038.";
       }
     }
     description "Authentication mode bit mask";
+  }
+
+    typedef ctrl-connection-state {
+    type enumeration {
+      enum active {
+        description "Control connection is active.";
+      }
+      enum idle {
+        description "Control connection is idle.";
+      }
+    }
+    description "Control connection state";
   }
 
   typedef test-session-state {
@@ -117,23 +117,34 @@ module ietf-twamp {
         description "Cannot perform request due to
         temporary resource limitations.";
       }
-
     }
     description "Test session state";
   }
 
-  typedef server-ctrl-connection-state {
+   typedef server-ctrl-connection-state {
     type enumeration {
-      enum "active" {
+      enum active {
         description "Active";
       }
-      enum "servwait" {
+      enum servwait {
         description "Servwait";
       }
     }
     description "Server control connection state";
   }
-
+  
+  typedef sender-session-state {
+    type enumeration {
+      enum setup {
+        description "Test session is active.";
+      }
+      enum failure {
+        description "Test session is idle.";
+      }
+    }
+    description "Sender session state.";
+  }
+  
   typedef fill-mode {
     type enumeration {
       enum zero {
@@ -166,21 +177,9 @@ module ietf-twamp {
     description "Time units";
   }
 
-  typedef sender-session-state {
-    type enumeration {
-      enum setup {
-        description "Test session is active.";
-      }
-      enum failure {
-        description "Test session is idle.";
-      }
-    }
-    description "Sender session state.";
-  }
-
   typedef dynamic-port-number {
   type inet:port-number {
-    range "49152 .. 65535";
+    range 49152..65535;
   }
   description "Dynamic range for port numbers";
   }
@@ -189,22 +188,22 @@ module ietf-twamp {
     description "Maintenance statistics grouping";
     leaf sent-packets {
       type uint32;
-      config "false";
+      config false;
       description "Packets sent";
     }
     leaf rcv-packets {
       type uint32;
-      config "false";
+      config false;
       description "Packets received";
     }
     leaf last-sent-seq {
       type uint32;
-      config "false";
+      config false;
       description "Last sent sequence number";
     }
     leaf last-rcv-seq {
       type uint32;
-      config "false";
+      config false;
       description "Last received sequence number";
     }
   }
@@ -213,19 +212,17 @@ module ietf-twamp {
     description "Top level container";
     container twamp-client {
       if-feature control-client;
-      presence "twamp-client";
-
-      description "Twamp client container";
+      presence twamp-client;
+      description "TWAMP Control-Client container";
       leaf client-admin-state {
         type boolean;
-        mandatory "true";
+        mandatory true;
         description "Indicates whether this device is allowed to run
         TWAMP to initiate control sessions";
       }
-
       list mode-preference-chain {
-        key "priority";
-        unique "mode";
+        key priority;
+        unique mode;
         leaf priority {
           type uint16;
           description "priority";
@@ -236,12 +233,11 @@ module ietf-twamp {
         }
         description "Authentication mode preference";
       }
-
       list key-chain {
-        key "key-id";
+        key key-id;
         leaf key-id {
           type string {
-            length "1..80";
+            length 1..80;
           }
           description "Key ID";
         }
@@ -251,9 +247,8 @@ module ietf-twamp {
         }
         description "Key chain";
       }
-
       list twamp-client-ctrl-connection {
-        key "ctrl-connection-name";
+        key ctrl-connection-name;
         description "Twamp client control connections";
         leaf ctrl-connection-name {
           type string;
@@ -263,29 +258,28 @@ module ietf-twamp {
         }
         leaf client-ip {
           type inet:ip-address;
-
           description "Client IP address";
         }
         leaf server-ip {
           type inet:ip-address;
-          mandatory "true";
+          mandatory true;
           description "Server IP address";
         }
         leaf server-tcp-port {
           type inet:port-number;
-          default "862";
+          default 862;
           description "Server tcp port";
         }
         leaf dscp{
           type inet:dscp;
-          default "0";
+          default 0;
           description "The DSCP value to be placed in the IP header
             of the TWAMP TCP Control packets generated
             by the Control-Client";
         }
         leaf key-id {
           type string {
-            length "1..80";
+            length 1..80;
           }
           description "Key ID";
         }
@@ -298,49 +292,47 @@ module ietf-twamp {
         }
         leaf client-tcp-port {
           type inet:port-number;
-          config "false";
+          config false;
           description "Client TCP port";
         }
         leaf server-start-time {
           type uint64;
-          config "false";
+          config false;
           description "The Start-Time advertized by the Server in
           the Server-Start message";
         }
         leaf ctrl-connection-state {
           type ctrl-connection-state;
-          config "false";
+          config false;
           description "Control connection state";
         }
-
         leaf selected-mode {
           type mode;
-          config "false";
+          config false;
           description "The TWAMP mode that the Control-Client has
           chosen for this control connection as set in the Mode
           field of the Set-Up-Response message";
         }
         leaf token {
             type binary {
-            length "64";
+            length 64;
           }
-          config "false";
+          config false;
           description "64 octets, containing the concatenation of a
             16-octet challenge, a 16-octet AES Session-key used
             for encryption, and a 32-octet HMAC-SHA1 Session-key
             used for authentication";
         }
-        leaf client-iv{
+        leaf client-iv {
           type binary {
-            length "16";
+            length 16;
           }
-          config "false";
+          config false;
           description "16 octets, Client-IV is generated randomly
             by the Control-Client.";
         }
-
         list twamp-session-request {
-          key "test-session-name";
+          key test-session-name;
           description "Twamp session requests";
           leaf test-session-name {
             type string;
@@ -358,10 +350,9 @@ module ietf-twamp {
           }
           leaf reflector-ip {
             type inet:ip-address;
-            mandatory "true";
+            mandatory true;
             description "Reflector IP address.";
           }
-
           leaf reflector-udp-port {
             type dynamic-port-number;
             description "Reflector UDP port. If this value is not
@@ -372,13 +363,13 @@ module ietf-twamp {
           }
           leaf timeout {
             type uint64;
-            default "2";
+            default 2;
             description "The time (in seconds)Session-Reflector MUST
             wait after receiving a Stop-Session message.";
           }
           leaf padding-length {
-            type uint32{
-              range "64..4096";
+            type uint32 {
+              range 64..4096;
             }
             description "The number of bytes of padding that should
                 be added to the UDP test packets generated by the
@@ -394,7 +385,7 @@ module ietf-twamp {
           }
           leaf start-time {
             type uint64;
-            default "0";
+            default 0;
             description "Time when the session is to be started
             (but not before the Start-Sessions command is issued).
             This value is placed in the Start Time field of the
@@ -404,7 +395,7 @@ module ietf-twamp {
           }
           leaf repeat {
             type uint32;
-            default "0";
+            default 0;
             description "Determines if the test session is to be
             run repeatedly. The default value of repeat is 0,
             indicating that once the session has completed, it
@@ -421,9 +412,8 @@ module ietf-twamp {
             type uint32;
             description "Repeat interval (in minutes)";
           }
-
           list pm-reg-list {
-            key "pm-index";
+            key pm-index;
             leaf pm-index {
               type uint16;
               description "One or more Numerical index values of a
@@ -435,12 +425,12 @@ module ietf-twamp {
           }
           leaf test-session-state {
             type test-session-state;
-            config "false";
+            config false;
             description "Test session state";
           }
-          leaf sid{
+          leaf sid {
             type string;
-            config "false";
+            config false;
             description "The SID allocated by the Server for
             this test session";
           }
@@ -450,18 +440,17 @@ module ietf-twamp {
 
     container twamp-server{
       if-feature server;
-      presence "twamp-server";
+      presence twamp-server;
       description "Twamp sever container";
       leaf server-admin-state{
         type boolean;
-        mandatory "true";
+        mandatory true;
         description "Indicates whether this device is allowed to run
           TWAMP to respond to control sessions";
       }
       leaf server-tcp-port {
-
         type inet:port-number;
-        default "862";
+        default 862;
         description "This parameter defines the well known TCP port
         number that is used by TWAMP.";
       }
@@ -499,16 +488,15 @@ module ietf-twamp {
       }
 
       list key-chain {
-        key "key-id";
+        key key-id;
         leaf key-id {
           type string {
-            length "1..80";
+            length 1..80;
           }
           description "Key IDs.";
         }
         leaf secret-key {
           type string;
-
           description "Secret keys.";
         }
         description "KeyIDs with the respective secret keys.";
@@ -516,7 +504,7 @@ module ietf-twamp {
 
       list twamp-server-ctrl-connection {
         key "client-ip client-tcp-port server-ip server-tcp-port";
-        config "false";
+        config false;
         description "Twamp server control connections";
         leaf client-ip {
           type inet:ip-address;
@@ -557,8 +545,7 @@ module ietf-twamp {
         }
         leaf key-id {
           type string {
-
-            length "1..80";
+            length 1..80;
           }
           description "The key-id value that is in use by this
                   control connection.";
@@ -587,42 +574,41 @@ module ietf-twamp {
           this read-only value will show the different max-count
           that is in use for this control connection.";
         }
-        leaf salt{
+        leaf salt {
           type binary {
-            length "16";
+            length 16;
           }
           description "Salt MUST be generated pseudo-randomly";
         }
         leaf server-iv {
           type binary {
-            length "16";
+            length 16;
           }
           description "16 octets, Server-IV is generated randomly
           by the Control-Client.";
         }
         leaf challenge {
           type binary {
-            length "16";
+            length 16;
           }
           description "Challenge is a random sequence of octets
           generated by the Server";
-
         }
       }
     }
 
     container twamp-session-sender{
       if-feature session-sender;
-      presence "twamp-session-sender";
+      presence twamp-session-sender;
       description "Twamp session sender container";
       leaf session-sender-admin-state {
         type boolean;
-        mandatory "true";
+        mandatory true;
         description "Indicates whether this device is allowed to run
         TWAMP to initiate test sessions";
       }
       list twamp-sender-test-session{
-        key "test-session-name";
+        key test-session-name;
         description "Twamp sender test sessions";
         leaf test-session-name {
           type string;
@@ -632,7 +618,7 @@ module ietf-twamp {
         }
         leaf ctrl-connection-name {
           type string;
-          config "false";
+          config false;
           description "The name of the parent control connection
           that is responsible for negotiating this test session.";
         }
@@ -655,7 +641,6 @@ module ietf-twamp {
               type uint32;
               description "Periodic interval";
             }
-
             leaf periodic-interval-units  {
               type units;
               description "Periodic interval units";
@@ -684,7 +669,7 @@ module ietf-twamp {
         }
         leaf sender-session-state {
           type sender-session-state;
-          config "false";
+          config false;
           description "Sender session state.";
         }
         uses maintenance-statistics;
@@ -693,30 +678,28 @@ module ietf-twamp {
 
     container twamp-session-reflector {
       if-feature session-reflector;
-      presence "twamp-session-reflector";
+      presence twamp-session-reflector;
       description "Twamp session reflector container";
       leaf session-reflector-admin-state {
         type boolean;
-        mandatory "true";
+        mandatory true;
         description "Indicates whether this device is allowed to run
         TWAMP to respond to test sessions";
       }
       leaf refwait {
         type uint32 {
           range 1..604800;
-
         }
         default 900;
         description "REFWAIT (TWAMP test session timeout),
           the default value is 900";
       }
-
       list twamp-reflector-test-session {
         key "sender-ip sender-udp-port reflector-ip
             reflector-udp-port";
-        config "false";
+        config false;
         description "Twamp reflector test sessions";
-        leaf sid{
+        leaf sid {
           type string;
           description "An auto-allocated identifier for this test
           session, that is unique within the context of this
@@ -753,7 +736,6 @@ module ietf-twamp {
         leaf parent-connection-server-tcp-port {
           type inet:port-number;
           description "Parent connection server TCP port";
-
         }
         leaf dscp {
           type inet:dscp;
