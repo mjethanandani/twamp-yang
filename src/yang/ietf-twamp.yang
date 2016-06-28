@@ -159,7 +159,7 @@ module ietf-twamp {
     whether it should consist of all zeroes.";
   }
 
-  typedef units  {
+  typedef time-units  {
     type enumeration {
       enum seconds {
         description "Seconds";
@@ -642,7 +642,7 @@ module ietf-twamp {
               description "Periodic interval";
             }
             leaf periodic-interval-units  {
-              type units;
+              type time-units;
               description "Periodic interval units";
             }
           }
@@ -662,7 +662,7 @@ module ietf-twamp {
               transmissions.";
             }
             leaf truncation-point-units{
-              type units;
+              type time-units;
               description "Truncation point units";
             }
           }
