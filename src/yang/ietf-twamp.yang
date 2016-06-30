@@ -12,13 +12,17 @@ module ietf-twamp {
   contact draft-ietf-ippm-twamp-yang@tools.ietf.org;
 
   description "This YANG module specifies a vendor-independent data
-  model for TWAMP implementations";
+  model for the Two-Way Active Measurement Protocol (TWAMP).
+  The data model covers the TWAMP logical entities Control-Client, 
+  Server, Session-Sender, and Session-Reflector. See Fig. 1 of 
+  draft-ietf-ippm-twamp-yang for an illustration of the annotated
+  TWAMP logical model.";
 
-  revision 2016-06-28 {
+  revision 2016-06-30 {
     description "v01 (draft-ietf-ippm-twamp-yang-01).
     Covers RFC5357, RFC5618, RFC5938 and RFC6038 and
     draft-ietf-ippm-metric-registry";
-  reference draft-ietf-ippm-twamp-yang;
+    reference draft-ietf-ippm-twamp-yang;
   }
 
   feature control-client {
@@ -41,19 +45,19 @@ module ietf-twamp {
     the TWAMP Session-Reflector.";
   }
 
-  typedef mode {
+  typedef twamp-modes {
     type bits {
       bit unauthenticated {
         position 0;
-        description "Unauthenticated";
+        description "Unauthenticated mode. See RFC 7717 Section 7.";
       }
       bit authenticated {
         position 1;
-        description "Authenticated";
+        description "Authenticated mode. See RFC 7717 Section 7.";
       }
       bit encrypted {
         position 2;
-        description "Encrypted";
+        description "Encrypted mode. See RFC 7717 Section 7.";
       }
       bit unauth-test-encrpyt-control {
         position 3;
@@ -73,108 +77,126 @@ module ietf-twamp {
         position 6;
         description "Symmetrical size per RFC6038.";
       }
+      bit IKEv2Derived {
+        position 7;
+        description "IKEv2Derived Mode Capability per RFC7717.";
+      }
     }
-    description "Authentication mode bit mask";
+    description "Specifies the configurable TWAMP-Modes used
+    during a TWAMP-Control Connection setup between a
+    Control-Client and a Server. RFC 7717 Section 7 summarizes the
+    TWAMP-Modes registry.";
   }
 
-    typedef ctrl-connection-state {
+    typedef control-client-connection-state {
     type enumeration {
       enum active {
-        description "Control connection is active.";
+        description "Indicates an active TWAMP-Control connection
+        to a Server.";
       }
       enum idle {
-        description "Control connection is idle.";
+        description "Indicates an idle TWAMP-Control connection
+        to a Server.";
       }
     }
-    description "Control connection state";
+    description "Control-Client control connection state";
   }
 
   typedef test-session-state {
     type enumeration {
       enum ok {
         value 0;
-        description "Test session is accepted.";
+        description "The TWAMP-Test session request is accepted.";
       }
       enum failed {
         value 1;
-        description "Failure, reason unspecified (catch-all).";
+        description "TWAMP-Test session failure,
+        reason unspecified (catch-all).";
       }
       enum internal-error {
         value 2;
-        description "Internal error.";
+        description "An internal error occured.";
       }
       enum not-supported {
         value 3;
-        description "Some aspect of request is not supported.";
+        description "Some aspect of the TWAMP-Test session request
+        is not supported.";
       }
       enum permanent-resource-limit {
         value 4;
-        description "Cannot perform request due to
-        permanent resource limitations.";
+        description "Cannot perform TWAMP-Test session request
+        due to permanent resource limitations.";
       }
       enum temp-resource-limit {
         value 5;
-        description "Cannot perform request due to
-        temporary resource limitations.";
+        description "Cannot perform TWAMP-Test request
+        due to temporary resource limitations.";
       }
     }
-    description "Test session state";
+    description "TWAMP-Test session state";
   }
 
    typedef server-ctrl-connection-state {
     type enumeration {
       enum active {
-        description "Active";
+        description "Indicates an active TWAMP-Control connection
+        to the Control-Client.";
       }
       enum servwait {
-        description "Servwait";
+        description "Indicates that the TWAMP-Control connection
+        to the Control-Client is in SERVWAIT according to RFC 5357
+        (Section 3.1): [a] Server MAY discontinue any established
+        control connection when no packet associated with that
+        connection has been received within SERVWAIT seconds.";
       }
     }
     description "Server control connection state";
   }
-  
+
   typedef sender-session-state {
     type enumeration {
-      enum setup {
-        description "Test session is active.";
+      enum active {
+        description "Indicates that the TWAMP-Test session is active.";
       }
       enum failure {
-        description "Test session is idle.";
+        description "Indicates that the TWAMP-Test session has failed.";
       }
     }
-    description "Sender session state.";
+    description "Session-Sender session state.";
   }
   
-  typedef fill-mode {
+  typedef padding-fill-mode {
     type enumeration {
       enum zero {
-        description "Zero";
+        description "Packets will be padded with
+        all zeros";
       }
       enum random {
-        description "Random";
+        description "Packets will be padded with
+        pseudo-random numbers";
       }
     }
-    description "Indicates whether the padding added to the
-    UDP test packets will contain pseudo-random numbers, or
-    whether it should consist of all zeroes.";
+    description "Indicates what type of packet padding is
+    to be used for the UDP TWAMP-Test packets.";
   }
 
   typedef time-units  {
     type enumeration {
-      enum seconds {
-        description "Seconds";
+      enum s {
+        description "Seconds.";
       }
-      enum milliseconds {
-        description "Milliseconds";
+      enum ms {
+        description "Milliseconds.";
       }
-      enum microseconds {
-        description "Microseconds";
+      enum us {
+        description "Microseconds.";
       }
-      enum nanoseconds {
-        description "Nanoseconds";
+      enum ns {
+        description "Nanoseconds.";
       }
     }
-    description "Time units";
+    description "TWAMP configuration parameters may use
+    different time units.";
   }
 
   typedef dynamic-port-number {
@@ -185,7 +207,6 @@ module ietf-twamp {
   }
 
   grouping maintenance-statistics {
-    description "Maintenance statistics grouping";
     leaf sent-packets {
       type uint32;
       config false;
@@ -206,6 +227,7 @@ module ietf-twamp {
       config false;
       description "Last received sequence number";
     }
+    description "TWAMP-Test maintenance statistics grouping";
   }
 
   container twamp {
@@ -232,7 +254,7 @@ module ietf-twamp {
           description "priority";
         }
         leaf mode {
-          type mode;
+          type twamp-modes;
           description "Authentication mode bit mask";
         }
         description "Authentication mode preference";
@@ -306,16 +328,16 @@ module ietf-twamp {
           the Server-Start message";
         }
         leaf ctrl-connection-state {
-          type ctrl-connection-state;
+          type control-client-connection-state;
           config false;
           description "Control connection state";
         }
         leaf selected-mode {
-          type mode;
+          type twamp-modes;
           config false;
-          description "The TWAMP mode that the Control-Client has
-          chosen for this control connection as set in the Mode
-          field of the Set-Up-Response message";
+          description "This is the TWAMP-Mode that the Control-Client
+          has chosen for this control connection as set in the Mode
+          field of the Set-Up-Response message.";
         }
         leaf token {
             type binary {
@@ -487,7 +509,7 @@ module ietf-twamp {
         description "Max count value.";
       }
       leaf modes {
-        type mode;
+        type twamp-modes;
         description "The bit mask of TWAMP Modes this Server
         instance is willing to support.";
       }
@@ -543,10 +565,10 @@ module ietf-twamp {
           dscp value in use by this control connection.";
         }
         leaf selected-mode {
-          type mode;
-          description "The mode that was chosen for this control
-          connection as set in the Mode field of the
-          Set-Up-Response message.";
+          type twamp-modes;
+          description "This is the TWAMP-Mode that the Control-Client
+          has chosen for this control connection as set in the Mode
+          field of the Set-Up-Response message.";
         }
         leaf key-id {
           type string {
@@ -629,7 +651,7 @@ module ietf-twamp {
           that is responsible for negotiating this test session.";
         }
         leaf fill-mode {
-          type fill-mode;
+          type padding-fill-mode;
           default zero;
           description "Indicates whether the padding added to the
           UDP test packets will contain pseudo-random numbers, or
