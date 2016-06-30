@@ -1,102 +1,123 @@
 module ietf-twamp {
   //namespace need to be assigned by IANA
-  namespace urn:ietf:params:xml:ns:yang:ietf-twamp; 
-  prefix ietf-twamp;
+  namespace
+    urn:ietf:params:xml:ns:yang:ietf-twamp; 
+  prefix
+    ietf-twamp;
 
   import ietf-inet-types {
     prefix inet;
   }
 
-  organization "IETF IPPM (IP Performance Metrics) Working Group";
+  organization
+    "IETF IPPM (IP Performance Metrics) Working Group";
 
-  contact draft-ietf-ippm-twamp-yang@tools.ietf.org;
+  contact
+    draft-ietf-ippm-twamp-yang@tools.ietf.org;
 
-  description "This YANG module specifies a vendor-independent data
-  model for the Two-Way Active Measurement Protocol (TWAMP).
-  The data model covers the TWAMP logical entities Control-Client, 
-  Server, Session-Sender, and Session-Reflector. See Fig. 1 of 
-  draft-ietf-ippm-twamp-yang for an illustration of the annotated
-  TWAMP logical model.";
+  description
+    "This YANG module specifies a vendor-independent data
+    model for the Two-Way Active Measurement Protocol (TWAMP).
+    
+    The data model covers four TWAMP logical entities:
+    Control-Client, Server, Session-Sender, and Session-Reflector.
+    See Fig. 1 of draft-ietf-ippm-twamp-yang for an illustration
+    of the annotated TWAMP logical model.
+    
+    The YANG module uses features to indicate which of the four
+    logical entities are supported by an implementation.";
 
   revision 2016-06-30 {
-    description "v01 (draft-ietf-ippm-twamp-yang-01).
-    Covers RFC5357, RFC5618, RFC5938 and RFC6038 and
-    draft-ietf-ippm-metric-registry";
-    reference draft-ietf-ippm-twamp-yang;
+    description
+        "Revision appearing in draft-ietf-ippm-twamp-yang-01.
+        Covers RFC5357, RFC5618, RFC5938, RFC6038, RFC 7717,
+        and draft-ietf-ippm-metric-registry";
+    reference
+        draft-ietf-ippm-twamp-yang;
   }
 
-  feature control-client {
-    description "This feature relates to the device functions as
-    the TWAMP Control-Client.";
-  }
 
-  feature server {
-    description "This feature relates to the device functions as
-    the TWAMP Server.";
-  }
-
-  feature session-sender {
-    description "This feature relates to the device functions as
-    the TWAMP Session-Sender.";
-  }
-
-  feature session-reflector {
-    description "This feature relates to the device functions as
-    the TWAMP Session-Reflector.";
-  }
+  /*
+   * Typedefs
+   */
 
   typedef twamp-modes {
     type bits {
       bit unauthenticated {
         position 0;
-        description "Unauthenticated mode. See RFC 7717 Section 7.";
+        description
+            "Unauthenticated mode. See RFC 7717 Section 7.";
       }
       bit authenticated {
         position 1;
-        description "Authenticated mode. See RFC 7717 Section 7.";
+        description
+            "Authenticated mode. See RFC 7717 Section 7.";
       }
       bit encrypted {
         position 2;
-        description "Encrypted mode. See RFC 7717 Section 7.";
+        description
+            "Encrypted mode. See RFC 7717 Section 7.";
       }
       bit unauth-test-encrpyt-control {
         position 3;
-        description "Mixed Security Mode per RFC 5618. Test
-        protocol security mode in Unauthenticated mode,
-        Control protocol in Encrypted mode.";
+        description
+            "Mixed Security Mode: TWAMP-Test protocol security
+            mode in Unauthenticated mode, TWAMP-Control protocol
+            in Encrypted mode.";
+        reference
+            "RFC 5618: Mixed Security Mode for the Two-Way Active
+            Measurement Protocol (TWAMP)";
       }
       bit individual-session-control {
         position 4;
-        description "Individual session control per RFC5938.";
+        description
+            "Individual Session Control.";
+        reference
+            "RFC 5938: Individual Session Control Feature
+            for the Two-Way Active Measurement Protocol (TWAMP)";
       }
       bit reflect-octets {
         position 5;
-        description "Reflect octets capability per RFC6038.";
+        description
+            "Reflect Octets Capability.";
+        reference
+            "RFC 6038: Two-Way Active Measurement Protocol (TWAMP)
+            Reflect Octets and Symmetrical Size Features";
       }
       bit symmetrical-size {
         position 6;
-        description "Symmetrical size per RFC6038.";
+        description
+            "Symmetrical Size Sender Test Packet Format.";
+        reference
+            "RFC 6038: Two-Way Active Measurement Protocol (TWAMP)
+            Reflect Octets and Symmetrical Size Features";
       }
       bit IKEv2Derived {
         position 7;
-        description "IKEv2Derived Mode Capability per RFC7717.";
+        description
+            "IKEv2Derived Mode Capability.";
+        reference
+            "RFC 7717: IKEv2-Derived Shared Secret Key for
+            the One-Way Active Measurement Protocol (OWAMP)
+            and Two-Way Active Measurement Protocol (TWAMP)";
       }
     }
-    description "Specifies the configurable TWAMP-Modes used
-    during a TWAMP-Control Connection setup between a
-    Control-Client and a Server. RFC 7717 Section 7 summarizes the
-    TWAMP-Modes registry.";
+    description
+        "Specifies the configurable TWAMP-Modes used during a
+        TWAMP-Control Connection setup between a Control-Client
+        and a Server. RFC 7717 Section 7 summarizes the
+        TWAMP-Modes registry.";
   }
 
-    typedef control-client-connection-state {
+  typedef control-client-connection-state {
     type enumeration {
       enum active {
-        description "Indicates an active TWAMP-Control connection
-        to a Server.";
+        description
+            "Indicates an active TWAMP-Control connection to Server.";
       }
       enum idle {
-        description "Indicates an idle TWAMP-Control connection
-        to a Server.";
+        description
+            "Indicates an idle TWAMP-Control connection to Server.";
       }
     }
     description "Control-Client control connection state";
@@ -106,37 +127,46 @@ module ietf-twamp {
     type enumeration {
       enum ok {
         value 0;
-        description "The TWAMP-Test session request is accepted.";
+        description
+            "Indicates that the TWAMP-Test session request
+            is accepted.";
       }
       enum failed {
         value 1;
-        description "TWAMP-Test session failure,
-        reason unspecified (catch-all).";
+        description
+            "Indicates a TWAMP-Test session failure due to
+            some unspecified reason (catch-all).";
       }
       enum internal-error {
         value 2;
-        description "An internal error occured.";
+        description
+            "Indicates a TWAMP-Test session failure due to
+            an internal error.";
       }
       enum not-supported {
         value 3;
-        description "Some aspect of the TWAMP-Test session request
-        is not supported.";
+        description
+            "Indicates a TWAMP-Test session failure because
+            some aspect of the TWAMP-Test session request
+            is not supported.";
       }
       enum permanent-resource-limit {
         value 4;
-        description "Cannot perform TWAMP-Test session request
-        due to permanent resource limitations.";
+        description
+            "Indicates a TWAMP-Test session failure due to
+            permanent resource limitations.";
       }
       enum temp-resource-limit {
         value 5;
-        description "Cannot perform TWAMP-Test request
-        due to temporary resource limitations.";
+        description
+            "Indicates a TWAMP-Test session failure due to
+            temporary resource limitations.";
       }
     }
     description "TWAMP-Test session state";
   }
 
-   typedef server-ctrl-connection-state {
+  typedef server-ctrl-connection-state {
     type enumeration {
       enum active {
         description "Indicates an active TWAMP-Control connection
@@ -195,8 +225,7 @@ module ietf-twamp {
         description "Nanoseconds.";
       }
     }
-    description "TWAMP configuration parameters may use
-    different time units.";
+    description "TWAMP configuration parameters time units.";
   }
 
   typedef dynamic-port-number {
@@ -205,6 +234,39 @@ module ietf-twamp {
   }
   description "Dynamic range for port numbers";
   }
+
+  /*
+   * Features
+   */
+
+  feature control-client {
+    description
+        "Indicates that the device supports configuration
+        of the TWAMP Control-Client.";
+  }
+
+  feature server {
+    description
+        "Indicates that the device supports configuration
+        of the TWAMP Server.";
+  }
+
+  feature session-sender {
+    description
+        "Indicates that the device supports configuration
+        of the TWAMP Session-Sender.";
+  }
+
+  feature session-reflector {
+    description
+        "Indicates that the device supports configuration
+        of the TWAMP Session-Reflector.";
+  }
+
+
+  /*
+   * Reusable node groups
+   */
 
   grouping maintenance-statistics {
     leaf sent-packets {
@@ -227,14 +289,17 @@ module ietf-twamp {
       config false;
       description "Last received sequence number";
     }
-    description "TWAMP-Test maintenance statistics grouping";
+    description "TWAMP-Test maintenance statistics";
   }
 
+
+  /*
+   * Configuration data nodes
+   */
+
   container twamp {
-    description "The TWAMP data model defines parameters and
-    configuration items for four logical entities:
-    Client, Server, Session-Sender, and Session-Reflector.
-    See also Fig. 1 of Internet-Draft ietf-ippm-twamp-yang.";
+    description
+        "TWAMP logical entity configuration.";
     container twamp-client {
       if-feature control-client;
       presence twamp-client;
