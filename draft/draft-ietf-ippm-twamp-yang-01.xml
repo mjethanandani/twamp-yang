@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <author fullname="Kostas Pentikousis" initials="K.P." role="editor"
+    <author fullname="Kostas Pentikousis" initials="K." role="editor"
             surname="Pentikousis">
       <organization>Travelping</organization>
 
@@ -186,7 +186,7 @@
       such as latency, bandwidth, and packet loss by sending probe packets and
       measuring their experience in the network. To date, TWAMP
       implementations do not come with a standard management framework and, as
-      such, configuration depends on the various proprietary mechanisms
+      such, configuration depends on proprietary mechanisms
       developed by the corresponding TWAMP vendor. This document addresses
       this gap by formally specifying the TWAMP data model using YANG.</t>
 
@@ -295,8 +295,11 @@ o-------------------o                       o-------------------o
 ]]></artwork>
       </figure>
 
-      <t><xref target="OperationalCommands"/> considers TWAMP operational commands,
-      which are outside the scope of this document.</t>
+      <t>Operational actions such as how TWAMP sessions are started/stopped, how
+      results are retrieved, or stored results are cleared, and so on, are not
+      addressed by this configuration model as they are not part of the
+      TWAMP specification <xref target="RFC5357"/> and hence are out of scope
+      of this document as well. See also <xref target="OperationalCommands"/>.</t>
     </section>
 
     <section anchor="structure" title="Data Model Overview">
@@ -457,8 +460,8 @@ o-------------------o                       o-------------------o
         </figure>
 
         <t>The twamp-client container includes an administrative parameter
-        (client-admin-state) that controls whether the device is allowed to
-        initiate TWAMP control sessions.</t>
+        (client-admin-state) that indicates whether the device is allowed to
+        initiate TWAMP-Control sessions.</t>
 
         <t>The twamp-client container holds a list (mode-preference-chain)
         which specifies the preferred Mode values according to their preferred
@@ -472,7 +475,8 @@ o-------------------o                       o-------------------o
         Note that the list of preferred Modes may set bit position
         combinations when necessary, such as when referring to the extended
         TWAMP features in <xref target="RFC5618"/>, <xref target="RFC5938"/>,
-        and <xref target="RFC6038"/>. If the Control-Client cannot determine
+        <xref target="RFC6038"/>, and <xref target="RFC7717"/>.
+        If the Control-Client cannot determine
         an acceptable Mode, it MUST respond with zero Mode bits set in the
         Set-up Response message, indicating it will not continue with the
         control connection.</t>
@@ -2443,6 +2447,8 @@ module ietf-twamp {
       
       <?rfc include='reference.RFC.6536'?>
 
+      <?rfc include='reference.RFC.7717'?>
+      
       <?rfc include='reference.RFC.7426'?>
 
       <?rfc include='reference.I-D.ietf-netconf-restconf'?>
@@ -2686,11 +2692,6 @@ module ietf-twamp {
     </section>
 
     <section anchor="OperationalCommands" title="TWAMP Operational Commands">
-      <t>This document is targeted at configuration details for TWAMP.
-      Operational actions such as how TWAMP sessions are started/stopped, how
-      results are retrieved, or stored results are cleared, and so on, are not
-      addressed by this configuration model and are out of scope of this
-      document.</t>
 
       <t>TWAMP operational commands could be performed programmatically or
       manually, e.g. using a command-line interface (CLI). With respect to
