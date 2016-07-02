@@ -2109,7 +2109,8 @@ module ietf-twamp {
       in nature, but aims to be self-contained, i.e. were it to be executed in
       a real TWAMP implementation it would lead to a correctly configured test
       session. A more elaborated example, which also includes authentication
-      parameters, is provided in <xref target="AuthExample"/>.</t>
+      parameters, is provided in <xref target="AuthExample"/>. For completeness,
+      examples are provided for IPv4 and IPv6.</t>
 
       <section anchor="ExampleCC" title="Control-Client">
         <t>The following configuration example shows a Control-Client with
@@ -2173,6 +2174,41 @@ module ietf-twamp {
       </twamp-client>
    </twamp>
 </config>
+
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-client>
+         <client-admin-state>true</client-admin-state>
+         <twamp-client-ctrl-connection>
+            <ctrl-connection-name>RouterA</ctrl-connection-name>
+            <client-ip>2001:203:0:113::1</client-ip>
+            <server-ip>2001:203:0:113::2</server-ip>
+            <twamp-session-request>
+               <test-session-name>Test1</test-session-name>
+               <sender-ip>2001:10:1:1::1</sender-ip>
+               <sender-udp-port>4000</sender-udp-port>
+               <reflector-ip>2001:10:1:1::2</reflector-ip>
+               <reflector-udp-port>5000</reflector-udp-port>
+               <start-time>0</start-time>
+            </twamp-session-request>
+            <twamp-session-request>
+               <test-session-name>Test2</test-session-name>
+               <sender-ip>2001:203:0:113::1</sender-ip>
+               <sender-udp-port>4001</sender-udp-port>
+               <reflector-ip>2001:203:0:113::2</reflector-ip>
+               <reflector-udp-port>5001</reflector-udp-port>
+               <start-time>0</start-time>
+            </twamp-session-request>
+         </twamp-client-ctrl-connection>
+         <twamp-client-ctrl-connection>
+            <ctrl-connection-name>RouterB</ctrl-connection-name>
+            <client-ip>2001:203:0:113::1</client-ip>
+            <server-ip>2001:203:0:113::3</server-ip>
+         </twamp-client-ctrl-connection>
+      </twamp-client>
+   </twamp>
+</config>
 ]]></artwork>
         </figure>
       </section>
@@ -2213,6 +2249,24 @@ module ietf-twamp {
             <client-ip>203.0.113.1</client-ip>
             <client-tcp-port>16341</client-tcp-port>
             <server-ip>203.0.113.2</server-ip>
+            <server-tcp-port>862</server-tcp-port>
+            <server-ctrl-connection-state>
+               active
+            </server-ctrl-connection-state>
+         </twamp-server-ctrl-connection>
+      </twamp-server>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-server>
+         <server-admin-state>true</server-admin-state>
+         <twamp-server-ctrl-connection>
+            <client-ip>2001:203:0:113::1</client-ip>
+            <client-tcp-port>16341</client-tcp-port>
+            <server-ip>2001:203:0:113::2</server-ip>
             <server-tcp-port>862</server-tcp-port>
             <server-ctrl-connection-state>
                active
@@ -2315,6 +2369,53 @@ module ietf-twamp {
             <parent-connection-server-ip>
                203.0.113.2
             </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+              862
+            </parent-connection-server-tcp-port>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </twamp-reflector-test-session>
+      </twamp-session-reflector>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-session-reflector>
+	  <session-reflector-admin-state>true</session-reflector-admin-state>
+          <twamp-reflector-test-session>
+            <sender-ip>10.1.1.1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>10.1.1.2</reflector-ip>
+            <reflector-udp-port>5000</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>203.0.113.1</parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>203.0.113.2</parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+             </parent-connection-server-tcp-port>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </twamp-reflector-test-session>
+         <twamp-reflector-test-session>
+            <sender-ip>203.0.113.1</sender-ip>
+            <sender-udp-port>4001</sender-udp-port>
+            <reflector-ip>192.68.0.2</reflector-ip>
+            <reflector-udp-port>5001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>203.0.113.1</parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+             </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>203.0.113.2</parent-connection-server-ip>
             <parent-connection-server-tcp-port>
               862
             </parent-connection-server-tcp-port>
@@ -2516,6 +2617,60 @@ module ietf-twamp {
       </twamp-client>
    </twamp>
 </data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-client>
+         <client-admin-state>true</client-admin-state>
+         <mode-preference-chain>
+            <priority>0</priority>
+            <mode>authenticated</mode>
+         </mode-preference-chain>
+         <mode-preference-chain>
+            <priority>1</priority>
+            <mode>unauthenticated</mode>
+         </mode-preference-chain>
+         <key-chain>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <secret-key>secret1</secret-key>
+         </key-chain>
+         <key-chain>
+            <key-id>KeyForRouterB</key-id>
+            <secret-key>secret2</secret-key>
+         </key-chain>
+         <twamp-client-ctrl-connection>
+            <ctrl-connection-name>RouterA</ctrl-connection-name>
+            <client-ip>2001:203:0:113::1</client-ip>
+            <server-ip>2001:203:0:113::2</server-ip>
+            <dscp>32</dscp>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <twamp-session-request>
+               <test-session-name>Test1</test-session-name>
+               <sender-ip>2001:10:1:1::1</sender-ip>
+               <sender-udp-port>4000</sender-udp-port>
+               <reflector-ip>2001:10:1:1::2</reflector-ip>
+               <reflector-udp-port>5000</reflector-udp-port>
+               <padding-length>64</padding-length>
+               <start-time>0</start-time>
+               <test-session-state>ok</test-session-state>
+               <sid>1232</sid>
+            </twamp-session-request>
+            <twamp-session-request>
+               <test-session-name>Test2</test-session-name>
+               <sender-ip>2001:203:0:113::1</sender-ip>
+               <sender-udp-port>4001</sender-udp-port>
+               <reflector-ip>2001:203:0:113::2</reflector-ip>
+               <reflector-udp-port>5001</reflector-udp-port>
+               <padding-length>128</padding-length>
+               <start-time>0</start-time>
+               <test-session-state>ok</test-session-state>
+               <sid>178943</sid>
+            </twamp-session-request>
+         </twamp-client-ctrl-connection>
+      </twamp-client>
+   </twamp>
+</data>
 ]]></artwork>
         </figure>
       </section>
@@ -2544,6 +2699,40 @@ module ietf-twamp {
             <client-ip>203.0.113.1</client-ip>
             <client-tcp-port>16341</client-tcp-port>
             <server-ip>203.0.113.2</server-ip>
+            <server-tcp-port>862</server-tcp-port>
+            <server-ctrl-connection-state>
+               active
+             </server-ctrl-connection-state>
+            <dscp>32</dscp>
+            <selected-mode>unauthenticated</selected-mode>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <count>1024</count>
+         </twamp-server-ctrl-connection>
+      </twamp-server>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-server>
+         <server-admin-state>true</server-admin-state>
+         <servwait>1800</servwait>
+         <dscp>32</dscp>
+         <modes>authenticated unauthenticated</modes>
+         <count>1024</count>
+         <key-chain>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <secret-key>secret1</secret-key>
+         </key-chain>
+         <key-chain>
+            <key-id>KeyClient10ToRouterA</key-id>
+            <secret-key>secret10</secret-key>
+         </key-chain>
+         <twamp-server-ctrl-connection>
+            <client-ip>2001:203:0:113::1</client-ip>
+            <client-tcp-port>16341</client-tcp-port>
+            <server-ip>2001:203:0:113::2</server-ip>
             <server-tcp-port>862</server-tcp-port>
             <server-ctrl-connection-state>
                active
@@ -2654,6 +2843,55 @@ module ietf-twamp {
             <parent-connection-server-ip>
                203.0.113.2
             </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </twamp-reflector-test-session>
+      </twamp-session-reflector>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-session-reflector>
+	 <session-reflector-admin-state>true</session-reflector-admin-state>
+         <twamp-reflector-test-session>
+            <sender-ip>2001:10:1:1::1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>2001:10:1:1::2</reflector-ip>
+            <reflector-udp-port>5000</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>2001:203:0:113::1</parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>2001:203:0:113::2</parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </twamp-reflector-test-session>
+         <twamp-reflector-test-session>
+            <sender-ip>2001:203:0:113::1</sender-ip>
+            <sender-udp-port>4001</sender-udp-port>
+            <reflector-ip>2001:192:68::2</reflector-ip>
+            <reflector-udp-port>5001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>2001:203:0:113::1</parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>2001:203:0:113::2</parent-connection-server-ip>
             <parent-connection-server-tcp-port>
                862
             </parent-connection-server-tcp-port>

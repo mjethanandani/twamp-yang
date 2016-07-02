@@ -5,7 +5,7 @@
 IPPM WG                                                         R. Civil
 Internet-Draft                                         Ciena Corporation
 Intended status: Standards Track                               A. Morton
-Expires: January 1, 2017                                       AT&T Labs
+Expires: January 2, 2017                                       AT&T Labs
                                                                 L. Zheng
                                                      Huawei Technologies
                                                                R. Rahman
@@ -13,7 +13,7 @@ Expires: January 1, 2017                                       AT&T Labs
                                                            Cisco Systems
                                                      K. Pentikousis, Ed.
                                                               Travelping
-                                                           June 30, 2016
+                                                            July 1, 2016
 
 
          Two-Way Active Measurement Protocol (TWAMP) Data Model
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 1, 2017.
+   This Internet-Draft will expire on January 2, 2017.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 1]
+Civil, et al.            Expires January 2, 2017                [Page 1]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    (http://trustee.ietf.org/license-info) in effect on the date of
@@ -88,30 +88,30 @@ Table of Contents
      5.2.  YANG Module . . . . . . . . . . . . . . . . . . . . . . .  17
    6.  Data Model Examples . . . . . . . . . . . . . . . . . . . . .  42
      6.1.  Control-Client  . . . . . . . . . . . . . . . . . . . . .  43
-     6.2.  Server  . . . . . . . . . . . . . . . . . . . . . . . . .  44
-     6.3.  Session-Sender  . . . . . . . . . . . . . . . . . . . . .  45
-     6.4.  Session-Reflector . . . . . . . . . . . . . . . . . . . .  46
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  47
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  48
-   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  48
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  49
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .  49
-     10.2.  Informative References . . . . . . . . . . . . . . . . .  50
-   Appendix A.  Detailed Data Model Examples . . . . . . . . . . . .  51
-     A.1.  Control-Client  . . . . . . . . . . . . . . . . . . . . .  51
-     A.2.  Server  . . . . . . . . . . . . . . . . . . . . . . . . .  52
-     A.3.  Session-Sender  . . . . . . . . . . . . . . . . . . . . .  53
-     A.4.  Session-Reflector . . . . . . . . . . . . . . . . . . . .  54
-   Appendix B.  TWAMP Operational Commands . . . . . . . . . . . . .  56
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  56
+     6.2.  Server  . . . . . . . . . . . . . . . . . . . . . . . . .  45
+     6.3.  Session-Sender  . . . . . . . . . . . . . . . . . . . . .  46
+     6.4.  Session-Reflector . . . . . . . . . . . . . . . . . . . .  47
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  49
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  50
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  50
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  51
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  51
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  51
+   Appendix A.  Detailed Data Model Examples . . . . . . . . . . . .  53
+     A.1.  Control-Client  . . . . . . . . . . . . . . . . . . . . .  53
+     A.2.  Server  . . . . . . . . . . . . . . . . . . . . . . . . .  55
+     A.3.  Session-Sender  . . . . . . . . . . . . . . . . . . . . .  57
+     A.4.  Session-Reflector . . . . . . . . . . . . . . . . . . . .  58
+   Appendix B.  TWAMP Operational Commands . . . . . . . . . . . . .  61
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  61
 
 
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 2]
+Civil, et al.            Expires January 2, 2017                [Page 2]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 3]
+Civil, et al.            Expires January 2, 2017                [Page 3]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    examples which conform to the YANG data model specified in this
@@ -221,9 +221,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 4]
+Civil, et al.            Expires January 2, 2017                [Page 4]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    o-------------------o                       o-------------------o
@@ -277,9 +277,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 5]
+Civil, et al.            Expires January 2, 2017                [Page 5]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    Each TWAMP Control-Client is associated with zero or more TWAMP
@@ -333,9 +333,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 6]
+Civil, et al.            Expires January 2, 2017                [Page 6]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    Server IP address, Server TCP port}. Control connection configuration
@@ -389,9 +389,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 7]
+Civil, et al.            Expires January 2, 2017                [Page 7]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
  +--------------------+
@@ -445,9 +445,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 8]
+Civil, et al.            Expires January 2, 2017                [Page 8]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    mode (expressed as a 32-bit Hexadecimal value).  Depending on the
@@ -501,9 +501,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017                [Page 9]
+Civil, et al.            Expires January 2, 2017                [Page 9]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
 4.2.  Server
@@ -557,9 +557,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 10]
+Civil, et al.            Expires January 2, 2017               [Page 10]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    choose the appropriate secret-key; a Control-Client would typically
@@ -613,9 +613,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 11]
+Civil, et al.            Expires January 2, 2017               [Page 11]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    +----------------------------+
@@ -669,9 +669,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 12]
+Civil, et al.            Expires January 2, 2017               [Page 12]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    session must be configured at the overall Session-Reflector level,
@@ -725,9 +725,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 13]
+Civil, et al.            Expires January 2, 2017               [Page 13]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    When attempting to retrieve operational data for active test sessions
@@ -781,9 +781,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 14]
+Civil, et al.            Expires January 2, 2017               [Page 14]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         |     +--rw ctrl-connection-name     string
@@ -837,9 +837,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 15]
+Civil, et al.            Expires January 2, 2017               [Page 15]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         |     +--ro server-ctrl-connection-state?\
@@ -893,9 +893,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 16]
+Civil, et al.            Expires January 2, 2017               [Page 16]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
               +--ro parent-connection-server-tcp-port?\
@@ -949,9 +949,9 @@ module ietf-twamp {
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 17]
+Civil, et al.            Expires January 2, 2017               [Page 17]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         and draft-ietf-ippm-metric-registry";
@@ -1005,9 +1005,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 18]
+Civil, et al.            Expires January 2, 2017               [Page 18]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             "Reflect Octets Capability.";
@@ -1061,9 +1061,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 19]
+Civil, et al.            Expires January 2, 2017               [Page 19]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         description
@@ -1117,9 +1117,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 20]
+Civil, et al.            Expires January 2, 2017               [Page 20]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         (Section 3.1): [a] Server MAY discontinue any established
@@ -1173,9 +1173,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 21]
+Civil, et al.            Expires January 2, 2017               [Page 21]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
       }
@@ -1229,9 +1229,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 22]
+Civil, et al.            Expires January 2, 2017               [Page 22]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         key key-id;
@@ -1285,9 +1285,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 23]
+Civil, et al.            Expires January 2, 2017               [Page 23]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
   }
@@ -1341,9 +1341,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 24]
+Civil, et al.            Expires January 2, 2017               [Page 24]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             "List of TWAMP Control-Client control connections.
@@ -1397,9 +1397,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 25]
+Civil, et al.            Expires January 2, 2017               [Page 25]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             TWAMP-Control (TCP) packets generated by this
@@ -1453,9 +1453,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 26]
+Civil, et al.            Expires January 2, 2017               [Page 26]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
           config false;
@@ -1509,9 +1509,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 27]
+Civil, et al.            Expires January 2, 2017               [Page 27]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             Client-IV merely needs to be unique (i.e., it MUST
@@ -1565,9 +1565,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 28]
+Civil, et al.            Expires January 2, 2017               [Page 28]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
                 repeated, the device is free to auto-allocate a
@@ -1621,9 +1621,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 29]
+Civil, et al.            Expires January 2, 2017               [Page 29]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             }
@@ -1677,9 +1677,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 30]
+Civil, et al.            Expires January 2, 2017               [Page 30]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
                 The value of 0 indicates that the session MUST NOT be
@@ -1733,9 +1733,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 31]
+Civil, et al.            Expires January 2, 2017               [Page 31]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
                 "A list of one or more Performance Metric Registry
@@ -1789,9 +1789,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 32]
+Civil, et al.            Expires January 2, 2017               [Page 32]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         description
@@ -1845,9 +1845,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 33]
+Civil, et al.            Expires January 2, 2017               [Page 33]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             "Parameter used in deriving a key from a shared
@@ -1901,9 +1901,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 34]
+Civil, et al.            Expires January 2, 2017               [Page 34]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
           description
@@ -1957,9 +1957,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 35]
+Civil, et al.            Expires January 2, 2017               [Page 35]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             for this control connection. This will usually
@@ -2013,9 +2013,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 36]
+Civil, et al.            Expires January 2, 2017               [Page 36]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             same value as is configured under twamp-server. However,
@@ -2069,9 +2069,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 37]
+Civil, et al.            Expires January 2, 2017               [Page 37]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         logical entity";
@@ -2125,9 +2125,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 38]
+Civil, et al.            Expires January 2, 2017               [Page 38]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         choice packet-distribution {
@@ -2181,9 +2181,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 39]
+Civil, et al.            Expires January 2, 2017               [Page 39]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
         uses maintenance-statistics;
@@ -2237,9 +2237,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 40]
+Civil, et al.            Expires January 2, 2017               [Page 40]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             Server/Session-Reflector device only. This value
@@ -2293,9 +2293,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 41]
+Civil, et al.            Expires January 2, 2017               [Page 41]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
           type inet:port-number;
@@ -2345,17 +2345,17 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    Section 5.  The example is illustrative in nature, but aims to be
    self-contained, i.e. were it to be executed in a real TWAMP
    implementation it would lead to a correctly configured test session.
-
-
-
-
-Civil, et al.            Expires January 1, 2017               [Page 42]
-
-Internet-Draft            TWAMP YANG Data Model                June 2016
-
-
    A more elaborated example, which also includes authentication
-   parameters, is provided in Appendix A.
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 42]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
+   parameters, is provided in Appendix A.  For completeness, examples
+   are provided for IPv4 and IPv6.
 
 6.1.  Control-Client
 
@@ -2380,36 +2380,6 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    test session requests.  The TWAMP-Control connection named "RouterB"
    has no TWAMP-Test session requests.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Civil, et al.            Expires January 1, 2017               [Page 43]
-
-Internet-Draft            TWAMP YANG Data Model                June 2016
-
-
    <?xml version="1.0" encoding="utf-8"?>
    <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
       <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
@@ -2432,6 +2402,14 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
                   <sender-ip>203.0.113.1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
                   <reflector-ip>203.0.113.2</reflector-ip>
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 43]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
                   <reflector-udp-port>50001</reflector-udp-port>
                   <start-time>0</start-time>
                </twamp-session-request>
@@ -2445,26 +2423,54 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
       </twamp>
    </config>
 
+   <?xml version="1.0" encoding="utf-8"?>
+   <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+      <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+         <twamp-client>
+            <client-admin-state>true</client-admin-state>
+            <twamp-client-ctrl-connection>
+               <ctrl-connection-name>RouterA</ctrl-connection-name>
+               <client-ip>2001:203:0:113::1</client-ip>
+               <server-ip>2001:203:0:113::2</server-ip>
+               <twamp-session-request>
+                  <test-session-name>Test1</test-session-name>
+                  <sender-ip>2001:10:1:1::1</sender-ip>
+                  <sender-udp-port>4000</sender-udp-port>
+                  <reflector-ip>2001:10:1:1::2</reflector-ip>
+                  <reflector-udp-port>5000</reflector-udp-port>
+                  <start-time>0</start-time>
+               </twamp-session-request>
+               <twamp-session-request>
+                  <test-session-name>Test2</test-session-name>
+                  <sender-ip>2001:203:0:113::1</sender-ip>
+                  <sender-udp-port>4001</sender-udp-port>
+                  <reflector-ip>2001:203:0:113::2</reflector-ip>
+                  <reflector-udp-port>5001</reflector-udp-port>
+                  <start-time>0</start-time>
+               </twamp-session-request>
+            </twamp-client-ctrl-connection>
+            <twamp-client-ctrl-connection>
+               <ctrl-connection-name>RouterB</ctrl-connection-name>
+               <client-ip>2001:203:0:113::1</client-ip>
+               <server-ip>2001:203:0:113::3</server-ip>
+            </twamp-client-ctrl-connection>
+         </twamp-client>
+      </twamp>
+   </config>
+
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 44]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
 6.2.  Server
 
    This configuration example shows a Server with server-admin-state
    enabled, which permits a device following Figure 2 to respond to
    TWAMP-Control connections and TWAMP-Test sessions.
-
-
-
-
-
-
-
-
-
-
-
-Civil, et al.            Expires January 1, 2017               [Page 44]
-
-Internet-Draft            TWAMP YANG Data Model                June 2016
-
 
    <?xml version="1.0" encoding="utf-8"?>
    <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -2479,6 +2485,43 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    connection corresponding to the control connection name (ctrl-
    connection-name) "RouterA" presented in Section 6.1.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 45]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
    <?xml version="1.0" encoding="utf-8"?>
    <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
       <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
@@ -2488,6 +2531,24 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
                <client-ip>203.0.113.1</client-ip>
                <client-tcp-port>16341</client-tcp-port>
                <server-ip>203.0.113.2</server-ip>
+               <server-tcp-port>862</server-tcp-port>
+               <server-ctrl-connection-state>
+                  active
+               </server-ctrl-connection-state>
+            </twamp-server-ctrl-connection>
+         </twamp-server>
+      </twamp>
+   </data>
+
+   <?xml version="1.0" encoding="utf-8"?>
+   <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+      <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+         <twamp-server>
+            <server-admin-state>true</server-admin-state>
+            <twamp-server-ctrl-connection>
+               <client-ip>2001:203:0:113::1</client-ip>
+               <client-tcp-port>16341</client-tcp-port>
+               <server-ip>2001:203:0:113::2</server-ip>
                <server-tcp-port>862</server-tcp-port>
                <server-ctrl-connection-state>
                   active
@@ -2512,14 +2573,9 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-
-
-
-
-
-Civil, et al.            Expires January 1, 2017               [Page 45]
+Civil, et al.            Expires January 2, 2017               [Page 46]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    <?xml version="1.0" encoding="utf-8"?>
@@ -2556,85 +2612,140 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    The following example shows the two Session-Reflector TWAMP-Test
    sessions corresponding to the test sessions presented in Section 6.3.
 
-   <?xml version="1.0" encoding="utf-8"?>
-   <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-      <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-         <twamp-session-reflector>
-             <session-reflector-admin-state>
-                true
-             </session-reflector-admin-state>
-             <twamp-reflector-test-session>
-               <sender-ip>10.1.1.1</sender-ip>
-               <sender-udp-port>4000</sender-udp-port>
-               <reflector-ip>10.1.1.2</reflector-ip>
-               <reflector-udp-port>50001</reflector-udp-port>
-               <sid>1232</sid>
-               <parent-connection-client-ip>
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-session-reflector>
+          <session-reflector-admin-state>
+             true
+          </session-reflector-admin-state>
+          <twamp-reflector-test-session>
+            <sender-ip>10.1.1.1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>10.1.1.2</reflector-ip>
+            <reflector-udp-port>50001</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 46]
+Civil, et al.            Expires January 2, 2017               [Page 47]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
-                  203.0.113.1
-               </parent-connection-client-ip>
-               <parent-connection-client-tcp-port>
-                  16341
-               </parent-connection-client-tcp-port>
-               <parent-connection-server-ip>
-                  203.0.113.2
-               </parent-connection-server-ip>
-               <parent-connection-server-tcp-port>
-                  862
-                </parent-connection-server-tcp-port>
-               <sent-packets>2</sent-packets>
-               <rcv-packets>2</rcv-packets>
-               <last-sent-seq>1</last-sent-seq>
-               <last-rcv-seq>1</last-rcv-seq>
-            </twamp-reflector-test-session>
-            <twamp-reflector-test-session>
-               <sender-ip>203.0.113.1</sender-ip>
-               <sender-udp-port>50000</sender-udp-port>
-               <reflector-ip>192.68.0.2</reflector-ip>
-               <reflector-udp-port>50001</reflector-udp-port>
-               <sid>178943</sid>
-               <parent-connection-client-ip>
-                  203.0.113.1
-               </parent-connection-client-ip>
-               <parent-connection-client-tcp-port>
-                  16341
-                </parent-connection-client-tcp-port>
-               <parent-connection-server-ip>
-                  203.0.113.2
-               </parent-connection-server-ip>
-               <parent-connection-server-tcp-port>
-                 862
-               </parent-connection-server-tcp-port>
-               <sent-packets>21</sent-packets>
-               <rcv-packets>21</rcv-packets>
-               <last-sent-seq>20</last-sent-seq>
-               <last-rcv-seq>20</last-rcv-seq>
-            </twamp-reflector-test-session>
-         </twamp-session-reflector>
-      </twamp>
-   </data>
+               203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+               203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+             </parent-connection-server-tcp-port>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </twamp-reflector-test-session>
+         <twamp-reflector-test-session>
+            <sender-ip>203.0.113.1</sender-ip>
+            <sender-udp-port>50000</sender-udp-port>
+            <reflector-ip>192.68.0.2</reflector-ip>
+            <reflector-udp-port>50001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>
+               203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+             </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+               203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+              862
+            </parent-connection-server-tcp-port>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </twamp-reflector-test-session>
+      </twamp-session-reflector>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-session-reflector>
+          <session-reflector-admin-state>true</session-reflector-admin-state>
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 48]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
+          <twamp-reflector-test-session>
+            <sender-ip>10.1.1.1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>10.1.1.2</reflector-ip>
+            <reflector-udp-port>5000</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>203.0.113.1</parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>203.0.113.2</parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+             </parent-connection-server-tcp-port>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </twamp-reflector-test-session>
+         <twamp-reflector-test-session>
+            <sender-ip>203.0.113.1</sender-ip>
+            <sender-udp-port>4001</sender-udp-port>
+            <reflector-ip>192.68.0.2</reflector-ip>
+            <reflector-udp-port>5001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>203.0.113.1</parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+             </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>203.0.113.2</parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+              862
+            </parent-connection-server-tcp-port>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </twamp-reflector-test-session>
+      </twamp-session-reflector>
+   </twamp>
+</data>
 
 7.  Security Considerations
 
    The YANG module defined in this draft is designed to be accessed via
    among other protocols by NETCONF [RFC6241].  Protocols like NETCONF
    use a secure a secure transport layer like SSH that is mandatory to
-
-
-
-Civil, et al.            Expires January 1, 2017               [Page 47]
-
-Internet-Draft            TWAMP YANG Data Model                June 2016
-
-
    implement.  The NETCONF Access Control Module (NACM) [RFC6536]
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 49]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
    provides the means to restrict access for particular users to a pre-
    configured set of NETCONF protocol operations and attributes.
 
@@ -2681,17 +2792,16 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
    Ladislav Lhokta did thorough review of the YANG module and the
    examples.
 
-
-
-
-
-Civil, et al.            Expires January 1, 2017               [Page 48]
-
-Internet-Draft            TWAMP YANG Data Model                June 2016
-
-
    Kostas Pentikousis is partially supported by FP7 UNIFY
    (http://fp7-unify.eu), a research project partially funded by the
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 50]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
    European Community under the Seventh Framework Program (grant
    agreement no. 619609).  The views expressed here are those of the
    authors only.  The European Commission is not liable for any use that
@@ -2735,18 +2845,18 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
               Features", RFC 6038, DOI 10.17487/RFC6038, October 2010,
               <http://www.rfc-editor.org/info/rfc6038>.
 
-
-
-
-
-
-
-Civil, et al.            Expires January 1, 2017               [Page 49]
-
-Internet-Draft            TWAMP YANG Data Model                June 2016
-
-
 10.2.  Informative References
+
+
+
+
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 51]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
 
    [I-D.ietf-ippm-metric-registry]
               Bagnulo, M., Claise, B., Eardley, P., Morton, A., and A.
@@ -2797,9 +2907,11 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 50]
+
+
+Civil, et al.            Expires January 2, 2017               [Page 52]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
@@ -2853,9 +2965,9 @@ A.1.  Control-Client
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 51]
+Civil, et al.            Expires January 2, 2017               [Page 53]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
             <key-chain>
@@ -2895,28 +3007,81 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
       </twamp>
    </data>
 
-A.2.  Server
+   <?xml version="1.0" encoding="utf-8"?>
+   <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+      <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+         <twamp-client>
+            <client-admin-state>true</client-admin-state>
+            <mode-preference-chain>
+               <priority>0</priority>
+               <mode>authenticated</mode>
+            </mode-preference-chain>
+            <mode-preference-chain>
+               <priority>1</priority>
 
 
 
-
-
-
-
-
-
-
-
-
-
-Civil, et al.            Expires January 1, 2017               [Page 52]
+Civil, et al.            Expires January 2, 2017               [Page 54]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+               <mode>unauthenticated</mode>
+            </mode-preference-chain>
+            <key-chain>
+               <key-id>KeyClient1ToRouterA</key-id>
+               <secret-key>secret1</secret-key>
+            </key-chain>
+            <key-chain>
+               <key-id>KeyForRouterB</key-id>
+               <secret-key>secret2</secret-key>
+            </key-chain>
+            <twamp-client-ctrl-connection>
+               <ctrl-connection-name>RouterA</ctrl-connection-name>
+               <client-ip>2001:203:0:113::1</client-ip>
+               <server-ip>2001:203:0:113::2</server-ip>
+               <dscp>32</dscp>
+               <key-id>KeyClient1ToRouterA</key-id>
+               <twamp-session-request>
+                  <test-session-name>Test1</test-session-name>
+                  <sender-ip>2001:10:1:1::1</sender-ip>
+                  <sender-udp-port>4000</sender-udp-port>
+                  <reflector-ip>2001:10:1:1::2</reflector-ip>
+                  <reflector-udp-port>5000</reflector-udp-port>
+                  <padding-length>64</padding-length>
+                  <start-time>0</start-time>
+                  <test-session-state>ok</test-session-state>
+                  <sid>1232</sid>
+               </twamp-session-request>
+               <twamp-session-request>
+                  <test-session-name>Test2</test-session-name>
+                  <sender-ip>2001:203:0:113::1</sender-ip>
+                  <sender-udp-port>4001</sender-udp-port>
+                  <reflector-ip>2001:203:0:113::2</reflector-ip>
+                  <reflector-udp-port>5001</reflector-udp-port>
+                  <padding-length>128</padding-length>
+                  <start-time>0</start-time>
+                  <test-session-state>ok</test-session-state>
+                  <sid>178943</sid>
+               </twamp-session-request>
+            </twamp-client-ctrl-connection>
+         </twamp-client>
+      </twamp>
+   </data>
+
+A.2.  Server
 
    <?xml version="1.0" encoding="utf-8"?>
    <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
       <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 55]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
          <twamp-server>
             <server-admin-state>true</server-admin-state>
             <servwait>1800</servwait>
@@ -2948,6 +3113,48 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
       </twamp>
    </data>
 
+   <?xml version="1.0" encoding="utf-8"?>
+   <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+      <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+         <twamp-server>
+            <server-admin-state>true</server-admin-state>
+            <servwait>1800</servwait>
+            <dscp>32</dscp>
+            <modes>authenticated unauthenticated</modes>
+            <count>1024</count>
+            <key-chain>
+               <key-id>KeyClient1ToRouterA</key-id>
+               <secret-key>secret1</secret-key>
+            </key-chain>
+            <key-chain>
+               <key-id>KeyClient10ToRouterA</key-id>
+               <secret-key>secret10</secret-key>
+            </key-chain>
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 56]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
+            <twamp-server-ctrl-connection>
+               <client-ip>2001:203:0:113::1</client-ip>
+               <client-tcp-port>16341</client-tcp-port>
+               <server-ip>2001:203:0:113::2</server-ip>
+               <server-tcp-port>862</server-tcp-port>
+               <server-ctrl-connection-state>
+                  active
+                </server-ctrl-connection-state>
+               <dscp>32</dscp>
+               <selected-mode>unauthenticated</selected-mode>
+               <key-id>KeyClient1ToRouterA</key-id>
+               <count>1024</count>
+            </twamp-server-ctrl-connection>
+         </twamp-server>
+      </twamp>
+   </data>
+
 A.3.  Session-Sender
 
 
@@ -2965,9 +3172,26 @@ A.3.  Session-Sender
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 53]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 57]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    <?xml version="1.0" encoding="utf-8"?>
@@ -3011,80 +3235,137 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 A.4.  Session-Reflector
 
-   <?xml version="1.0" encoding="utf-8"?>
-   <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-      <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-         <twamp-session-reflector>
-            <session-reflector-admin-state>
-               true
-            </session-reflector-admin-state>
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-session-reflector>
+         <session-reflector-admin-state>
+            true
+         </session-reflector-admin-state>
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 54]
+Civil, et al.            Expires January 2, 2017               [Page 58]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
-            <twamp-reflector-test-session>
-               <sender-ip>10.1.1.1</sender-ip>
-               <sender-udp-port>4000</sender-udp-port>
-               <reflector-ip>10.1.1.2</reflector-ip>
-               <reflector-udp-port>5000</reflector-udp-port>
-               <sid>1232</sid>
-               <parent-connection-client-ip>
-                  203.0.113.1
-               </parent-connection-client-ip>
-               <parent-connection-client-tcp-port>
-                  16341
-               </parent-connection-client-tcp-port>
-               <parent-connection-server-ip>
-                  203.0.113.2
-               </parent-connection-server-ip>
-               <parent-connection-server-tcp-port>
-                  862
-               </parent-connection-server-tcp-port>
-               <dscp>32</dscp>
-               <sent-packets>2</sent-packets>
-               <rcv-packets>2</rcv-packets>
-               <last-sent-seq>1</last-sent-seq>
-               <last-rcv-seq>1</last-rcv-seq>
-            </twamp-reflector-test-session>
-            <twamp-reflector-test-session>
-               <sender-ip>203.0.113.1</sender-ip>
-               <sender-udp-port>4001</sender-udp-port>
-               <reflector-ip>192.68.0.2</reflector-ip>
-               <reflector-udp-port>5001</reflector-udp-port>
-               <sid>178943</sid>
-               <parent-connection-client-ip>
-                  203.0.113.1
-               </parent-connection-client-ip>
-               <parent-connection-client-tcp-port>
-                  16341
-               </parent-connection-client-tcp-port>
-               <parent-connection-server-ip>
-                  203.0.113.2
-               </parent-connection-server-ip>
-               <parent-connection-server-tcp-port>
-                  862
-               </parent-connection-server-tcp-port>
-               <dscp>32</dscp>
-               <sent-packets>21</sent-packets>
-               <rcv-packets>21</rcv-packets>
-               <last-sent-seq>20</last-sent-seq>
-               <last-rcv-seq>20</last-rcv-seq>
-            </twamp-reflector-test-session>
+         <twamp-reflector-test-session>
+            <sender-ip>10.1.1.1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>10.1.1.2</reflector-ip>
+            <reflector-udp-port>5000</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>
+               203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+               203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </twamp-reflector-test-session>
+         <twamp-reflector-test-session>
+            <sender-ip>203.0.113.1</sender-ip>
+            <sender-udp-port>4001</sender-udp-port>
+            <reflector-ip>192.68.0.2</reflector-ip>
+            <reflector-udp-port>5001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>
+               203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+               203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </twamp-reflector-test-session>
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 55]
+Civil, et al.            Expires January 2, 2017               [Page 59]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
-         </twamp-session-reflector>
-      </twamp>
-   </data>
+      </twamp-session-reflector>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <twamp-session-reflector>
+         <session-reflector-admin-state>true</session-reflector-admin-state>
+         <twamp-reflector-test-session>
+            <sender-ip>2001:10:1:1::1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>2001:10:1:1::2</reflector-ip>
+            <reflector-udp-port>5000</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>2001:203:0:113::1</parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>2001:203:0:113::2</parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </twamp-reflector-test-session>
+         <twamp-reflector-test-session>
+            <sender-ip>2001:203:0:113::1</sender-ip>
+            <sender-udp-port>4001</sender-udp-port>
+            <reflector-ip>2001:192:68::2</reflector-ip>
+            <reflector-udp-port>5001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>2001:203:0:113::1</parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>2001:203:0:113::2</parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+
+
+
+Civil, et al.            Expires January 2, 2017               [Page 60]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
+         </twamp-reflector-test-session>
+      </twamp-session-reflector>
+   </twamp>
+</data>
 
 Appendix B.  TWAMP Operational Commands
 
@@ -3132,10 +3413,9 @@ Authors' Addresses
 
 
 
-
-Civil, et al.            Expires January 1, 2017               [Page 56]
+Civil, et al.            Expires January 2, 2017               [Page 61]
 
-Internet-Draft            TWAMP YANG Data Model                June 2016
+Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
    Lianshu Zheng
@@ -3189,4 +3469,4 @@ Internet-Draft            TWAMP YANG Data Model                June 2016
 
 
 
-Civil, et al.            Expires January 1, 2017               [Page 57]
+Civil, et al.            Expires January 2, 2017               [Page 62]
