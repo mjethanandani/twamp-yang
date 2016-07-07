@@ -410,19 +410,19 @@ o-------------------o                       o-------------------o
       associated parameters.</t>
 
       <section anchor="clientConfig" title="Control-Client">
-        <t>The twamp-client container (see <xref target="fig:twamp-client"/>)
+        <t>The client container (see <xref target="fig:twamp-client"/>)
         holds items that are related to the configuration of the TWAMP
         Control-Client logical entity. These are divided up into items that
         are associated with the configuration of the Control-Client as a whole
         (e.g. client/admin-state) and items that are associated with
         individual control connections initiated by the Control-Client entity
-        (twamp-client/ctrl-connection).</t>
+        (client/ctrl-connection).</t>
 
         <figure anchor="fig:twamp-client"
                 title="TWAMP Control-Client UML class diagram">
           <artwork><![CDATA[
 +--------------------+
-| twamp-client       |
+| client       |
 +--------------------+                   1..* +-----------------------+
 | admin-state |<>----------------------| mode-preference-chain |
 |                    |                        +-----------------------+
@@ -459,11 +459,11 @@ o-------------------o                       o-------------------o
 ]]></artwork>
         </figure>
 
-        <t>The twamp-client container includes an administrative parameter
+        <t>The client container includes an administrative parameter
         (client/admin-state) that indicates whether the device is allowed to
         initiate TWAMP-Control sessions.</t>
 
-        <t>The twamp-client container holds a list (mode-preference-chain)
+        <t>The client container holds a list (mode-preference-chain)
         which specifies the preferred Mode values according to their preferred
         order of use, including the authentication and encryption Modes.
         Specifically, mode-preference-chain lists each priority (expressed as
@@ -481,7 +481,7 @@ o-------------------o                       o-------------------o
         Set-up Response message, indicating it will not continue with the
         control connection.</t>
 
-        <t>In addition, the twamp-client container holds a list named
+        <t>In addition, the client container holds a list named
         key-chain which relates KeyIDs with the respective secret keys. Both
         the Server and the Control-Client use the same mappings from KeyIDs to
         shared secrets (key-id and secret-key in <xref
@@ -497,7 +497,7 @@ o-------------------o                       o-------------------o
         encryption and a 256-bit HMAC-SHA1 Session-key used for authentication
         (see Section 6.10 of <xref target="RFC4656"/>).</t>
 
-        <t>Each twamp-client container also holds a list of
+        <t>Each client container also holds a list of
         ctrl-connection, where each item in the list describes a
         TWAMP control connection that will be initiated by this
         Control-Client. There SHALL be one instance of
@@ -521,7 +521,7 @@ o-------------------o                       o-------------------o
       </section>
 
       <section anchor="serverConfig" title="Server">
-        <t>The twamp-server container (see <xref target="fig:twamp-server"/>)
+        <t>The server container (see <xref target="fig:twamp-server"/>)
         holds items that are related to the configuration of the TWAMP Server
         logical entity (recall <xref target="fig:scope"/>).</t>
 
@@ -529,7 +529,7 @@ o-------------------o                       o-------------------o
                 title="TWAMP Server UML class diagram">
           <artwork><![CDATA[
 +------------------ -+
-| twamp-server       |
+| server       |
 +--------------------+
 | admin-state |   1..* +------------+
 | server-tcp-port    |<>------| key-chain  |
@@ -565,7 +565,7 @@ o-------------------o                       o-------------------o
         connection must be configured at the overall Server level, and will
         then be applied to all incoming TWAMP-Control connections.</t>
 
-        <t>Each twamp-server container holds a list named key-chain which
+        <t>Each server container holds a list named key-chain which
         relates KeyIDs with the respective secret keys. As mentioned in <xref
         target="clientConfig"/>, both the Server and the Control-Client use
         the same mappings from KeyIDs to shared secrets. The Server, being
@@ -576,25 +576,25 @@ o-------------------o                       o-------------------o
         for authentication or encryption.</t>
 
         <t>Each incoming control connection that is active on the Server will
-        be represented by an instance of a twamp-server/ctrl-connection
-        object. All items in the twamp-server/ctrl-connection object are
+        be represented by an instance of a server/ctrl-connection
+        object. All items in the server/ctrl-connection object are
         read-only, as we explain later in this section.</t>
 
-        <t>There SHALL be one instance of twamp-server/ctrl-connection per
+        <t>There SHALL be one instance of server/ctrl-connection per
         incoming TWAMP-Control (TCP) connection that is received and active on
-        the Server device. All items in the twamp-server/ctrl-connection are
-        read-only. Each instance of twamp-server/ctrl-connection uses the
+        the Server device. All items in the server/ctrl-connection are
+        read-only. Each instance of server/ctrl-connection uses the
         following 4-tuple as its unique key: client-ip, client-tcp-port,
         server-ip, server-tcp-port.</t>
 
       </section>
 
       <section anchor="senderConfig" title="Session-Sender">
-        <t>The twamp-session-sender container, illustrated in <xref
+        <t>The session-sender container, illustrated in <xref
         target="fig:twampSenders"/>, holds items that are related to the
         configuration of the TWAMP Session-Sender logical entity.</t>
 
-        <t>The twamp-session-sender container includes an administrative
+        <t>The session-sender container includes an administrative
         parameter (session-sender/admin-state) that controls whether the
         device is allowed to initiate TWAMP test sessions.</t>
 
@@ -605,7 +605,7 @@ o-------------------o                       o-------------------o
                 title="TWAMP Session-Sender UML class diagram">
           <artwork><![CDATA[
 +----------------------------+
-| twamp-session-sender       |
+| session-sender       |
 +----------------------------+  0..* +---------------------------+
 | admin-state |<>-----| test-session |
 +----------------------------+       +---------------------------+
@@ -644,7 +644,7 @@ o-------------------o                       o-------------------o
       </section>
 
       <section anchor="reflectorConfig" title="Session-Reflector">
-        <t>The twamp-session-reflector container, illustrated in <xref
+        <t>The session-reflector container, illustrated in <xref
         target="fig:twampReflector"/>, holds items that are related to the
         configuration of the TWAMP Session-Reflector logical entity.</t>
 
@@ -655,7 +655,7 @@ o-------------------o                       o-------------------o
         session must be configured at the overall Session-Reflector level, and
         will then be applied to all incoming sessions.</t>
 
-        <t>The twamp-session-sender container includes an administrative
+        <t>The session-sender container includes an administrative
         parameter (session-reflector/admin-state) that controls whether the
         device is allowed to respond to incoming TWAMP test sessions. Each
         incoming TWAMP-Test session that is active on the Session-Reflector
@@ -667,7 +667,7 @@ o-------------------o                       o-------------------o
                 title="TWAMP Session-Reflector UML class diagram">
           <artwork><![CDATA[
 +----=--------------------------+
-| twamp-session-reflector       |
+| session-reflector       |
 +-------------------------------+
 | admin-state |
 | refwait                       |
@@ -709,10 +709,10 @@ o-------------------o                       o-------------------o
         auto-allocated for these test sessions. If the user has network access
         to the Control-Client device, then it is possible to read the data for
         this session under
-        twamp-client/ctrl-connection/test-session-request/sid
+        client/ctrl-connection/test-session-request/sid
         and obtain the SID (see <xref target="fig:twamp-client"/>). The user
         may then use this SID value as an index to retrieve an individual
-        twamp-session-reflector/test-session instance on the
+        session-reflector/test-session instance on the
         Session-Reflector device.</t>
 
         <t>If the user has no network access to the Control-Client device,
@@ -726,7 +726,7 @@ o-------------------o                       o-------------------o
         parent-connection-client-tcp-port, parent-connection-server-ip,
         parent-connection-server-tcp-port}. This 4-tuple corresponds to the
         equivalent 4-tuple {client-ip, client-tcp-port, server-ip,
-        server-tcp-port} in the twamp-server/ctrl-connection object. This
+        server-tcp-port} in the server/ctrl-connection object. This
         4-tuple allows the user to trace back from the TWAMP-Test session to
         the (parent) TWAMP-Control connection that negotiated this test
         session.</t>
@@ -2113,16 +2113,16 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-client>
+      <client>
          <admin-state>true</admin-state>
-      </twamp-client>
+      </client>
    </twamp>
 </config>
 ]]></artwork>
         </figure>
 
         <t>The following configuration example shows a Control-Client with two
-        instances of twamp-client/ctrl-connection, one called "RouterA" and
+        instances of client/ctrl-connection, one called "RouterA" and
         another called "RouterB". Each TWAMP-Control connection is to a
         different Server. The control connection named "RouterA" has two test
         session requests. The TWAMP-Control connection named "RouterB" has no
@@ -2133,7 +2133,7 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-client>
+      <client>
          <admin-state>true</admin-state>
          <ctrl-connection>
             <name>RouterA</name>
@@ -2161,14 +2161,14 @@ module ietf-twamp {
             <client-ip>203.0.113.1</client-ip>
             <server-ip>203.0.113.3</server-ip>
          </ctrl-connection>
-      </twamp-client>
+      </client>
    </twamp>
 </config>
 
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-client>
+      <client>
          <admin-state>true</admin-state>
          <ctrl-connection>
             <name>RouterA</name>
@@ -2196,7 +2196,7 @@ module ietf-twamp {
             <client-ip>2001:203:0:113::1</client-ip>
             <server-ip>2001:203:0:113::3</server-ip>
          </ctrl-connection>
-      </twamp-client>
+      </client>
    </twamp>
 </config>
 ]]></artwork>
@@ -2215,9 +2215,9 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-server>
+      <server>
          <admin-state>true</admin-state>
-      </twamp-server>
+      </server>
    </twamp>
 </config>
 ]]></artwork>
@@ -2233,7 +2233,7 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-server>
+      <server>
          <admin-state>true</admin-state>
          <ctrl-connection>
             <client-ip>203.0.113.1</client-ip>
@@ -2244,14 +2244,14 @@ module ietf-twamp {
                active
             </state>
          </ctrl-connection>
-      </twamp-server>
+      </server>
    </twamp>
 </data>
 
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-server>
+      <server>
          <admin-state>true</admin-state>
          <ctrl-connection>
             <client-ip>2001:203:0:113::1</client-ip>
@@ -2262,7 +2262,7 @@ module ietf-twamp {
                active
             </state>
          </ctrl-connection>
-      </twamp-server>
+      </server>
    </twamp>
 </data>
 ]]></artwork>
@@ -2278,7 +2278,7 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-     <twamp-session-sender>
+     <session-sender>
         <admin-state>true</admin-state>
         <test-session>
            <name>Test1</name>
@@ -2300,7 +2300,7 @@ module ietf-twamp {
            <truncation-point-units>seconds</truncation-point-units>
            <state>setup</state>
         </test-session>
-     </twamp-session-sender>
+     </session-sender>
   </twamp>
 </data>
 ]]></artwork>
@@ -2317,7 +2317,7 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-session-reflector>
+      <session-reflector>
           <admin-state>
              true
           </admin-state>
@@ -2367,14 +2367,14 @@ module ietf-twamp {
             <last-sent-seq>20</last-sent-seq>
             <last-rcv-seq>20</last-rcv-seq>
          </test-session>
-      </twamp-session-reflector>
+      </session-reflector>
    </twamp>
 </data>
 
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-session-reflector>
+      <session-reflector>
 	  <admin-state>true</admin-state>
           <test-session>
             <sender-ip>10.1.1.1</sender-ip>
@@ -2414,7 +2414,7 @@ module ietf-twamp {
             <last-sent-seq>20</last-sent-seq>
             <last-rcv-seq>20</last-rcv-seq>
          </test-session>
-      </twamp-session-reflector>
+      </session-reflector>
    </twamp>
 </data>
 ]]></artwork>
@@ -2557,7 +2557,7 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-client>
+      <client>
          <admin-state>true</admin-state>
          <mode-preference-chain>
             <priority>0</priority>
@@ -2604,14 +2604,14 @@ module ietf-twamp {
                <sid>178943</sid>
             </test-session-request>
          </ctrl-connection>
-      </twamp-client>
+      </client>
    </twamp>
 </data>
 
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-client>
+      <client>
          <admin-state>true</admin-state>
          <mode-preference-chain>
             <priority>0</priority>
@@ -2658,7 +2658,7 @@ module ietf-twamp {
                <sid>178943</sid>
             </test-session-request>
          </ctrl-connection>
-      </twamp-client>
+      </client>
    </twamp>
 </data>
 ]]></artwork>
@@ -2671,7 +2671,7 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-server>
+      <server>
          <admin-state>true</admin-state>
          <servwait>1800</servwait>
          <dscp>32</dscp>
@@ -2698,14 +2698,14 @@ module ietf-twamp {
             <key-id>KeyClient1ToRouterA</key-id>
             <count>1024</count>
          </ctrl-connection>
-      </twamp-server>
+      </server>
    </twamp>
 </data>
 
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-server>
+      <server>
          <admin-state>true</admin-state>
          <servwait>1800</servwait>
          <dscp>32</dscp>
@@ -2732,7 +2732,7 @@ module ietf-twamp {
             <key-id>KeyClient1ToRouterA</key-id>
             <count>1024</count>
          </ctrl-connection>
-      </twamp-server>
+      </server>
    </twamp>
 </data>
 ]]></artwork>
@@ -2745,7 +2745,7 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-     <twamp-session-sender>
+     <session-sender>
         <admin-state>true</admin-state>
         <test-session>
            <name>Test1</name>
@@ -2777,7 +2777,7 @@ module ietf-twamp {
            <last-sent-seq>20</last-sent-seq>
            <last-rcv-seq>20</last-rcv-seq>
         </test-session>
-     </twamp-session-sender>
+     </session-sender>
   </twamp>
 </data>
 ]]></artwork>
@@ -2790,7 +2790,7 @@ module ietf-twamp {
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-session-reflector>
+      <session-reflector>
          <admin-state>
             true
          </admin-state>
@@ -2842,14 +2842,14 @@ module ietf-twamp {
             <last-sent-seq>20</last-sent-seq>
             <last-rcv-seq>20</last-rcv-seq>
          </test-session>
-      </twamp-session-reflector>
+      </session-reflector>
    </twamp>
 </data>
 
 <?xml version="1.0" encoding="utf-8"?>
 <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <twamp-session-reflector>
+      <session-reflector>
 	 <admin-state>true</admin-state>
          <test-session>
             <sender-ip>2001:10:1:1::1</sender-ip>
@@ -2891,7 +2891,7 @@ module ietf-twamp {
             <last-sent-seq>20</last-sent-seq>
             <last-rcv-seq>20</last-rcv-seq>
          </test-session>
-      </twamp-session-reflector>
+      </session-reflector>
    </twamp>
 </data>
 ]]></artwork>
