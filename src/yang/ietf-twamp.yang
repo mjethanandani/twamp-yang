@@ -186,10 +186,12 @@ module ietf-twamp {
   typedef sender-session-state {
     type enumeration {
       enum active {
-        description "Indicates that the TWAMP-Test session is active.";
+        description
+            "Indicates that the TWAMP-Test session is active.";
       }
       enum failure {
-        description "Indicates that the TWAMP-Test session has failed.";
+        description
+            "Indicates that the TWAMP-Test session has failed.";
       }
     }
     description "Session-Sender session state.";
