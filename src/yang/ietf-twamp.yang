@@ -1124,7 +1124,7 @@ module ietf-twamp {
             case of failure.";
       }
 
-      list twamp-reflector-test-session {
+      list test-session {
         key
             "sender-ip sender-udp-port
             reflector-ip reflector-udp-port";
