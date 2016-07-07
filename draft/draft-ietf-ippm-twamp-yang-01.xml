@@ -154,9 +154,10 @@
       <address>
         <postal>
           <street>Koernerstr. 7-10</street>
-		  
-		  <code>10785</code>
-          <city> Berlin</city>
+
+          <code>10785</code>
+
+          <city>Berlin</city>
 
           <country>Germany</country>
         </postal>
@@ -165,7 +166,7 @@
       </address>
     </author>
 
-    <date year="2016"/>
+    <date day="7" month="July" year="2016"/>
 
     <area>Transport</area>
 
@@ -186,9 +187,9 @@
       such as latency, bandwidth, and packet loss by sending probe packets and
       measuring their experience in the network. To date, TWAMP
       implementations do not come with a standard management framework and, as
-      such, configuration depends on proprietary mechanisms
-      developed by the corresponding TWAMP vendor. This document addresses
-      this gap by formally specifying the TWAMP data model using YANG.</t>
+      such, configuration depends on proprietary mechanisms developed by the
+      corresponding TWAMP vendor. This document addresses this gap by formally
+      specifying the TWAMP data model using YANG.</t>
 
       <section anchor="motivation" title="Motivation">
         <t>In current TWAMP deployments the lack of a standardized data model
@@ -275,7 +276,7 @@
       this document is orthogonal to the specific protocol used between the
       Config client and Config server to communicate the TWAMP configuration
       parameters.</t>
-      
+
       <figure anchor="fig:scope2" title="Simplified TWAMP model and protocols">
         <artwork><![CDATA[
 o-------------------o                       o-------------------o
@@ -295,11 +296,11 @@ o-------------------o                       o-------------------o
 ]]></artwork>
       </figure>
 
-      <t>Operational actions such as how TWAMP sessions are started/stopped, how
-      results are retrieved, or stored results are cleared, and so on, are not
-      addressed by this configuration model as they are not part of the
+      <t>Operational actions such as how TWAMP sessions are started/stopped,
+      how results are retrieved, or stored results are cleared, and so on, are
+      not addressed by this configuration model as they are not part of the
       TWAMP specification <xref target="RFC5357"/> and hence are out of scope
-      of this document as well. See also <xref target="OperationalCommands"/>.</t>
+      of this document. See also <xref target="OperationalCommands"/>.</t>
     </section>
 
     <section anchor="structure" title="Data Model Overview">
@@ -410,8 +411,8 @@ o-------------------o                       o-------------------o
       associated parameters.</t>
 
       <section anchor="clientConfig" title="Control-Client">
-        <t>The client container (see <xref target="fig:twamp-client"/>)
-        holds items that are related to the configuration of the TWAMP
+        <t>The client container (see <xref target="fig:twamp-client"/>) holds
+        items that are related to the configuration of the TWAMP
         Control-Client logical entity. These are divided up into items that
         are associated with the configuration of the Control-Client as a whole
         (e.g. client/admin-state) and items that are associated with
@@ -463,9 +464,9 @@ o-------------------o                       o-------------------o
         (client/admin-state) that indicates whether the device is allowed to
         initiate TWAMP-Control sessions.</t>
 
-        <t>The client container holds a list (mode-preference-chain)
-        which specifies the preferred Mode values according to their preferred
-        order of use, including the authentication and encryption Modes.
+        <t>The client container holds a list (mode-preference-chain) which
+        specifies the preferred Mode values according to their preferred order
+        of use, including the authentication and encryption Modes.
         Specifically, mode-preference-chain lists each priority (expressed as
         a 16-bit unsigned integer, where zero is the highest priority and
         subsequent values monotonically increasing) with their corresponding
@@ -475,54 +476,50 @@ o-------------------o                       o-------------------o
         Note that the list of preferred Modes may set bit position
         combinations when necessary, such as when referring to the extended
         TWAMP features in <xref target="RFC5618"/>, <xref target="RFC5938"/>,
-        <xref target="RFC6038"/>, and <xref target="RFC7717"/>.
-        If the Control-Client cannot determine
-        an acceptable Mode, it MUST respond with zero Mode bits set in the
-        Set-up Response message, indicating it will not continue with the
-        control connection.</t>
+        <xref target="RFC6038"/>, and <xref target="RFC7717"/>. If the
+        Control-Client cannot determine an acceptable Mode, it MUST respond
+        with zero Mode bits set in the Set-up Response message, indicating it
+        will not continue with the control connection.</t>
 
-        <t>In addition, the client container holds a list named
-        key-chain which relates KeyIDs with the respective secret keys. Both
-        the Server and the Control-Client use the same mappings from KeyIDs to
-        shared secrets (key-id and secret-key in <xref
-        target="fig:twamp-client"/>, respectively). The Server, being prepared
-        to conduct sessions with more than one Control-Client, uses KeyIDs to
-        choose the appropriate secret-key; a Control-Client would typically
-        have different secret keys for different Servers. The secret-key is
-        the shared secret, an octet string of arbitrary length whose
-        interpretation as a text string is unspecified. The key-id and
-        secret-key encoding should follow Section 9.4 of <xref
-        target="RFC6020"/>. The derived key length (dkLen in <xref
-        target="RFC2898"/>) MUST be 128-bits for the AES Session-key used for
-        encryption and a 256-bit HMAC-SHA1 Session-key used for authentication
-        (see Section 6.10 of <xref target="RFC4656"/>).</t>
+        <t>In addition, the client container holds a list named key-chain
+        which relates KeyIDs with the respective secret keys. Both the Server
+        and the Control-Client use the same mappings from KeyIDs to shared
+        secrets (key-id and secret-key in <xref target="fig:twamp-client"/>,
+        respectively). The Server, being prepared to conduct sessions with
+        more than one Control-Client, uses KeyIDs to choose the appropriate
+        secret-key; a Control-Client would typically have different secret
+        keys for different Servers. The secret-key is the shared secret, an
+        octet string of arbitrary length whose interpretation as a text string
+        is unspecified. The key-id and secret-key encoding should follow
+        Section 9.4 of <xref target="RFC6020"/>. The derived key length (dkLen
+        in <xref target="RFC2898"/>) MUST be 128-bits for the AES Session-key
+        used for encryption and a 256-bit HMAC-SHA1 Session-key used for
+        authentication (see Section 6.10 of <xref target="RFC4656"/>).</t>
 
-        <t>Each client container also holds a list of
-        ctrl-connection, where each item in the list describes a
-        TWAMP control connection that will be initiated by this
-        Control-Client. There SHALL be one instance of
-        ctrl-connection per TWAMP-Control (TCP) connection that
-        is to be initiated from this device.</t>
+        <t>Each client container also holds a list of ctrl-connection, where
+        each item in the list describes a TWAMP control connection that will
+        be initiated by this Control-Client. There SHALL be one instance of
+        ctrl-connection per TWAMP-Control (TCP) connection that is to be
+        initiated from this device.</t>
 
-        <t>Each ctrl-connection holds a list of
-        test-session-request. test-session-request holds information
-        associated with the Control-Client for this test session. This
-        includes information that is associated with the
-        Request-TW-Session/Accept-Session message exchange (see Section 3.5 of
-        <xref target="RFC5357"/>). The Control-Client is also responsible for
-        scheduling and results collection for TWAMP-Test sessions, so
-        test-session-request will also hold information related to these actions
-        (e.g. pm-index, repeat-interval).</t>
+        <t>Each ctrl-connection holds a list of test-session-request.
+        test-session-request holds information associated with the
+        Control-Client for this test session. This includes information that
+        is associated with the Request-TW-Session/Accept-Session message
+        exchange (see Section 3.5 of <xref target="RFC5357"/>). The
+        Control-Client is also responsible for scheduling and results
+        collection for TWAMP-Test sessions, so test-session-request will also
+        hold information related to these actions (e.g. pm-index,
+        repeat-interval).</t>
 
         <t>There SHALL be one instance of test-session-request for each
         TWAMP-Test session that is to be negotiated by this TWAMP-Control
         connection via a Request-TW-Session/Accept-Session exchange.</t>
-
       </section>
 
       <section anchor="serverConfig" title="Server">
-        <t>The server container (see <xref target="fig:twamp-server"/>)
-        holds items that are related to the configuration of the TWAMP Server
+        <t>The server container (see <xref target="fig:twamp-server"/>) holds
+        items that are related to the configuration of the TWAMP Server
         logical entity (recall <xref target="fig:scope"/>).</t>
 
         <figure anchor="fig:twamp-server"
@@ -565,8 +562,8 @@ o-------------------o                       o-------------------o
         connection must be configured at the overall Server level, and will
         then be applied to all incoming TWAMP-Control connections.</t>
 
-        <t>Each server container holds a list named key-chain which
-        relates KeyIDs with the respective secret keys. As mentioned in <xref
+        <t>Each server container holds a list named key-chain which relates
+        KeyIDs with the respective secret keys. As mentioned in <xref
         target="clientConfig"/>, both the Server and the Control-Client use
         the same mappings from KeyIDs to shared secrets. The Server, being
         prepared to conduct sessions with more than one Control-Client, uses
@@ -576,17 +573,16 @@ o-------------------o                       o-------------------o
         for authentication or encryption.</t>
 
         <t>Each incoming control connection that is active on the Server will
-        be represented by an instance of a server/ctrl-connection
-        object. All items in the server/ctrl-connection object are
-        read-only, as we explain later in this section.</t>
+        be represented by an instance of a server/ctrl-connection object. All
+        items in the server/ctrl-connection object are read-only, as we
+        explain later in this section.</t>
 
-        <t>There SHALL be one instance of server/ctrl-connection per
-        incoming TWAMP-Control (TCP) connection that is received and active on
-        the Server device. All items in the server/ctrl-connection are
-        read-only. Each instance of server/ctrl-connection uses the
-        following 4-tuple as its unique key: client-ip, client-tcp-port,
-        server-ip, server-tcp-port.</t>
-
+        <t>There SHALL be one instance of server/ctrl-connection per incoming
+        TWAMP-Control (TCP) connection that is received and active on the
+        Server device. All items in the server/ctrl-connection are read-only.
+        Each instance of server/ctrl-connection uses the following 4-tuple as
+        its unique key: client-ip, client-tcp-port, server-ip,
+        server-tcp-port.</t>
       </section>
 
       <section anchor="senderConfig" title="Session-Sender">
@@ -594,12 +590,12 @@ o-------------------o                       o-------------------o
         target="fig:twampSenders"/>, holds items that are related to the
         configuration of the TWAMP Session-Sender logical entity.</t>
 
-        <t>The session-sender container includes an administrative
-        parameter (session-sender/admin-state) that controls whether the
-        device is allowed to initiate TWAMP test sessions.</t>
+        <t>The session-sender container includes an administrative parameter
+        (session-sender/admin-state) that controls whether the device is
+        allowed to initiate TWAMP test sessions.</t>
 
-        <t>There is one instance of test-session for each
-        TWAMP-Test session for which packets are being sent.</t>
+        <t>There is one instance of test-session for each TWAMP-Test session
+        for which packets are being sent.</t>
 
         <figure anchor="fig:twampSenders"
                 title="TWAMP Session-Sender UML class diagram">
@@ -641,7 +637,6 @@ o-------------------o                       o-------------------o
                               +------------------------+
 ]]></artwork>
         </figure>
-
       </section>
 
       <section anchor="reflectorConfig" title="Session-Reflector">
@@ -656,12 +651,12 @@ o-------------------o                       o-------------------o
         session must be configured at the overall Session-Reflector level, and
         will then be applied to all incoming sessions.</t>
 
-        <t>The session-sender container includes an administrative
-        parameter (session-reflector/admin-state) that controls whether the
-        device is allowed to respond to incoming TWAMP test sessions. Each
-        incoming TWAMP-Test session that is active on the Session-Reflector
-        will be represented by an instance of a twamp-reflector/test-session
-        object. All items in the twamp-reflector/test-session object are
+        <t>The session-sender container includes an administrative parameter
+        (session-reflector/admin-state) that controls whether the device is
+        allowed to respond to incoming TWAMP test sessions. Each incoming
+        TWAMP-Test session that is active on the Session-Reflector will be
+        represented by an instance of a twamp-reflector/test-session object.
+        All items in the twamp-reflector/test-session object are
         read-only.</t>
 
         <figure anchor="fig:twampReflector"
@@ -698,40 +693,37 @@ o-------------------o                       o-------------------o
 ]]></artwork>
         </figure>
 
-        <t>Instances of test-session are indexed by a session
-        identifier (sid). This value is auto-allocated by the Server as test
-        session requests are received, and communicated back to the
-        Control-Client in the SID field of the Accept-Session message; see
-        Section 4.3 of <xref target="RFC6038"/>.</t>
+        <t>Instances of test-session are indexed by a session identifier
+        (sid). This value is auto-allocated by the Server as test session
+        requests are received, and communicated back to the Control-Client in
+        the SID field of the Accept-Session message; see Section 4.3 of <xref
+        target="RFC6038"/>.</t>
 
         <t>When attempting to retrieve operational data for active test
         sessions from a Session-Reflector device, the user will not know what
         sessions are currently active on that device, or what SIDs have been
         auto-allocated for these test sessions. If the user has network access
         to the Control-Client device, then it is possible to read the data for
-        this session under
-        client/ctrl-connection/test-session-request/sid
-        and obtain the SID (see <xref target="fig:twamp-client"/>). The user
-        may then use this SID value as an index to retrieve an individual
-        session-reflector/test-session instance on the
-        Session-Reflector device.</t>
+        this session under client/ctrl-connection/test-session-request/sid and
+        obtain the SID (see <xref target="fig:twamp-client"/>). The user may
+        then use this SID value as an index to retrieve an individual
+        session-reflector/test-session instance on the Session-Reflector
+        device.</t>
 
         <t>If the user has no network access to the Control-Client device,
-        then the only option is to retrieve all test-session
-        instances from the Session-Reflector device. This could be problematic
-        if a large number of test sessions are currently active on that
-        device.</t>
+        then the only option is to retrieve all test-session instances from
+        the Session-Reflector device. This could be problematic if a large
+        number of test sessions are currently active on that device.</t>
 
         <t>Each Session-Reflector TWAMP-Test session contains the following
         4-tuple: {parent-connection-client-ip,
         parent-connection-client-tcp-port, parent-connection-server-ip,
         parent-connection-server-tcp-port}. This 4-tuple corresponds to the
         equivalent 4-tuple {client-ip, client-tcp-port, server-ip,
-        server-tcp-port} in the server/ctrl-connection object. This
-        4-tuple allows the user to trace back from the TWAMP-Test session to
-        the (parent) TWAMP-Control connection that negotiated this test
+        server-tcp-port} in the server/ctrl-connection object. This 4-tuple
+        allows the user to trace back from the TWAMP-Test session to the
+        (parent) TWAMP-Control connection that negotiated this test
         session.</t>
-
       </section>
     </section>
 
@@ -2126,8 +2118,8 @@ module ietf-twamp {
       in nature, but aims to be self-contained, i.e. were it to be executed in
       a real TWAMP implementation it would lead to a correctly configured test
       session. A more elaborated example, which also includes authentication
-      parameters, is provided in <xref target="AuthExample"/>. For completeness,
-      examples are provided for IPv4 and IPv6.</t>
+      parameters, is provided in <xref target="AuthExample"/>. For
+      completeness, examples are provided for IPv4 and IPv6.</t>
 
       <section anchor="ExampleCC" title="Control-Client">
         <t>The following configuration example shows a Control-Client with
@@ -2149,10 +2141,10 @@ module ietf-twamp {
         </figure>
 
         <t>The following configuration example shows a Control-Client with two
-        instances of client/ctrl-connection, one called "RouterA" and
-        another called "RouterB". Each TWAMP-Control connection is to a
-        different Server. The control connection named "RouterA" has two test
-        session requests. The TWAMP-Control connection named "RouterB" has no
+        instances of client/ctrl-connection, one called "RouterA" and another
+        called "RouterB". Each TWAMP-Control connection is to a different
+        Server. The control connection named "RouterA" has two test session
+        requests. The TWAMP-Control connection named "RouterB" has no
         TWAMP-Test session requests.</t>
 
         <figure>
@@ -2472,8 +2464,9 @@ module ietf-twamp {
       nodes without proper protection can have a negative effect on the
       devices that support this feature.</t>
 
-      <t>Examples of nodes that are particularly vulnerable include</t>
-
+      <t>Examples of nodes that are particularly vulnerable include several
+      timeout values put in the protocol to protect against sessions that are
+      not active but are consuming resources.</t>
     </section>
 
     <section anchor="iana" title="IANA Considerations">
@@ -2501,13 +2494,13 @@ module ietf-twamp {
 
     <section anchor="acks" title="Acknowledgements">
       <t>We thank Fred Baker, Kevin D'Souza, Gregory Mirsky, Brian Trammell
-      and Robert Sherman for their thorough and constructive reviews,
-      comments and text suggestions.</t>
+      and Robert Sherman for their thorough and constructive reviews, comments
+      and text suggestions.</t>
 
       <t>Haoxing Shen contributed to the definition of the YANG module in
       <xref target="module"/>.</t>
 
-      <t>Ladislav Lhokta did thorough review of the YANG module and the
+      <t>Ladislav Lhokta did a thorough review of the YANG module and the
       examples.</t>
 
       <t>Kostas Pentikousis is partially supported by FP7 UNIFY
@@ -2550,11 +2543,11 @@ module ietf-twamp {
       <?rfc ?>
 
       <?rfc include='reference.RFC.6241'?>
-      
+
       <?rfc include='reference.RFC.6536'?>
 
       <?rfc include='reference.RFC.7717'?>
-      
+
       <?rfc include='reference.RFC.7426'?>
 
       <?rfc include='reference.I-D.ietf-netconf-restconf'?>
@@ -2945,7 +2938,6 @@ module ietf-twamp {
     </section>
 
     <section anchor="OperationalCommands" title="TWAMP Operational Commands">
-
       <t>TWAMP operational commands could be performed programmatically or
       manually, e.g. using a command-line interface (CLI). With respect to
       programmability, YANG can be used to define NETCONF Remote Procedure
