@@ -598,7 +598,7 @@ o-------------------o                       o-------------------o
         parameter (session-sender/admin-state) that controls whether the
         device is allowed to initiate TWAMP test sessions.</t>
 
-        <t>There is one instance of twamp-sender-test-session for each
+        <t>There is one instance of test-session for each
         TWAMP-Test session for which packets are being sent.</t>
 
         <figure anchor="fig:twampSenders"
@@ -607,13 +607,13 @@ o-------------------o                       o-------------------o
 +----------------------------+
 | twamp-session-sender       |
 +----------------------------+  0..* +---------------------------+
-| admin-state |<>-----| twamp-sender-test-session |
+| admin-state |<>-----| test-session |
 +----------------------------+       +---------------------------+
                                      | name         |
                                      | ctrl-connection-name {ro} |
                                      | fill-mode                 |
                                      | number-of-packets         |
-                                     | sender-session-state {ro} |
+                                     | state {ro} |
                                      | sent-packets         {ro} |
                                      | rcv-packets          {ro} |
                                      | last-sent-seq        {ro} |
@@ -659,8 +659,8 @@ o-------------------o                       o-------------------o
         parameter (session-reflector/admin-state) that controls whether the
         device is allowed to respond to incoming TWAMP test sessions. Each
         incoming TWAMP-Test session that is active on the Session-Reflector
-        will be represented by an instance of a twamp-reflector-test-session
-        object. All items in the twamp-reflector-test-session object are
+        will be represented by an instance of a twamp-reflector/test-session
+        object. All items in the twamp-reflector/test-session object are
         read-only.</t>
 
         <figure anchor="fig:twampReflector"
@@ -677,7 +677,7 @@ o-------------------o                       o-------------------o
                  |
                  | 0..*
 +----------------------------------------+
-| twamp-reflector-test-session           |
+| test-session           |
 +----------------------------------------+
 | sid                               {ro} |
 | sender-ip                         {ro} |
@@ -697,7 +697,7 @@ o-------------------o                       o-------------------o
 ]]></artwork>
         </figure>
 
-        <t>Instances of twamp-reflector-test-session are indexed by a session
+        <t>Instances of test-session are indexed by a session
         identifier (sid). This value is auto-allocated by the Server as test
         session requests are received, and communicated back to the
         Control-Client in the SID field of the Accept-Session message; see
@@ -712,11 +712,11 @@ o-------------------o                       o-------------------o
         twamp-client/ctrl-connection/test-session-request/sid
         and obtain the SID (see <xref target="fig:twamp-client"/>). The user
         may then use this SID value as an index to retrieve an individual
-        twamp-session-reflector/twamp-reflector-test-session instance on the
+        twamp-session-reflector/test-session instance on the
         Session-Reflector device.</t>
 
         <t>If the user has no network access to the Control-Client device,
-        then the only option is to retrieve all twamp-reflector-test-session
+        then the only option is to retrieve all test-session
         instances from the Session-Reflector device. This could be problematic
         if a large number of test sessions are currently active on that
         device.</t>
@@ -2280,15 +2280,15 @@ module ietf-twamp {
  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
      <twamp-session-sender>
         <admin-state>true</admin-state>
-        <twamp-sender-test-session>
+        <test-session>
            <name>Test1</name>
            <ctrl-connection-name>RouterA</ctrl-connection-name>
            <number-of-packets>900</number-of-packets>
            <periodic-interval>1</periodic-interval>
            <periodic-interval-units>seconds</periodic-interval-units>
-           <sender-session-state>setup</sender-session-state>
-        </twamp-sender-test-session>
-        <twamp-sender-test-session>
+           <state>setup</state>
+        </test-session>
+        <test-session>
            <name>Test2</name>
            <ctrl-connection-name>
              RouterA
@@ -2298,8 +2298,8 @@ module ietf-twamp {
            <lambda-units>1</lambda-units>
            <max-interval>2</max-interval>
            <truncation-point-units>seconds</truncation-point-units>
-           <sender-session-state>setup</sender-session-state>
-        </twamp-sender-test-session>
+           <state>setup</state>
+        </test-session>
      </twamp-session-sender>
   </twamp>
 </data>
@@ -2321,7 +2321,7 @@ module ietf-twamp {
           <admin-state>
              true
           </admin-state>
-          <twamp-reflector-test-session>
+          <test-session>
             <sender-ip>10.1.1.1</sender-ip>
             <sender-udp-port>4000</sender-udp-port>
             <reflector-ip>10.1.1.2</reflector-ip>
@@ -2343,8 +2343,8 @@ module ietf-twamp {
             <rcv-packets>2</rcv-packets>
             <last-sent-seq>1</last-sent-seq>
             <last-rcv-seq>1</last-rcv-seq>
-         </twamp-reflector-test-session>
-         <twamp-reflector-test-session>
+         </test-session>
+         <test-session>
             <sender-ip>203.0.113.1</sender-ip>
             <sender-udp-port>50000</sender-udp-port>
             <reflector-ip>192.68.0.2</reflector-ip>
@@ -2366,7 +2366,7 @@ module ietf-twamp {
             <rcv-packets>21</rcv-packets>
             <last-sent-seq>20</last-sent-seq>
             <last-rcv-seq>20</last-rcv-seq>
-         </twamp-reflector-test-session>
+         </test-session>
       </twamp-session-reflector>
    </twamp>
 </data>
@@ -2376,7 +2376,7 @@ module ietf-twamp {
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
       <twamp-session-reflector>
 	  <admin-state>true</admin-state>
-          <twamp-reflector-test-session>
+          <test-session>
             <sender-ip>10.1.1.1</sender-ip>
             <sender-udp-port>4000</sender-udp-port>
             <reflector-ip>10.1.1.2</reflector-ip>
@@ -2394,8 +2394,8 @@ module ietf-twamp {
             <rcv-packets>2</rcv-packets>
             <last-sent-seq>1</last-sent-seq>
             <last-rcv-seq>1</last-rcv-seq>
-         </twamp-reflector-test-session>
-         <twamp-reflector-test-session>
+         </test-session>
+         <test-session>
             <sender-ip>203.0.113.1</sender-ip>
             <sender-udp-port>4001</sender-udp-port>
             <reflector-ip>192.68.0.2</reflector-ip>
@@ -2413,7 +2413,7 @@ module ietf-twamp {
             <rcv-packets>21</rcv-packets>
             <last-sent-seq>20</last-sent-seq>
             <last-rcv-seq>20</last-rcv-seq>
-         </twamp-reflector-test-session>
+         </test-session>
       </twamp-session-reflector>
    </twamp>
 </data>
@@ -2747,20 +2747,20 @@ module ietf-twamp {
   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
      <twamp-session-sender>
         <admin-state>true</admin-state>
-        <twamp-sender-test-session>
+        <test-session>
            <name>Test1</name>
            <ctrl-connection-name>RouterA</ctrl-connection-name>
            <fill-mode>zero</fill-mode>
            <number-of-packets>900</number-of-packets>
            <periodic-interval>1</periodic-interval>
            <periodic-interval-units>seconds</periodic-interval-units>
-           <sender-session-state>setup</sender-session-state>
+           <state>setup</state>
            <sent-packets>2</sent-packets>
            <rcv-packets>2</rcv-packets>
            <last-sent-seq>1</last-sent-seq>
            <last-rcv-seq>1</last-rcv-seq>
-        </twamp-sender-test-session>
-        <twamp-sender-test-session>
+        </test-session>
+        <test-session>
            <name>Test2</name>
            <ctrl-connection-name>
              RouterA
@@ -2771,12 +2771,12 @@ module ietf-twamp {
            <lambda-units>1</lambda-units>
            <max-interval>2</max-interval>
            <truncation-point-units>seconds</truncation-point-units>
-           <sender-session-state>setup</sender-session-state>
+           <state>setup</state>
            <sent-packets>21</sent-packets>
            <rcv-packets>21</rcv-packets>
            <last-sent-seq>20</last-sent-seq>
            <last-rcv-seq>20</last-rcv-seq>
-        </twamp-sender-test-session>
+        </test-session>
      </twamp-session-sender>
   </twamp>
 </data>
@@ -2794,7 +2794,7 @@ module ietf-twamp {
          <admin-state>
             true
          </admin-state>
-         <twamp-reflector-test-session>
+         <test-session>
             <sender-ip>10.1.1.1</sender-ip>
             <sender-udp-port>4000</sender-udp-port>
             <reflector-ip>10.1.1.2</reflector-ip>
@@ -2817,8 +2817,8 @@ module ietf-twamp {
             <rcv-packets>2</rcv-packets>
             <last-sent-seq>1</last-sent-seq>
             <last-rcv-seq>1</last-rcv-seq>
-         </twamp-reflector-test-session>
-         <twamp-reflector-test-session>
+         </test-session>
+         <test-session>
             <sender-ip>203.0.113.1</sender-ip>
             <sender-udp-port>4001</sender-udp-port>
             <reflector-ip>192.68.0.2</reflector-ip>
@@ -2841,7 +2841,7 @@ module ietf-twamp {
             <rcv-packets>21</rcv-packets>
             <last-sent-seq>20</last-sent-seq>
             <last-rcv-seq>20</last-rcv-seq>
-         </twamp-reflector-test-session>
+         </test-session>
       </twamp-session-reflector>
    </twamp>
 </data>
@@ -2851,7 +2851,7 @@ module ietf-twamp {
    <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
       <twamp-session-reflector>
 	 <admin-state>true</admin-state>
-         <twamp-reflector-test-session>
+         <test-session>
             <sender-ip>2001:10:1:1::1</sender-ip>
             <sender-udp-port>4000</sender-udp-port>
             <reflector-ip>2001:10:1:1::2</reflector-ip>
@@ -2870,8 +2870,8 @@ module ietf-twamp {
             <rcv-packets>2</rcv-packets>
             <last-sent-seq>1</last-sent-seq>
             <last-rcv-seq>1</last-rcv-seq>
-         </twamp-reflector-test-session>
-         <twamp-reflector-test-session>
+         </test-session>
+         <test-session>
             <sender-ip>2001:203:0:113::1</sender-ip>
             <sender-udp-port>4001</sender-udp-port>
             <reflector-ip>2001:192:68::2</reflector-ip>
@@ -2890,7 +2890,7 @@ module ietf-twamp {
             <rcv-packets>21</rcv-packets>
             <last-sent-seq>20</last-sent-seq>
             <last-rcv-seq>20</last-rcv-seq>
-         </twamp-reflector-test-session>
+         </test-session>
       </twamp-session-reflector>
    </twamp>
 </data>
