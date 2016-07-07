@@ -413,12 +413,12 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
  | client-ip                    |
  | server-ip                    |
  | server-tcp-port              |    0..* +-------------------------+
- | dscp                         |<>-------| twamp-session-request   |
+ | dscp                         |<>-------| test-session-request   |
  | key-id                       |         +-------------------------+
- | max-count                    |         | test-session-name       |
+ | max-count                    |         | name       |
  | client-tcp-port         {ro} |         | sender-ip               |
  | server-start-time       {ro} |         | sender-udp-port         |
- | ctrl-connection-state   {ro} |         | reflector-ip            |
+ | state   {ro} |         | reflector-ip            |
  | selected-mode           {ro} |         | reflector-udp-port      |
  | token                   {ro} |         | timeout                 |
  | client-iv               {ro} |         | padding-length          |
@@ -426,7 +426,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                                           | start-time              |
                    +-------------+ 1      | repeat                  |
                    | pm-reg-list |------<>| repeat-interval         |
-                   +-------------+        | test-session-state {ro} |
+                   +-------------+        | state {ro} |
                    | pm-index    |        | sid                {ro} |
                    +-------------+        +-------------------------+
 
@@ -481,16 +481,16 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    instance of ctrl-connection per TWAMP-Control (TCP) connection that
    is to be initiated from this device.
 
-   Each ctrl-connection holds a list of twamp-session-request. twamp-
+   Each ctrl-connection holds a list of test-session-request. test-
    session-request holds information associated with the Control-Client
    for this test session.  This includes information that is associated
    with the Request-TW-Session/Accept-Session message exchange (see
    Section 3.5 of [RFC5357]).  The Control-Client is also responsible
    for scheduling and results collection for TWAMP-Test sessions, so
-   twamp-session-request will also hold information related to these
+   test-session-request will also hold information related to these
    actions (e.g. pm-index, repeat-interval).
 
-   There SHALL be one instance of twamp-session-request for each TWAMP-
+   There SHALL be one instance of test-session-request for each TWAMP-
    Test session that is to be negotiated by this TWAMP-Control
    connection via a Request-TW-Session/Accept-Session exchange.
 
@@ -523,13 +523,13 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    | max-count          |        +------------+
    | modes              |
    |                    |   0..* +-----------------------------------+
-   |                    |<>------| twamp-server-ctrl-connection      |
+   |                    |<>------| ctrl-connection      |
    +--------------------+        +-----------------------------------+
                                  | client-ip                    {ro} |
                                  | client-tcp-port              {ro} |
                                  | server-ip                    {ro} |
                                  | server-tcp-port              {ro} |
-                                 | server-ctrl-connection-state {ro} |
+                                 | state {ro} |
                                  | dscp                         {ro} |
                                  | selected-mode                {ro} |
                                  | key-id                       {ro} |
@@ -568,14 +568,14 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    authentication or encryption.
 
    Each incoming control connection that is active on the Server will be
-   represented by an instance of a twamp-server-ctrl-connection object.
-   All items in the twamp-server-ctrl-connection object are read-only,
+   represented by an instance of a twamp-server/ctrl-connection object.
+   All items in the twamp-server/ctrl-connection object are read-only,
    as we explain later in this section.
 
-   There SHALL be one instance of twamp-server-ctrl-connection per
+   There SHALL be one instance of twamp-server/ctrl-connection per
    incoming TWAMP-Control (TCP) connection that is received and active
-   on the Server device.  All items in the twamp-server-ctrl-connection
-   are read-only.  Each instance of twamp-server-ctrl-connection uses
+   on the Server device.  All items in the twamp-server/ctrl-connection
+   are read-only.  Each instance of twamp-server/ctrl-connection uses
    the following 4-tuple as its unique key: client-ip, client-tcp-port,
    server-ip, server-tcp-port.
 
@@ -623,7 +623,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    +----------------------------+  0..* +---------------------------+
    | admin-state |<>-----| twamp-sender-test-session |
    +----------------------------+       +---------------------------+
-                                        | test-session-name         |
+                                        | name         |
                                         | ctrl-connection-name {ro} |
                                         | fill-mode                 |
                                         | number-of-packets         |
@@ -735,9 +735,9 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    are currently active on that device, or what SIDs have been auto-
    allocated for these test sessions.  If the user has network access to
    the Control-Client device, then it is possible to read the data for
-   this session under twamp-client/ctrl-connection/twamp-session-
-   request/sid and obtain the SID (see Figure 3).  The user may then use
-   this SID value as an index to retrieve an individual twamp-session-
+   this session under twamp-client/ctrl-connection/test-session-request/
+   sid and obtain the SID (see Figure 3).  The user may then use this
+   SID value as an index to retrieve an individual twamp-session-
    reflector/twamp-reflector-test-session instance on the Session-
    Reflector device.
 
@@ -751,7 +751,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    4-tuple: {parent-connection-client-ip, parent-connection-client-tcp-
    port, parent-connection-server-ip, parent-connection-server-tcp-
    port}. This 4-tuple corresponds to the equivalent 4-tuple {client-ip,
-   client-tcp-port, server-ip, server-tcp-port} in the twamp-server-
+   client-tcp-port, server-ip, server-tcp-port} in the twamp-server/
    ctrl-connection object.  This 4-tuple allows the user to trace back
    from the TWAMP-Test session to the (parent) TWAMP-Control connection
    that negotiated this test session.
@@ -786,21 +786,21 @@ Civil, et al.            Expires January 8, 2017               [Page 14]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
-      |     +--rw name                     string
-      |     +--rw client-ip?               inet:ip-address
-      |     +--rw server-ip                inet:ip-address
-      |     +--rw server-tcp-port?         inet:port-number
-      |     +--rw control-packet-dscp?     inet:dscp
-      |     +--rw key-id?                  string
-      |     +--rw max-count?               uint32
-      |     +--ro client-tcp-port?         inet:port-number
-      |     +--ro server-start-time?       uint64
-      |     +--ro ctrl-connection-state?   control-client-connection-state
-      |     +--ro selected-mode?           twamp-modes
-      |     +--ro token?                   binary
-      |     +--ro client-iv?               binary
-      |     +--rw twamp-session-request* [test-session-name]
-      |        +--rw test-session-name     string
+      |     +--rw name                    string
+      |     +--rw client-ip?              inet:ip-address
+      |     +--rw server-ip               inet:ip-address
+      |     +--rw server-tcp-port?        inet:port-number
+      |     +--rw control-packet-dscp?    inet:dscp
+      |     +--rw key-id?                 string
+      |     +--rw max-count?              uint32
+      |     +--ro client-tcp-port?        inet:port-number
+      |     +--ro server-start-time?      uint64
+      |     +--ro state?                  control-client-connection-state
+      |     +--ro selected-mode?          twamp-modes
+      |     +--ro token?                  binary
+      |     +--ro client-iv?              binary
+      |     +--rw test-session-request* [name]
+      |        +--rw name                  string
       |        +--rw sender-ip?            inet:ip-address
       |        +--rw sender-udp-port?      dynamic-port-number
       |        +--rw reflector-ip          inet:ip-address
@@ -813,27 +813,27 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
       |        +--rw repeat-interval?      uint32
       |        +--rw pm-reg-list* [pm-index]
       |        |  +--rw pm-index    uint16
-      |        +--ro test-session-state?   test-session-state
+      |        +--ro state?                test-session-state
       |        +--ro sid?                  string
       +--rw twamp-server! {server}?
-      |  +--rw admin-state                     boolean
-      |  +--rw server-tcp-port?                inet:port-number
-      |  +--rw servwait?                       uint32
-      |  +--rw control-packet-dscp?            inet:dscp
-      |  +--rw count?                          uint32
-      |  +--rw max-count?                      uint32
-      |  +--rw modes?                          twamp-modes
+      |  +--rw admin-state            boolean
+      |  +--rw server-tcp-port?       inet:port-number
+      |  +--rw servwait?              uint32
+      |  +--rw control-packet-dscp?   inet:dscp
+      |  +--rw count?                 uint32
+      |  +--rw max-count?             uint32
+      |  +--rw modes?                 twamp-modes
       |  +--rw key-chain* [key-id]
       |  |  +--rw key-id        string
       |  |  +--rw secret-key?   string
-      |  +--ro twamp-server-ctrl-connection* [client-ip client-tcp-port server-ip server-tcp-port]
-      |     +--ro client-ip                       inet:ip-address
-      |     +--ro client-tcp-port                 inet:port-number
-      |     +--ro server-ip                       inet:ip-address
-      |     +--ro server-tcp-port                 inet:port-number
-      |     +--ro server-ctrl-connection-state?   server-ctrl-connection-state
-      |     +--ro control-packet-dscp?            inet:dscp
-      |     +--ro selected-mode?                  twamp-modes
+      |  +--ro ctrl-connection* [client-ip client-tcp-port server-ip server-tcp-port]
+      |     +--ro client-ip              inet:ip-address
+      |     +--ro client-tcp-port        inet:port-number
+      |     +--ro server-ip              inet:ip-address
+      |     +--ro server-tcp-port        inet:port-number
+      |     +--ro state?                 server-ctrl-connection-state
+      |     +--ro control-packet-dscp?   inet:dscp
+      |     +--ro selected-mode?         twamp-modes
 
 
 
@@ -842,16 +842,16 @@ Civil, et al.            Expires January 8, 2017               [Page 15]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
-      |     +--ro key-id?                         string
-      |     +--ro count?                          uint32
-      |     +--ro max-count?                      uint32
-      |     +--ro salt?                           binary
-      |     +--ro server-iv?                      binary
-      |     +--ro challenge?                      binary
+      |     +--ro key-id?                string
+      |     +--ro count?                 uint32
+      |     +--ro max-count?             uint32
+      |     +--ro salt?                  binary
+      |     +--ro server-iv?             binary
+      |     +--ro challenge?             binary
       +--rw twamp-session-sender! {session-sender}?
       |  +--rw admin-state                  boolean
-      |  +--rw twamp-sender-test-session* [test-session-name]
-      |     +--rw test-session-name          string
+      |  +--rw twamp-sender-test-session* [name]
+      |     +--rw name                       string
       |     +--ro ctrl-connection-name?      string
       |     +--rw fill-mode?                 padding-fill-mode
       |     +--rw number-of-packets?         uint32
@@ -933,7 +933,7 @@ module ietf-twamp {
     The YANG module uses features to indicate which of the four
     logical entities are supported by an implementation.";
 
-  revision 2016-06-30 {
+  revision 2016-07-07 {
     description
         "Revision appearing in draft-ietf-ippm-twamp-yang-01.
         Covers RFC5357, RFC5618, RFC5938, RFC6038, RFC 7717,
@@ -1436,7 +1436,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             instantiation of the Server started operating.";
         }
 
-        leaf ctrl-connection-state {
+        leaf state {
           type control-client-connection-state;
           config false;
           description
@@ -1503,8 +1503,8 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             pseudo-random number source.";
         }
 
-        list twamp-session-request {
-          key test-session-name;
+        list test-session-request {
+          key name;
           description
 
 
@@ -1517,7 +1517,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             "Information associated with the Control-Client
             for this test session";
 
-          leaf test-session-name {
+          leaf name {
             type string;
             description
                 "A unique name to be used for identification of
@@ -1586,7 +1586,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                 message. If this value is not set, the device SHALL
                 use the same port number as defined in the
                 server-tcp-port parameter of this
-                twamp-session-request's parent
+                test-session-request's parent
                 twamp/client/ctrl-connection.";
           }
 
@@ -1728,7 +1728,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                 to specify all metrics that shall be measured on
                 a single stream.";
           }
-          leaf test-session-state {
+          leaf state {
             type test-session-state;
 
 
@@ -1876,7 +1876,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
 
       uses key-management;
 
-      list twamp-server-ctrl-connection {
+      list ctrl-connection {
         key
             "client-ip client-tcp-port server-ip server-tcp-port";
         config false;
@@ -1929,7 +1929,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             actually in use for this control connection.";
         }
 
-        leaf server-ctrl-connection-state {
+        leaf state {
           type server-ctrl-connection-state;
           description
             "Indicates the Server TWAMP-Control connection state.";
@@ -2062,7 +2062,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
       }
 
       list twamp-sender-test-session{
-        key test-session-name;
+        key name;
         description
             "TWAMP Session-Sender test sessions.";
 
@@ -2074,7 +2074,7 @@ Civil, et al.            Expires January 8, 2017               [Page 37]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
-        leaf test-session-name {
+        leaf name {
           type string;
           description
             "A unique name for this TWAMP-Test session to be used
@@ -2379,22 +2379,22 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                <name>RouterA</name>
                <client-ip>203.0.113.1</client-ip>
                <server-ip>203.0.113.2</server-ip>
-               <twamp-session-request>
-                  <test-session-name>Test1</test-session-name>
+               <test-session-request>
+                  <name>Test1</name>
                   <sender-ip>10.1.1.1</sender-ip>
                   <sender-udp-port>50000</sender-udp-port>
                   <reflector-ip>10.1.1.2</reflector-ip>
                   <reflector-udp-port>500001</reflector-udp-port>
                   <start-time>0</start-time>
-               </twamp-session-request>
-               <twamp-session-request>
-                  <test-session-name>Test2</test-session-name>
+               </test-session-request>
+               <test-session-request>
+                  <name>Test2</name>
                   <sender-ip>203.0.113.1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
                   <reflector-ip>203.0.113.2</reflector-ip>
                   <reflector-udp-port>50001</reflector-udp-port>
                   <start-time>0</start-time>
-               </twamp-session-request>
+               </test-session-request>
             </ctrl-connection>
             <ctrl-connection>
                <name>RouterB</name>
@@ -2422,22 +2422,22 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                <name>RouterA</name>
                <client-ip>2001:203:0:113::1</client-ip>
                <server-ip>2001:203:0:113::2</server-ip>
-               <twamp-session-request>
-                  <test-session-name>Test1</test-session-name>
+               <test-session-request>
+                  <name>Test1</name>
                   <sender-ip>2001:10:1:1::1</sender-ip>
                   <sender-udp-port>4000</sender-udp-port>
                   <reflector-ip>2001:10:1:1::2</reflector-ip>
                   <reflector-udp-port>5000</reflector-udp-port>
                   <start-time>0</start-time>
-               </twamp-session-request>
-               <twamp-session-request>
-                  <test-session-name>Test2</test-session-name>
+               </test-session-request>
+               <test-session-request>
+                  <name>Test2</name>
                   <sender-ip>2001:203:0:113::1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
                   <reflector-ip>2001:203:0:113::2</reflector-ip>
                   <reflector-udp-port>5001</reflector-udp-port>
                   <start-time>0</start-time>
-               </twamp-session-request>
+               </test-session-request>
             </ctrl-connection>
             <ctrl-connection>
                <name>RouterB</name>
@@ -2484,15 +2484,15 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
       <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
          <twamp-server>
             <admin-state>true</admin-state>
-            <twamp-server-ctrl-connection>
+            <ctrl-connection>
                <client-ip>203.0.113.1</client-ip>
                <client-tcp-port>16341</client-tcp-port>
                <server-ip>203.0.113.2</server-ip>
                <server-tcp-port>862</server-tcp-port>
-               <server-ctrl-connection-state>
+               <state>
                   active
-               </server-ctrl-connection-state>
-            </twamp-server-ctrl-connection>
+               </state>
+            </ctrl-connection>
          </twamp-server>
       </twamp>
    </data>
@@ -2502,15 +2502,15 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
       <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
          <twamp-server>
             <admin-state>true</admin-state>
-            <twamp-server-ctrl-connection>
+            <ctrl-connection>
                <client-ip>2001:203:0:113::1</client-ip>
                <client-tcp-port>16341</client-tcp-port>
                <server-ip>2001:203:0:113::2</server-ip>
                <server-tcp-port>862</server-tcp-port>
-               <server-ctrl-connection-state>
+               <state>
                   active
-               </server-ctrl-connection-state>
-            </twamp-server-ctrl-connection>
+               </state>
+            </ctrl-connection>
          </twamp-server>
       </twamp>
    </data>
@@ -2533,7 +2533,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
         <twamp-session-sender>
            <admin-state>true</admin-state>
            <twamp-sender-test-session>
-              <test-session-name>Test1</test-session-name>
+              <name>Test1</name>
               <ctrl-connection-name>RouterA</ctrl-connection-name>
               <number-of-packets>900</number-of-packets>
               <periodic-interval>1</periodic-interval>
@@ -2541,7 +2541,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               <sender-session-state>setup</sender-session-state>
            </twamp-sender-test-session>
            <twamp-sender-test-session>
-              <test-session-name>Test2</test-session-name>
+              <name>Test2</name>
               <ctrl-connection-name>
                 RouterA
               </ctrl-connection-name>
@@ -2924,28 +2924,28 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                <server-ip>203.0.113.2</server-ip>
                <dscp>32</dscp>
                <key-id>KeyClient1ToRouterA</key-id>
-               <twamp-session-request>
-                  <test-session-name>Test1</test-session-name>
+               <test-session-request>
+                  <name>Test1</name>
                   <sender-ip>10.1.1.1</sender-ip>
                   <sender-udp-port>4000</sender-udp-port>
                   <reflector-ip>10.1.1.2</reflector-ip>
                   <reflector-udp-port>5000</reflector-udp-port>
                   <padding-length>64</padding-length>
                   <start-time>0</start-time>
-                  <test-session-state>ok</test-session-state>
+                  <state>ok</state>
                   <sid>1232</sid>
-               </twamp-session-request>
-               <twamp-session-request>
-                  <test-session-name>Test2</test-session-name>
+               </test-session-request>
+               <test-session-request>
+                  <name>Test2</name>
                   <sender-ip>203.0.113.1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
                   <reflector-ip>203.0.113.2</reflector-ip>
                   <reflector-udp-port>5001</reflector-udp-port>
                   <padding-length>128</padding-length>
                   <start-time>0</start-time>
-                  <test-session-state>ok</test-session-state>
+                  <state>ok</state>
                   <sid>178943</sid>
-               </twamp-session-request>
+               </test-session-request>
             </ctrl-connection>
          </twamp-client>
       </twamp>
@@ -2986,28 +2986,28 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                <server-ip>2001:203:0:113::2</server-ip>
                <dscp>32</dscp>
                <key-id>KeyClient1ToRouterA</key-id>
-               <twamp-session-request>
-                  <test-session-name>Test1</test-session-name>
+               <test-session-request>
+                  <name>Test1</name>
                   <sender-ip>2001:10:1:1::1</sender-ip>
                   <sender-udp-port>4000</sender-udp-port>
                   <reflector-ip>2001:10:1:1::2</reflector-ip>
                   <reflector-udp-port>5000</reflector-udp-port>
                   <padding-length>64</padding-length>
                   <start-time>0</start-time>
-                  <test-session-state>ok</test-session-state>
+                  <state>ok</state>
                   <sid>1232</sid>
-               </twamp-session-request>
-               <twamp-session-request>
-                  <test-session-name>Test2</test-session-name>
+               </test-session-request>
+               <test-session-request>
+                  <name>Test2</name>
                   <sender-ip>2001:203:0:113::1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
                   <reflector-ip>2001:203:0:113::2</reflector-ip>
                   <reflector-udp-port>5001</reflector-udp-port>
                   <padding-length>128</padding-length>
                   <start-time>0</start-time>
-                  <test-session-state>ok</test-session-state>
+                  <state>ok</state>
                   <sid>178943</sid>
-               </twamp-session-request>
+               </test-session-request>
             </ctrl-connection>
          </twamp-client>
       </twamp>
@@ -3040,19 +3040,19 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                <key-id>KeyClient10ToRouterA</key-id>
                <secret-key>secret10</secret-key>
             </key-chain>
-            <twamp-server-ctrl-connection>
+            <ctrl-connection>
                <client-ip>203.0.113.1</client-ip>
                <client-tcp-port>16341</client-tcp-port>
                <server-ip>203.0.113.2</server-ip>
                <server-tcp-port>862</server-tcp-port>
-               <server-ctrl-connection-state>
+               <state>
                   active
-                </server-ctrl-connection-state>
+                </state>
                <dscp>32</dscp>
                <selected-mode>unauthenticated</selected-mode>
                <key-id>KeyClient1ToRouterA</key-id>
                <count>1024</count>
-            </twamp-server-ctrl-connection>
+            </ctrl-connection>
          </twamp-server>
       </twamp>
    </data>
@@ -3082,19 +3082,19 @@ Civil, et al.            Expires January 8, 2017               [Page 55]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
-            <twamp-server-ctrl-connection>
+            <ctrl-connection>
                <client-ip>2001:203:0:113::1</client-ip>
                <client-tcp-port>16341</client-tcp-port>
                <server-ip>2001:203:0:113::2</server-ip>
                <server-tcp-port>862</server-tcp-port>
-               <server-ctrl-connection-state>
+               <state>
                   active
-                </server-ctrl-connection-state>
+                </state>
                <dscp>32</dscp>
                <selected-mode>unauthenticated</selected-mode>
                <key-id>KeyClient1ToRouterA</key-id>
                <count>1024</count>
-            </twamp-server-ctrl-connection>
+            </ctrl-connection>
          </twamp-server>
       </twamp>
    </data>
@@ -3144,7 +3144,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
         <twamp-session-sender>
            <admin-state>true</admin-state>
            <twamp-sender-test-session>
-              <test-session-name>Test1</test-session-name>
+              <name>Test1</name>
               <ctrl-connection-name>RouterA</ctrl-connection-name>
               <fill-mode>zero</fill-mode>
               <number-of-packets>900</number-of-packets>
@@ -3157,7 +3157,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               <last-rcv-seq>1</last-rcv-seq>
            </twamp-sender-test-session>
            <twamp-sender-test-session>
-              <test-session-name>Test2</test-session-name>
+              <name>Test2</name>
               <ctrl-connection-name>
                 RouterA
               </ctrl-connection-name>
