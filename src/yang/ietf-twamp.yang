@@ -520,7 +520,7 @@ module ietf-twamp {
             pseudo-random number source.";
         }
 
-        list twamp-session-request {
+        list test-session-request {
           key test-session-name;
           description
             "Information associated with the Control-Client
@@ -587,7 +587,7 @@ module ietf-twamp {
                 message. If this value is not set, the device SHALL
                 use the same port number as defined in the
                 server-tcp-port parameter of this
-                twamp-session-request's parent
+                test-session-request's parent
                 twamp/client/ctrl-connection.";
           }
 
