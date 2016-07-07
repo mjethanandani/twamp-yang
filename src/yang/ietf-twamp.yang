@@ -521,12 +521,12 @@ module ietf-twamp {
         }
 
         list test-session-request {
-          key test-session-name;
+          key name;
           description
             "Information associated with the Control-Client
             for this test session";
 
-          leaf test-session-name {
+          leaf name {
             type string;
             description
                 "A unique name to be used for identification of
@@ -1002,11 +1002,11 @@ module ietf-twamp {
       }
 
       list twamp-sender-test-session{
-        key test-session-name;
+        key name;
         description
             "TWAMP Session-Sender test sessions.";
 
-        leaf test-session-name {
+        leaf name {
           type string;
           description
             "A unique name for this TWAMP-Test session to be used
