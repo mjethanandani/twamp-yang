@@ -735,9 +735,9 @@ module ietf-twamp {
       }
     }
 
-    container twamp-server {
+    container server {
       if-feature server;
-      presence twamp-server;
+      presence server;
       description
         "Configuration of the TWAMP Server logical entity.";
 
@@ -878,8 +878,8 @@ module ietf-twamp {
             TWAMP-Control (TCP) packets belonging to this
             control connection. This will usually be the
             same value as the server-tcp-port configured
-            under twamp-server. However, in the event that
-            the user re-configured twamp-server/server-tcp-port
+            under twamp/server. However, in the event that
+            the user re-configured server/server-tcp-port
             after this control connection was initiated, this
             value will indicate the server-tcp-port that is
             actually in use for this control connection.";
@@ -898,9 +898,9 @@ module ietf-twamp {
             TWAMP-Control (TCP) packets sent by the Server
             for this control connection. This will usually
             be the same value as is configured in the
-            control-packet-dscp parameter under the twamp-server
+            control-packet-dscp parameter under the twamp/server
             container.  However, in the event that the user
-            re-configures twamp-server/dscp after this control
+            re-configures server/dscp after this control
             connection is already in progress, this read-only
             value will show the actual dscp value in use by this
             TWAMP-Control connection.";
@@ -930,8 +930,8 @@ module ietf-twamp {
           description
             "The count value that is in use by this TWAMP-Control
             connection. This will usually be the same value
-            as is configured under twamp-server. However, in the
-            event that the user re-configured twamp-server/count
+            as is configured under twamp/server. However, in the
+            event that the user re-configured server/count
             after this control connection is already in progress,
             this read-only value will show the actual count that
             is in use for this TWAMP-Control connection.";
@@ -944,9 +944,9 @@ module ietf-twamp {
           description
             "The max-count value that is in use by this
             TWAMP-Control connection. This will usually be the
-            same value as is configured under twamp-server. However,
+            same value as is configured under twamp/server. However,
             in the event that the user re-configured
-            twamp-server/max-count after this control connection is
+            server/max-count after this control connection is
             already in progress, this read-only value will show the
             actual max-count that is in use for this
             control connection.";
@@ -987,9 +987,9 @@ module ietf-twamp {
       }
     }
 
-    container twamp-session-sender {
+    container session-sender {
       if-feature session-sender;
-      presence twamp-session-sender;
+      presence session-sender;
       description
         "Configuration of the TWAMP Session-Sender
         logical entity";
@@ -1093,9 +1093,9 @@ module ietf-twamp {
       }
     }
 
-    container twamp-session-reflector {
+    container session-reflector {
       if-feature session-reflector;
-      presence twamp-session-reflector;
+      presence session-reflector;
       description
         "Configuration of the TWAMP Session-Reflector
         logical entity";
