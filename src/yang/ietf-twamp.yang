@@ -30,7 +30,7 @@ module ietf-twamp {
   revision 2016-07-07 {
     description
         "Revision appearing in draft-ietf-ippm-twamp-yang-01.
-        Covers RFC5357, RFC5618, RFC5938, RFC6038, RFC 7717,
+        Covers RFC 5357, RFC 5618, RFC 5938, RFC 6038, RFC 7717,
         and draft-ietf-ippm-metric-registry";
     reference
         draft-ietf-ippm-twamp-yang;
@@ -458,7 +458,7 @@ module ietf-twamp {
           config false;
           description
             "The Start-Time advertized by the Server in the
-            Server-Start message (RFC4656, Section 3.1). This is
+            Server-Start message (RFC 4656, Section 3.1). This is
             a timestamp representing the time when the current
             instantiation of the Server started operating.";
         }
@@ -477,7 +477,7 @@ module ietf-twamp {
           description
             "The TWAMP Mode that the Control-Client has chosen for
             this control connection as set in the Mode field of the
-            Set-Up-Response message (RFC4656, Section 3.1).";
+            Set-Up-Response message (RFC 4656, Section 3.1).";
         }
 
         leaf token {
@@ -495,7 +495,7 @@ module ietf-twamp {
             randomly by the Control-Client. AES Session-key and
             HMAC Session-key MUST be generated with sufficient
             entropy not to reduce the security of the underlying
-            cipher, see [RFC 4086]. The token itself is encrypted
+            cipher. The token itself is encrypted
             using the AES (Advanced Encryption Standard) in
             Cipher Block Chaining (CBC). Encryption MUST be
             performed using an Initialization Vector (IV)
@@ -503,6 +503,8 @@ module ietf-twamp {
             associated with KeyID. Challenge is the same as
             transmitted by the Server in the clear; see also the
             last paragraph of Section 6 in RFC 4656.";
+          reference
+            "RFC 4086: Randomness Requirements for Security";
         }
 
         leaf client-iv {
@@ -618,7 +620,7 @@ module ietf-twamp {
                 
                 This value will be placed in the Padding Length
                 field of the Request-TW-Session message
-                (RFC4656, Section 3.5).";
+                (RFC 4656, Section 3.5).";
           }
 
           leaf test-packet-dscp {
@@ -707,14 +709,17 @@ module ietf-twamp {
             }
             description
                 "A list of one or more Performance Metric Registry
-                Index values (see [I-D.ietf-ippm-metric-registry]),
-                which communicate packet stream characteristics
-                along with one or more metrics to be measured.
+                Index values, which communicate packet stream
+                characteristics along with one or more metrics
+                to be measured.
                 
                 All members of the pm-reg-list MUST have the same
                 stream characteristics, such that they combine
                 to specify all metrics that shall be measured on
                 a single stream.";
+            reference
+            "ietf-ippm-metric-registry:
+                Registry for Performance Metrics";
           }
           leaf state {
             type test-session-state;
@@ -731,7 +736,7 @@ module ietf-twamp {
                 "The SID allocated by the Server for this TWAMP-Test
                 session, and communicated back to the Control-Client
                 in the SID field of the Accept-Session message;
-                see Section 4.3 of RFC6038.";
+                see Section 4.3 of RFC 6038.";
           }
         }
       }
@@ -774,7 +779,7 @@ module ietf-twamp {
         default 900;
         description
             "TWAMP-Control (TCP) session timeout, in seconds
-            (RFC5357, Section 3.1)).";
+            (RFC 5357, Section 3.1)).";
       }
 
       leaf control-packet-dscp {
@@ -960,7 +965,7 @@ module ietf-twamp {
           }
           description
             "A parameter used in deriving a key from a
-            shared secret as described in Section 3.1 of RFC4656.
+            shared secret as described in Section 3.1 of RFC 4656.
             Salt MUST be generated pseudo-randomly (independently
             of anything else in the RFC) and is communicated to
             the Control-Client as part of the Server Greeting
@@ -1056,8 +1061,10 @@ module ietf-twamp {
             }
             leaf periodic-interval-units  {
               type time-units;
-              description
-                "Periodic interval time unit. See [RFC 3432]";
+              description "Periodic interval time unit.";
+              reference
+              "RFC 3432: Network performance measurement
+                         with periodic streams";
             }
           }
           case poisson {
@@ -1069,8 +1076,11 @@ module ietf-twamp {
             leaf lambda-units {
               type uint32;
               description
-                "Indicates the units of lambda in reciprocal seconds.
-                See [RFC 3432].";
+                "Indicates the units of lambda in
+                reciprocal seconds.";
+             reference
+              "RFC 3432: Network performance measurement
+                         with periodic streams";
             }
             leaf max-interval {
               type uint32;
