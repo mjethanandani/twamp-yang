@@ -1371,7 +1371,7 @@ module ietf-twamp {
             randomly by the Control-Client. AES Session-key and
             HMAC Session-key MUST be generated with sufficient
             entropy not to reduce the security of the underlying
-            cipher, see RFC 4086. The token itself is encrypted
+            cipher, see [RFC 4086]. The token itself is encrypted
             using the AES (Advanced Encryption Standard) in
             Cipher Block Chaining (CBC). Encryption MUST be
             performed using an Initialization Vector (IV)
@@ -1583,7 +1583,7 @@ module ietf-twamp {
             }
             description
                 "A list of one or more Performance Metric Registry
-                Index values (see I-D.ietf-ippm-metric-registry),
+                Index values (see [I-D.ietf-ippm-metric-registry]),
                 which communicate packet stream characteristics
                 along with one or more metrics to be measured.
                 
