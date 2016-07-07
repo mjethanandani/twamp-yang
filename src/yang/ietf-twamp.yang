@@ -1056,7 +1056,8 @@ module ietf-twamp {
             }
             leaf periodic-interval-units  {
               type time-units;
-              description "Periodic interval time unit";
+              description
+                "Periodic interval time unit. See [RFC 3432]";
             }
           }
           case poisson {
@@ -1069,7 +1070,7 @@ module ietf-twamp {
               type uint32;
               description
                 "Indicates the units of lambda in reciprocal seconds.
-                See RFC 3432.";
+                See [RFC 3432].";
             }
             leaf max-interval {
               type uint32;

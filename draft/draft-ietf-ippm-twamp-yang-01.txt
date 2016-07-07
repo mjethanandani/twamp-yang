@@ -2144,7 +2144,8 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               }
               leaf periodic-interval-units  {
                 type time-units;
-                description "Periodic interval time unit";
+                description
+                  "Periodic interval time unit. See [RFC 3432]";
               }
             }
             case poisson {
@@ -2157,7 +2158,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                 type uint32;
                 description
                   "Indicates the units of lambda in reciprocal seconds.
-                  See RFC 3432.";
+                  See [RFC 3432].";
               }
               leaf max-interval {
                 type uint32;
@@ -2177,7 +2178,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             config false;
             description
               "Indicates the Session-Sender test session state.";
-          }
 
 
 
@@ -2185,6 +2185,8 @@ Civil, et al.            Expires January 8, 2017               [Page 39]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+          }
 
           uses maintenance-statistics;
         }
@@ -2232,8 +2234,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
           leaf sid {
             type string;
             description
-              "An auto-allocated identifier for this TWAMP-Test
-              session, that is unique within the context of this
 
 
 
@@ -2242,6 +2242,8 @@ Civil, et al.            Expires January 8, 2017               [Page 40]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+              "An auto-allocated identifier for this TWAMP-Test
+              session, that is unique within the context of this
               Server/Session-Reflector device only. This value
               will be communicated to the Control-Client that
               requested the test session in the SID field of the
@@ -2289,8 +2291,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               connection that negotiated this test session.";
           }
 
-          leaf parent-connection-client-tcp-port {
-
 
 
 Civil, et al.            Expires January 8, 2017               [Page 41]
@@ -2298,6 +2298,7 @@ Civil, et al.            Expires January 8, 2017               [Page 41]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+          leaf parent-connection-client-tcp-port {
             type inet:port-number;
             description
               "The source TCP port number used in the TWAMP-Control
@@ -2335,6 +2336,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
       }
     }
   }
+
   <CODE ENDS>
 
 
@@ -2344,8 +2346,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    all four entities in Figure 1, based on the YANG module specified in
    Section 5.  The example is illustrative in nature, but aims to be
    self-contained, i.e. were it to be executed in a real TWAMP
-   implementation it would lead to a correctly configured test session.
-   A more elaborated example, which also includes authentication
 
 
 
@@ -2354,6 +2354,8 @@ Civil, et al.            Expires January 8, 2017               [Page 42]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+   implementation it would lead to a correctly configured test session.
+   A more elaborated example, which also includes authentication
    parameters, is provided in Appendix A.  For completeness, examples
    are provided for IPv4 and IPv6.
 
@@ -2400,8 +2402,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                <test-session-request>
                   <name>Test2</name>
                   <sender-ip>203.0.113.1</sender-ip>
-                  <sender-udp-port>4001</sender-udp-port>
-                  <reflector-ip>203.0.113.2</reflector-ip>
 
 
 
@@ -2410,6 +2410,8 @@ Civil, et al.            Expires January 8, 2017               [Page 43]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+                  <sender-udp-port>4001</sender-udp-port>
+                  <reflector-ip>203.0.113.2</reflector-ip>
                   <reflector-udp-port>50001</reflector-udp-port>
                   <start-time>0</start-time>
                </test-session-request>
@@ -2456,8 +2458,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             </ctrl-connection>
          </client>
       </twamp>
-   </config>
-
 
 
 
@@ -2465,6 +2465,8 @@ Civil, et al.            Expires January 8, 2017               [Page 44]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+   </config>
 
 6.2.  Server
 
@@ -2484,8 +2486,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    The following example presents a Server with the TWAMP-Control
    connection corresponding to the control connection name (ctrl-
    connection/name) "RouterA" presented in Section 6.1.
-
-
 
 
 
