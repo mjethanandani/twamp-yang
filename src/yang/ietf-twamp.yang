@@ -365,13 +365,13 @@ module ietf-twamp {
       uses key-management;
       
       list ctrl-connection {
-        key ctrl-connection-name;
+        key name;
         description
             "List of TWAMP Control-Client control connections.
             Each item in the list describes a control connection
             that will be initiated by this Control-Client";
 
-        leaf ctrl-connection-name {
+        leaf name {
           type string;
           description
             "A unique name used as a key to identify this individual
