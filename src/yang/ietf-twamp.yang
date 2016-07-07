@@ -364,7 +364,7 @@ module ietf-twamp {
 
       uses key-management;
       
-      list twamp-client-ctrl-connection {
+      list ctrl-connection {
         key ctrl-connection-name;
         description
             "List of TWAMP Control-Client control connections.
@@ -588,7 +588,7 @@ module ietf-twamp {
                 use the same port number as defined in the
                 server-tcp-port parameter of this
                 twamp-session-request's parent
-                twamp-client-ctrl-connection.";
+                twamp/client/ctrl-connection.";
           }
 
           leaf timeout {
