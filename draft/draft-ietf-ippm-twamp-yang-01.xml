@@ -440,7 +440,7 @@ o-------------------o                       o-------------------o
 | client-ip              |
 | server-ip              |
 | server-tcp-port        |    0..* +----------------------+
-| dscp                   |<>-------| test-session-request |
+| control-packet-dscp    |<>-------| test-session-request |
 | key-id                 |         +----------------------+
 | max-count              |         | name                 |
 | client-tcp-port   {ro} |         | sender-ip            |
@@ -449,7 +449,7 @@ o-------------------o                       o-------------------o
 | selected-mode     {ro} |         | reflector-udp-port   |
 | token             {ro} |         | timeout              |
 | client-iv         {ro} |         | padding-length       |
-+------------------------+         | dscp                 |
++------------------------+         | test-packet-dscp     |
                                    | start-time           |
             +-------------+ 1      | repeat               |
             | pm-reg-list |------<>| repeat-interval      |
@@ -528,33 +528,33 @@ o-------------------o                       o-------------------o
         <figure anchor="fig:twamp-server"
                 title="TWAMP Server UML class diagram">
           <artwork><![CDATA[
-+-----------------+
-| server          |
-+-----------------+
-| admin-state     |   1..* +------------+
-| server-tcp-port |<>------| key-chain  |
-| servwait        |        +------------+
-| dscp            |        | key-id     |
-| count           |        | secret-key |
-| max-count       |        +------------+
-| modes           |
-|                 |   0..* +----------------------+
-|                 |<>------| ctrl-connection      |
-+-----------------+        +----------------------+
-                           | client-ip       {ro} |                            
-                           | client-tcp-port {ro} |
-                           | server-ip       {ro} |
-                           | server-tcp-port {ro} |
-                           | state           {ro} |
-                           | dscp            {ro} |
-                           | selected-mode   {ro} |
-                           | key-id          {ro} |
-                           | count           {ro} |
-                           | max-count       {ro} |
-                           | salt            {ro} | 
-                           | server-iv       {ro} |
-                           | challenge       {ro} |
-                           +----------------------+
++---------------------+
+| server              |
++---------------------+
+| admin-state         |   1..* +------------+
+| server-tcp-port     |<>------| key-chain  |
+| servwait            |        +------------+
+| control-packet-dscp |        | key-id     |
+| count               |        | secret-key |
+| max-count           |        +------------+
+| modes               |
+|                     |   0..* +--------------------------+
+|                     |<>------| ctrl-connection          |
++---------------------+        +--------------------------+
+                               | client-ip           {ro} |                            
+                               | client-tcp-port     {ro} |
+                               | server-ip           {ro} |
+                               | server-tcp-port     {ro} |
+                               | state               {ro} |
+                               | control-packet-dscp {ro} |
+                               | selected-mode       {ro} |
+                               | key-id              {ro} |
+                               | count               {ro} |
+                               | max-count           {ro} |
+                               | salt                {ro} | 
+                               | server-iv           {ro} |
+                               | challenge           {ro} |
+                               +--------------------------+
 ]]></artwork>
         </figure>
 
@@ -607,13 +607,13 @@ o-------------------o                       o-------------------o
 +----------------+
 | session-sender |
 +----------------+  0..* +---------------------------+
-| admin-state    |<>-----| test-session |
+| admin-state    |<>-----| test-session              |
 +----------------+       +---------------------------+
-                         | name         |
+                         | name                      |
                          | ctrl-connection-name {ro} |
                          | fill-mode                 |
                          | number-of-packets         |
-                         | state {ro} |
+                         | state {ro}                |
                          | sent-packets         {ro} |
                          | rcv-packets          {ro} |
                          | last-sent-seq        {ro} |
@@ -689,7 +689,7 @@ o-------------------o                       o-------------------o
 | parent-connection-client-tcp-port {ro} |
 | parent-connection-server-ip       {ro} |
 | parent-connection-server-tcp-port {ro} |
-| dscp                              {ro} |
+| test-packet-dscp                  {ro} |
 | sent-packets                      {ro} |
 | rcv-packets                       {ro} |
 | last-sent-seq                     {ro} |
@@ -872,6 +872,8 @@ module: ietf-twamp
 
         <figure>
           <artwork><![CDATA[
+<CODE BEGINS> file "ietf-twamp@2016-07-07.yang"
+       
 module ietf-twamp {
   //namespace need to be assigned by IANA
   namespace
@@ -1498,7 +1500,7 @@ module ietf-twamp {
           leaf test-packet-dscp {
             type inet:dscp;
             description
-                "The DSCP value to be placed in the UDP header
+                "The DSCP value to be placed in the IP header
                 of TWAMP-Test packets generated by the
                 Session-Sender, and in the UDP header of the
                 TWAMP-Test response packets generated by the

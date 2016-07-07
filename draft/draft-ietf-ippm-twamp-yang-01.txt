@@ -87,23 +87,23 @@ Table of Contents
      5.1.  YANG Tree Diagram . . . . . . . . . . . . . . . . . . . .  14
      5.2.  YANG Module . . . . . . . . . . . . . . . . . . . . . . .  17
    6.  Data Model Examples . . . . . . . . . . . . . . . . . . . . .  42
-     6.1.  Control-Client  . . . . . . . . . . . . . . . . . . . . .  42
-     6.2.  Server  . . . . . . . . . . . . . . . . . . . . . . . . .  44
+     6.1.  Control-Client  . . . . . . . . . . . . . . . . . . . . .  43
+     6.2.  Server  . . . . . . . . . . . . . . . . . . . . . . . . .  45
      6.3.  Session-Sender  . . . . . . . . . . . . . . . . . . . . .  46
-     6.4.  Session-Reflector . . . . . . . . . . . . . . . . . . . .  46
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  49
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  49
+     6.4.  Session-Reflector . . . . . . . . . . . . . . . . . . . .  47
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  50
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  50
    9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  50
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  50
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .  50
-     10.2.  Informative References . . . . . . . . . . . . . . . . .  51
-   Appendix A.  Detailed Data Model Examples . . . . . . . . . . . .  52
-     A.1.  Control-Client  . . . . . . . . . . . . . . . . . . . . .  52
-     A.2.  Server  . . . . . . . . . . . . . . . . . . . . . . . . .  55
-     A.3.  Session-Sender  . . . . . . . . . . . . . . . . . . . . .  56
-     A.4.  Session-Reflector . . . . . . . . . . . . . . . . . . . .  57
-   Appendix B.  TWAMP Operational Commands . . . . . . . . . . . . .  60
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  60
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  51
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  51
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  52
+   Appendix A.  Detailed Data Model Examples . . . . . . . . . . . .  53
+     A.1.  Control-Client  . . . . . . . . . . . . . . . . . . . . .  53
+     A.2.  Server  . . . . . . . . . . . . . . . . . . . . . . . . .  56
+     A.3.  Session-Sender  . . . . . . . . . . . . . . . . . . . . .  57
+     A.4.  Session-Reflector . . . . . . . . . . . . . . . . . . . .  58
+   Appendix B.  TWAMP Operational Commands . . . . . . . . . . . . .  61
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  61
 
 
 
@@ -413,7 +413,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    | client-ip              |
    | server-ip              |
    | server-tcp-port        |    0..* +----------------------+
-   | dscp                   |<>-------| test-session-request |
+   | control-packet-dscp    |<>-------| test-session-request |
    | key-id                 |         +----------------------+
    | max-count              |         | name                 |
    | client-tcp-port   {ro} |         | sender-ip            |
@@ -422,7 +422,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    | selected-mode     {ro} |         | reflector-udp-port   |
    | token             {ro} |         | timeout              |
    | client-iv         {ro} |         | padding-length       |
-   +------------------------+         | dscp                 |
+   +------------------------+         | test-packet-dscp     |
                                       | start-time           |
                +-------------+ 1      | repeat               |
                | pm-reg-list |------<>| repeat-interval      |
@@ -512,33 +512,33 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    the configuration of the TWAMP Server logical entity (recall
    Figure 1).
 
-   +-----------------+
-   | server          |
-   +-----------------+
-   | admin-state     |   1..* +------------+
-   | server-tcp-port |<>------| key-chain  |
-   | servwait        |        +------------+
-   | dscp            |        | key-id     |
-   | count           |        | secret-key |
-   | max-count       |        +------------+
-   | modes           |
-   |                 |   0..* +----------------------+
-   |                 |<>------| ctrl-connection      |
-   +-----------------+        +----------------------+
-                              | client-ip       {ro} |
-                              | client-tcp-port {ro} |
-                              | server-ip       {ro} |
-                              | server-tcp-port {ro} |
-                              | state           {ro} |
-                              | dscp            {ro} |
-                              | selected-mode   {ro} |
-                              | key-id          {ro} |
-                              | count           {ro} |
-                              | max-count       {ro} |
-                              | salt            {ro} |
-                              | server-iv       {ro} |
-                              | challenge       {ro} |
-                              +----------------------+
+   +---------------------+
+   | server              |
+   +---------------------+
+   | admin-state         |   1..* +------------+
+   | server-tcp-port     |<>------| key-chain  |
+   | servwait            |        +------------+
+   | control-packet-dscp |        | key-id     |
+   | count               |        | secret-key |
+   | max-count           |        +------------+
+   | modes               |
+   |                     |   0..* +--------------------------+
+   |                     |<>------| ctrl-connection          |
+   +---------------------+        +--------------------------+
+                                  | client-ip           {ro} |
+                                  | client-tcp-port     {ro} |
+                                  | server-ip           {ro} |
+                                  | server-tcp-port     {ro} |
+                                  | state               {ro} |
+                                  | control-packet-dscp {ro} |
+                                  | selected-mode       {ro} |
+                                  | key-id              {ro} |
+                                  | count               {ro} |
+                                  | max-count           {ro} |
+                                  | salt                {ro} |
+                                  | server-iv           {ro} |
+                                  | challenge           {ro} |
+                                  +--------------------------+
 
                  Figure 4: TWAMP Server UML class diagram
 
@@ -621,13 +621,13 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    +----------------+
    | session-sender |
    +----------------+  0..* +---------------------------+
-   | admin-state    |<>-----| test-session |
+   | admin-state    |<>-----| test-session              |
    +----------------+       +---------------------------+
-                            | name         |
+                            | name                      |
                             | ctrl-connection-name {ro} |
                             | fill-mode                 |
                             | number-of-packets         |
-                            | state {ro} |
+                            | state {ro}                |
                             | sent-packets         {ro} |
                             | rcv-packets          {ro} |
                             | last-sent-seq        {ro} |
@@ -706,7 +706,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    | parent-connection-client-tcp-port {ro} |
    | parent-connection-server-ip       {ro} |
    | parent-connection-server-tcp-port {ro} |
-   | dscp                              {ro} |
+   | test-packet-dscp                  {ro} |
    | sent-packets                      {ro} |
    | rcv-packets                       {ro} |
    | last-sent-seq                     {ro} |
@@ -909,6 +909,8 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    This section presents the YANG module for the TWAMP data model
    defined in this document.
 
+  <CODE BEGINS> file "ietf-twamp@2016-07-07.yang"
+
   module ietf-twamp {
     //namespace need to be assigned by IANA
     namespace
@@ -944,14 +946,16 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
           Covers RFC5357, RFC5618, RFC5938, RFC6038, RFC 7717,
           and draft-ietf-ippm-metric-registry";
       reference
-          draft-ietf-ippm-twamp-yang;
-    }
 
 
 
 Civil, et al.            Expires January 8, 2017               [Page 17]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
+          draft-ietf-ippm-twamp-yang;
+    }
 
 
     /*
@@ -998,10 +1002,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
           description
               "Reflect Octets Capability.";
           reference
-              "RFC 6038: Two-Way Active Measurement Protocol (TWAMP)
-              Reflect Octets and Symmetrical Size Features";
-        }
-        bit symmetrical-size {
 
 
 
@@ -1010,6 +1010,10 @@ Civil, et al.            Expires January 8, 2017               [Page 18]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+              "RFC 6038: Two-Way Active Measurement Protocol (TWAMP)
+              Reflect Octets and Symmetrical Size Features";
+        }
+        bit symmetrical-size {
           position 6;
           description
               "Symmetrical Size Sender Test Packet Format.";
@@ -1054,10 +1058,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
           value 0;
           description
               "Indicates that the TWAMP-Test session request
-              is accepted.";
-        }
-        enum failed {
-          value 1;
 
 
 
@@ -1066,6 +1066,10 @@ Civil, et al.            Expires January 8, 2017               [Page 19]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+              is accepted.";
+        }
+        enum failed {
+          value 1;
           description
               "Indicates a TWAMP-Test session failure due to
               some unspecified reason (catch-all).";
@@ -1110,10 +1114,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
           to the Control-Client is in SERVWAIT according to RFC 5357
           (Section 3.1): [a] Server MAY discontinue any established
           control connection when no packet associated with that
-          connection has been received within SERVWAIT seconds.";
-        }
-      }
-      description "Server control connection state";
 
 
 
@@ -1122,6 +1122,10 @@ Civil, et al.            Expires January 8, 2017               [Page 20]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+          connection has been received within SERVWAIT seconds.";
+        }
+      }
+      description "Server control connection state";
     }
 
     typedef sender-session-state {
@@ -1166,10 +1170,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
         }
         enum ns {
           description "Nanoseconds.";
-        }
-      }
-      description "TWAMP configuration parameters time units.";
-    }
 
 
 
@@ -1177,6 +1177,11 @@ Civil, et al.            Expires January 8, 2017               [Page 21]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+        }
+      }
+      description "TWAMP configuration parameters time units.";
+    }
 
     typedef dynamic-port-number {
     type inet:port-number {
@@ -1221,11 +1226,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
     grouping key-management {
 
       list key-chain {
-          key key-id;
-          leaf key-id {
-            type string {
-              length 1..80;
-            }
 
 
 
@@ -1234,6 +1234,11 @@ Civil, et al.            Expires January 8, 2017               [Page 22]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+          key key-id;
+          leaf key-id {
+            type string {
+              length 1..80;
+            }
             description
               "KeyID to be used for a TWAMP-Control connection.";
           }
@@ -1277,11 +1282,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
         description "Last received sequence number";
       }
       description "TWAMP-Test maintenance statistics";
-    }
-
-
-    /*
-     * Configuration data nodes
 
 
 
@@ -1290,6 +1290,11 @@ Civil, et al.            Expires January 8, 2017               [Page 23]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+    }
+
+
+    /*
+     * Configuration data nodes
      */
 
     container twamp {
@@ -1333,11 +1338,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
         list ctrl-connection {
           key name;
           description
-              "List of TWAMP Control-Client control connections.
-              Each item in the list describes a control connection
-              that will be initiated by this Control-Client";
-
-          leaf name {
 
 
 
@@ -1346,6 +1346,11 @@ Civil, et al.            Expires January 8, 2017               [Page 24]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+              "List of TWAMP Control-Client control connections.
+              Each item in the list describes a control connection
+              that will be initiated by this Control-Client";
+
+          leaf name {
             type string;
             description
               "A unique name used as a key to identify this individual
@@ -1389,11 +1394,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             default 0;
             description
               "The DSCP value to be placed in the IP header of
-              TWAMP-Control (TCP) packets generated by this
-              Control-Client.";
-          }
-
-          leaf key-id {
 
 
 
@@ -1402,6 +1402,11 @@ Civil, et al.            Expires January 8, 2017               [Page 25]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+              TWAMP-Control (TCP) packets generated by this
+              Control-Client.";
+          }
+
+          leaf key-id {
             type string {
               length 1..80;
             }
@@ -1445,11 +1450,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
 
           leaf state {
             type control-client-connection-state;
-            config false;
-            description
-              "Indicates the currest state of the TWAMP-Control
-              connection state.";
-          }
 
 
 
@@ -1457,6 +1457,12 @@ Civil, et al.            Expires January 8, 2017               [Page 26]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+            config false;
+            description
+              "Indicates the currest state of the TWAMP-Control
+              connection state.";
+          }
 
           leaf selected-mode {
             type twamp-modes;
@@ -1501,12 +1507,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               "The Control-Client Initialization Vector (Client-IV)
               is generated randomly by the Control-Client.
 
-              Client-IV merely needs to be unique (i.e., it MUST
-              never be repeated for different sessions using the
-              same secret key; a simple way to achieve that without
-              the use of cumbersome state is to generate the
-              Client-IV values using a cryptographically secure
-
 
 
 Civil, et al.            Expires January 8, 2017               [Page 27]
@@ -1514,6 +1514,11 @@ Civil, et al.            Expires January 8, 2017               [Page 27]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+              Client-IV merely needs to be unique (i.e., it MUST
+              never be repeated for different sessions using the
+              same secret key; a simple way to achieve that without
+              the use of cumbersome state is to generate the
+              Client-IV values using a cryptographically secure
               pseudo-random number source.";
           }
 
@@ -1557,11 +1562,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                   scenario where a device auto-allocates a UDP port
                   number for a session, and the repeat parameter
                   for that session indicates that it should be
-                  repeated, the device is free to auto-allocate a
-                  different UDP port number when it negotiates the
-                  next (repeated) iteration of this session.";
-            }
-
 
 
 
@@ -1569,6 +1569,11 @@ Civil, et al.            Expires January 8, 2017               [Page 28]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+                  repeated, the device is free to auto-allocate a
+                  different UDP port number when it negotiates the
+                  next (repeated) iteration of this session.";
+            }
 
             leaf reflector-ip {
               type inet:ip-address;
@@ -1613,11 +1618,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             leaf padding-length {
               type uint32 {
                 range 64..4096;
-              }
-              description
-                  "The number of padding bytes to be added to the
-                  TWAMP-Test (UDP) packets generated by the
-                  Session-Sender.
 
 
 
@@ -1625,6 +1625,12 @@ Civil, et al.            Expires January 8, 2017               [Page 29]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+              }
+              description
+                  "The number of padding bytes to be added to the
+                  TWAMP-Test (UDP) packets generated by the
+                  Session-Sender.
 
                   This value will be placed in the Padding Length
                   field of the Request-TW-Session message
@@ -1634,7 +1640,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             leaf test-packet-dscp {
               type inet:dscp;
               description
-                  "The DSCP value to be placed in the UDP header
+                  "The DSCP value to be placed in the IP header
                   of TWAMP-Test packets generated by the
                   Session-Sender, and in the UDP header of the
                   TWAMP-Test response packets generated by the
@@ -1668,12 +1674,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                   be repeated. When a test session has completed, the
                   repeat parameter is checked.
 
-                  The value of 0 indicates that the session MUST NOT be
-                  repeated.
-
-                  If the value is 1 through 4,294,967,294 then the test
-                  session SHALL be repeated using the information in
-                  repeat-interval parameter, and the parent
 
 
 
@@ -1682,6 +1682,12 @@ Civil, et al.            Expires January 8, 2017               [Page 30]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+                  The value of 0 indicates that the session MUST NOT be
+                  repeated.
+
+                  If the value is 1 through 4,294,967,294 then the test
+                  session SHALL be repeated using the information in
+                  repeat-interval parameter, and the parent
                   TWAMP-Control connection for this test session is
                   restarted to negotiate a new instance of this
                   TWAMP-Test session. The implementation MUST decrement
@@ -1724,12 +1730,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                   are specified in the corresponding Registry entry.";
               }
               description
-                  "A list of one or more Performance Metric Registry
-                  Index values (see I-D.ietf-ippm-metric-registry),
-                  which communicate packet stream characteristics
-                  along with one or more metrics to be measured.
-
-                  All members of the pm-reg-list MUST have the same
 
 
 
@@ -1738,6 +1738,12 @@ Civil, et al.            Expires January 8, 2017               [Page 31]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+                  "A list of one or more Performance Metric Registry
+                  Index values (see I-D.ietf-ippm-metric-registry),
+                  which communicate packet stream characteristics
+                  along with one or more metrics to be measured.
+
+                  All members of the pm-reg-list MUST have the same
                   stream characteristics, such that they combine
                   to specify all metrics that shall be measured on
                   a single stream.";
@@ -1780,12 +1786,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
         leaf server-tcp-port {
           type inet:port-number;
           default 862;
-          description
-              "This parameter defines the well known TCP port number
-              that is used by TWAMP-Control. The Server will listen
-              on this port number for incoming TWAMP-Control
-              connections. Although this is defined as a fixed value
-              (862) in RFC 5357, there are several realizations of
 
 
 
@@ -1794,6 +1794,12 @@ Civil, et al.            Expires January 8, 2017               [Page 32]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+          description
+              "This parameter defines the well known TCP port number
+              that is used by TWAMP-Control. The Server will listen
+              on this port number for incoming TWAMP-Control
+              connections. Although this is defined as a fixed value
+              (862) in RFC 5357, there are several realizations of
               TWAMP in the field that were implemented before this
               well-known port number was allocated. These early
               implementations allowed the port number to be
@@ -1836,12 +1842,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             range 1024..4294967295;
           }
           description
-              "Parameter used in deriving a key from a shared
-              secret as described in Section 3.1 of  RFC 4656,
-              and are communicated to the Control-Client as part
-              of the Server Greeting message.
-
-              count MUST be a power of 2.
 
 
 
@@ -1849,6 +1849,13 @@ Civil, et al.            Expires January 8, 2017               [Page 33]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+              "Parameter used in deriving a key from a shared
+              secret as described in Section 3.1 of  RFC 4656,
+              and are communicated to the Control-Client as part
+              of the Server Greeting message.
+
+              count MUST be a power of 2.
 
               count MUST be at least 1024.
 
@@ -1891,13 +1898,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
 
           leaf client-ip {
             type inet:ip-address;
-            description
-              "The IP address on the remote Control-Client device,
-              which is the source IP address used in the
-              TWAMP-Control (TCP) packets belonging to this control
-              connection.";
-          }
-
 
 
 
@@ -1905,6 +1905,13 @@ Civil, et al.            Expires January 8, 2017               [Page 34]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+            description
+              "The IP address on the remote Control-Client device,
+              which is the source IP address used in the
+              TWAMP-Control (TCP) packets belonging to this control
+              connection.";
+          }
 
           leaf client-tcp-port {
             type inet:port-number;
@@ -1947,13 +1954,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             description
               "The DSCP value used in the IP header of the
               TWAMP-Control (TCP) packets sent by the Server
-              for this control connection. This will usually
-              be the same value as is configured in the
-              control-packet-dscp parameter under the twamp/server
-              container.  However, in the event that the user
-              re-configures server/dscp after this control
-              connection is already in progress, this read-only
-              value will show the actual dscp value in use by this
 
 
 
@@ -1962,6 +1962,13 @@ Civil, et al.            Expires January 8, 2017               [Page 35]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+              for this control connection. This will usually
+              be the same value as is configured in the
+              control-packet-dscp parameter under the twamp/server
+              container.  However, in the event that the user
+              re-configures server/dscp after this control
+              connection is already in progress, this read-only
+              value will show the actual dscp value in use by this
               TWAMP-Control connection.";
           }
 
@@ -2003,13 +2010,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             description
               "The max-count value that is in use by this
               TWAMP-Control connection. This will usually be the
-              same value as is configured under twamp/server. However,
-              in the event that the user re-configured
-              server/max-count after this control connection is
-              already in progress, this read-only value will show the
-              actual max-count that is in use for this
-              control connection.";
-          }
 
 
 
@@ -2017,6 +2017,14 @@ Civil, et al.            Expires January 8, 2017               [Page 36]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+              same value as is configured under twamp/server. However,
+              in the event that the user re-configured
+              server/max-count after this control connection is
+              already in progress, this read-only value will show the
+              actual max-count that is in use for this
+              control connection.";
+          }
 
           leaf salt {
             type binary {
@@ -2058,6 +2066,14 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
         presence session-sender;
         description
           "Configuration of the TWAMP Session-Sender
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 37]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
           logical entity";
         leaf admin-state {
           type boolean;
@@ -2066,13 +2082,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               "Indicates whether the device is allowed to operate
               as a TWAMP Session-Sender.";
         }
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 37]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
 
         list test-session{
           key name;
@@ -2113,6 +2122,14 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               for this test session.";
           }
 
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 38]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
           choice packet-distribution {
             description
               "Indicates the distribution to be used for transmitting
@@ -2122,14 +2139,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                 type uint32;
                 description
                   "Indicates the period to wait between the first bits
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 38]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
                   of TWAMP-Test (UDP) packet transmissions for
                   this test session";
               }
@@ -2170,6 +2179,13 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               "Indicates the Session-Sender test session state.";
           }
 
+
+
+Civil, et al.            Expires January 8, 2017               [Page 39]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
           uses maintenance-statistics;
         }
       }
@@ -2178,14 +2194,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
         if-feature session-reflector;
         presence session-reflector;
         description
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 39]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
           "Configuration of the TWAMP Session-Reflector
           logical entity";
 
@@ -2226,14 +2234,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             description
               "An auto-allocated identifier for this TWAMP-Test
               session, that is unique within the context of this
-              Server/Session-Reflector device only. This value
-              will be communicated to the Control-Client that
-              requested the test session in the SID field of the
-              Accept-Session message.";
-          }
-
-          leaf sender-ip {
-            type inet:ip-address;
 
 
 
@@ -2242,6 +2242,14 @@ Civil, et al.            Expires January 8, 2017               [Page 40]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+              Server/Session-Reflector device only. This value
+              will be communicated to the Control-Client that
+              requested the test session in the SID field of the
+              Accept-Session message.";
+          }
+
+          leaf sender-ip {
+            type inet:ip-address;
             description
               "The IP address on the remote device, which is the
               source IP address used in the TWAMP-Test
@@ -2282,14 +2290,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
           }
 
           leaf parent-connection-client-tcp-port {
-            type inet:port-number;
-            description
-              "The source TCP port number used in the TWAMP-Control
-              (TCP) packets belonging to the parent control connection
-              that negotiated this test session.";
-          }
-
-          leaf parent-connection-server-ip {
 
 
 
@@ -2298,6 +2298,14 @@ Civil, et al.            Expires January 8, 2017               [Page 41]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+            type inet:port-number;
+            description
+              "The source TCP port number used in the TWAMP-Control
+              (TCP) packets belonging to the parent control connection
+              that negotiated this test session.";
+          }
+
+          leaf parent-connection-server-ip {
             type inet:ip-address;
             description
               "The IP address of the Server device, which is the
@@ -2338,14 +2346,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    self-contained, i.e. were it to be executed in a real TWAMP
    implementation it would lead to a correctly configured test session.
    A more elaborated example, which also includes authentication
-   parameters, is provided in Appendix A.  For completeness, examples
-   are provided for IPv4 and IPv6.
-
-6.1.  Control-Client
-
-   The following configuration example shows a Control-Client with
-   client/admin-state enabled.  In a real implementation following
-
 
 
 
@@ -2354,6 +2354,13 @@ Civil, et al.            Expires January 8, 2017               [Page 42]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+   parameters, is provided in Appendix A.  For completeness, examples
+   are provided for IPv4 and IPv6.
+
+6.1.  Control-Client
+
+   The following configuration example shows a Control-Client with
+   client/admin-state enabled.  In a real implementation following
    Figure 2 this would permit the initiation of TWAMP-Control
    connections and TWAMP-Test sessions.
 
@@ -2395,13 +2402,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                   <sender-ip>203.0.113.1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
                   <reflector-ip>203.0.113.2</reflector-ip>
-                  <reflector-udp-port>50001</reflector-udp-port>
-                  <start-time>0</start-time>
-               </test-session-request>
-            </ctrl-connection>
-            <ctrl-connection>
-               <name>RouterB</name>
-               <client-ip>203.0.113.1</client-ip>
 
 
 
@@ -2410,6 +2410,13 @@ Civil, et al.            Expires January 8, 2017               [Page 43]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+                  <reflector-udp-port>50001</reflector-udp-port>
+                  <start-time>0</start-time>
+               </test-session-request>
+            </ctrl-connection>
+            <ctrl-connection>
+               <name>RouterB</name>
+               <client-ip>203.0.113.1</client-ip>
                <server-ip>203.0.113.3</server-ip>
             </ctrl-connection>
          </client>
@@ -2451,13 +2458,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
       </twamp>
    </config>
 
-6.2.  Server
-
-   This configuration example shows a Server with server/admin-state
-   enabled, which permits a device following Figure 2 to respond to
-   TWAMP-Control connections and TWAMP-Test sessions.
-
-
 
 
 
@@ -2465,6 +2465,12 @@ Civil, et al.            Expires January 8, 2017               [Page 44]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
+
+6.2.  Server
+
+   This configuration example shows a Server with server/admin-state
+   enabled, which permits a device following Figure 2 to respond to
+   TWAMP-Control connections and TWAMP-Test sessions.
 
    <?xml version="1.0" encoding="utf-8"?>
    <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -2478,6 +2484,43 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    The following example presents a Server with the TWAMP-Control
    connection corresponding to the control connection name (ctrl-
    connection/name) "RouterA" presented in Section 6.1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 45]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
 
    <?xml version="1.0" encoding="utf-8"?>
    <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -2515,17 +2558,25 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
       </twamp>
    </data>
 
-
-
-Civil, et al.            Expires January 8, 2017               [Page 45]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
 6.3.  Session-Sender
 
    The following configuration example shows a Session-Sender with the
    two TWAMP-Test sessions presented in Section 6.1.
+
+
+
+
+
+
+
+
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 46]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
 
    <?xml version="1.0" encoding="utf-8"?>
    <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -2570,19 +2621,19 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
              </admin-state>
              <test-session>
                <sender-ip>10.1.1.1</sender-ip>
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 46]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
                <sender-udp-port>4000</sender-udp-port>
                <reflector-ip>10.1.1.2</reflector-ip>
                <reflector-udp-port>50001</reflector-udp-port>
                <sid>1232</sid>
                <parent-connection-client-ip>
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 47]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
                   203.0.113.1
                </parent-connection-client-ip>
                <parent-connection-client-tcp-port>
@@ -2626,19 +2677,19 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
       </twamp>
    </data>
 
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 47]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
    <?xml version="1.0" encoding="utf-8"?>
    <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
       <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
          <session-reflector>
              <admin-state>true</admin-state>
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 48]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
              <test-session>
                <sender-ip>10.1.1.1</sender-ip>
                <sender-udp-port>4000</sender-udp-port>
@@ -2682,19 +2733,19 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                </parent-connection-server-tcp-port>
                <sent-packets>21</sent-packets>
                <rcv-packets>21</rcv-packets>
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 48]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
                <last-sent-seq>20</last-sent-seq>
                <last-rcv-seq>20</last-rcv-seq>
             </test-session>
          </session-reflector>
       </twamp>
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 49]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
    </data>
 
 7.  Security Considerations
@@ -2737,20 +2788,19 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
 
    reference: RFC XXXX
 
-
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 49]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
 9.  Acknowledgements
 
    We thank Fred Baker, Kevin D'Souza, Gregory Mirsky, Brian Trammell
    and Robert Sherman for their thorough and constructive reviews,
    comments and text suggestions.
+
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 50]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
 
    Haoxing Shen contributed to the definition of the YANG module in
    Section 5.
@@ -2793,19 +2843,20 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               RFC 5357, DOI 10.17487/RFC5357, October 2008,
               <http://www.rfc-editor.org/info/rfc5357>.
 
-
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 50]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
    [RFC6020]  Bjorklund, M., Ed., "YANG - A Data Modeling Language for
               the Network Configuration Protocol (NETCONF)", RFC 6020,
               DOI 10.17487/RFC6020, October 2010,
               <http://www.rfc-editor.org/info/rfc6020>.
+
+
+
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 51]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
 
    [RFC6038]  Morton, A. and L. Ciavattone, "Two-Way Active Measurement
               Protocol (TWAMP) Reflect Octets and Symmetrical Size
@@ -2850,18 +2901,18 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
               DOI 10.17487/RFC4086, June 2005,
               <http://www.rfc-editor.org/info/rfc4086>.
 
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 51]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
    [RFC5618]  Morton, A. and K. Hedayat, "Mixed Security Mode for the
               Two-Way Active Measurement Protocol (TWAMP)", RFC 5618,
               DOI 10.17487/RFC5618, August 2009,
               <http://www.rfc-editor.org/info/rfc5618>.
+
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 52]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
 
    [RFC5938]  Morton, A. and M. Chiba, "Individual Session Control
               Feature for the Two-Way Active Measurement Protocol
@@ -2906,19 +2957,19 @@ A.1.  Control-Client
             <admin-state>true</admin-state>
             <mode-preference-chain>
                <priority>0</priority>
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 52]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
                <mode>authenticated</mode>
             </mode-preference-chain>
             <mode-preference-chain>
                <priority>1</priority>
                <mode>unauthenticated</mode>
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 53]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
             </mode-preference-chain>
             <key-chain>
                <key-id>KeyClient1ToRouterA</key-id>
@@ -2962,19 +3013,19 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    </data>
 
    <?xml version="1.0" encoding="utf-8"?>
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 53]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
    <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
       <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
          <client>
             <admin-state>true</admin-state>
             <mode-preference-chain>
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 54]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
                <priority>0</priority>
                <mode>authenticated</mode>
             </mode-preference-chain>
@@ -3018,18 +3069,18 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                   <state>ok</state>
                   <sid>178943</sid>
                </test-session-request>
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 54]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
             </ctrl-connection>
          </client>
       </twamp>
    </data>
+
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 55]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
 
 A.2.  Server
 
@@ -3074,19 +3125,19 @@ A.2.  Server
             <admin-state>true</admin-state>
             <servwait>1800</servwait>
             <dscp>32</dscp>
-
-
-
-Civil, et al.            Expires January 8, 2017               [Page 55]
-
-Internet-Draft            TWAMP YANG Data Model                July 2016
-
-
             <modes>authenticated unauthenticated</modes>
             <count>1024</count>
             <key-chain>
                <key-id>KeyClient1ToRouterA</key-id>
                <secret-key>secret1</secret-key>
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 56]
+
+Internet-Draft            TWAMP YANG Data Model                July 2016
+
+
             </key-chain>
             <key-chain>
                <key-id>KeyClient10ToRouterA</key-id>
@@ -3133,7 +3184,12 @@ A.3.  Session-Sender
 
 
 
-Civil, et al.            Expires January 8, 2017               [Page 56]
+
+
+
+
+
+Civil, et al.            Expires January 8, 2017               [Page 57]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
@@ -3189,7 +3245,7 @@ A.4.  Session-Reflector
 
 
 
-Civil, et al.            Expires January 8, 2017               [Page 57]
+Civil, et al.            Expires January 8, 2017               [Page 58]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
@@ -3245,7 +3301,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
 
-Civil, et al.            Expires January 8, 2017               [Page 58]
+Civil, et al.            Expires January 8, 2017               [Page 59]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
@@ -3301,7 +3357,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
 
-Civil, et al.            Expires January 8, 2017               [Page 59]
+Civil, et al.            Expires January 8, 2017               [Page 60]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
@@ -3357,7 +3413,7 @@ Authors' Addresses
 
 
 
-Civil, et al.            Expires January 8, 2017               [Page 60]
+Civil, et al.            Expires January 8, 2017               [Page 61]
 
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
@@ -3413,4 +3469,4 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
 
-Civil, et al.            Expires January 8, 2017               [Page 61]
+Civil, et al.            Expires January 8, 2017               [Page 62]
