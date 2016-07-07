@@ -461,7 +461,7 @@ module ietf-twamp {
             instantiation of the Server started operating.";
         }
 
-        leaf ctrl-connection-state {
+        leaf state {
           type control-client-connection-state;
           config false;
           description
