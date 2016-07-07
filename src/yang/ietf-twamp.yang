@@ -27,7 +27,7 @@ module ietf-twamp {
     The YANG module uses features to indicate which of the four
     logical entities are supported by an implementation.";
 
-  revision 2016-06-30 {
+  revision 2016-07-07 {
     description
         "Revision appearing in draft-ietf-ippm-twamp-yang-01.
         Covers RFC5357, RFC5618, RFC5938, RFC6038, RFC 7717,
@@ -714,7 +714,7 @@ module ietf-twamp {
                 to specify all metrics that shall be measured on
                 a single stream.";
           }
-          leaf test-session-state {
+          leaf state {
             type test-session-state;
             config false;
             description
