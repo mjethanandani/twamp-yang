@@ -1595,7 +1595,7 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                   "This parameter defines the UDP port number that
                   will be used by the Session-Reflector for
                   this TWAMP-Test session. The number is restricted
-                  to the dynamic port range and is to  be placed in
+                  to the dynamic port range and is to be placed in
                   the Receiver Port field of the Request-TW-Session
                   message. If this value is not set, the device SHALL
                   use the same port number as defined in the
