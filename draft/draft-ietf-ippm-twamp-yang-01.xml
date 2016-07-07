@@ -421,41 +421,41 @@ o-------------------o                       o-------------------o
         <figure anchor="fig:twamp-client"
                 title="TWAMP Control-Client UML class diagram">
           <artwork><![CDATA[
-+--------------------+
-| client       |
-+--------------------+                   1..* +-----------------------+
++-------------+
+| client      |
++-------------+                   1..* +-----------------------+
 | admin-state |<>----------------------| mode-preference-chain |
-|                    |                        +-----------------------+
-|                    |  1..* +------------+   | priority              |
-|                    |<>-----| key-chain  |   | mode                  |
-+--------------------+       +------------+   +-----------------------+
-              ^              | key-id     |
-              V              | secret-key |
-              |              +------------+
-              | 0..*
-+------------------------------+
-| ctrl-connection |
-+------------------------------+
-| name         |
-| client-ip                    |
-| server-ip                    |
-| server-tcp-port              |    0..* +-------------------------+
-| dscp                         |<>-------| test-session-request   |
-| key-id                       |         +-------------------------+
-| max-count                    |         | name       |
-| client-tcp-port         {ro} |         | sender-ip               |
-| server-start-time       {ro} |         | sender-udp-port         |
-| state   {ro} |         | reflector-ip            |
-| selected-mode           {ro} |         | reflector-udp-port      |
-| token                   {ro} |         | timeout                 |
-| client-iv               {ro} |         | padding-length          |
-+------------------------------+         | dscp                    |
-                                         | start-time              |
-                  +-------------+ 1      | repeat                  |
-                  | pm-reg-list |------<>| repeat-interval         |
-                  +-------------+        | state {ro} |
-                  | pm-index    |        | sid                {ro} |
-                  +-------------+        +-------------------------+
+|             |                        +-----------------------+
+|             |  1..* +------------+   | priority              |
+|             |<>-----| key-chain  |   | mode                  |
++-------------+       +------------+   +-----------------------+
+       ^              | key-id     |
+       V              | secret-key |
+       |              +------------+
+       | 0..*
++------------------------+
+| ctrl-connection        |
++------------------------+
+| name                   |
+| client-ip              |
+| server-ip              |
+| server-tcp-port        |    0..* +----------------------+
+| dscp                   |<>-------| test-session-request |
+| key-id                 |         +----------------------+
+| max-count              |         | name                 |
+| client-tcp-port   {ro} |         | sender-ip            |
+| server-start-time {ro} |         | sender-udp-port      |
+| state             {ro} |         | reflector-ip         |
+| selected-mode     {ro} |         | reflector-udp-port   |
+| token             {ro} |         | timeout              |
+| client-iv         {ro} |         | padding-length       |
++------------------------+         | dscp                 |
+                                   | start-time           |
+            +-------------+ 1      | repeat               |
+            | pm-reg-list |------<>| repeat-interval      |
+            +-------------+        | state           {ro} |
+            | pm-index    |        | sid             {ro} |
+            +-------------+        +----------------------+
 ]]></artwork>
         </figure>
 
@@ -528,33 +528,33 @@ o-------------------o                       o-------------------o
         <figure anchor="fig:twamp-server"
                 title="TWAMP Server UML class diagram">
           <artwork><![CDATA[
-+------------------ -+
-| server       |
-+--------------------+
-| admin-state |   1..* +------------+
-| server-tcp-port    |<>------| key-chain  |
-| servwait           |        +------------+
-| dscp               |        | key-id     |
-| count              |        | secret-key |
-| max-count          |        +------------+
-| modes              |
-|                    |   0..* +-----------------------------------+
-|                    |<>------| ctrl-connection      |
-+--------------------+        +-----------------------------------+
-                              | client-ip                    {ro} |                            
-                              | client-tcp-port              {ro} |
-                              | server-ip                    {ro} |
-                              | server-tcp-port              {ro} |
-                              | state {ro} |
-                              | dscp                         {ro} |
-                              | selected-mode                {ro} |
-                              | key-id                       {ro} |
-                              | count                        {ro} |
-                              | max-count                    {ro} |
-                              | salt                         {ro} | 
-                              | server-iv                    {ro} |
-                              | challenge                    {ro} |
-                              +-----------------------------------+
++-----------------+
+| server          |
++-----------------+
+| admin-state     |   1..* +------------+
+| server-tcp-port |<>------| key-chain  |
+| servwait        |        +------------+
+| dscp            |        | key-id     |
+| count           |        | secret-key |
+| max-count       |        +------------+
+| modes           |
+|                 |   0..* +----------------------+
+|                 |<>------| ctrl-connection      |
++-----------------+        +----------------------+
+                           | client-ip       {ro} |                            
+                           | client-tcp-port {ro} |
+                           | server-ip       {ro} |
+                           | server-tcp-port {ro} |
+                           | state           {ro} |
+                           | dscp            {ro} |
+                           | selected-mode   {ro} |
+                           | key-id          {ro} |
+                           | count           {ro} |
+                           | max-count       {ro} |
+                           | salt            {ro} | 
+                           | server-iv       {ro} |
+                           | challenge       {ro} |
+                           +----------------------+
 ]]></artwork>
         </figure>
 
@@ -604,40 +604,41 @@ o-------------------o                       o-------------------o
         <figure anchor="fig:twampSenders"
                 title="TWAMP Session-Sender UML class diagram">
           <artwork><![CDATA[
-+----------------------------+
-| session-sender       |
-+----------------------------+  0..* +---------------------------+
-| admin-state |<>-----| test-session |
-+----------------------------+       +---------------------------+
-                                     | name         |
-                                     | ctrl-connection-name {ro} |
-                                     | fill-mode                 |
-                                     | number-of-packets         |
-                                     | state {ro} |
-                                     | sent-packets         {ro} |
-                                     | rcv-packets          {ro} |
-                                     | last-sent-seq        {ro} |
-                                     | last-rcv-seq         {ro} |
-                                     +---------------------------+
-                                                ^
-                                                V
-                                                | 1
-                                      +---------------------+
-                                      | packet-distribution |
-                                      +---------------------+
-                                      | periodic /  poisson |
-                                      +---------------------+
-                                          |           |
-                         +-------------------------+  |
-                         | periodic-interval       |  | 
-                         | periodic-interval-units |  | 
-                         +-------------------------+  |
-                                          +------------------------+
-                                          | lambda                 | 
-                                          | lambda-units           |
-                                          | max-interval           |
-                                          | truncation-point-units |
-                                          +------------------------+
++----------------+
+| session-sender |
++----------------+  0..* +---------------------------+
+| admin-state    |<>-----| test-session |
++----------------+       +---------------------------+
+                         | name         |
+                         | ctrl-connection-name {ro} |
+                         | fill-mode                 |
+                         | number-of-packets         |
+                         | state {ro} |
+                         | sent-packets         {ro} |
+                         | rcv-packets          {ro} |
+                         | last-sent-seq        {ro} |
+                         | last-rcv-seq         {ro} |
+                         +---------------------------+
+                                      ^
+                                      V
+                                      | 1
+                          +---------------------+
+                          | packet-distribution |
+                          +---------------------+
+                          | periodic /  poisson |
+                          +---------------------+
+                              |           |
+             +-------------------------+  |
+             | periodic-interval       |  | 
+             | periodic-interval-units |  | 
+             +-------------------------+  |
+                                          |
+                              +------------------------+
+                              | lambda                 | 
+                              | lambda-units           |
+                              | max-interval           |
+                              | truncation-point-units |
+                              +------------------------+
 ]]></artwork>
         </figure>
 
@@ -666,18 +667,18 @@ o-------------------o                       o-------------------o
         <figure anchor="fig:twampReflector"
                 title="TWAMP Session-Reflector UML class diagram">
           <artwork><![CDATA[
-+----=--------------------------+
-| session-reflector       |
-+-------------------------------+
-| admin-state |
-| refwait                       |
-+-------------------------------+
-                 ^
-                 V
-                 |
-                 | 0..*
++----=--------------+
+| session-reflector |
++-------------------+
+| admin-state       |
+| refwait           |
++-------------------+
+         ^
+         V
+         |
+         | 0..*
 +----------------------------------------+
-| test-session           |
+| test-session                           |
 +----------------------------------------+
 | sid                               {ro} |
 | sender-ip                         {ro} |
@@ -747,7 +748,7 @@ o-------------------o                       o-------------------o
           <artwork><![CDATA[
 module: ietf-twamp
    +--rw twamp
-      +--rw twamp-client! {control-client}?
+      +--rw client! {control-client}?
       |  +--rw admin-state              boolean
       |  +--rw mode-preference-chain* [priority]
       |  |  +--rw priority    uint16
@@ -765,7 +766,8 @@ module: ietf-twamp
       |     +--rw max-count?              uint32
       |     +--ro client-tcp-port?        inet:port-number
       |     +--ro server-start-time?      uint64
-      |     +--ro state?                  control-client-connection-state
+      |     +--ro state? \
+                          control-client-connection-state
       |     +--ro selected-mode?          twamp-modes
       |     +--ro token?                  binary
       |     +--ro client-iv?              binary
@@ -785,7 +787,7 @@ module: ietf-twamp
       |        |  +--rw pm-index    uint16
       |        +--ro state?                test-session-state
       |        +--ro sid?                  string
-      +--rw twamp-server! {server}?
+      +--rw server! {server}?
       |  +--rw admin-state            boolean
       |  +--rw server-tcp-port?       inet:port-number
       |  +--rw servwait?              uint32
@@ -796,7 +798,8 @@ module: ietf-twamp
       |  +--rw key-chain* [key-id]
       |  |  +--rw key-id        string
       |  |  +--rw secret-key?   string
-      |  +--ro ctrl-connection* [client-ip client-tcp-port server-ip server-tcp-port]
+      |  +--ro ctrl-connection* \
+                [client-ip client-tcp-port server-ip server-tcp-port]
       |     +--ro client-ip              inet:ip-address
       |     +--ro client-tcp-port        inet:port-number
       |     +--ro server-ip              inet:ip-address
@@ -810,9 +813,9 @@ module: ietf-twamp
       |     +--ro salt?                  binary
       |     +--ro server-iv?             binary
       |     +--ro challenge?             binary
-      +--rw twamp-session-sender! {session-sender}?
-      |  +--rw admin-state                  boolean
-      |  +--rw twamp-sender-test-session* [name]
+      +--rw session-sender! {session-sender}?
+      |  +--rw admin-state     boolean
+      |  +--rw test-session* [name]
       |     +--rw name                       string
       |     +--ro ctrl-connection-name?      string
       |     +--rw fill-mode?                 padding-fill-mode
@@ -826,24 +829,33 @@ module: ietf-twamp
       |     |     +--rw lambda-units?              uint32
       |     |     +--rw max-interval?              uint32
       |     |     +--rw truncation-point-units?    time-units
-      |     +--ro sender-session-state?      sender-session-state
+      |     +--ro state?                     sender-session-state
       |     +--ro sent-packets?              uint32
       |     +--ro rcv-packets?               uint32
       |     +--ro last-sent-seq?             uint32
       |     +--ro last-rcv-seq?              uint32
-      +--rw twamp-session-reflector! {session-reflector}?
-         +--rw admin-state                     boolean
-         +--rw refwait?                        uint32
-         +--ro twamp-reflector-test-session* [sender-ip sender-udp-port reflector-ip reflector-udp-port]
+      +--rw session-reflector! {session-reflector}?
+         +--rw admin-state     boolean
+         +--rw refwait?        uint32
+         +--ro test-session* \
+                        [sender-ip sender-udp-port \
+                        reflector-ip reflector-udp-port]
             +--ro sid?                                 string
-            +--ro sender-ip                            inet:ip-address
-            +--ro sender-udp-port                      dynamic-port-number
+            +--ro sender-ip                   \
+                                                inet:ip-address
+            +--ro sender-udp-port             \
+                                                dynamic-port-number
             +--ro reflector-ip                         inet:ip-address
-            +--ro reflector-udp-port                   dynamic-port-number
-            +--ro parent-connection-client-ip?         inet:ip-address
-            +--ro parent-connection-client-tcp-port?   inet:port-number
-            +--ro parent-connection-server-ip?         inet:ip-address
-            +--ro parent-connection-server-tcp-port?   inet:port-number
+            +--ro reflector-udp-port          \
+                                                dynamic-port-number
+            +--ro parent-connection-client-ip?\
+                                                inet:ip-address
+            +--ro parent-connection-client-tcp-port? \
+                                                inet:port-number
+            +--ro parent-connection-server-ip? \
+                                                inet:ip-address
+            +--ro parent-connection-server-tcp-port? \
+                                                inet:port-number
             +--ro test-packet-dscp?                    inet:dscp
             +--ro sent-packets?                        uint32
             +--ro rcv-packets?                         uint32
@@ -860,7 +872,6 @@ module: ietf-twamp
 
         <figure>
           <artwork><![CDATA[
-<CODE BEGINS> file "ietf-twamp@2016-07-07.yang"
 module ietf-twamp {
   //namespace need to be assigned by IANA
   namespace
@@ -1049,10 +1060,12 @@ module ietf-twamp {
   typedef sender-session-state {
     type enumeration {
       enum active {
-        description "Indicates that the TWAMP-Test session is active.";
+        description
+            "Indicates that the TWAMP-Test session is active.";
       }
       enum failure {
-        description "Indicates that the TWAMP-Test session has failed.";
+        description
+            "Indicates that the TWAMP-Test session has failed.";
       }
     }
     description "Session-Sender session state.";
@@ -1193,9 +1206,9 @@ module ietf-twamp {
     description
         "TWAMP logical entity configuration grouping.";
 
-    container twamp-client {
+    container client {
       if-feature control-client;
-      presence twamp-client;
+      presence client;
       description
         "Configuration of the TWAMP Control-Client logical entity.";
 
@@ -1598,9 +1611,9 @@ module ietf-twamp {
       }
     }
 
-    container twamp-server {
+    container server {
       if-feature server;
-      presence twamp-server;
+      presence server;
       description
         "Configuration of the TWAMP Server logical entity.";
 
@@ -1741,8 +1754,8 @@ module ietf-twamp {
             TWAMP-Control (TCP) packets belonging to this
             control connection. This will usually be the
             same value as the server-tcp-port configured
-            under twamp-server. However, in the event that
-            the user re-configured twamp-server/server-tcp-port
+            under twamp/server. However, in the event that
+            the user re-configured server/server-tcp-port
             after this control connection was initiated, this
             value will indicate the server-tcp-port that is
             actually in use for this control connection.";
@@ -1761,9 +1774,9 @@ module ietf-twamp {
             TWAMP-Control (TCP) packets sent by the Server
             for this control connection. This will usually
             be the same value as is configured in the
-            control-packet-dscp parameter under the twamp-server
+            control-packet-dscp parameter under the twamp/server
             container.  However, in the event that the user
-            re-configures twamp-server/dscp after this control
+            re-configures server/dscp after this control
             connection is already in progress, this read-only
             value will show the actual dscp value in use by this
             TWAMP-Control connection.";
@@ -1793,8 +1806,8 @@ module ietf-twamp {
           description
             "The count value that is in use by this TWAMP-Control
             connection. This will usually be the same value
-            as is configured under twamp-server. However, in the
-            event that the user re-configured twamp-server/count
+            as is configured under twamp/server. However, in the
+            event that the user re-configured server/count
             after this control connection is already in progress,
             this read-only value will show the actual count that
             is in use for this TWAMP-Control connection.";
@@ -1807,9 +1820,9 @@ module ietf-twamp {
           description
             "The max-count value that is in use by this
             TWAMP-Control connection. This will usually be the
-            same value as is configured under twamp-server. However,
+            same value as is configured under twamp/server. However,
             in the event that the user re-configured
-            twamp-server/max-count after this control connection is
+            server/max-count after this control connection is
             already in progress, this read-only value will show the
             actual max-count that is in use for this
             control connection.";
@@ -1843,16 +1856,16 @@ module ietf-twamp {
           }
           description
             "A random sequence of octets generated by the Server.
-            As described in twamp-client/token, Challenge is used
+            As described in client/token, Challenge is used
             by the Control-Client to prove possession of a
             shared secret.";
         }
       }
     }
 
-    container twamp-session-sender {
+    container session-sender {
       if-feature session-sender;
-      presence twamp-session-sender;
+      presence session-sender;
       description
         "Configuration of the TWAMP Session-Sender
         logical entity";
@@ -1864,7 +1877,7 @@ module ietf-twamp {
             as a TWAMP Session-Sender.";
       }
 
-      list twamp-sender-test-session{
+      list test-session{
         key name;
         description
             "TWAMP Session-Sender test sessions.";
@@ -1945,7 +1958,7 @@ module ietf-twamp {
           }
         }
 
-        leaf sender-session-state {
+        leaf state {
           type sender-session-state;
           config false;
           description
@@ -1956,9 +1969,9 @@ module ietf-twamp {
       }
     }
 
-    container twamp-session-reflector {
+    container session-reflector {
       if-feature session-reflector;
-      presence twamp-session-reflector;
+      presence session-reflector;
       description
         "Configuration of the TWAMP Session-Reflector
         logical entity";
@@ -1987,7 +2000,7 @@ module ietf-twamp {
             case of failure.";
       }
 
-      list twamp-reflector-test-session {
+      list test-session {
         key
             "sender-ip sender-udp-port
             reflector-ip reflector-udp-port";
@@ -2085,8 +2098,8 @@ module ietf-twamp {
     }
   }
 }
-
 <CODE ENDS>
+
        ]]></artwork>
         </figure>
       </section>
@@ -2382,11 +2395,15 @@ module ietf-twamp {
             <reflector-ip>10.1.1.2</reflector-ip>
             <reflector-udp-port>5000</reflector-udp-port>
             <sid>1232</sid>
-            <parent-connection-client-ip>203.0.113.1</parent-connection-client-ip>
+            <parent-connection-client-ip>
+                203.0.113.1
+            </parent-connection-client-ip>
             <parent-connection-client-tcp-port>
                16341
             </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>203.0.113.2</parent-connection-server-ip>
+            <parent-connection-server-ip>
+                203.0.113.2
+            </parent-connection-server-ip>
             <parent-connection-server-tcp-port>
                862
              </parent-connection-server-tcp-port>
@@ -2401,11 +2418,15 @@ module ietf-twamp {
             <reflector-ip>192.68.0.2</reflector-ip>
             <reflector-udp-port>5001</reflector-udp-port>
             <sid>178943</sid>
-            <parent-connection-client-ip>203.0.113.1</parent-connection-client-ip>
+            <parent-connection-client-ip>
+                203.0.113.1
+            </parent-connection-client-ip>
             <parent-connection-client-tcp-port>
                16341
              </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>203.0.113.2</parent-connection-server-ip>
+            <parent-connection-server-ip>
+                203.0.113.2
+            </parent-connection-server-ip>
             <parent-connection-server-tcp-port>
               862
             </parent-connection-server-tcp-port>
@@ -2753,7 +2774,9 @@ module ietf-twamp {
            <fill-mode>zero</fill-mode>
            <number-of-packets>900</number-of-packets>
            <periodic-interval>1</periodic-interval>
-           <periodic-interval-units>seconds</periodic-interval-units>
+           <periodic-interval-units>
+                seconds
+           </periodic-interval-units>
            <state>setup</state>
            <sent-packets>2</sent-packets>
            <rcv-packets>2</rcv-packets>
@@ -2857,11 +2880,15 @@ module ietf-twamp {
             <reflector-ip>2001:10:1:1::2</reflector-ip>
             <reflector-udp-port>5000</reflector-udp-port>
             <sid>1232</sid>
-            <parent-connection-client-ip>2001:203:0:113::1</parent-connection-client-ip>
+            <parent-connection-client-ip>
+                2001:203:0:113::1
+            </parent-connection-client-ip>
             <parent-connection-client-tcp-port>
                16341
             </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>2001:203:0:113::2</parent-connection-server-ip>
+            <parent-connection-server-ip>
+                2001:203:0:113::2
+            </parent-connection-server-ip>
             <parent-connection-server-tcp-port>
                862
             </parent-connection-server-tcp-port>
@@ -2877,11 +2904,15 @@ module ietf-twamp {
             <reflector-ip>2001:192:68::2</reflector-ip>
             <reflector-udp-port>5001</reflector-udp-port>
             <sid>178943</sid>
-            <parent-connection-client-ip>2001:203:0:113::1</parent-connection-client-ip>
+            <parent-connection-client-ip>
+                2001:203:0:113::1
+            </parent-connection-client-ip>
             <parent-connection-client-tcp-port>
                16341
             </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>2001:203:0:113::2</parent-connection-server-ip>
+            <parent-connection-server-ip>
+                2001:203:0:113::2
+            </parent-connection-server-ip>
             <parent-connection-server-tcp-port>
                862
             </parent-connection-server-tcp-port>
