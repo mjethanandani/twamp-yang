@@ -1014,7 +1014,7 @@ module ietf-twamp {
             logical entity.";
         }
 
-        leaf ctrl-connection-name {
+        leaf name {
           type string;
           config false;
           description
