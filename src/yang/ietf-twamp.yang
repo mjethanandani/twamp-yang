@@ -885,7 +885,7 @@ module ietf-twamp {
             actually in use for this control connection.";
         }
 
-        leaf server-ctrl-connection-state {
+        leaf state {
           type server-ctrl-connection-state;
           description
             "Indicates the Server TWAMP-Control connection state.";
