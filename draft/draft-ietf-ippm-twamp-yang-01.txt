@@ -2443,21 +2443,21 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             <admin-state>true</admin-state>
             <ctrl-connection>
                <name>RouterA</name>
-               <client-ip>2001:203:0:113::1</client-ip>
-               <server-ip>2001:203:0:113::2</server-ip>
+               <client-ip>2001:DB8:203:0:113::1</client-ip>
+               <server-ip>2001:DB8:203:0:113::2</server-ip>
                <test-session-request>
                   <name>Test1</name>
-                  <sender-ip>2001:10:1:1::1</sender-ip>
+                  <sender-ip>2001:DB8:10:1:1::1</sender-ip>
                   <sender-udp-port>4000</sender-udp-port>
-                  <reflector-ip>2001:10:1:1::2</reflector-ip>
+                  <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
                   <reflector-udp-port>5000</reflector-udp-port>
                   <start-time>0</start-time>
                </test-session-request>
                <test-session-request>
                   <name>Test2</name>
-                  <sender-ip>2001:203:0:113::1</sender-ip>
+                  <sender-ip>2001:DB8:203:0:113::1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
-                  <reflector-ip>2001:203:0:113::2</reflector-ip>
+                  <reflector-ip>2001:DB8:203:0:113::2</reflector-ip>
 
 
 
@@ -2472,8 +2472,8 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             </ctrl-connection>
             <ctrl-connection>
                <name>RouterB</name>
-               <client-ip>2001:203:0:113::1</client-ip>
-               <server-ip>2001:203:0:113::3</server-ip>
+               <client-ip>2001:DB8:203:0:113::1</client-ip>
+               <server-ip>2001:DB8:203:0:113::3</server-ip>
             </ctrl-connection>
          </client>
       </twamp>
@@ -2546,9 +2546,9 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
          <server>
             <admin-state>true</admin-state>
             <ctrl-connection>
-               <client-ip>2001:203:0:113::1</client-ip>
+               <client-ip>2001:DB8:203:0:113::1</client-ip>
                <client-tcp-port>16341</client-tcp-port>
-               <server-ip>2001:203:0:113::2</server-ip>
+               <server-ip>2001:DB8:203:0:113::2</server-ip>
                <server-tcp-port>862</server-tcp-port>
                <state>
                   active
@@ -3043,15 +3043,15 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
             </key-chain>
             <ctrl-connection>
                <name>RouterA</name>
-               <client-ip>2001:203:0:113::1</client-ip>
-               <server-ip>2001:203:0:113::2</server-ip>
+               <client-ip>2001:DB8:203:0:113::1</client-ip>
+               <server-ip>2001:DB8:203:0:113::2</server-ip>
                <dscp>32</dscp>
                <key-id>KeyClient1ToRouterA</key-id>
                <test-session-request>
                   <name>Test1</name>
-                  <sender-ip>2001:10:1:1::1</sender-ip>
+                  <sender-ip>2001:DB8:10:1:1::1</sender-ip>
                   <sender-udp-port>4000</sender-udp-port>
-                  <reflector-ip>2001:10:1:1::2</reflector-ip>
+                  <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
                   <reflector-udp-port>5000</reflector-udp-port>
                   <padding-length>64</padding-length>
                   <start-time>0</start-time>
@@ -3060,9 +3060,9 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                </test-session-request>
                <test-session-request>
                   <name>Test2</name>
-                  <sender-ip>2001:203:0:113::1</sender-ip>
+                  <sender-ip>2001:DB8:203:0:113::1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
-                  <reflector-ip>2001:203:0:113::2</reflector-ip>
+                  <reflector-ip>2001:DB8:203:0:113::2</reflector-ip>
                   <reflector-udp-port>5001</reflector-udp-port>
                   <padding-length>128</padding-length>
                   <start-time>0</start-time>
@@ -3144,9 +3144,9 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                <secret-key>secret10</secret-key>
             </key-chain>
             <ctrl-connection>
-               <client-ip>2001:203:0:113::1</client-ip>
+               <client-ip>2001:DB8:203:0:113::1</client-ip>
                <client-tcp-port>16341</client-tcp-port>
-               <server-ip>2001:203:0:113::2</server-ip>
+               <server-ip>2001:DB8:203:0:113::2</server-ip>
                <server-tcp-port>862</server-tcp-port>
                <state>
                   active
@@ -3318,19 +3318,19 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
          <session-reflector>
             <admin-state>true</admin-state>
             <test-session>
-               <sender-ip>2001:10:1:1::1</sender-ip>
+               <sender-ip>2001:DB8:10:1:1::1</sender-ip>
                <sender-udp-port>4000</sender-udp-port>
-               <reflector-ip>2001:10:1:1::2</reflector-ip>
+               <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
                <reflector-udp-port>5000</reflector-udp-port>
                <sid>1232</sid>
                <parent-connection-client-ip>
-                   2001:203:0:113::1
+                   2001:DB8:203:0:113::1
                </parent-connection-client-ip>
                <parent-connection-client-tcp-port>
                   16341
                </parent-connection-client-tcp-port>
                <parent-connection-server-ip>
-                   2001:203:0:113::2
+                   2001:DB8:203:0:113::2
                </parent-connection-server-ip>
                <parent-connection-server-tcp-port>
                   862
@@ -3342,13 +3342,13 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                <last-rcv-seq>1</last-rcv-seq>
             </test-session>
             <test-session>
-               <sender-ip>2001:203:0:113::1</sender-ip>
+               <sender-ip>2001:DB8:203:0:113::1</sender-ip>
                <sender-udp-port>4001</sender-udp-port>
-               <reflector-ip>2001:192:68::2</reflector-ip>
+               <reflector-ip>2001:DB8:192:68::2</reflector-ip>
                <reflector-udp-port>5001</reflector-udp-port>
                <sid>178943</sid>
                <parent-connection-client-ip>
-                   2001:203:0:113::1
+                   2001:DB8:203:0:113::1
                </parent-connection-client-ip>
                <parent-connection-client-tcp-port>
                   16341
@@ -3362,7 +3362,7 @@ Civil, et al.            Expires January 8, 2017               [Page 60]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
-                   2001:203:0:113::2
+                   2001:DB8:203:0:113::2
                </parent-connection-server-ip>
                <parent-connection-server-tcp-port>
                   862
