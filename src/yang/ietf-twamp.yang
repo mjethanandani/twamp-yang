@@ -1001,7 +1001,7 @@ module ietf-twamp {
             as a TWAMP Session-Sender.";
       }
 
-      list twamp-sender-test-session{
+      list test-session{
         key name;
         description
             "TWAMP Session-Sender test sessions.";
