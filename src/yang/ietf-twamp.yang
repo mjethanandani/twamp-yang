@@ -336,7 +336,7 @@ module ietf-twamp {
       description
         "Configuration of the TWAMP Control-Client logical entity.";
 
-      leaf client-admin-state {
+      leaf admin-state {
         type boolean;
         mandatory true;
         description
@@ -741,7 +741,7 @@ module ietf-twamp {
       description
         "Configuration of the TWAMP Server logical entity.";
 
-      leaf server-admin-state {
+      leaf admin-state {
         type boolean;
         mandatory true;
         description
@@ -993,7 +993,7 @@ module ietf-twamp {
       description
         "Configuration of the TWAMP Session-Sender
         logical entity";
-      leaf session-sender-admin-state {
+      leaf admin-state {
         type boolean;
         mandatory true;
         description
@@ -1100,7 +1100,7 @@ module ietf-twamp {
         "Configuration of the TWAMP Session-Reflector
         logical entity";
 
-      leaf session-reflector-admin-state {
+      leaf admin-state {
         type boolean;
         mandatory true;
         description
