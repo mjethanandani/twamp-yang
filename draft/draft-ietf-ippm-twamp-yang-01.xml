@@ -18,21 +18,13 @@
 ]>
 <rfc category="std" docName="draft-ietf-ippm-twamp-yang-01" ipr="trust200902">
   <?rfc toc="yes" ?>
-
   <?rfc symrefs="yes" ?>
-
   <?rfc sortrefs="yes"?>
-
   <?rfc iprnotified="no" ?>
-
   <?rfc strict="yes" ?>
-
   <?rfc compact="yes" ?>
-
   <?rfc subcompact="no" ?>
-
   <?rfc comments="yes"?>
-
   <?rfc inline="yes" ?>
 
   <front>
@@ -41,17 +33,12 @@
 
     <author fullname="Ruth Civil" initials="R." surname="Civil">
       <organization>Ciena Corporation</organization>
-
       <address>
         <postal>
           <street>307 Legget Drive</street>
-
           <city>Kanata</city>
-
           <region>ON</region>
-
           <code>K2K 3C8</code>
-
           <country>Canada</country>
         </postal>
 
@@ -63,17 +50,12 @@
 
     <author fullname="Al Morton" initials="A." surname="Morton">
       <organization>AT&amp;T Labs</organization>
-
       <address>
         <postal>
           <street>200 Laurel Avenue South</street>
-
           <city>Middletown,</city>
-
           <region>NJ</region>
-
           <code>07748</code>
-
           <country>USA</country>
         </postal>
 
@@ -87,17 +69,58 @@
       </address>
     </author>
 
+    <author fullname="Reshad Rahman" initials="R." surname="Rahman">
+      <organization>Cisco Systems</organization>
+      <address>
+        <postal>
+          <street>2000 Innovation Drive</street>
+          <city>Kanata</city>
+          <region>ON</region>
+          <code>K2K 3E8</code>
+          <country>Canada</country>
+        </postal>
+
+        <email>rrahman@cisco.com</email>
+      </address>
+    </author>
+
+    <author fullname="Mahesh Jethanandani" initials="M." surname="Jethanandani">
+      <organization>Cisco Systems</organization>
+      <address>
+        <postal>
+          <street>3700 Cisco Way</street>
+          <city>San Jose</city>
+          <region>CA</region>
+          <code>95134</code>
+          <country>USA</country>
+        </postal>
+
+        <email>mjethanandani@gmail.com</email>
+      </address>
+    </author>
+
+    <author fullname="Kostas Pentikousis" initials="K." surname="Pentikousis"
+            role="editor">
+      <organization>Travelping</organization>
+      <address>
+        <postal>
+          <street>Koernerstr. 7-10</street>
+          <code>10785</code>
+          <city>Berlin</city>
+          <country>Germany</country>
+        </postal>
+
+        <email>k.pentikousis@travelping.com</email>
+      </address>
+    </author>
+
     <author fullname="Lianshu Zheng" initials="L." surname="Zheng">
       <organization>Huawei Technologies</organization>
-
       <address>
         <postal>
           <street/>
-
           <city/>
-
           <region/>
-
           <code/>
 
           <country>China</country>
@@ -107,66 +130,7 @@
       </address>
     </author>
 
-    <author fullname="Reshad Rahman" initials="R." surname="Rahman">
-      <organization>Cisco Systems</organization>
-
-      <address>
-        <postal>
-          <street>2000 Innovation Drive</street>
-
-          <city>Kanata</city>
-
-          <region>ON</region>
-
-          <code>K2K 3E8</code>
-
-          <country>Canada</country>
-        </postal>
-
-        <email>rrahman@cisco.com</email>
-      </address>
-    </author>
-
-    <author fullname="Mahesh Jethanandani" initials="M" surname="Jethanandani">
-      <organization>Cisco Systems</organization>
-
-      <address>
-        <postal>
-          <street>3700 Cisco Way</street>
-
-          <city>San Jose</city>
-
-          <region>CA</region>
-
-          <code>95134</code>
-
-          <country>USA</country>
-        </postal>
-
-        <email>mjethanandani@gmail.com</email>
-      </address>
-    </author>
-
-    <author fullname="Kostas Pentikousis" initials="K." role="editor"
-            surname="Pentikousis">
-      <organization>Travelping</organization>
-
-      <address>
-        <postal>
-          <street>Koernerstr. 7-10</street>
-
-          <code>10785</code>
-
-          <city>Berlin</city>
-
-          <country>Germany</country>
-        </postal>
-
-        <email>k.pentikousis@travelping.com</email>
-      </address>
-    </author>
-
-    <date day="7" month="July" year="2016"/>
+    <date year="2016"/>
 
     <area>Transport</area>
 
@@ -730,7 +694,7 @@ o-------------------o                       o-------------------o
     <section anchor="module" title="Data Model">
       <t>This section formally specifies the TWAMP data model using YANG.</t>
 
-      <section title="YANG Tree Diagram">
+      <section anchor="yangtree" title="YANG Tree Diagram">
         <t>This section presents a simplified graphical representation of the
         TWAMP data model using a YANG tree diagram. Readers should keep in
         mind that the limit of 72 characters per line forces us to introduce
@@ -858,7 +822,7 @@ module: ietf-twamp
         </figure>
       </section>
 
-      <section title="YANG Module">
+      <section anchor="yangmodule" title="YANG Module">
         <t>This section presents the YANG module for the TWAMP data model
         defined in this document.</t>
 
@@ -2450,9 +2414,10 @@ module ietf-twamp {
     </section>
 
     <section anchor="security" title="Security Considerations">
-      <t>The YANG module defined in this draft is designed to be accessed via
-      among other protocols by <xref target="RFC6241">NETCONF</xref>.
-      Protocols like NETCONF use a secure a secure transport layer like SSH
+      <t>The YANG module defined in <xref target="module"/> is designed
+      to be accessed, among other protocols, via
+      <xref target="RFC6241">NETCONF</xref>.
+      Protocols like NETCONF use a secure transport layer like SSH
       that is mandatory to implement. The <xref target="RFC6536">NETCONF
       Access Control Module (NACM)</xref> provides the means to restrict
       access for particular users to a pre-configured set of NETCONF protocol
@@ -2500,8 +2465,8 @@ module ietf-twamp {
       <t>Haoxing Shen contributed to the definition of the YANG module in
       <xref target="module"/>.</t>
 
-      <t>Ladislav Lhokta did a thorough review of the YANG module and the
-      examples.</t>
+      <t>Jan Lindblad and Ladislav Lhokta did thorough reviews of
+      the YANG module and the examples in <xref target="AuthExample"/>.</t>
 
       <t>Kostas Pentikousis is partially supported by FP7 UNIFY
       (http://fp7-unify.eu), a research project partially funded by the
@@ -2515,17 +2480,11 @@ module ietf-twamp {
   <back>
     <references title="Normative References">
       <?rfc include='reference.RFC.2119'?>
-
       <?rfc include='reference.RFC.3432'?>
-
       <?rfc include='reference.RFC.3688'?>
-
       <?rfc include='reference.RFC.4656'?>
-
       <?rfc include='reference.RFC.5357'?>
-
       <?rfc include='reference.RFC.6020'?>
-
       <?rfc include='reference.RFC.6038'?>
     </references>
 
@@ -2533,51 +2492,37 @@ module ietf-twamp {
       <!--<?rfc include="reference.RFC.7398"?>-->
 
       <?rfc include='reference.RFC.2898'?>
-
       <?rfc include='reference.RFC.4086'?>
-
       <?rfc include='reference.RFC.5618'?>
-
       <?rfc include='reference.RFC.5938'?>
-
-      <?rfc ?>
-
       <?rfc include='reference.RFC.6241'?>
-
       <?rfc include='reference.RFC.6536'?>
-
+      <?rfc include='reference.RFC.7426'?>
       <?rfc include='reference.RFC.7717'?>
 
-      <?rfc include='reference.RFC.7426'?>
-
       <?rfc include='reference.I-D.ietf-netconf-restconf'?>
-
       <?rfc include='reference.I-D.ietf-ippm-metric-registry'?>
-
       <?rfc include='reference.I-D.unify-nfvrg-challenges'?>
-
       <?rfc include='reference.I-D.unify-nfvrg-devops'?>
 
       <reference anchor="NSC">
         <front>
           <title>Research directions in network service chaining</title>
-
           <author>
             <organization>John, W., Pentikousis, K., et al.</organization>
           </author>
-
           <date month="November" year="2013"/>
         </front>
-
-        <seriesInfo name="Proc. SDN for Future Networks and Services (SDN4FNS), Trento, Italy"
-                    value="IEEE"/>
+        <seriesInfo
+            name="Proc. SDN for Future Networks and Services (SDN4FNS), Trento, Italy"
+            value="IEEE"/>
       </reference>
     </references>
 
     <section anchor="AuthExample" title="Detailed Data Model Examples">
       <t>This appendix extends the example presented in <xref
       target="examples"/> by configuring more fields such as authentication
-      parameters, dscp values and so on.</t>
+      parameters, DSCP values and so on.</t>
 
       <section title="Control-Client">
         <figure>
@@ -2939,18 +2884,23 @@ module ietf-twamp {
 
     <section anchor="OperationalCommands" title="TWAMP Operational Commands">
       <t>TWAMP operational commands could be performed programmatically or
-      manually, e.g. using a command-line interface (CLI). With respect to
-      programmability, YANG can be used to define NETCONF Remote Procedure
-      Calls (RPC), therefore it would be possible to define RPC operations for
-      actions such as starting or stopping control or test sessions or groups
-      of sessions; retrieving results; clearing stored results, and so on.</t>
+      manually, e.g. using a command-line interface (CLI).</t>
+      
+      <t>With respect to programmability, YANG can be used to define
+      NETCONF Remote Procedure Calls (RPC), therefore it would be,
+      in principle, possible to define TWAMP RPC operations for
+      actions such as starting or stopping control connections
+      or test sessions or groups of sessions; retrieving results;
+      clearing stored results, and so on.</t>
 
-      <t>However, <xref target="RFC5357"/> does not attempt to describe such
-      operational actions, and it is likely that different TWAMP
-      implementations could support different sets of operational commands,
-      with different restrictions. Therefore, this document considers it the
-      responsibility of the individual implementation to define its
-      corresponding TWAMP operational commands data model.</t>
+      <t>However, <xref target="RFC5357"/> does not attempt to describe
+      such operational actions. Refer also to <xref target="scope"/> and 
+      the unlabeled links in <xref target="fig:scope"/>. In actual
+      deployments different TWAMP implementations may support different
+      sets of operational commands, with different restrictions.
+      Therefore, this document considers it the responsibility of the
+      individual implementation to define its corresponding TWAMP
+      operational commands data model.</t>
     </section>
   </back>
 </rfc>
