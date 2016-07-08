@@ -83,7 +83,7 @@
 
         <email>acmorton@att.com</email>
 
-        <uri>http://home.comcast.net/~acmacm/</uri>
+        <uri> </uri>
       </address>
     </author>
 
@@ -356,10 +356,10 @@ o-------------------o                       o-------------------o
             example, the source UDP port number is not known to uniquely
             identify the test session.</t>
 
-            <t>The IP address and UDP port number of the Session-Sender of the
+            <t>The IP address and UDP port number of the Session-Sender on the
             path under test by TWAMP</t>
 
-            <t>The IP address and UDP port number of the Session-Reflector of
+            <t>The IP address and UDP port number of the Session-Reflector on
             said path</t>
 
             <t>Information pertaining to the test packet stream, such as the
@@ -496,7 +496,7 @@ o-------------------o                       o-------------------o
         used for encryption and a 256-bit HMAC-SHA1 Session-key used for
         authentication (see Section 6.10 of <xref target="RFC4656"/>).</t>
 
-        <t>Each client container also holds a list of ctrl-connection, where
+        <t>Each client container also holds a list of ctrl-connections, where
         each item in the list describes a TWAMP control connection that will
         be initiated by this Control-Client. There SHALL be one instance of
         ctrl-connection per TWAMP-Control (TCP) connection that is to be
