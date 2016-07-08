@@ -741,10 +741,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    session must be configured at the overall Session-Reflector level,
    and will then be applied to all incoming sessions.
 
-   Each incoming TWAMP-Test session that is active on the Session-
-   Reflector will be represented by an instance of a test-session
-   object.  All items in the test-session object are read-only.
-
    +----=--------------+
    | session-reflector |
    +-------------------+
@@ -775,6 +771,10 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    +----------------------------------------+
 
             Figure 6: TWAMP Session-Reflector UML class diagram
+
+   Each incoming TWAMP-Test session that is active on the Session-
+   Reflector SHALL be represented by an instance of a test-session
+   object.  All items in the test-session object are read-only.
 
    Instances of test-session are indexed by a session identifier (sid).
    This value is auto-allocated by the TWAMP Server as test session
@@ -2425,9 +2425,10 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    Section 5.  The example is illustrative in nature, but aims to be
    self-contained, i.e. were it to be executed in a real TWAMP
    implementation it would lead to a correctly configured test session.
+   For completeness, examples are provided for both IPv4 and IPv6.
+
    A more elaborated example, which also includes authentication
-   parameters, is provided in Appendix A.  For completeness, examples
-   are provided for IPv4 and IPv6.
+   parameters, is provided in Appendix A.
 
 6.1.  Control-Client
 
@@ -2447,17 +2448,16 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
 
    The following configuration example shows a Control-Client with two
    instances of client/ctrl-connection, one called "RouterA" and another
-   called "RouterB".  Each TWAMP-Control connection is to a different
-   Server.  The control connection named "RouterA" has two test session
-   requests.  The TWAMP-Control connection named "RouterB" has no TWAMP-
-   Test session requests.
+   called "RouterB".
+
+   Each TWAMP-Control connection is to a different Server.  The control
+   connection named "RouterA" has two test session requests.  The TWAMP-
+   Control connection named "RouterB" has no TWAMP-Test session
+   requests.
 
    <?xml version="1.0" encoding="utf-8"?>
    <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
       <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-         <client>
-            <admin-state>true</admin-state>
-            <ctrl-connection>
 
 
 
@@ -2466,6 +2466,9 @@ Civil, et al.            Expires January 9, 2017               [Page 44]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+         <client>
+            <admin-state>true</admin-state>
+            <ctrl-connection>
                <name>RouterA</name>
                <client-ip>203.0.113.1</client-ip>
                <server-ip>203.0.113.2</server-ip>
@@ -2511,9 +2514,6 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
                   <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
                   <reflector-udp-port>5000</reflector-udp-port>
                   <start-time>0</start-time>
-               </test-session-request>
-               <test-session-request>
-                  <name>Test2</name>
 
 
 
@@ -2522,6 +2522,9 @@ Civil, et al.            Expires January 9, 2017               [Page 45]
 Internet-Draft            TWAMP YANG Data Model                July 2016
 
 
+               </test-session-request>
+               <test-session-request>
+                  <name>Test2</name>
                   <sender-ip>2001:DB8:203:0:113::1</sender-ip>
                   <sender-udp-port>4001</sender-udp-port>
                   <reflector-ip>2001:DB8:203:0:113::2</reflector-ip>
@@ -2554,11 +2557,8 @@ Internet-Draft            TWAMP YANG Data Model                July 2016
    </config>
 
    The following example presents a Server with the TWAMP-Control
-   connection corresponding to the control connection name (ctrl-
+   connection corresponding to the control connection name (client/ctrl-
    connection/name) "RouterA" presented in Section 6.1.
-
-
-
 
 
 

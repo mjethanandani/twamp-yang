@@ -646,11 +646,6 @@ o-------------------o                       o-------------------o
         Session-Reflector might want to apply to an incoming TWAMP-Test
         session must be configured at the overall Session-Reflector level, and
         will then be applied to all incoming sessions.</t>
-        
-        <t>Each incoming TWAMP-Test session that is active on the
-        Session-Reflector will be represented by an instance of a
-        test-session object. All items in the test-session object are
-        read-only.</t>
 
         <figure anchor="fig:twampReflector"
                 title="TWAMP Session-Reflector UML class diagram">
@@ -685,6 +680,11 @@ o-------------------o                       o-------------------o
 +----------------------------------------+
 ]]></artwork>
         </figure>
+
+        <t>Each incoming TWAMP-Test session that is active on the
+        Session-Reflector SHALL be represented by an instance of a
+        test-session object. All items in the test-session object are
+        read-only.</t>
         
         <t>Instances of test-session are indexed by a session identifier
         (sid). This value is auto-allocated by the TWAMP Server as test session
@@ -2113,9 +2113,10 @@ module ietf-twamp {
       module specified in <xref target="module"/>. The example is illustrative
       in nature, but aims to be self-contained, i.e. were it to be executed in
       a real TWAMP implementation it would lead to a correctly configured test
-      session. A more elaborated example, which also includes authentication
-      parameters, is provided in <xref target="AuthExample"/>. For
-      completeness, examples are provided for IPv4 and IPv6.</t>
+      session. For completeness, examples are provided for both IPv4 and IPv6.</t>
+      
+      <t>A more elaborated example, which also includes authentication
+      parameters, is provided in <xref target="AuthExample"/>. </t>
 
       <section anchor="ExampleCC" title="Control-Client">
         <t>The following configuration example shows a Control-Client with
@@ -2138,8 +2139,10 @@ module ietf-twamp {
 
         <t>The following configuration example shows a Control-Client with two
         instances of client/ctrl-connection, one called "RouterA" and another
-        called "RouterB". Each TWAMP-Control connection is to a different
-        Server. The control connection named "RouterA" has two test session
+        called "RouterB".</t>
+        
+        <t>Each TWAMP-Control connection is to a different Server.
+        The control connection named "RouterA" has two test session
         requests. The TWAMP-Control connection named "RouterB" has no
         TWAMP-Test session requests.</t>
 
@@ -2240,7 +2243,7 @@ module ietf-twamp {
 
         <t>The following example presents a Server with the TWAMP-Control
         connection corresponding to the control connection name
-        (ctrl-connection/name) "RouterA" presented in <xref
+        (client/ctrl-connection/name) "RouterA" presented in <xref
         target="ExampleCC"/>.</t>
 
         <figure>
