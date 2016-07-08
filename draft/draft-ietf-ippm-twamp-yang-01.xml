@@ -209,9 +209,11 @@
       figure is annotated with pointers to the UML diagrams provided in this
       document and associated with the data model of the four logical entities
       in a TWAMP deployment, namely the TWAMP Control-Client, Server,
-      Session-Sender and Session-Reflector. As per <xref target="RFC5357"/>,
-      unlabeled links in <xref target="fig:scope"/> are unspecified and may be
-      proprietary protocols.</t>
+      Session-Sender and Session-Reflector. </t>
+      
+      <t>As per <xref target="RFC5357"/>, unlabeled links in 
+      <xref target="fig:scope"/> are left unspecified and may
+      be proprietary protocols.</t>
 
       <figure anchor="fig:scope" title="Annotated TWAMP logical model">
         <artwork><![CDATA[
@@ -230,16 +232,13 @@
       </figure>
 
       <t>As per <xref target="RFC5357"/>, a TWAMP implementation may follow a
-      simplified logical model, in which the same node acts both as the
+      simplified logical model, in which the same node acts both as
       Control-Client and Session-Sender, while another node acts at the same
-      time as the TWAMP Server and Session-Reflector. <xref
+      time as TWAMP Server and Session-Reflector. <xref
       target="fig:scope2"/> illustrates this simplified logical model and
       indicates the interaction between the TWAMP configuration client and
       server using, for instance, NETCONF <xref target="RFC6241"/> or RESTCONF
-      <xref target="I-D.ietf-netconf-restconf"/>. The data model defined in
-      this document is orthogonal to the specific protocol used between the
-      Config client and Config server to communicate the TWAMP configuration
-      parameters.</t>
+      <xref target="I-D.ietf-netconf-restconf"/>.</t>
 
       <figure anchor="fig:scope2" title="Simplified TWAMP model and protocols">
         <artwork><![CDATA[
@@ -260,11 +259,18 @@ o-------------------o                       o-------------------o
 ]]></artwork>
       </figure>
 
-      <t>Operational actions such as how TWAMP sessions are started/stopped,
-      how results are retrieved, or stored results are cleared, and so on, are
-      not addressed by this configuration model as they are not part of the
-      TWAMP specification <xref target="RFC5357"/> and hence are out of scope
-      of this document. See also <xref target="OperationalCommands"/>.</t>
+      <t>We note that the data model defined in this document is orthogonal
+      to the specific protocol used between the Config client and Config
+      server to communicate the TWAMP configuration parameters.</t>
+      
+      <t>Operational actions such as how TWAMP-Test sessions are started
+      and stopped, how perfmormance measurement results are retrieved,
+      or how stored results are cleared, and so on, are
+      not addressed by the configuration model defined in this docuemnt.
+      As noted above, such operational actions are not part of the 
+      TWAMP specification <xref target="RFC5357"/> and hence are
+      out of scope of this document.
+      See also <xref target="OperationalCommands"/>.</t>
     </section>
 
     <section anchor="structure" title="Data Model Overview">
@@ -2486,6 +2492,7 @@ module ietf-twamp {
       <?rfc include='reference.RFC.5357'?>
       <?rfc include='reference.RFC.6020'?>
       <?rfc include='reference.RFC.6038'?>
+      <?rfc include='reference.RFC.7717'?>
     </references>
 
     <references title="Informative References">
@@ -2498,7 +2505,6 @@ module ietf-twamp {
       <?rfc include='reference.RFC.6241'?>
       <?rfc include='reference.RFC.6536'?>
       <?rfc include='reference.RFC.7426'?>
-      <?rfc include='reference.RFC.7717'?>
 
       <?rfc include='reference.I-D.ietf-netconf-restconf'?>
       <?rfc include='reference.I-D.ietf-ippm-metric-registry'?>
