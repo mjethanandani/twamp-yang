@@ -274,18 +274,25 @@ o-------------------o                       o-------------------o
     </section>
 
     <section anchor="structure" title="Data Model Overview">
-      <t>A TWAMP data model includes four categories of configuration items.
-      Global configuration items relate to parameters that are set on a per
+      <t>The TWAMP data model includes four categories of
+      configuration items.</t>
+      
+      <t>Global configuration items relate to parameters that are set on a per
       device level. For example, the administrative status of the device with
       respect to whether it allows TWAMP sessions and, if so, in what capacity
       (e.g. Control-Client, Server or both), are typical instances of global
-      configuration items. A second category includes attributes that can be
-      configured on a per control connection basis, such as the Server IP
-      address. A third category includes attributes related to per test
+      configuration items.</t>
+      
+      <t>A second category includes attributes that can be
+      configured on a per TWAMP-Control connection basis, such as the
+      Server IP address.</t>
+
+      <t>A third category includes attributes related to per TWAMP-Test
       session attributes, for instance setting different values in the
-      Differentiated Services Code Point (DSCP) field. Finally, the data model
-      could include attributes that relate to the operational state of the
-      TWAMP implementation.</t>
+      Differentiated Services Code Point (DSCP) field.</t>
+      
+      <t>Finally, the data model includes attributes that relate to the
+      operational state of the TWAMP implementation.</t>
 
       <t>As we describe the TWAMP data model in the remaining sections of this
       document, readers should keep in mind the functional entity grouping
@@ -296,44 +303,47 @@ o-------------------o                       o-------------------o
         the device level that indicates whether the node is enabled to
         function as such.</t>
 
-        <t>Each TWAMP Control-Client is associated with zero or more TWAMP
-        control connections. The main configuration parameters of each control
-        connection are: <list style="symbols">
+        <t>Each TWAMP Control-Client is associated with zero or more
+        TWAMP-Control connections. The main configuration parameters
+        of each control connection are: <list style="symbols">
             <t>A name which can be used to uniquely identify at the
             Control-Client a particular control connection. This name is
             necessary for programmability reasons because at the time of
-            creation of a TWAMP control connection not all IP and TCP port
+            creation of a TWAMP-Control connection not all IP and TCP port
             number information needed to uniquely identify the connection is
             available.</t>
 
             <t>The IP address of the interface the Control-Client will use for
-            connections</t>
+            connections.</t>
 
-            <t>The IP address of the remote Server</t>
+            <t>The IP address of the remote TWAMP Server.</t>
 
             <t>Authentication and Encryption attributes such as KeyID, Token
-            and the Client Initialization Vector (Client-IV) <xref
-            target="RFC4656"/>.</t>
+            and the Client Initialization Vector (Client-IV); see also the
+            last paragraph of Section 6 in <xref target="RFC4656"/> and
+            <xref target="RFC4086"/>.</t>
           </list></t>
 
-        <t>Each TWAMP control connection, in turn, is associated with zero or
-        more test sessions. For each test session we note the following
+        <t>Each TWAMP-Control connection, in turn, is associated with zero or
+        more TWAMP-Test sessions. For each test session we note the following
         configuration items: <list style="symbols">
             <t>The test session name that uniquely identifies a particular
             test session at the Control-Client and Session-Sender. Similarly
             to the control connections above, this unique test session name is
-            needed because at the time of creation of a test session, for
-            example, the source UDP port number is not known to uniquely
+            needed because at the time of creation of a TWAMP-Test session,
+            for example, the source UDP port number is not known to uniquely
             identify the test session.</t>
 
             <t>The IP address and UDP port number of the Session-Sender on the
-            path under test by TWAMP</t>
+            path under test by TWAMP.</t>
 
             <t>The IP address and UDP port number of the Session-Reflector on
-            said path</t>
+            said path.</t>
 
             <t>Information pertaining to the test packet stream, such as the
-            test starting time or whether the test should be repeated.</t>
+            test starting time, which performance metric is to be used <xref
+            target="I-D.ietf-ippm-metric-registry"/>, or
+            whether the test should be repeated.</t>
           </list></t>
       </section>
 
@@ -342,7 +352,7 @@ o-------------------o                       o-------------------o
         device level to indicate whether the node is enabled to function as a
         TWAMP Server.</t>
 
-        <t>Each TWAMP Server is associated with zero or more control
+        <t>Each Server is associated with zero or more TWAMP-Control
         connections. Each control connection is uniquely identified by the
         4-tuple {Control-Client IP address, Control-Client TCP port number,
         Server IP address, Server TCP port}. Control connection configuration
@@ -350,28 +360,30 @@ o-------------------o                       o-------------------o
       </section>
 
       <section anchor="twampSender" title="Session-Sender">
-        <t>There is one TWAMP Session-Sender instance for each test session
+        <t>There is one Session-Sender instance for each TWAMP-Test session
         that is initiated from the sending device. Primary configuration
         fields include: <list style="symbols">
             <t>The test session name that MUST be identical with the
-            corresponding test session name on the TWAMP Control-Client (<xref
-            target="twamp-client"/>)</t>
+            corresponding test session name on the TWAMP Control-Client
+            (<xref target="twamp-client"/>)</t>
 
             <t>The control connection name, which along with the test session
             name uniquely identify the TWAMP Session-Sender instance</t>
 
-            <t>Information pertaining to the test packet stream, such as, for
-            example, the number of test packets and the packet distribution to
-            be employed.</t>
+            <t>Information pertaining to the test packet stream, such as,
+            for example, the number of test packets and the packet
+            distribution to be employed; see also <xref target="RFC3432"/>.</t>
           </list></t>
       </section>
 
       <section anchor="twampReflector" title="Session-Reflector">
-        <t>Each TWAMP Session-Reflector is associated with zero or more test
+        <t>Each Session-Reflector is associated with zero or more TWAMP-Test
         sessions. For each test session, the REFWAIT parameter (Section 4.2 of
-        <xref target="RFC5357"/> can be configured. Read-only access to other
-        data model parameters, such as the Sender IP address is foreseen. Each
-        test session can be uniquely identified by the 4-tuple mentioned in
+        <xref target="RFC5357"/> can be configured.</t>
+
+        <t>Read-only access to other data model parameters, such as the
+        Sender IP address is foreseen. Each test session can be uniquely
+        identified by the 4-tuple mentioned in
         <xref target="twamp-server"/>.</t>
       </section>
     </section>

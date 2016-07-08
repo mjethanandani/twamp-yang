@@ -577,7 +577,7 @@ module ietf-twamp {
                 Session-Reflector device to which the TWAMP-Test
                 session will be initiated. This value will be
                 used to populate the receiver address field of
-                the Request-TW-Session message. ";
+                the Request-TW-Session message.";
           }
 
           leaf reflector-udp-port {
