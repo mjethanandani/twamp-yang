@@ -389,18 +389,21 @@ o-------------------o                       o-------------------o
     </section>
 
     <section anchor="parameters" title="Data Model Parameters">
-      <t>This section defines the TWAMP data model using UML and describes all
-      associated parameters.</t>
+      <t>This section defines the TWAMP data model using UML and
+      introduces selected parameters associated with the four TWAMP
+      logical entities. The complete TWAMP data model specification
+      is provided in the YANG module presented in
+      <xref target="yangmodule"/>.</t>
 
       <section anchor="clientConfig" title="Control-Client">
         <t>The client container (see <xref target="fig:twamp-client"/>) holds
         items that are related to the configuration of the TWAMP
-        Control-Client logical entity. These are divided up into items that
-        are associated with the configuration of the Control-Client as a whole
-        (e.g. client/admin-state) and items that are associated with
-        individual control connections initiated by the Control-Client entity
-        (client/ctrl-connection).</t>
+        Control-Client logical entity (recall <xref target="fig:scope"/>).</t>
 
+        <t>The client container includes an administrative configuration
+        parameter (client/admin-state) that indicates whether the device is
+        allowed to initiate TWAMP-Control connections.</t>
+        
         <figure anchor="fig:twamp-client"
                 title="TWAMP Control-Client UML class diagram">
           <artwork><![CDATA[
@@ -442,20 +445,20 @@ o-------------------o                       o-------------------o
 ]]></artwork>
         </figure>
 
-        <t>The client container includes an administrative parameter
-        (client/admin-state) that indicates whether the device is allowed to
-        initiate TWAMP-Control sessions.</t>
-
         <t>The client container holds a list (mode-preference-chain) which
-        specifies the preferred Mode values according to their preferred order
-        of use, including the authentication and encryption Modes.
+        specifies the Mode values according to their preferred order
+        of use by the operator of this Control-Client,
+        including the authentication and encryption Modes.
         Specifically, mode-preference-chain lists each priority (expressed as
         a 16-bit unsigned integer, where zero is the highest priority and
         subsequent values monotonically increasing) with their corresponding
-        mode (expressed as a 32-bit Hexadecimal value). Depending on the Modes
-        available in the Server Greeting, the Control-Client MUST choose the
-        highest priority Mode from the configured mode-preference-chain list.
-        Note that the list of preferred Modes may set bit position
+        mode (expressed as a 32-bit Hexadecimal value).</t>
+        
+        <t>Depending on the Modes available in the Server Greeting,
+        the Control-Client MUST choose the highest priority Mode from the
+        configured mode-preference-chain list.</t>
+        
+        <t>Note that the list of preferred Modes may set bit position
         combinations when necessary, such as when referring to the extended
         TWAMP features in <xref target="RFC5618"/>, <xref target="RFC5938"/>,
         <xref target="RFC6038"/>, and <xref target="RFC7717"/>. If the
@@ -488,15 +491,17 @@ o-------------------o                       o-------------------o
         test-session-request holds information associated with the
         Control-Client for this test session. This includes information that
         is associated with the Request-TW-Session/Accept-Session message
-        exchange (see Section 3.5 of <xref target="RFC5357"/>). The
-        Control-Client is also responsible for scheduling and results
-        collection for TWAMP-Test sessions, so test-session-request will also
-        hold information related to these actions (e.g. pm-index,
-        repeat-interval).</t>
+        exchange (see Section 3.5 of <xref target="RFC5357"/>).</t>
 
         <t>There SHALL be one instance of test-session-request for each
         TWAMP-Test session that is to be negotiated by this TWAMP-Control
         connection via a Request-TW-Session/Accept-Session exchange.</t>
+
+        <t>The Control-Client is also responsible for scheduling and results
+        collection for TWAMP-Test sessions, so test-session-request will also
+        hold information related to these actions (e.g. pm-index,
+        repeat-interval).</t>
+
       </section>
 
       <section anchor="serverConfig" title="Server">
@@ -504,6 +509,17 @@ o-------------------o                       o-------------------o
         items that are related to the configuration of the TWAMP Server
         logical entity (recall <xref target="fig:scope"/>).</t>
 
+        <t>The server container includes an administrative configuration
+        parameter (server/admin-state) that indicates whether the device is
+        allowed to receive TWAMP-Control connections.</t>
+
+        <t>A device operating in the Server role cannot configure attributes
+        on a per TWAMP-Control connection basis, as it has no foreknowledge of
+        the incoming TWAMP-Control connections to be received. As such, any
+        parameter that the Server might want to apply to an incoming control
+        connection must be configured at the overall Server level, and will
+        then be applied to all incoming TWAMP-Control connections.</t>
+        
         <figure anchor="fig:twamp-server"
                 title="TWAMP Server UML class diagram">
           <artwork><![CDATA[
@@ -537,13 +553,6 @@ o-------------------o                       o-------------------o
 ]]></artwork>
         </figure>
 
-        <t>A device operating in the Server role cannot configure attributes
-        on a per TWAMP-Control connection basis, as it has no foreknowledge of
-        the incoming TWAMP-Control connections to be received. As such, any
-        parameter that the Server might want to apply to an incoming control
-        connection must be configured at the overall Server level, and will
-        then be applied to all incoming TWAMP-Control connections.</t>
-
         <t>Each server container holds a list named key-chain which relates
         KeyIDs with the respective secret keys. As mentioned in <xref
         target="clientConfig"/>, both the Server and the Control-Client use
@@ -555,16 +564,15 @@ o-------------------o                       o-------------------o
         for authentication or encryption.</t>
 
         <t>Each incoming control connection that is active on the Server will
-        be represented by an instance of a server/ctrl-connection object. All
-        items in the server/ctrl-connection object are read-only, as we
-        explain later in this section.</t>
-
-        <t>There SHALL be one instance of server/ctrl-connection per incoming
+        be represented by an instance of a ctrl-connection object.
+        There SHALL be one instance of ctrl-connection per incoming
         TWAMP-Control (TCP) connection that is received and active on the
-        Server device. All items in the server/ctrl-connection are read-only.
-        Each instance of server/ctrl-connection uses the following 4-tuple as
-        its unique key: client-ip, client-tcp-port, server-ip,
-        server-tcp-port.</t>
+        Server device.</t>
+
+        <t>All items in the ctrl-connection object are read-only.
+        Each instance of ctrl-connection can be uniquely identified by 
+        the 4-tuple
+        {client-ip, client-tcp-port, server-ip, server-tcp-port}.</t>
       </section>
 
       <section anchor="senderConfig" title="Session-Sender">
@@ -572,13 +580,10 @@ o-------------------o                       o-------------------o
         target="fig:twampSenders"/>, holds items that are related to the
         configuration of the TWAMP Session-Sender logical entity.</t>
 
-        <t>The session-sender container includes an administrative parameter
-        (session-sender/admin-state) that controls whether the device is
-        allowed to initiate TWAMP test sessions.</t>
-
-        <t>There is one instance of test-session for each TWAMP-Test session
-        for which packets are being sent.</t>
-
+        <t>The session-sender container includes an administrative
+        parameter (session-sender/admin-state) that controls whether
+        the device is allowed to initiate TWAMP-Test sessions.</t>
+        
         <figure anchor="fig:twampSenders"
                 title="TWAMP Session-Sender UML class diagram">
           <artwork><![CDATA[
@@ -619,26 +624,32 @@ o-------------------o                       o-------------------o
                               +------------------------+
 ]]></artwork>
         </figure>
-      </section>
+
+        <t>Each TWAMP-Test session initiated by the Session-Sender
+        will be represented by an instance of a test-session object.
+        There SHALL be one instance of test-session for each
+        TWAMP-Test session for which packets are being sent.</t>
+        </section>
 
       <section anchor="reflectorConfig" title="Session-Reflector">
         <t>The session-reflector container, illustrated in <xref
         target="fig:twampReflector"/>, holds items that are related to the
         configuration of the TWAMP Session-Reflector logical entity.</t>
 
+        <t>The session-reflector container includes an administrative parameter
+        (session-reflector/admin-state) that controls whether the device is
+        allowed to respond to incoming TWAMP test sessions.</t>
+        
         <t>A device operating in the Session-Reflector role cannot configure
         attributes on a per-session basis, as it has no foreknowledge of what
         incoming sessions it will receive. As such, any parameter that the
         Session-Reflector might want to apply to an incoming TWAMP-Test
         session must be configured at the overall Session-Reflector level, and
         will then be applied to all incoming sessions.</t>
-
-        <t>The session-sender container includes an administrative parameter
-        (session-reflector/admin-state) that controls whether the device is
-        allowed to respond to incoming TWAMP test sessions. Each incoming
-        TWAMP-Test session that is active on the Session-Reflector will be
-        represented by an instance of a twamp-reflector/test-session object.
-        All items in the twamp-reflector/test-session object are
+        
+        <t>Each incoming TWAMP-Test session that is active on the
+        Session-Reflector will be represented by an instance of a
+        test-session object. All items in the test-session object are
         read-only.</t>
 
         <figure anchor="fig:twampReflector"
@@ -674,9 +685,9 @@ o-------------------o                       o-------------------o
 +----------------------------------------+
 ]]></artwork>
         </figure>
-
+        
         <t>Instances of test-session are indexed by a session identifier
-        (sid). This value is auto-allocated by the Server as test session
+        (sid). This value is auto-allocated by the TWAMP Server as test session
         requests are received, and communicated back to the Control-Client in
         the SID field of the Accept-Session message; see Section 4.3 of <xref
         target="RFC6038"/>.</t>
@@ -698,11 +709,14 @@ o-------------------o                       o-------------------o
         number of test sessions are currently active on that device.</t>
 
         <t>Each Session-Reflector TWAMP-Test session contains the following
-        4-tuple: {parent-connection-client-ip,
-        parent-connection-client-tcp-port, parent-connection-server-ip,
-        parent-connection-server-tcp-port}. This 4-tuple corresponds to the
-        equivalent 4-tuple {client-ip, client-tcp-port, server-ip,
-        server-tcp-port} in the server/ctrl-connection object. This 4-tuple
+        4-tuple:
+        {parent-connection-client-ip,
+        parent-connection-client-tcp-port,
+        parent-connection-server-ip,
+        parent-connection-server-tcp-port}.
+        This 4-tuple MUST correspond to the equivalent 4-tuple
+        {client-ip, client-tcp-port, server-ip, server-tcp-port}
+        in the server/ctrl-connection object. This 4-tuple
         allows the user to trace back from the TWAMP-Test session to the
         (parent) TWAMP-Control connection that negotiated this test
         session.</t>
@@ -1427,7 +1441,7 @@ module ietf-twamp {
                 Session-Reflector device to which the TWAMP-Test
                 session will be initiated. This value will be
                 used to populate the receiver address field of
-                the Request-TW-Session message. ";
+                the Request-TW-Session message.";
           }
 
           leaf reflector-udp-port {
