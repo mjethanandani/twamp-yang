@@ -1,0 +1,1606 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This template is for creating an Internet Draft using xml2rfc,
+     which is available here: http://xml.resource.org. -->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC3432 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3432.xml">
+<!ENTITY RFC4086 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4086.xml">
+<!ENTITY RFC4656 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4656.xml">
+<!ENTITY RFC5357 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5357.xml">
+<!ENTITY RFC6020 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6020.xml">
+<!ENTITY RFC6038 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6038.xml">
+<!ENTITY RFC6241 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6241.xml">
+<!ENTITY RFC7426 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7426.xml">
+<!ENTITY IPPMREG SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-ippm-metric-registry-02.xml">
+<!ENTITY RESTCONF SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-netconf-restconf-04.xml">
+<!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
+<!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
+]>
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-latest"
+     ipr="trust200902">
+  <?rfc toc="yes" ?>
+
+  <?rfc symrefs="yes" ?>
+
+  <?rfc sortrefs="yes"?>
+
+  <?rfc iprnotified="no" ?>
+
+  <?rfc strict="yes" ?>
+
+  <?rfc compact="yes" ?>
+
+  <?rfc subcompact="no" ?>
+
+  <?rfc comments="yes"?>
+
+  <?rfc inline="yes" ?>
+
+  <front>
+    <title abbrev="TWAMP YANG Data Model">Two-Way Active Measurement Protocol
+    (TWAMP) Data Model</title>
+
+    <author fullname="Ruth Civil" initials="R." surname="Civil">
+      <organization>Ciena Corporation</organization>
+
+      <address>
+        <postal>
+          <street>307 Legget Drive</street>
+
+          <city>Kanata</city>
+
+          <region>ON</region>
+
+          <code>K2K 3C8</code>
+
+          <country>Canada</country>
+        </postal>
+
+        <email>gcivil@ciena.com</email>
+
+        <uri>www.ciena.com</uri>
+      </address>
+    </author>
+
+    <author fullname="Al Morton" initials="A." surname="Morton">
+      <organization>AT&amp;T Labs</organization>
+
+      <address>
+        <postal>
+          <street>200 Laurel Avenue South</street>
+
+          <city>Middletown,</city>
+
+          <region>NJ</region>
+
+          <code>07748</code>
+
+          <country>USA</country>
+        </postal>
+
+        <phone>+1 732 420 1571</phone>
+
+        <facsimile>+1 732 368 1192</facsimile>
+
+        <email>acmorton@att.com</email>
+
+        <uri>http://home.comcast.net/~acmacm/</uri>
+      </address>
+    </author>
+
+    <author fullname="Lianshu Zheng" initials="L." surname="Zheng">
+      <organization>Huawei Technologies</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city/>
+
+          <region/>
+
+          <code/>
+
+          <country>China</country>
+        </postal>
+
+        <email>vero.zheng@huawei.com</email>
+      </address>
+    </author>
+
+    <author fullname="Reshad Rahman" initials="R." surname="Rahman">
+      <organization>Cisco Systems</organization>
+
+      <address>
+        <postal>
+          <street>2000 Innovation Drive</street>
+
+          <city>Kanata</city>
+
+          <region>ON</region>
+
+          <code>K2K 3E8</code>
+
+          <country>Canada</country>
+        </postal>
+
+        <email>rrahman@cisco.com</email>
+      </address>
+    </author>
+
+    <author fullname="Mahesh Jethanandani" initials="M" surname="Jethanandani">
+      <organization>Cisco Systems</organization>
+
+      <address>
+        <postal>
+          <street>3700 Cisco Way</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>mjethanandani@gmail.com</email>
+      </address>
+    </author>
+
+    <author fullname="Kostas Pentikousis" initials="K." role="editor"
+            surname="Pentikousis">
+      <organization>Travelping</organization>
+
+      <address>
+        <postal>
+          <street>Koernerstr. 7-10</street>
+
+          <code>10785</code>
+
+          <city>Berlin</city>
+
+          <country>Germany</country>
+        </postal>
+
+        <email>k.pentikousis@travelping.com</email>
+      </address>
+    </author>
+
+    <date day="7" month="July" year="2016"/>
+
+    <area>Transport</area>
+
+    <workgroup>IPPM WG</workgroup>
+
+    <abstract>
+      <t>This document specifies a data model for client and server
+      implementations of the Two-Way Active Measurement Protocol (TWAMP). We
+      define the TWAMP data model through Unified Modeling Language (UML)
+      class diagrams and formally specify it using YANG.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>The Two-Way Active Measurement Protocol (TWAMP) <xref
+      target="RFC5357"/> is used to measure network performance parameters
+      such as latency, bandwidth, and packet loss by sending probe packets and
+      measuring their experience in the network. To date, TWAMP
+      implementations do not come with a standard management framework and, as
+      such, configuration depends on proprietary mechanisms developed by the
+      corresponding TWAMP vendor. This document addresses this gap by formally
+      specifying the TWAMP data model using YANG.</t>
+
+      <section anchor="motivation" title="Motivation">
+        <t>In current TWAMP deployments the lack of a standardized data model
+        limits the flexibility to dynamically instantiate TWAMP-based
+        measurements across equipment from different vendors. In large,
+        virtualized, and dynamically instantiated infrastructures where
+        network functions are placed according to orchestration algorithms as
+        discussed in <xref target="I-D.unify-nfvrg-challenges"/><xref
+        target="I-D.unify-nfvrg-devops"/>, proprietary mechanisms for managing
+        TWAMP measurements pose severe limitations with respect to
+        programmability.</t>
+
+        <t>Two major trends call for revisiting the standardization on TWAMP
+        management aspects. First, we expect that in the coming years
+        large-scale and multi-vendor TWAMP deployments will become the norm.
+        From an operations perspective, dealing with several vendor-specific
+        TWAMP configuration mechanisms is simply unsustainable in this
+        context. Second, the increasingly software-defined and virtualized
+        nature of network infrastructures, based on dynamic service chains
+        <xref target="NSC"/> and programmable control and management planes
+        <xref target="RFC7426"/> requires a well-defined data model for TWAMP
+        implementations. This document defines such a TWAMP data model and
+        specifies it formally using the YANG data modeling language <xref
+        target="RFC6020"/>.</t>
+      </section>
+
+      <section title="Terminology">
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref
+        target="RFC2119"/>.</t>
+      </section>
+
+      <section title="Document Organization">
+        <t>The rest of this document is organized as follows. <xref
+        target="scope"/> presents the scope and applicability of this
+        document. <xref target="structure"/> provides a high-level overview of
+        the TWAMP data model. <xref target="parameters"/> details the
+        configuration parameters of the data model and <xref target="module"/>
+        specifies in YANG the TWAMP data model. <xref target="examples"/>
+        lists illustrative examples which conform to the YANG data model
+        specified in this document. <xref target="AuthExample"/> elaborates
+        these examples further.</t>
+      </section>
+    </section>
+
+    <section anchor="scope" title="Scope, Model, and Applicability">
+      <t>The purpose of this document is the specification of a
+      vendor-independent data model for TWAMP implementations.</t>
+
+      <t><xref target="fig:scope"/> illustrates a redrawn version of the TWAMP
+      logical model found in Section 1.2 of <xref target="RFC5357"/>. The
+      figure is annotated with pointers to the UML diagrams provided in this
+      document and associated with the data model of the four logical entities
+      in a TWAMP deployment, namely the TWAMP Control-Client, Server,
+      Session-Sender and Session-Reflector. As per <xref target="RFC5357"/>,
+      unlabeled links in <xref target="fig:scope"/> are unspecified and may be
+      proprietary protocols.</t>
+
+      <figure anchor="fig:scope" title="Annotated TWAMP logical model">
+        <artwork><![CDATA[
+    [Fig. 3]                                 [Fig. 4]
++----------------+                          +--------+
+| Control-Client |  <-- TWAMP-Control -->   | Server |
++----------------+                          +--------+ 
+        ^                                        ^
+        |                                        |
+        V                                        V
++----------------+                     +-------------------+
+| Session-Sender |  <-- TWAMP-Test --> | Session-Reflector |
++----------------+                     +-------------------+
+    [Fig. 5]                                 [Fig. 6]
+]]></artwork>
+      </figure>
+
+      <t>As per <xref target="RFC5357"/>, a TWAMP implementation may follow a
+      simplified logical model, in which the same node acts both as the
+      Control-Client and Session-Sender, while another node acts at the same
+      time as the TWAMP Server and Session-Reflector. <xref
+      target="fig:scope2"/> illustrates this simplified logical model and
+      indicates the interaction between the TWAMP configuration client and
+      server using, for instance, NETCONF <xref target="RFC6241"/> or RESTCONF
+      <xref target="I-D.ietf-netconf-restconf"/>. The data model defined in
+      this document is orthogonal to the specific protocol used between the
+      Config client and Config server to communicate the TWAMP configuration
+      parameters.</t>
+
+      <figure anchor="fig:scope2" title="Simplified TWAMP model and protocols">
+        <artwork><![CDATA[
+o-------------------o                       o-------------------o
+|   Config client   |                       |   Config client   |
+o-------------------o                       o-------------------o
+         ||                                          ||
+ NETCONF || RESTCONF                         NETCONF || RESTCONF
+         ||                                          ||
+o-------------------o                       o-------------------o
+|   Config server   |                       |   Config server   |
+|    [Fig. 3, 5]    |                       |    [Fig. 4, 6]    |
++-------------------+                       +-------------------+
+|   Control-Client  | <-- TWAMP-Control --> |      Server       |
+|                   |                       |                   |
+|   Session-Sender  |  <-- TWAMP-Test -->   | Session-Reflector |
++-------------------+                       +-------------------+
+]]></artwork>
+      </figure>
+
+      <t>Operational actions such as how TWAMP sessions are started/stopped,
+      how results are retrieved, or stored results are cleared, and so on, are
+      not addressed by this configuration model as they are not part of the
+      TWAMP specification <xref target="RFC5357"/> and hence are out of scope
+      of this document. See also <xref target="OperationalCommands"/>.</t>
+    </section>
+
+    <section anchor="structure" title="Data Model Overview">
+      <t>A TWAMP data model includes four categories of configuration items.
+      Global configuration items relate to parameters that are set on a per
+      device level. For example, the administrative status of the device with
+      respect to whether it allows TWAMP sessions and, if so, in what capacity
+      (e.g. Control-Client, Server or both), are typical instances of global
+      configuration items. A second category includes attributes that can be
+      configured on a per control connection basis, such as the Server IP
+      address. A third category includes attributes related to per test
+      session attributes, for instance setting different values in the
+      Differentiated Services Code Point (DSCP) field. Finally, the data model
+      could include attributes that relate to the operational state of the
+      TWAMP implementation.</t>
+
+      <t>As we describe the TWAMP data model in the remaining sections of this
+      document, readers should keep in mind the functional entity grouping
+      illustrated in <xref target="fig:scope"/>.</t>
+
+      <section anchor="twamp-client" title="Control-Client">
+        <t>A TWAMP Control-Client has an administrative status field set at
+        the device level that indicates whether the node is enabled to
+        function as such.</t>
+
+        <t>Each TWAMP Control-Client is associated with zero or more TWAMP
+        control connections. The main configuration parameters of each control
+        connection are: <list style="symbols">
+            <t>A name which can be used to uniquely identify at the
+            Control-Client a particular control connection. This name is
+            necessary for programmability reasons because at the time of
+            creation of a TWAMP control connection not all IP and TCP port
+            number information needed to uniquely identify the connection is
+            available.</t>
+
+            <t>The IP address of the interface the Control-Client will use for
+            connections</t>
+
+            <t>The IP address of the remote Server</t>
+
+            <t>Authentication and Encryption attributes such as KeyID, Token
+            and the Client Initialization Vector (Client-IV) <xref
+            target="RFC4656"/>.</t>
+          </list></t>
+
+        <t>Each TWAMP control connection, in turn, is associated with zero or
+        more test sessions. For each test session we note the following
+        configuration items: <list style="symbols">
+            <t>The test session name that uniquely identifies a particular
+            test session at the Control-Client and Session-Sender. Similarly
+            to the control connections above, this unique test session name is
+            needed because at the time of creation of a test session, for
+            example, the source UDP port number is not known to uniquely
+            identify the test session.</t>
+
+            <t>The IP address and UDP port number of the Session-Sender of the
+            path under test by TWAMP</t>
+
+            <t>The IP address and UDP port number of the Session-Reflector of
+            said path</t>
+
+            <t>Information pertaining to the test packet stream, such as the
+            test starting time or whether the test should be repeated.</t>
+          </list></t>
+      </section>
+
+      <section anchor="twamp-server" title="Server">
+        <t>Each TWAMP Server has an administrative status field set at the
+        device level to indicate whether the node is enabled to function as a
+        TWAMP Server.</t>
+
+        <t>Each TWAMP Server is associated with zero or more control
+        connections. Each control connection is uniquely identified by the
+        4-tuple {Control-Client IP address, Control-Client TCP port number,
+        Server IP address, Server TCP port}. Control connection configuration
+        items on a TWAMP Server are read-only.</t>
+      </section>
+
+      <section anchor="twampSender" title="Session-Sender">
+        <t>There is one TWAMP Session-Sender instance for each test session
+        that is initiated from the sending device. Primary configuration
+        fields include: <list style="symbols">
+            <t>The test session name that MUST be identical with the
+            corresponding test session name on the TWAMP Control-Client (<xref
+            target="twamp-client"/>)</t>
+
+            <t>The control connection name, which along with the test session
+            name uniquely identify the TWAMP Session-Sender instance</t>
+
+            <t>Information pertaining to the test packet stream, such as, for
+            example, the number of test packets and the packet distribution to
+            be employed.</t>
+          </list></t>
+      </section>
+
+      <section anchor="twampReflector" title="Session-Reflector">
+        <t>Each TWAMP Session-Reflector is associated with zero or more test
+        sessions. For each test session, the REFWAIT parameter (Section 4.2 of
+        <xref target="RFC5357"/> can be configured. Read-only access to other
+        data model parameters, such as the Sender IP address is foreseen. Each
+        test session can be uniquely identified by the 4-tuple mentioned in
+        <xref target="twamp-server"/>.</t>
+      </section>
+    </section>
+
+    <section anchor="parameters" title="Data Model Parameters">
+      <t>This section defines the TWAMP data model using UML and describes all
+      associated parameters.</t>
+
+      <section anchor="clientConfig" title="Control-Client">
+        <t>The client container (see <xref target="fig:twamp-client"/>) holds
+        items that are related to the configuration of the TWAMP
+        Control-Client logical entity. These are divided up into items that
+        are associated with the configuration of the Control-Client as a whole
+        (e.g. client/admin-state) and items that are associated with
+        individual control connections initiated by the Control-Client entity
+        (client/ctrl-connection).</t>
+
+        <figure anchor="fig:twamp-client"
+                title="TWAMP Control-Client UML class diagram">
+          <artwork><![CDATA[
++-------------+
+| client      |
++-------------+                   1..* +-----------------------+
+| admin-state |<>----------------------| mode-preference-chain |
+|             |                        +-----------------------+
+|             |  1..* +------------+   | priority              |
+|             |<>-----| key-chain  |   | mode                  |
++-------------+       +------------+   +-----------------------+
+       ^              | key-id     |
+       V              | secret-key |
+       |              +------------+
+       | 0..*
++------------------------+
+| ctrl-connection        |
++------------------------+
+| name                   |
+| client-ip              |
+| server-ip              |
+| server-tcp-port        |    0..* +----------------------+
+| control-packet-dscp    |<>-------| test-session-request |
+| key-id                 |         +----------------------+
+| max-count              |         | name                 |
+| client-tcp-port   {ro} |         | sender-ip            |
+| server-start-time {ro} |         | sender-udp-port      |
+| state             {ro} |         | reflector-ip         |
+| selected-mode     {ro} |         | reflector-udp-port   |
+| token             {ro} |         | timeout              |
+| client-iv         {ro} |         | padding-length       |
++------------------------+         | test-packet-dscp     |
+                                   | start-time           |
+            +-------------+ 1      | repeat               |
+            | pm-reg-list |------<>| repeat-interval      |
+            +-------------+        | state           {ro} |
+            | pm-index    |        | sid             {ro} |
+            +-------------+        +----------------------+
+]]></artwork>
+        </figure>
+
+        <t>The client container includes an administrative parameter
+        (client/admin-state) that indicates whether the device is allowed to
+        initiate TWAMP-Control sessions.</t>
+
+        <t>The client container holds a list (mode-preference-chain) which
+        specifies the preferred Mode values according to their preferred order
+        of use, including the authentication and encryption Modes.
+        Specifically, mode-preference-chain lists each priority (expressed as
+        a 16-bit unsigned integer, where zero is the highest priority and
+        subsequent values monotonically increasing) with their corresponding
+        mode (expressed as a 32-bit Hexadecimal value). Depending on the Modes
+        available in the Server Greeting, the Control-Client MUST choose the
+        highest priority Mode from the configured mode-preference-chain list.
+        Note that the list of preferred Modes may set bit position
+        combinations when necessary, such as when referring to the extended
+        TWAMP features in <xref target="RFC5618"/>, <xref target="RFC5938"/>,
+        <xref target="RFC6038"/>, and <xref target="RFC7717"/>. If the
+        Control-Client cannot determine an acceptable Mode, it MUST respond
+        with zero Mode bits set in the Set-up Response message, indicating it
+        will not continue with the control connection.</t>
+
+        <t>In addition, the client container holds a list named key-chain
+        which relates KeyIDs with the respective secret keys. Both the Server
+        and the Control-Client use the same mappings from KeyIDs to shared
+        secrets (key-id and secret-key in <xref target="fig:twamp-client"/>,
+        respectively). The Server, being prepared to conduct sessions with
+        more than one Control-Client, uses KeyIDs to choose the appropriate
+        secret-key; a Control-Client would typically have different secret
+        keys for different Servers. The secret-key is the shared secret, an
+        octet string of arbitrary length whose interpretation as a text string
+        is unspecified. The key-id and secret-key encoding should follow
+        Section 9.4 of <xref target="RFC6020"/>. The derived key length (dkLen
+        in <xref target="RFC2898"/>) MUST be 128-bits for the AES Session-key
+        used for encryption and a 256-bit HMAC-SHA1 Session-key used for
+        authentication (see Section 6.10 of <xref target="RFC4656"/>).</t>
+
+        <t>Each client container also holds a list of ctrl-connection, where
+        each item in the list describes a TWAMP control connection that will
+        be initiated by this Control-Client. There SHALL be one instance of
+        ctrl-connection per TWAMP-Control (TCP) connection that is to be
+        initiated from this device.</t>
+
+        <t>Each ctrl-connection holds a list of test-session-request.
+        test-session-request holds information associated with the
+        Control-Client for this test session. This includes information that
+        is associated with the Request-TW-Session/Accept-Session message
+        exchange (see Section 3.5 of <xref target="RFC5357"/>). The
+        Control-Client is also responsible for scheduling and results
+        collection for TWAMP-Test sessions, so test-session-request will also
+        hold information related to these actions (e.g. pm-index,
+        repeat-interval).</t>
+
+        <t>There SHALL be one instance of test-session-request for each
+        TWAMP-Test session that is to be negotiated by this TWAMP-Control
+        connection via a Request-TW-Session/Accept-Session exchange.</t>
+      </section>
+
+      <section anchor="serverConfig" title="Server">
+        <t>The server container (see <xref target="fig:twamp-server"/>) holds
+        items that are related to the configuration of the TWAMP Server
+        logical entity (recall <xref target="fig:scope"/>).</t>
+
+        <figure anchor="fig:twamp-server"
+                title="TWAMP Server UML class diagram">
+          <artwork><![CDATA[
++---------------------+
+| server              |
++---------------------+
+| admin-state         |   1..* +------------+
+| server-tcp-port     |<>------| key-chain  |
+| servwait            |        +------------+
+| control-packet-dscp |        | key-id     |
+| count               |        | secret-key |
+| max-count           |        +------------+
+| modes               |
+|                     |   0..* +--------------------------+
+|                     |<>------| ctrl-connection          |
++---------------------+        +--------------------------+
+                               | client-ip           {ro} |                            
+                               | client-tcp-port     {ro} |
+                               | server-ip           {ro} |
+                               | server-tcp-port     {ro} |
+                               | state               {ro} |
+                               | control-packet-dscp {ro} |
+                               | selected-mode       {ro} |
+                               | key-id              {ro} |
+                               | count               {ro} |
+                               | max-count           {ro} |
+                               | salt                {ro} | 
+                               | server-iv           {ro} |
+                               | challenge           {ro} |
+                               +--------------------------+
+]]></artwork>
+        </figure>
+
+        <t>A device operating in the Server role cannot configure attributes
+        on a per TWAMP-Control connection basis, as it has no foreknowledge of
+        the incoming TWAMP-Control connections to be received. As such, any
+        parameter that the Server might want to apply to an incoming control
+        connection must be configured at the overall Server level, and will
+        then be applied to all incoming TWAMP-Control connections.</t>
+
+        <t>Each server container holds a list named key-chain which relates
+        KeyIDs with the respective secret keys. As mentioned in <xref
+        target="clientConfig"/>, both the Server and the Control-Client use
+        the same mappings from KeyIDs to shared secrets. The Server, being
+        prepared to conduct sessions with more than one Control-Client, uses
+        KeyIDs to choose the appropriate secret-key; a Control-Client would
+        typically have different secret keys for different Servers. key-id
+        tells the Server which shared-secret the Control-Client wishes to use
+        for authentication or encryption.</t>
+
+        <t>Each incoming control connection that is active on the Server will
+        be represented by an instance of a server/ctrl-connection object. All
+        items in the server/ctrl-connection object are read-only, as we
+        explain later in this section.</t>
+
+        <t>There SHALL be one instance of server/ctrl-connection per incoming
+        TWAMP-Control (TCP) connection that is received and active on the
+        Server device. All items in the server/ctrl-connection are read-only.
+        Each instance of server/ctrl-connection uses the following 4-tuple as
+        its unique key: client-ip, client-tcp-port, server-ip,
+        server-tcp-port.</t>
+      </section>
+
+      <section anchor="senderConfig" title="Session-Sender">
+        <t>The session-sender container, illustrated in <xref
+        target="fig:twampSenders"/>, holds items that are related to the
+        configuration of the TWAMP Session-Sender logical entity.</t>
+
+        <t>The session-sender container includes an administrative parameter
+        (session-sender/admin-state) that controls whether the device is
+        allowed to initiate TWAMP test sessions.</t>
+
+        <t>There is one instance of test-session for each TWAMP-Test session
+        for which packets are being sent.</t>
+
+        <figure anchor="fig:twampSenders"
+                title="TWAMP Session-Sender UML class diagram">
+          <artwork><![CDATA[
++----------------+
+| session-sender |
++----------------+  0..* +---------------------------+
+| admin-state    |<>-----| test-session              |
++----------------+       +---------------------------+
+                         | name                      |
+                         | ctrl-connection-name {ro} |
+                         | fill-mode                 |
+                         | number-of-packets         |
+                         | state {ro}                |
+                         | sent-packets         {ro} |
+                         | rcv-packets          {ro} |
+                         | last-sent-seq        {ro} |
+                         | last-rcv-seq         {ro} |
+                         +---------------------------+
+                                      ^
+                                      V
+                                      | 1
+                          +---------------------+
+                          | packet-distribution |
+                          +---------------------+
+                          | periodic /  poisson |
+                          +---------------------+
+                              |           |
+             +-------------------------+  |
+             | periodic-interval       |  | 
+             | periodic-interval-units |  | 
+             +-------------------------+  |
+                                          |
+                              +------------------------+
+                              | lambda                 | 
+                              | lambda-units           |
+                              | max-interval           |
+                              | truncation-point-units |
+                              +------------------------+
+]]></artwork>
+        </figure>
+      </section>
+
+      <section anchor="reflectorConfig" title="Session-Reflector">
+        <t>The session-reflector container, illustrated in <xref
+        target="fig:twampReflector"/>, holds items that are related to the
+        configuration of the TWAMP Session-Reflector logical entity.</t>
+
+        <t>A device operating in the Session-Reflector role cannot configure
+        attributes on a per-session basis, as it has no foreknowledge of what
+        incoming sessions it will receive. As such, any parameter that the
+        Session-Reflector might want to apply to an incoming TWAMP-Test
+        session must be configured at the overall Session-Reflector level, and
+        will then be applied to all incoming sessions.</t>
+
+        <t>The session-sender container includes an administrative parameter
+        (session-reflector/admin-state) that controls whether the device is
+        allowed to respond to incoming TWAMP test sessions. Each incoming
+        TWAMP-Test session that is active on the Session-Reflector will be
+        represented by an instance of a twamp-reflector/test-session object.
+        All items in the twamp-reflector/test-session object are
+        read-only.</t>
+
+        <figure anchor="fig:twampReflector"
+                title="TWAMP Session-Reflector UML class diagram">
+          <artwork><![CDATA[
++----=--------------+
+| session-reflector |
++-------------------+
+| admin-state       |
+| refwait           |
++-------------------+
+         ^
+         V
+         |
+         | 0..*
++----------------------------------------+
+| test-session                           |
++----------------------------------------+
+| sid                               {ro} |
+| sender-ip                         {ro} |
+| sender-udp-port                   {ro} |
+| reflector-ip                      {ro} |
+| reflector-udp-port                {ro} |
+| parent-connection-client-ip       {ro} |
+| parent-connection-client-tcp-port {ro} |
+| parent-connection-server-ip       {ro} |
+| parent-connection-server-tcp-port {ro} |
+| test-packet-dscp                  {ro} |
+| sent-packets                      {ro} |
+| rcv-packets                       {ro} |
+| last-sent-seq                     {ro} |
+| last-rcv-seq                      {ro} |
++----------------------------------------+
+]]></artwork>
+        </figure>
+
+        <t>Instances of test-session are indexed by a session identifier
+        (sid). This value is auto-allocated by the Server as test session
+        requests are received, and communicated back to the Control-Client in
+        the SID field of the Accept-Session message; see Section 4.3 of <xref
+        target="RFC6038"/>.</t>
+
+        <t>When attempting to retrieve operational data for active test
+        sessions from a Session-Reflector device, the user will not know what
+        sessions are currently active on that device, or what SIDs have been
+        auto-allocated for these test sessions. If the user has network access
+        to the Control-Client device, then it is possible to read the data for
+        this session under client/ctrl-connection/test-session-request/sid and
+        obtain the SID (see <xref target="fig:twamp-client"/>). The user may
+        then use this SID value as an index to retrieve an individual
+        session-reflector/test-session instance on the Session-Reflector
+        device.</t>
+
+        <t>If the user has no network access to the Control-Client device,
+        then the only option is to retrieve all test-session instances from
+        the Session-Reflector device. This could be problematic if a large
+        number of test sessions are currently active on that device.</t>
+
+        <t>Each Session-Reflector TWAMP-Test session contains the following
+        4-tuple: {parent-connection-client-ip,
+        parent-connection-client-tcp-port, parent-connection-server-ip,
+        parent-connection-server-tcp-port}. This 4-tuple corresponds to the
+        equivalent 4-tuple {client-ip, client-tcp-port, server-ip,
+        server-tcp-port} in the server/ctrl-connection object. This 4-tuple
+        allows the user to trace back from the TWAMP-Test session to the
+        (parent) TWAMP-Control connection that negotiated this test
+        session.</t>
+      </section>
+    </section>
+
+    <section anchor="module" title="Data Model">
+      <t>This section formally specifies the TWAMP data model using YANG.</t>
+
+      <section title="YANG Tree Diagram">
+        <t>This section presents a simplified graphical representation of the
+        TWAMP data model using a YANG tree diagram. Readers should keep in
+        mind that the limit of 72 characters per line forces us to introduce
+        artificial line breaks in some tree diagram nodes.</t>
+
+        <figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp-tree.txt)
+]]></artwork>
+        </figure>
+      </section>
+
+      <section title="YANG Module">
+        <t>This section presents the YANG module for the TWAMP data model
+        defined in this document.</t>
+
+        <figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "ietf-twamp@YYYY-MM-DD.yang"
+
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang)
+
+<CODE ENDS>
+
+       ]]></artwork>
+        </figure>
+      </section>
+    </section>
+
+    <section anchor="examples" title="Data Model Examples">
+      <t>This section presents a simple but complete example of configuring
+      all four entities in <xref target="fig:scope"/>, based on the YANG
+      module specified in <xref target="module"/>. The example is illustrative
+      in nature, but aims to be self-contained, i.e. were it to be executed in
+      a real TWAMP implementation it would lead to a correctly configured test
+      session. A more elaborated example, which also includes authentication
+      parameters, is provided in <xref target="AuthExample"/>. For
+      completeness, examples are provided for IPv4 and IPv6.</t>
+
+      <section anchor="ExampleCC" title="Control-Client">
+        <t>The following configuration example shows a Control-Client with
+        client/admin-state enabled. In a real implementation following <xref
+        target="fig:scope2"/> this would permit the initiation of
+        TWAMP-Control connections and TWAMP-Test sessions.</t>
+
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <client>
+         <admin-state>true</admin-state>
+      </client>
+   </twamp>
+</config>
+]]></artwork>
+        </figure>
+
+        <t>The following configuration example shows a Control-Client with two
+        instances of client/ctrl-connection, one called "RouterA" and another
+        called "RouterB". Each TWAMP-Control connection is to a different
+        Server. The control connection named "RouterA" has two test session
+        requests. The TWAMP-Control connection named "RouterB" has no
+        TWAMP-Test session requests.</t>
+
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <client>
+         <admin-state>true</admin-state>
+         <ctrl-connection>
+            <name>RouterA</name>
+            <client-ip>203.0.113.1</client-ip>
+            <server-ip>203.0.113.2</server-ip>
+            <test-session-request>
+               <name>Test1</name>
+               <sender-ip>10.1.1.1</sender-ip>
+               <sender-udp-port>50000</sender-udp-port>
+               <reflector-ip>10.1.1.2</reflector-ip>
+               <reflector-udp-port>500001</reflector-udp-port>
+               <start-time>0</start-time>
+            </test-session-request>
+            <test-session-request>
+               <name>Test2</name>
+               <sender-ip>203.0.113.1</sender-ip>
+               <sender-udp-port>4001</sender-udp-port>
+               <reflector-ip>203.0.113.2</reflector-ip>
+               <reflector-udp-port>50001</reflector-udp-port>
+               <start-time>0</start-time>
+            </test-session-request>
+         </ctrl-connection>
+         <ctrl-connection>
+            <name>RouterB</name>
+            <client-ip>203.0.113.1</client-ip>
+            <server-ip>203.0.113.3</server-ip>
+         </ctrl-connection>
+      </client>
+   </twamp>
+</config>
+
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <client>
+         <admin-state>true</admin-state>
+         <ctrl-connection>
+            <name>RouterA</name>
+            <client-ip>2001:DB8:203:0:113::1</client-ip>
+            <server-ip>2001:DB8:203:0:113::2</server-ip>
+            <test-session-request>
+               <name>Test1</name>
+               <sender-ip>2001:DB8:10:1:1::1</sender-ip>
+               <sender-udp-port>4000</sender-udp-port>
+               <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
+               <reflector-udp-port>5000</reflector-udp-port>
+               <start-time>0</start-time>
+            </test-session-request>
+            <test-session-request>
+               <name>Test2</name>
+               <sender-ip>2001:DB8:203:0:113::1</sender-ip>
+               <sender-udp-port>4001</sender-udp-port>
+               <reflector-ip>2001:DB8:203:0:113::2</reflector-ip>
+               <reflector-udp-port>5001</reflector-udp-port>
+               <start-time>0</start-time>
+            </test-session-request>
+         </ctrl-connection>
+         <ctrl-connection>
+            <name>RouterB</name>
+            <client-ip>2001:DB8:203:0:113::1</client-ip>
+            <server-ip>2001:DB8:203:0:113::3</server-ip>
+         </ctrl-connection>
+      </client>
+   </twamp>
+</config>
+]]></artwork>
+        </figure>
+      </section>
+
+      <section title="Server">
+        <t>This configuration example shows a Server with server/admin-state
+        enabled, which permits a device following <xref target="fig:scope2"/>
+        to respond to TWAMP-Control connections and TWAMP-Test sessions.</t>
+
+        <figure align="left">
+          <preamble/>
+
+          <artwork align="left"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <server>
+         <admin-state>true</admin-state>
+      </server>
+   </twamp>
+</config>
+]]></artwork>
+        </figure>
+
+        <t>The following example presents a Server with the TWAMP-Control
+        connection corresponding to the control connection name
+        (ctrl-connection/name) "RouterA" presented in <xref
+        target="ExampleCC"/>.</t>
+
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <server>
+         <admin-state>true</admin-state>
+         <ctrl-connection>
+            <client-ip>203.0.113.1</client-ip>
+            <client-tcp-port>16341</client-tcp-port>
+            <server-ip>203.0.113.2</server-ip>
+            <server-tcp-port>862</server-tcp-port>
+            <state>
+               active
+            </state>
+         </ctrl-connection>
+      </server>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <server>
+         <admin-state>true</admin-state>
+         <ctrl-connection>
+            <client-ip>2001:DB8:203:0:113::1</client-ip>
+            <client-tcp-port>16341</client-tcp-port>
+            <server-ip>2001:DB8:203:0:113::2</server-ip>
+            <server-tcp-port>862</server-tcp-port>
+            <state>
+               active
+            </state>
+         </ctrl-connection>
+      </server>
+   </twamp>
+</data>
+]]></artwork>
+        </figure>
+      </section>
+
+      <section anchor="ExampleSS" title="Session-Sender">
+        <t>The following configuration example shows a Session-Sender with the
+        two TWAMP-Test sessions presented in <xref target="ExampleCC"/>.</t>
+
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+ <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+     <session-sender>
+        <admin-state>true</admin-state>
+        <test-session>
+           <name>Test1</name>
+           <ctrl-connection-name>RouterA</ctrl-connection-name>
+           <number-of-packets>900</number-of-packets>
+           <periodic-interval>1</periodic-interval>
+           <periodic-interval-units>seconds</periodic-interval-units>
+           <state>setup</state>
+        </test-session>
+        <test-session>
+           <name>Test2</name>
+           <ctrl-connection-name>
+             RouterA
+           </ctrl-connection-name>
+           <number-of-packets>900</number-of-packets>
+           <lambda>1</lambda>
+           <lambda-units>1</lambda-units>
+           <max-interval>2</max-interval>
+           <truncation-point-units>seconds</truncation-point-units>
+           <state>setup</state>
+        </test-session>
+     </session-sender>
+  </twamp>
+</data>
+]]></artwork>
+        </figure>
+      </section>
+
+      <section title="Session-Reflector">
+        <t>The following example shows the two Session-Reflector TWAMP-Test
+        sessions corresponding to the test sessions presented in <xref
+        target="ExampleSS"/>.</t>
+
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <session-reflector>
+          <admin-state>
+             true
+          </admin-state>
+          <test-session>
+            <sender-ip>10.1.1.1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>10.1.1.2</reflector-ip>
+            <reflector-udp-port>50001</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>
+               203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+               203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+             </parent-connection-server-tcp-port>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </test-session>
+         <test-session>
+            <sender-ip>203.0.113.1</sender-ip>
+            <sender-udp-port>50000</sender-udp-port>
+            <reflector-ip>192.68.0.2</reflector-ip>
+            <reflector-udp-port>50001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>
+               203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+             </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+               203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+              862
+            </parent-connection-server-tcp-port>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </test-session>
+      </session-reflector>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <session-reflector>
+	  <admin-state>true</admin-state>
+          <test-session>
+            <sender-ip>10.1.1.1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>10.1.1.2</reflector-ip>
+            <reflector-udp-port>5000</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>
+                203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+                203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+             </parent-connection-server-tcp-port>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </test-session>
+         <test-session>
+            <sender-ip>203.0.113.1</sender-ip>
+            <sender-udp-port>4001</sender-udp-port>
+            <reflector-ip>192.68.0.2</reflector-ip>
+            <reflector-udp-port>5001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>
+                203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+             </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+                203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+              862
+            </parent-connection-server-tcp-port>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </test-session>
+      </session-reflector>
+   </twamp>
+</data>
+]]></artwork>
+        </figure>
+      </section>
+    </section>
+
+    <section anchor="security" title="Security Considerations">
+      <t>The YANG module defined in this draft is designed to be accessed via
+      among other protocols by <xref target="RFC6241">NETCONF</xref>.
+      Protocols like NETCONF use a secure a secure transport layer like SSH
+      that is mandatory to implement. The <xref target="RFC6536">NETCONF
+      Access Control Module (NACM)</xref> provides the means to restrict
+      access for particular users to a pre-configured set of NETCONF protocol
+      operations and attributes.</t>
+
+      <t>There are a number of nodes defined in this YANG module which are
+      writeable. These data nodes may be considered sensitive and vulnerable
+      to attacks in some network environments. Ability to write into these
+      nodes without proper protection can have a negative effect on the
+      devices that support this feature.</t>
+
+      <t>Examples of nodes that are particularly vulnerable include several
+      timeout values put in the protocol to protect against sessions that are
+      not active but are consuming resources.</t>
+    </section>
+
+    <section anchor="iana" title="IANA Considerations">
+      <t>This document registers a URI in the IETF XML registry <xref
+      target="RFC3688"/>. Following the format in <xref target="RFC3688"/>,
+      the following registration is requested to be made.</t>
+
+      <t>URI: urn:ietf:params:xml:ns:yang:ietf-twamp</t>
+
+      <t>Registrant Contact: The IPPM WG of the IETF.</t>
+
+      <t>XML: N/A, the requested URI is an XML namespace.</t>
+
+      <t>This document registers a YANG module in the YANG Module Names
+      registry <xref target="RFC6020"/>.</t>
+
+      <t>name: ietf-twamp</t>
+
+      <t>namespace: urn:ietf:params:xml:ns:yang:ietf-twamp</t>
+
+      <t>prefix: twamp</t>
+
+      <t>reference: RFC XXXX</t>
+    </section>
+
+    <section anchor="acks" title="Acknowledgements">
+      <t>We thank Fred Baker, Kevin D'Souza, Gregory Mirsky, Brian Trammell
+      and Robert Sherman for their thorough and constructive reviews, comments
+      and text suggestions.</t>
+
+      <t>Haoxing Shen contributed to the definition of the YANG module in
+      <xref target="module"/>.</t>
+
+      <t>Ladislav Lhokta did a thorough review of the YANG module and the
+      examples.</t>
+
+      <t>Kostas Pentikousis is partially supported by FP7 UNIFY
+      (http://fp7-unify.eu), a research project partially funded by the
+      European Community under the Seventh Framework Program (grant agreement
+      no. 619609). The views expressed here are those of the authors only. The
+      European Commission is not liable for any use that may be made of the
+      information in this document.</t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <?rfc include='reference.RFC.2119'?>
+
+      <?rfc include='reference.RFC.3432'?>
+
+      <?rfc include='reference.RFC.3688'?>
+
+      <?rfc include='reference.RFC.4656'?>
+
+      <?rfc include='reference.RFC.5357'?>
+
+      <?rfc include='reference.RFC.6020'?>
+
+      <?rfc include='reference.RFC.6038'?>
+    </references>
+
+    <references title="Informative References">
+      <!--<?rfc include="reference.RFC.7398"?>-->
+
+      <?rfc include='reference.RFC.2898'?>
+
+      <?rfc include='reference.RFC.4086'?>
+
+      <?rfc include='reference.RFC.5618'?>
+
+      <?rfc include='reference.RFC.5938'?>
+
+      <?rfc ?>
+
+      <?rfc include='reference.RFC.6241'?>
+
+      <?rfc include='reference.RFC.6536'?>
+
+      <?rfc include='reference.RFC.7717'?>
+
+      <?rfc include='reference.RFC.7426'?>
+
+      <?rfc include='reference.I-D.ietf-netconf-restconf'?>
+
+      <?rfc include='reference.I-D.ietf-ippm-metric-registry'?>
+
+      <?rfc include='reference.I-D.unify-nfvrg-challenges'?>
+
+      <?rfc include='reference.I-D.unify-nfvrg-devops'?>
+
+      <reference anchor="NSC">
+        <front>
+          <title>Research directions in network service chaining</title>
+
+          <author>
+            <organization>John, W., Pentikousis, K., et al.</organization>
+          </author>
+
+          <date month="November" year="2013"/>
+        </front>
+
+        <seriesInfo name="Proc. SDN for Future Networks and Services (SDN4FNS), Trento, Italy"
+                    value="IEEE"/>
+      </reference>
+    </references>
+
+    <section anchor="AuthExample" title="Detailed Data Model Examples">
+      <t>This appendix extends the example presented in <xref
+      target="examples"/> by configuring more fields such as authentication
+      parameters, dscp values and so on.</t>
+
+      <section title="Control-Client">
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <client>
+         <admin-state>true</admin-state>
+         <mode-preference-chain>
+            <priority>0</priority>
+            <mode>authenticated</mode>
+         </mode-preference-chain>
+         <mode-preference-chain>
+            <priority>1</priority>
+            <mode>unauthenticated</mode>
+         </mode-preference-chain>
+         <key-chain>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <secret-key>secret1</secret-key>
+         </key-chain>
+         <key-chain>
+            <key-id>KeyForRouterB</key-id>
+            <secret-key>secret2</secret-key>
+         </key-chain>
+         <ctrl-connection>
+            <name>RouterA</name>
+            <client-ip>203.0.113.1</client-ip>
+            <server-ip>203.0.113.2</server-ip>
+            <dscp>32</dscp>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <test-session-request>
+               <name>Test1</name>
+               <sender-ip>10.1.1.1</sender-ip>
+               <sender-udp-port>4000</sender-udp-port>
+               <reflector-ip>10.1.1.2</reflector-ip>
+               <reflector-udp-port>5000</reflector-udp-port>
+               <padding-length>64</padding-length>
+               <start-time>0</start-time>
+               <state>ok</state>
+               <sid>1232</sid>
+            </test-session-request>
+            <test-session-request>
+               <name>Test2</name>
+               <sender-ip>203.0.113.1</sender-ip>
+               <sender-udp-port>4001</sender-udp-port>
+               <reflector-ip>203.0.113.2</reflector-ip>
+               <reflector-udp-port>5001</reflector-udp-port>
+               <padding-length>128</padding-length>
+               <start-time>0</start-time>
+               <state>ok</state>
+               <sid>178943</sid>
+            </test-session-request>
+         </ctrl-connection>
+      </client>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <client>
+         <admin-state>true</admin-state>
+         <mode-preference-chain>
+            <priority>0</priority>
+            <mode>authenticated</mode>
+         </mode-preference-chain>
+         <mode-preference-chain>
+            <priority>1</priority>
+            <mode>unauthenticated</mode>
+         </mode-preference-chain>
+         <key-chain>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <secret-key>secret1</secret-key>
+         </key-chain>
+         <key-chain>
+            <key-id>KeyForRouterB</key-id>
+            <secret-key>secret2</secret-key>
+         </key-chain>
+         <ctrl-connection>
+            <name>RouterA</name>
+            <client-ip>2001:DB8:203:0:113::1</client-ip>
+            <server-ip>2001:DB8:203:0:113::2</server-ip>
+            <dscp>32</dscp>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <test-session-request>
+               <name>Test1</name>
+               <sender-ip>2001:DB8:10:1:1::1</sender-ip>
+               <sender-udp-port>4000</sender-udp-port>
+               <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
+               <reflector-udp-port>5000</reflector-udp-port>
+               <padding-length>64</padding-length>
+               <start-time>0</start-time>
+               <state>ok</state>
+               <sid>1232</sid>
+            </test-session-request>
+            <test-session-request>
+               <name>Test2</name>
+               <sender-ip>2001:DB8:203:0:113::1</sender-ip>
+               <sender-udp-port>4001</sender-udp-port>
+               <reflector-ip>2001:DB8:203:0:113::2</reflector-ip>
+               <reflector-udp-port>5001</reflector-udp-port>
+               <padding-length>128</padding-length>
+               <start-time>0</start-time>
+               <state>ok</state>
+               <sid>178943</sid>
+            </test-session-request>
+         </ctrl-connection>
+      </client>
+   </twamp>
+</data>
+]]></artwork>
+        </figure>
+      </section>
+
+      <section title="Server">
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <server>
+         <admin-state>true</admin-state>
+         <servwait>1800</servwait>
+         <dscp>32</dscp>
+         <modes>authenticated unauthenticated</modes>
+         <count>1024</count>
+         <key-chain>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <secret-key>secret1</secret-key>
+         </key-chain>
+         <key-chain>
+            <key-id>KeyClient10ToRouterA</key-id>
+            <secret-key>secret10</secret-key>
+         </key-chain>
+         <ctrl-connection>
+            <client-ip>203.0.113.1</client-ip>
+            <client-tcp-port>16341</client-tcp-port>
+            <server-ip>203.0.113.2</server-ip>
+            <server-tcp-port>862</server-tcp-port>
+            <state>
+               active
+             </state>
+            <dscp>32</dscp>
+            <selected-mode>unauthenticated</selected-mode>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <count>1024</count>
+         </ctrl-connection>
+      </server>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <server>
+         <admin-state>true</admin-state>
+         <servwait>1800</servwait>
+         <dscp>32</dscp>
+         <modes>authenticated unauthenticated</modes>
+         <count>1024</count>
+         <key-chain>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <secret-key>secret1</secret-key>
+         </key-chain>
+         <key-chain>
+            <key-id>KeyClient10ToRouterA</key-id>
+            <secret-key>secret10</secret-key>
+         </key-chain>
+         <ctrl-connection>
+            <client-ip>2001:DB8:203:0:113::1</client-ip>
+            <client-tcp-port>16341</client-tcp-port>
+            <server-ip>2001:DB8:203:0:113::2</server-ip>
+            <server-tcp-port>862</server-tcp-port>
+            <state>
+               active
+             </state>
+            <dscp>32</dscp>
+            <selected-mode>unauthenticated</selected-mode>
+            <key-id>KeyClient1ToRouterA</key-id>
+            <count>1024</count>
+         </ctrl-connection>
+      </server>
+   </twamp>
+</data>
+]]></artwork>
+        </figure>
+      </section>
+
+      <section title="Session-Sender">
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+     <session-sender>
+        <admin-state>true</admin-state>
+        <test-session>
+           <name>Test1</name>
+           <ctrl-connection-name>RouterA</ctrl-connection-name>
+           <fill-mode>zero</fill-mode>
+           <number-of-packets>900</number-of-packets>
+           <periodic-interval>1</periodic-interval>
+           <periodic-interval-units>
+                seconds
+           </periodic-interval-units>
+           <state>setup</state>
+           <sent-packets>2</sent-packets>
+           <rcv-packets>2</rcv-packets>
+           <last-sent-seq>1</last-sent-seq>
+           <last-rcv-seq>1</last-rcv-seq>
+        </test-session>
+        <test-session>
+           <name>Test2</name>
+           <ctrl-connection-name>
+             RouterA
+           </ctrl-connection-name>
+           <fill-mode>random</fill-mode>
+           <number-of-packets>900</number-of-packets>
+           <lambda>1</lambda>
+           <lambda-units>1</lambda-units>
+           <max-interval>2</max-interval>
+           <truncation-point-units>seconds</truncation-point-units>
+           <state>setup</state>
+           <sent-packets>21</sent-packets>
+           <rcv-packets>21</rcv-packets>
+           <last-sent-seq>20</last-sent-seq>
+           <last-rcv-seq>20</last-rcv-seq>
+        </test-session>
+     </session-sender>
+  </twamp>
+</data>
+]]></artwork>
+        </figure>
+      </section>
+
+      <section title="Session-Reflector">
+        <figure>
+          <artwork><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <session-reflector>
+         <admin-state>
+            true
+         </admin-state>
+         <test-session>
+            <sender-ip>10.1.1.1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>10.1.1.2</reflector-ip>
+            <reflector-udp-port>5000</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>
+               203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+               203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </test-session>
+         <test-session>
+            <sender-ip>203.0.113.1</sender-ip>
+            <sender-udp-port>4001</sender-udp-port>
+            <reflector-ip>192.68.0.2</reflector-ip>
+            <reflector-udp-port>5001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>
+               203.0.113.1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+               203.0.113.2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </test-session>
+      </session-reflector>
+   </twamp>
+</data>
+
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+      <session-reflector>
+	 <admin-state>true</admin-state>
+         <test-session>
+            <sender-ip>2001:DB8:10:1:1::1</sender-ip>
+            <sender-udp-port>4000</sender-udp-port>
+            <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
+            <reflector-udp-port>5000</reflector-udp-port>
+            <sid>1232</sid>
+            <parent-connection-client-ip>
+                2001:DB8:203:0:113::1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+                2001:DB8:203:0:113::2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>2</sent-packets>
+            <rcv-packets>2</rcv-packets>
+            <last-sent-seq>1</last-sent-seq>
+            <last-rcv-seq>1</last-rcv-seq>
+         </test-session>
+         <test-session>
+            <sender-ip>2001:DB8:203:0:113::1</sender-ip>
+            <sender-udp-port>4001</sender-udp-port>
+            <reflector-ip>2001:DB8:192:68::2</reflector-ip>
+            <reflector-udp-port>5001</reflector-udp-port>
+            <sid>178943</sid>
+            <parent-connection-client-ip>
+                2001:DB8:203:0:113::1
+            </parent-connection-client-ip>
+            <parent-connection-client-tcp-port>
+               16341
+            </parent-connection-client-tcp-port>
+            <parent-connection-server-ip>
+                2001:DB8:203:0:113::2
+            </parent-connection-server-ip>
+            <parent-connection-server-tcp-port>
+               862
+            </parent-connection-server-tcp-port>
+            <dscp>32</dscp>
+            <sent-packets>21</sent-packets>
+            <rcv-packets>21</rcv-packets>
+            <last-sent-seq>20</last-sent-seq>
+            <last-rcv-seq>20</last-rcv-seq>
+         </test-session>
+      </session-reflector>
+   </twamp>
+</data>
+]]></artwork>
+        </figure>
+      </section>
+    </section>
+
+    <section anchor="OperationalCommands" title="TWAMP Operational Commands">
+      <t>TWAMP operational commands could be performed programmatically or
+      manually, e.g. using a command-line interface (CLI). With respect to
+      programmability, YANG can be used to define NETCONF Remote Procedure
+      Calls (RPC), therefore it would be possible to define RPC operations for
+      actions such as starting or stopping control or test sessions or groups
+      of sessions; retrieving results; clearing stored results, and so on.</t>
+
+      <t>However, <xref target="RFC5357"/> does not attempt to describe such
+      operational actions, and it is likely that different TWAMP
+      implementations could support different sets of operational commands,
+      with different restrictions. Therefore, this document considers it the
+      responsibility of the individual implementation to define its
+      corresponding TWAMP operational commands data model.</t>
+    </section>
+  </back>
+</rfc>
