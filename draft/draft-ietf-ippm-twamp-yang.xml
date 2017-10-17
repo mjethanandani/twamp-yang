@@ -223,7 +223,7 @@
       model and indicates the interaction between the TWAMP 
       configuration client and server using, for instance,
       NETCONF <xref target="RFC6241"/> or RESTCONF
-      <xref target="I-D.ietf-netconf-restconf"/>.</t>
+      <xref target="RFC8040"/>.</t>
 
       <figure anchor="fig:scope2" title="Simplified TWAMP model and protocols">
         <artwork><![CDATA[
@@ -843,7 +843,7 @@ module: ietf-twamp
 
         <figure>
           <artwork><![CDATA[
-<CODE BEGINS> file "ietf-twamp@2017-02-22.yang"
+<CODE BEGINS> file "ietf-twamp@2017-10-16.yang"
 module ietf-twamp {
   namespace
     urn:ietf:params:xml:ns:yang:ietf-twamp; 
@@ -873,9 +873,9 @@ module ietf-twamp {
     This YANG module uses features to indicate which of the four
     logical entities are supported by a TWAMP implementation.";
 
-  revision 2017-02-22 {
+  revision 2017-10-16 {
     description
-      "Revision appearing in draft-ietf-ippm-twamp-yang-03.
+      "Revision appearing in draft-ietf-ippm-twamp-yang-05.
       
       Covers RFC 5357, RFC 5618, RFC 5938, RFC 6038, RFC 7717, and
       draft-ietf-ippm-metric-registry";
@@ -2628,8 +2628,8 @@ module ietf-twamp {
       <?rfc include='reference.RFC.6241'?>
       <?rfc include='reference.RFC.6536'?>
       <?rfc include='reference.RFC.7426'?>
+      <?rfc include='reference.RFC.8040'?>
 
-      <?rfc include='reference.I-D.ietf-netconf-restconf'?>
       <?rfc include='reference.I-D.ietf-ippm-metric-registry'?>
       <?rfc include='reference.I-D.unify-nfvrg-challenges'?>
       <?rfc include='reference.I-D.unify-nfvrg-devops'?>
