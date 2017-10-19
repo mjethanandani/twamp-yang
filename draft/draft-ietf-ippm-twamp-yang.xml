@@ -1194,7 +1194,7 @@ module ietf-twamp {
         Server Greeting message and used for deriving a key from a
         shared secret as per Section 3.1 of  RFC 4656:  MUST be a
         power of 2 and at least 1024. It is configured by providing 
-        said power. For example, configuring 15 here means max count 
+        said power. For example, configuring 15 here means count 
         2^15 = 32768. The default is 10, meaning 2^10 = 1024.";
       }
    description
@@ -1681,7 +1681,7 @@ module ietf-twamp {
                 "Indicates how many times the test session has been 
                  repeated. When a test is running, this value will be 
                  greater than 0. If the repeat parameter is non-zero, 
-                 this value is smaller then or equal to the repeat 
+                 this value is smaller than or equal to the repeat 
                  parameter.";
           }          
           leaf state {
