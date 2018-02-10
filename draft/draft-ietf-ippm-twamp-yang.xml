@@ -821,7 +821,7 @@ module: ietf-twamp
                 dynamic-port-number
              +--ro reflector-ip                         inet:ip-address
              +--ro reflector-udp-port \
-                dynamic-port-number
+                uint32
              +--ro parent-connection-client-ip?         inet:ip-address
              +--ro parent-connection-client-tcp-port? \
                 inet:port-number
@@ -873,9 +873,9 @@ module ietf-twamp {
     This YANG module uses features to indicate which of the four
     logical entities are supported by a TWAMP implementation.";
 
-  revision 2017-10-16 {
+  revision 2018-02-10 {
     description
-      "Revision appearing in draft-ietf-ippm-twamp-yang-05.
+      "Revision appearing in draft-ietf-ippm-twamp-yang-06.
       
       Covers RFC 5357, RFC 5618, RFC 5938, RFC 6038, RFC 7717, and
       draft-ietf-ippm-metric-registry";
@@ -1524,15 +1524,18 @@ module ietf-twamp {
           }
 
           leaf reflector-udp-port {
-            type dynamic-port-number;
+            type uint32 {
+              range "862|49152..65535";
+              default dynamic-port-number;
+            }
             description
               "This parameter defines the UDP port number that
               will be used by the Session-Reflector for
-              this TWAMP-Test session. The number is restricted
-              to the dynamic port range and is to be placed in
+              this TWAMP-Test session. The default number is within
+              the dynamic port range and is to be placed in
               the Receiver Port field of the Request-TW-Session
-              message.";
-          }
+              message. The new well-known port number may be used.";
+		}
 
           leaf timeout {
             type uint64;
