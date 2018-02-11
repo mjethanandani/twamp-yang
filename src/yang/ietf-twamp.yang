@@ -1255,7 +1255,9 @@ module ietf-twamp {
         }
 
         leaf reflector-udp-port {
-          type dynamic-port-number;
+          type uint32 {
+            range "862|49152..65535";
+	  }
           description
             "The destination UDP port number used in the
             TWAMP-Test (UDP) test packets belonging to this
