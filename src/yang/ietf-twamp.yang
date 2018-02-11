@@ -679,16 +679,17 @@ module ietf-twamp {
           }
 
           leaf reflector-udp-port {
-            type dynamic-port-number;
+            type uint32 {
+              range "862|49152..65535";
+            }
             description
               "This parameter defines the UDP port number that
               will be used by the Session-Reflector for
-              this TWAMP-Test session. The number is restricted
-              to the dynamic port range and is to be placed in
+              this TWAMP-Test session. The default number is within
+              the dynamic port range and is to be placed in
               the Receiver Port field of the Request-TW-Session
-              message.";
-          }
-
+              message. The new well-known port number MAY be used.";
+		      }
           leaf timeout {
             type uint64;
             units seconds;
@@ -1254,7 +1255,9 @@ module ietf-twamp {
         }
 
         leaf reflector-udp-port {
-          type dynamic-port-number;
+          type uint32 {
+            range "862|49152..65535";
+	  }
           description
             "The destination UDP port number used in the
             TWAMP-Test (UDP) test packets belonging to this
