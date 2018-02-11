@@ -52,8 +52,8 @@ $(next).xml: $(draft).xml ../src/yang/ietf-twamp.yang
 
 	cd ../src; ./gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
-#	rm ../src/yang/*-tree.txt
-#	rm ../src/yang/ietf-*\@$(shell date +%Y-%m-%d).yang
+	rm ../src/yang/*-tree.txt
+	rm ../src/yang/ietf-*\@$(shell date +%Y-%m-%d).yang
 
 .INTERMEDIATE: $(draft).xml
 %.xml: %.md
