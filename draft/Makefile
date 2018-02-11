@@ -20,7 +20,7 @@ draft_type := $(suffix $(firstword $(wildcard $(draft).md $(draft).org $(draft).
 
 current_ver := $(shell git tag | grep '$(draft)-[0-9][0-9]' | tail -1 | sed -e"s/.*-//")
 ifeq "${current_ver}" ""
-next_ver ?= 01
+next_ver ?= 06
 else
 next_ver ?= $(shell printf "%.2d" $$((1$(current_ver)-99)))
 endif
@@ -52,8 +52,8 @@ $(next).xml: $(draft).xml ../src/yang/ietf-twamp.yang
 
 	cd ../src; ./gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
-	rm ../src/yang/*-tree.txt
-	rm ../src/yang/ietf-*\@$(shell date +%Y-%m-%d).yang
+#	rm ../src/yang/*-tree.txt
+#	rm ../src/yang/ietf-*\@$(shell date +%Y-%m-%d).yang
 
 .INTERMEDIATE: $(draft).xml
 %.xml: %.md
