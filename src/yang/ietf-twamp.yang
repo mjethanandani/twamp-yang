@@ -548,6 +548,16 @@ module ietf-twamp {
              according to Section 4.1.2 of RFC 4656.";
         }
 
+        leaf repeat-count {
+          type uint64;
+          config false;
+          description
+            "Indicates how many times the test session has been
+             repeated. When a test is running, this value will be
+             greater than 0. If the repeat parameter is non-zero,
+             this value is smaller than or equal to the repeat
+             parameter.";
+        }
         leaf state {
           type control-client-connection-state;
           config false;
@@ -841,16 +851,7 @@ module ietf-twamp {
               "ietf-ippm-metric-registry: Registry for
                Performance Metrics";
           }
-          leaf repeat-count {
-            type uint64;
-            config false;
-            description
-              "Indicates how many times the test session has been
-               repeated. When a test is running, this value will be
-               greater than 0. If the repeat parameter is non-zero,
-               this value is smaller than or equal to the repeat
-               parameter.";
-          }
+
           leaf state {
             type test-session-state;
             config false;
