@@ -109,19 +109,19 @@
 
     <author fullname="Mahesh Jethanandani" initials="M."
             surname="Jethanandani">
-      <organization>Cisco Systems</organization>
+      <organization/>
 
       <address>
         <postal>
-          <street>3700 Cisco Way</street>
+          <street/>
 
-          <city>San Jose</city>
+          <city/>
 
-          <region>CA</region>
+          <region/>
 
-          <code>95134</code>
+          <code/>
 
-          <country>USA</country>
+          <country/>
         </postal>
 
         <email>mjethanandani@gmail.com</email>
@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <date day="11" month="February" year="2018"/>
+    <date day="13" month="February" year="2018"/>
 
     <area>Transport</area>
 

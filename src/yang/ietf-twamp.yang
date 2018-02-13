@@ -706,7 +706,7 @@ module ietf-twamp {
                this TWAMP-Test session. The default number is within
                to the dynamic port range and is to be placed in
                the Receiver Port field of the Request-TW-Session
-               message.";
+               message. The new well-known port (862) MAY be used.";
           }
 
           leaf timeout {
