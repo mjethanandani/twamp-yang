@@ -13,7 +13,20 @@ module ietf-twamp {
     "IETF IPPM (IP Performance Metrics) Working Group";
 
   contact
-    draft-ietf-ippm-twamp-yang@tools.ietf.org;
+    "WG Web: http://tools.ietf.org/wg/ippm/
+     WG List: ippm@ietf.org
+
+     Editor: Ruth Civil
+             gcivil@ciena.com
+     Editor: Al Morton
+             acmorton@att.com
+     Editor: Reshad Rehman
+             rrahman@cisco.com
+     Editor: Mahesh Jethanandani
+             mjethanandani@gmail.com
+     Editor: Kostas Pentikousis
+             k.pentikousis@travelping.com";
+
 
   description
     "This YANG module specifies a vendor-independent data
@@ -22,7 +35,7 @@ module ietf-twamp {
     The data model covers four TWAMP logical entities, namely,
     Control-Client, Server, Session-Sender, and Session-Reflector,
     as illustrated in the annotated TWAMP logical model (Fig. 1
-    of draft-ietf-ippm-twamp-yang).
+    of RFC XXXX).
 
     This YANG module uses features to indicate which of the four
     logical entities are supported by a TWAMP implementation.";
@@ -35,7 +48,7 @@ module ietf-twamp {
       draft-ietf-ippm-metric-registry";
 
     reference
-      draft-ietf-ippm-twamp-yang;
+      "RFC XXXX: TWAMP YANG Data Model.";
   }
 
 
@@ -49,25 +62,29 @@ module ietf-twamp {
         position 0;
         description
           "Unauthenticated mode, in which no encryption or
-          authentication is applied in TWAMP-Control and TWAMP-Test.
-          KeyID, Token, and Client-IV are not used in the
-          Set-Up-Response message. See Section 3.1 of RFC 4656.";
+          authentication is applied in TWAMP-Control and
+          TWAMP-Test. KeyID, Token, and Client-IV are not used in
+          the Set-Up-Response message. See Section 3.1 of
+          RFC 4656.";
         reference
-          "RFC 4656: A One-way Active Measurement Protocol (OWAMP)";
+          "RFC 4656: A One-way Active Measurement Protocol
+           (OWAMP)";
       }
       bit authenticated {
         position 1;
         description
-          "Authenticated mode, in which the Control-Client and Server
-           possess a shared secret thus prohibiting 'theft of service'.
-           As per Section 6 of RFC 4656, in 'authenticated mode, the
-           timestamp is in the clear and is not protected
-           cryptographically in any way, while the rest of the message
-           has the same protection as in encrypted mode. This mode
-           allows one to trade off cryptographic protection against
-           accuracy of timestamps.'";
+          "Authenticated mode, in which the Control-Client and
+           Server possess a shared secret thus prohibiting
+           'theft of service'. As per Section 6 of RFC 4656,
+           in 'authenticated mode, the timestamp is in the clear
+           and is not protected cryptographically in any way,
+           while the rest of the message has the same protection
+           as in encrypted mode. This mode allows one to trade off
+           cryptographic protection against accuracy of
+           timestamps.'";
         reference
-          "RFC 4656: A One-way Active Measurement Protocol (OWAMP)";
+          "RFC 4656: A One-way Active Measurement Protocol
+           (OWAMP)";
       }
       bit encrypted {
         position 2;
@@ -76,7 +93,8 @@ module ietf-twamp {
            timestamps undetectably.' See also Section 4 of RFC 7717
            and Section 6 of RFC 4656.";
         reference
-          "RFC 4656: A One-way Active Measurement Protocol (OWAMP)";
+          "RFC 4656: A One-way Active Measurement Protocol
+           (OWAMP)";
       }
       bit unauth-test-encrpyt-control {
         position 3;
@@ -137,7 +155,8 @@ module ietf-twamp {
     type enumeration {
       enum active {
         description
-          "Indicates an active TWAMP-Control connection to Server.";
+          "Indicates an active TWAMP-Control connection to
+           Server.";
       }
       enum idle {
         description
@@ -145,7 +164,8 @@ module ietf-twamp {
       }
     }
     description
-      "Indicates the Control-Client TWAMP-Control connection state.";
+      "Indicates the Control-Client TWAMP-Control connection
+       state.";
   }
 
   typedef test-session-state {
@@ -349,13 +369,13 @@ module ietf-twamp {
       }
       default 10;
       description 
-        "Parameter communicated to the Control-Client as part of the
-         Server Greeting message and used for deriving a key from a
-         shared secret as per Section 3.1 of  RFC 4656:  MUST be a
-         power of 2 and at least 1024. It is configured by providing 
-         said power. For example, configuring 15 here means count 
-         2^15 = 32768. The default is 10, meaning 2^10 = 1024.";
-
+        "Parameter communicated to the Control-Client as part of
+         the Server Greeting message and used for deriving a key
+         from a shared secret as per Section 3.1 of  RFC 4656:
+         MUST be a power of 2 and at least 1024. It is configured
+         by providing said power. For example, configuring 15 here
+         means count 2^15 = 32768. The default is 10,
+         meaning 2^10 = 1024.";
       }
    description
      "Reusable data structure for count which is used both in the
@@ -378,11 +398,11 @@ module ietf-twamp {
          A TWAMP Server uses this configured value in the
          Server-Greeting message sent to the Control-Client.
         
-         A TWAMP Control-Client uses this configured value to prevent
-         denial-of-service (DOS) attacks by closing the control
-         connection to the Server if it 'receives a Server-Greeting
-         message with Count greater that its maximum configured value',
-         as per Section 6 of RFC 5357.
+         A TWAMP Control-Client uses this configured value to
+         prevent denial-of-service (DOS) attacks by closing the
+         control connection to the Server if it 'receives a
+         Server-Greeting message with Count greater that its
+         maximum configured value', as per Section 6 of RFC 5357.
  
          Further, note that according to Section 6 of RFC 5357:
  
@@ -415,13 +435,14 @@ module ietf-twamp {
       "TWAMP logical entity configuration grouping of four models
       which correspond to the four TWAMP logical entities
       Control-Client, Server, Session-Sender, and Session-Reflector
-      as illustrated in Fig. 1 of draft-ietf-ippm-twamp-yang.";
+      as illustrated in Fig. 1 of RFC XXXX.";
 
     container client {
       if-feature control-client;
       presence "Enables TWAMP Control-Client functionality.";
       description
-        "Configuration of the TWAMP Control-Client logical entity.";
+        "Configuration of the TWAMP Control-Client logical
+         entity.";
 
       leaf admin-state {
         type boolean;
@@ -438,9 +459,9 @@ module ietf-twamp {
           type uint16;
           description
             "Indicates the Control-Client Mode preference priority
-             expressed as a 16-bit unsigned integer, where zero is the
-             highest priority and subsequent values monotonically
-             increasing.";
+             expressed as a 16-bit unsigned integer, where zero is
+             the highest priority and subsequent values
+             monotonically increasing.";
         }
         leaf mode {
           type twamp-modes;
@@ -455,8 +476,8 @@ module ietf-twamp {
             
            Depending on the Modes available in the TWAMP Server
            Greeting message (see Fig. 2 of RFC 7717), the
-           this Control-Client MUST choose the highest priority Mode
-           from the configured mode-preference-chain list.";
+           this Control-Client MUST choose the highest priority
+           Mode from the configured mode-preference-chain list.";
       }
 
       uses key-management;
@@ -471,8 +492,9 @@ module ietf-twamp {
         leaf name {
           type string;
           description
-            "A unique name used as a key to identify this individual
-             TWAMP-Control connection on the Control-Client device.";
+            "A unique name used as a key to identify this
+             individual TWAMP-Control connection on the
+             Control-Client device.";
         }
         leaf client-ip {
           type inet:ip-address;
@@ -498,12 +520,13 @@ module ietf-twamp {
             "This parameter defines the TCP port number that is
              to be used by this outgoing TWAMP-Control connection.
              Typically, this is the well-known TWAMP-Control
-             port number (862) as per RFC 5357 However, there are known
-             realizations of TWAMP in the field that were implemented
-             before this well-known port number was allocated. These
-             early implementations allowed the port number to be
-             configured. This parameter is therefore provided for
-             backward compatibility reasons.";
+             port number (862) as per RFC 5357 However, there are
+             known realizations of TWAMP in the field that were
+             implemented before this well-known port number was
+             allocated. These early implementations allowed the
+             port number to be configured. This parameter is
+             therefore provided for backward compatibility
+             reasons.";
         }
 
         leaf control-packet-dscp {
@@ -522,7 +545,6 @@ module ietf-twamp {
           description
            "Indicates the KeyID value selected for this
             TWAMP-Control connection.";
-
         }
 
         uses max-count;
@@ -540,8 +562,8 @@ module ietf-twamp {
           type uint64;
           config false;
           description
-            "Indicates the Start-Time advertized by the Server in the
-             Server-Start message (RFC 4656, Section 3.1),
+            "Indicates the Start-Time advertized by the Server in
+             the Server-Start message (RFC 4656, Section 3.1),
              representing the time when the current
              instantiation of the Server started operating.
              The timestamp format follows RFC 1305
@@ -571,8 +593,8 @@ module ietf-twamp {
           config false;
           description
             "The TWAMP Mode that the Control-Client has chosen for
-             this control connection as set in the Mode field of the
-             Set-Up-Response message";
+             this control connection as set in the Mode field of
+             the Set-Up-Response message";
           reference
             "RFC 4656, Section 3.1.";
         }
@@ -586,17 +608,17 @@ module ietf-twamp {
             "This parameter holds the 64 octets containing the
              concatenation of a 16-octet Challenge, a 16-octet AES
              Session-key used for encryption, and a 32-octet
-             HMAC-SHA1 Session-key used for authentication; see also
-             the last paragraph of Section 6 in RFC 4656.
+             HMAC-SHA1 Session-key used for authentication; see
+             also the last paragraph of Section 6 in RFC 4656.
 
              If the Mode defined in RFC 7717 is selected 
              (selected-mode), Token is limited to 16 octets.";
           reference
             "RFC 4086: Randomness Requirements for Security
 
-             RFC 7717: IKEv2-Derived Shared Secret Key for the One-Way
-             Active Measurement Protocol (OWAMP) and Two-Way Active
-             Measurement Protocol (TWAMP)";
+             RFC 7717: IKEv2-Derived Shared Secret Key for the
+             One-Way Active Measurement Protocol (OWAMP) and
+             Two-Way Active Measurement Protocol (TWAMP)";
         }
 
         leaf client-iv {
@@ -619,11 +641,12 @@ module ietf-twamp {
               If the Mode defined in RFC 7717 is selected 
               (selected-mode), Client-IV is limited to 12 octets.";
           reference
-            "RFC 4656: A One-way Active Measurement Protocol (OWAMP)
+            "RFC 4656: A One-way Active Measurement Protocol
+             (OWAMP).
             
-             RFC 7717: IKEv2-Derived Shared Secret Key for the One-Way
-             Active Measurement Protocol (OWAMP) and Two-Way Active
-             Measurement Protocol (TWAMP)";
+             RFC 7717: IKEv2-Derived Shared Secret Key for the
+             One-Way Active Measurement Protocol (OWAMP) and
+             Two-Way Active Measurement Protocol (TWAMP)";
         }
 
         list test-session-request {
@@ -674,15 +697,16 @@ module ietf-twamp {
                By default the Control-Client SHALL auto-allocate a
                UDP port number for this TWAMP-Test session.
 
-               The configured (or auto-allocated) value is advertized
-               in the Sender Port field of the Request-TW-session
-               message (see Section 3.5 of RFC 5357). Note that
-               in the scenario where a device auto-allocates a UDP
-               port number for a session, and the repeat parameter
-               for that session indicates that it should be
-               repeated, the device is free to auto-allocate a
-               different UDP port number when it negotiates the
-               next (repeated) iteration of this session.";
+               The configured (or auto-allocated) value is
+            	   advertized in the Sender Port field of the
+               Request-TW-session message (see Section 3.5 of
+               RFC 5357). Note that in the scenario where a device
+               auto-allocates a UDP port number for a session, and
+               the repeat parameter for that session indicates that
+               it should be repeated, the device is free to
+               auto-allocate a different UDP port number when it
+               negotiates the next (repeated) iteration of this
+               session.";
           }
 
           leaf reflector-ip {
@@ -703,10 +727,11 @@ module ietf-twamp {
             description
               "This parameter defines the UDP port number that
                will be used by the Session-Reflector for
-               this TWAMP-Test session. The default number is within
-               to the dynamic port range and is to be placed in
-               the Receiver Port field of the Request-TW-Session
-               message. The new well-known port (862) MAY be used.";
+               this TWAMP-Test session. The default number is
+               within to the dynamic port range and is to be placed
+               in the Receiver Port field of the Request-TW-Session
+               message. The new well-known port (862) MAY be
+               used.";
           }
 
           leaf timeout {
@@ -770,8 +795,8 @@ module ietf-twamp {
                Section 3.5 of RFC 4656.
                 
                The default value of 0 indicates that the session
-               will be started as soon as the Start-Sessions message
-               is received.";
+               will be started as soon as the Start-Sessions
+               message is received.";
           }
 
           leaf repeat {
@@ -835,7 +860,8 @@ module ietf-twamp {
                 "Numerical index value of a Registered Metric
                  in the Performance Metric Registry
                  (see ietf-ippm-metric-registry). Output statistics
-                 are specified in the corresponding Registry entry.";
+                 are specified in the corresponding Registry
+                 entry.";
             }
             description
               "A list of one or more Performance Metric Registry
@@ -1111,8 +1137,8 @@ module ietf-twamp {
           type string;
           description
             "A unique name for this TWAMP-Test session to be used
-             for identifying this test session by the Session-Sender
-             logical entity.";
+             for identifying this test session by the
+             Session-Sender logical entity.";
         }
 
         leaf ctrl-connection-name {
@@ -1120,7 +1146,8 @@ module ietf-twamp {
           config false;
           description
             "The name of the parent TWAMP-Control connection that
-             is responsible for negotiating this TWAMP-Test session.";
+             is responsible for negotiating this TWAMP-Test
+             session.";
         }
 
         leaf fill-mode {
@@ -1138,7 +1165,8 @@ module ietf-twamp {
           mandatory true;
           description
             "The overall number of TWAMP-Test (UDP) packets to be
-             transmitted by the Session-Sender for this test session.";
+             transmitted by the Session-Sender for this test
+             session.";
         }
 
         choice packet-distribution {
@@ -1153,9 +1181,9 @@ module ietf-twamp {
               units seconds;
               mandatory true;
               description
-                "Indicates the time to wait (in seconds) between the
-                 first bits of TWAMP-Test (UDP) packet transmissions for
-                 this test session.";
+                "Indicates the time to wait (in seconds) between
+                 the first bits of TWAMP-Test (UDP) packet
+                 transmissions for this test session.";
               reference
                 "RFC 3432: Network performance measurement
                            with periodic streams";
@@ -1171,9 +1199,10 @@ module ietf-twamp {
               description
                 "Indicates the average time interval (in seconds)
                  between packets in the Poisson distribution.
-                 The packet is calculated using the reciprocal of lambda
-                 and the TWAMP-Test packet size (which depends on the 
-                 selected Mode and the packet padding).";
+                 The packet is calculated using the reciprocal of
+                 lambda and the TWAMP-Test packet size (which
+                 depends on the selected Mode and the packet
+                 padding).";
              reference
                "RFC 2330: Framework for IP Performance Metrics";
             }
@@ -1207,7 +1236,8 @@ module ietf-twamp {
       if-feature session-reflector;
       presence "Enables TWAMP Session-Reflector functionality.";
       description
-        "Configuration of the TWAMP Session-Reflector logical entity";
+        "Configuration of the TWAMP Session-Reflector logical
+         entity";
 
       leaf admin-state {
         type boolean;
@@ -1224,11 +1254,12 @@ module ietf-twamp {
         units seconds;
         default 900;
         description
-          "The Session-Reflector MAY discontinue any session that has
-           been started when no packet associated with that session has
-           been received for REFWAIT seconds. As per Section 3.1 of
-           RFC 5357, this timeout allows a Session-Reflector to free up
-           resources in case of failure.";
+          "The Session-Reflector MAY discontinue any session that
+           has been started when no packet associated with that
+           session has been received for REFWAIT seconds. As per
+           Section 3.1 of RFC 5357, this timeout allows a
+           Session-Reflector to free up resources in case of
+           failure.";
       }
 
       list test-session {
@@ -1297,8 +1328,8 @@ module ietf-twamp {
           type inet:port-number;
           description
             "The source TCP port number used in the TWAMP-Control
-             (TCP) packets belonging to the parent control connection
-             that negotiated this test session.";
+             (TCP) packets belonging to the parent control
+             connection that negotiated this test session.";
         }
 
         leaf parent-connection-server-ip {
@@ -1313,9 +1344,10 @@ module ietf-twamp {
         leaf parent-connection-server-tcp-port {
           type inet:port-number;
           description
-            "The destination TCP port number used in the TWAMP-Control
-             (TCP) packets belonging to the parent control connection
-             that negotiated this test session.";
+            "The destination TCP port number used in the
+             TWAMP-Control (TCP) packets belonging to the parent
+             control connection that negotiated this test
+             session.";
         }
 
         leaf test-packet-dscp {

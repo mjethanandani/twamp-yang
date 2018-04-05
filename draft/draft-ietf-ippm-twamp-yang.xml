@@ -16,7 +16,7 @@
 <!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
 <!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
 ]>
-<rfc category="std" docName="draft-ietf-ippm-twamp-yang-06" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-07" ipr="trust200902">
   <?rfc toc="yes" ?>
 
   <?rfc symrefs="yes" ?>
@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <date day="13" month="February" year="2018"/>
+    <date day="10" month="April" year="2018"/>
 
     <area>Transport</area>
 
@@ -167,10 +167,10 @@
       target="RFC5357"/> is used to measure network performance parameters
       such as latency, bandwidth, and packet loss by sending probe packets and
       measuring their experience in the network. To date, TWAMP
-      implementations do not come with a standard management framework and, as
-      such, configuration depends on proprietary mechanisms developed by the
-      corresponding TWAMP vendor. This document addresses this gap by formally
-      specifying the TWAMP data model using YANG.</t>
+      implementations do not come with a standard management framework, and,
+      as such, implementors have no choice except to provide a proprietary
+      mechanism. This document addresses this gap by formally specifying the
+      TWAMP data model using YANG.</t>
 
       <section anchor="motivation" title="Motivation">
         <t>In current TWAMP deployments the lack of a standardized data model
@@ -186,29 +186,30 @@
         <t>Two major trends call for standardizing TWAMP management aspects.
         First, we expect that in the coming years large-scale and multi-vendor
         TWAMP deployments will become the norm. From an operations
-        perspective, dealing with several vendor-specific TWAMP configuration
-        mechanisms is simply unsustainable in this context. Second, the
-        increasingly software-defined and virtualized nature of network
-        infrastructures, based on dynamic service chains <xref target="NSC"/>
-        and programmable control and management planes <xref
-        target="RFC7426"/> requires a well-defined data model for TWAMP
-        implementations. This document defines such a TWAMP data model and
-        specifies it formally using the YANG data modeling language <xref
-        target="RFC6020"/>.</t>
+        perspective, using several vendor-specific TWAMP configuration
+        mechanisms when one standard mechanism could provide an alternative is
+        expensive and inefficient. Second, the increasingly software-defined
+        and virtualized nature of network infrastructures, based on dynamic
+        service chains <xref target="NSC"/> and programmable control and
+        management planes <xref target="RFC7426"/> requires a well-defined
+        data model for TWAMP implementations. This document defines such a
+        TWAMP data model and specifies it formally using the YANG data
+        modeling language <xref target="RFC6020"/>.</t>
 
         <t>Note to RFC Editor:</t>
 
-        <t>Please replace the date in the draft of the format YYYY-MM-DD with
-        the date of publication of this draft. Also, replace reference to
-        draft-ietf-ippm-twamp-yang, and draft-ietf-ippm-metric-registry with
-        the RFC numbers assigned to the draft.</t>
+        <t>Please replace the date YYYY-MM-DD in Section 5.2 of the draft with
+        the date of publication of this draft as a RFC. Also, replace
+        reference to RFC XXXX, and draft-ietf-ippm-metric-registry with the
+        RFC numbers assigned to the draft.</t>
       </section>
 
       <section title="Terminology">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-        document are to be interpreted as described in <xref
-        target="RFC2119"/>.</t>
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+        "OPTIONAL" in this document are to be interpreted as described in
+        <xref target="RFC2119">BCP 14</xref> <xref target="RFC8174"/> when,
+        and only when, they appear in all capitals, as shown here.</t>
       </section>
 
       <section title="Document Organization">
@@ -752,7 +753,7 @@ o-------------------o                       o-------------------o
 
         <figure anchor="fig:yangtree" title="YANG Tree Diagram.">
           <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt)
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt,68)
              ]]></artwork>
         </figure>
       </section>
@@ -765,7 +766,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt)
           <artwork><![CDATA[
 <CODE BEGINS> file "ietf-twamp@YYYY-MM-DD.yang"
 
-INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
 
 <CODE ENDS>
 ]]></artwork>
@@ -1211,9 +1212,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang)
     </section>
 
     <section anchor="contributors" title="Contributors">
-      <t>Lianshu Zheng, Huawei Technologies, China</t>
-
-      <t>Email: vero.zheng@huawei.com</t>
+      <t>Lianshu Zheng.</t>
     </section>
   </middle>
 
@@ -1234,6 +1233,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.6038'?>
 
       <?rfc include='reference.RFC.7717'?>
+
+      <?rfc include='reference.RFC.8174'?>
     </references>
 
     <references title="Informative References">
