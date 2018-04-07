@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+    <server>
+      <admin-state>true</admin-state>
+      <servwait>1800</servwait>
+      <control-packet-dscp>32</control-packet-dscp>
+      <modes>authenticated unauthenticated</modes>
+      <count>30</count>
+      <key-chain>
+        <key-id>KeyClient1ToRouterA</key-id>
+        <secret-key>c2VjcmV0MQ==</secret-key>
+      </key-chain>
+      <key-chain>
+        <key-id>KeyClient10ToRouterA</key-id>
+        <secret-key>c2VjcmV0MTANCg==</secret-key>
+      </key-chain>
+      <ctrl-connection>
+        <client-ip>203.0.113.1</client-ip>
+        <client-tcp-port>16341</client-tcp-port>
+        <server-ip>203.0.113.2</server-ip>
+        <server-tcp-port>862</server-tcp-port>
+        <control-packet-dscp>32</control-packet-dscp>
+        <selected-mode>unauthenticated</selected-mode>
+        <key-id>KeyClient1ToRouterA</key-id>
+        <count>30</count>
+      </ctrl-connection>
+    </server>
+  </twamp>
+</data>

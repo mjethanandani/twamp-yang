@@ -16,7 +16,7 @@
 <!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
 <!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
 ]>
-<rfc category="std" docName="draft-ietf-ippm-twamp-yang-07" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-06" ipr="trust200902">
   <?rfc toc="yes" ?>
 
   <?rfc symrefs="yes" ?>
@@ -194,7 +194,7 @@
         management planes <xref target="RFC7426"/> requires a well-defined
         data model for TWAMP implementations. This document defines such a
         TWAMP data model and specifies it formally using the YANG data
-        modeling language <xref target="RFC6020"/>.</t>
+        modeling language <xref target="RFC7950"/>.</t>
 
         <t>Note to RFC Editor:</t>
 
@@ -506,8 +506,8 @@ o-------------------o                       o-------------------o
         keys for different Servers. The secret-key is the shared secret, an
         octet string of arbitrary length whose interpretation as a text string
         is unspecified. The key-id and secret-key encoding SHOULD follow
-        Section 9.4 of <xref target="RFC6020"/>. The derived key length (dkLen
-        in <xref target="RFC2898"/>) MUST be 16 octets for the AES Session-key
+        Section 9.4 of <xref target="RFC7950"/>. The derived key length (dkLen
+        in <xref target="RFC8018"/>) MUST be 16 octets for the AES Session-key
         used for encryption and 32 octets for the HMAC-SHA1 Session-key used
         for authentication; see also Section 6.10 of <xref
         target="RFC4656"/>.</t>
@@ -728,8 +728,9 @@ o-------------------o                       o-------------------o
 
         <t>If the user has no network access to the Control-Client device,
         then the only option is to retrieve all test-session instances from
-        the Session-Reflector device. This could be problematic if a large
-        number of test sessions are currently active on that device.</t>
+        the Session-Reflector device, and then pick out specific test-session
+        instances of interest to the user. This could be problematic if a
+        large number of test sessions are currently active on that device.</t>
 
         <t>Each Session-Reflector TWAMP-Test session contains the following
         4-tuple: {parent-connection-client-ip,
@@ -796,14 +797,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
         <figure anchor="fig:ExampleCC"
                 title="XML instance enabling Control-Client operation.">
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <client>
-         <admin-state>true</admin-state>
-      </client>
-   </twamp>
-</config>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.1.1.xml,68)
+
 ]]></artwork>
         </figure>
 
@@ -816,75 +811,10 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
 
         <figure>
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <client>
-         <admin-state>true</admin-state>
-         <ctrl-connection>
-            <name>RouterA</name>
-            <client-ip>203.0.113.1</client-ip>
-            <server-ip>203.0.113.2</server-ip>
-            <test-session-request>
-               <name>Test1</name>
-               <sender-ip>203.0.113.3</sender-ip>
-               <sender-udp-port>54001</sender-udp-port>
-               <reflector-ip>203.0.113.4</reflector-ip>
-               <reflector-udp-port>50001</reflector-udp-port>
-               <start-time>0</start-time>
-            </test-session-request>
-            <test-session-request>
-               <name>Test2</name>
-               <sender-ip>203.0.113.1</sender-ip>
-               <sender-udp-port>54001</sender-udp-port>
-               <reflector-ip>203.0.113.2</reflector-ip>
-               <reflector-udp-port>50001</reflector-udp-port>
-               <start-time>0</start-time>
-            </test-session-request>
-         </ctrl-connection>
-         <ctrl-connection>
-            <name>RouterB</name>
-            <client-ip>203.0.113.1</client-ip>
-            <server-ip>203.0.113.3</server-ip>
-         </ctrl-connection>
-      </client>
-   </twamp>
-</config>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.1.2.xml,68)
 
-<?xml version="1.0" encoding="utf-8"?>
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <client>
-         <admin-state>true</admin-state>
-         <ctrl-connection>
-            <name>RouterA</name>
-            <client-ip>2001:DB8:203:0:113::1</client-ip>
-            <server-ip>2001:DB8:203:0:113::2</server-ip>
-            <test-session-request>
-               <name>Test1</name>
-               <sender-ip>2001:DB8:203:1:113::3</sender-ip>
-               <sender-udp-port>54000</sender-udp-port>
-               <reflector-ip>2001:DB8:203:1:113::4</reflector-ip>
-               <reflector-udp-port>55000</reflector-udp-port>
-               <start-time>0</start-time>
-            </test-session-request>
-            <test-session-request>
-               <name>Test2</name>
-               <sender-ip>2001:DB8:203:0:113::1</sender-ip>
-               <sender-udp-port>54001</sender-udp-port>
-               <reflector-ip>2001:DB8:203:0:113::2</reflector-ip>
-               <reflector-udp-port>55001</reflector-udp-port>
-               <start-time>0</start-time>
-            </test-session-request>
-         </ctrl-connection>
-         <ctrl-connection>
-            <name>RouterB</name>
-            <client-ip>2001:DB8:203:0:113::1</client-ip>
-            <server-ip>2001:DB8:203:0:113::3</server-ip>
-         </ctrl-connection>
-      </client>
-   </twamp>
-</config>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.1.3.xml,68)
+
 ]]></artwork>
         </figure>
       </section>
@@ -898,14 +828,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
         <figure anchor="fig:ExampleS"
                 title="XML instance enabling Server operation.">
           <artwork align="left"><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <server>
-         <admin-state>true</admin-state>
-      </server>
-   </twamp>
-</config>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.2.1.xml,68)
+
 ]]></artwork>
         </figure>
 
@@ -916,41 +840,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
 
         <figure>
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <server>
-         <admin-state>true</admin-state>
-         <ctrl-connection>
-            <client-ip>203.0.113.1</client-ip>
-            <client-tcp-port>16341</client-tcp-port>
-            <server-ip>203.0.113.2</server-ip>
-            <server-tcp-port>862</server-tcp-port>
-            <state>
-               active
-            </state>
-         </ctrl-connection>
-      </server>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.2.2.xml,68)
 
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <server>
-         <admin-state>true</admin-state>
-         <ctrl-connection>
-            <client-ip>2001:DB8:203:0:113::1</client-ip>
-            <client-tcp-port>16341</client-tcp-port>
-            <server-ip>2001:DB8:203:0:113::2</server-ip>
-            <server-tcp-port>862</server-tcp-port>
-            <state>
-               active
-            </state>
-         </ctrl-connection>
-      </server>
-   </twamp>
-</data>
 ]]></artwork>
         </figure>
       </section>
@@ -964,14 +855,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
         <figure anchor="fig:ExampleSS"
                 title="XML instance enabling Session-Sender operation.">
           <artwork align="left"><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <session-sender>
-         <admin-state>true</admin-state>
-      </session-sender>
-   </twamp>
-</config>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.3.1.xml,68)
+
 ]]></artwork>
         </figure>
 
@@ -980,31 +865,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
 
         <figure>
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
- <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-     <session-sender>
-        <admin-state>true</admin-state>
-        <test-session>
-           <name>Test1</name>
-           <ctrl-connection-name>RouterA</ctrl-connection-name>
-           <number-of-packets>900</number-of-packets>
-           <periodic-interval>1</periodic-interval>
-           <state>setup</state>
-        </test-session>
-        <test-session>
-           <name>Test2</name>
-           <ctrl-connection-name>
-             RouterA
-           </ctrl-connection-name>
-           <number-of-packets>900</number-of-packets>
-           <lambda>1</lambda>
-           <max-interval>2</max-interval>
-           <state>setup</state>
-        </test-session>
-     </session-sender>
-  </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.3.2.xml,68)
+
 ]]></artwork>
         </figure>
       </section>
@@ -1018,14 +880,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
         <figure anchor="fig:ExampleSR"
                 title="XML instance enabling Session-Reflector operation.">
           <artwork align="left"><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <session-reflector>
-         <admin-state>true</admin-state>
-      </session-reflector>
-   </twamp>
-</config>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.1.xml,68)
+
 ]]></artwork>
         </figure>
 
@@ -1035,115 +891,10 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
 
         <figure>
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <session-reflector>
-          <admin-state>true</admin-state>
-          <test-session>
-            <sender-ip>203.0.113.3</sender-ip>
-            <sender-udp-port>54000</sender-udp-port>
-            <reflector-ip>203.0.113.4</reflector-ip>
-            <reflector-udp-port>50001</reflector-udp-port>
-            <sid>1232</sid>
-            <parent-connection-client-ip>
-               203.0.113.1
-            </parent-connection-client-ip>
-            <parent-connection-client-tcp-port>
-               16341
-            </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>
-               203.0.113.2
-            </parent-connection-server-ip>
-            <parent-connection-server-tcp-port>
-               862
-             </parent-connection-server-tcp-port>
-            <sent-packets>2</sent-packets>
-            <rcv-packets>2</rcv-packets>
-            <last-sent-seq>1</last-sent-seq>
-            <last-rcv-seq>1</last-rcv-seq>
-         </test-session>
-         <test-session>
-            <sender-ip>203.0.113.1</sender-ip>
-            <sender-udp-port>54001</sender-udp-port>
-            <reflector-ip>192.68.0.2</reflector-ip>
-            <reflector-udp-port>50001</reflector-udp-port>
-            <sid>178943</sid>
-            <parent-connection-client-ip>
-               203.0.113.1
-            </parent-connection-client-ip>
-            <parent-connection-client-tcp-port>
-               16341
-             </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>
-               203.0.113.2
-            </parent-connection-server-ip>
-            <parent-connection-server-tcp-port>
-              862
-            </parent-connection-server-tcp-port>
-            <sent-packets>21</sent-packets>
-            <rcv-packets>21</rcv-packets>
-            <last-sent-seq>20</last-sent-seq>
-            <last-rcv-seq>20</last-rcv-seq>
-         </test-session>
-      </session-reflector>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.2.xml,68)
 
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <session-reflector>
-          <admin-state>true</admin-state>
-          <test-session>
-            <sender-ip>203.0.113.3</sender-ip>
-            <sender-udp-port>54000</sender-udp-port>
-            <reflector-ip>203.0.113.4</reflector-ip>
-            <reflector-udp-port>54001</reflector-udp-port>
-            <sid>1232</sid>
-            <parent-connection-client-ip>
-                203.0.113.1
-            </parent-connection-client-ip>
-            <parent-connection-client-tcp-port>
-               16341
-            </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>
-                203.0.113.2
-            </parent-connection-server-ip>
-            <parent-connection-server-tcp-port>
-               862
-             </parent-connection-server-tcp-port>
-            <sent-packets>2</sent-packets>
-            <rcv-packets>2</rcv-packets>
-            <last-sent-seq>1</last-sent-seq>
-            <last-rcv-seq>1</last-rcv-seq>
-         </test-session>
-         <test-session>
-            <sender-ip>203.0.113.1</sender-ip>
-            <sender-udp-port>54001</sender-udp-port>
-            <reflector-ip>192.68.0.2</reflector-ip>
-            <reflector-udp-port>55001</reflector-udp-port>
-            <sid>178943</sid>
-            <parent-connection-client-ip>
-                203.0.113.1
-            </parent-connection-client-ip>
-            <parent-connection-client-tcp-port>
-               16341
-             </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>
-                203.0.113.2
-            </parent-connection-server-ip>
-            <parent-connection-server-tcp-port>
-              862
-            </parent-connection-server-tcp-port>
-            <sent-packets>21</sent-packets>
-            <rcv-packets>21</rcv-packets>
-            <last-sent-seq>20</last-sent-seq>
-            <last-rcv-seq>20</last-rcv-seq>
-         </test-session>
-      </session-reflector>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
+
 ]]></artwork>
         </figure>
       </section>
@@ -1154,7 +905,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
       accessed, among other protocols, via <xref
       target="RFC6241">NETCONF</xref>. Protocols like NETCONF use a secure
       transport layer like SSH that is mandatory to implement. The <xref
-      target="RFC6536">NETCONF Access Control Module (NACM)</xref> provides
+      target="RFC8341">NETCONF Access Control Module (NACM)</xref> provides
       the means to restrict access for particular users to a pre-configured
       set of NETCONF protocol operations and attributes.</t>
 
@@ -1234,13 +985,13 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
 
       <?rfc include='reference.RFC.7717'?>
 
+      <?rfc include='reference.RFC.7950'?>
+
       <?rfc include='reference.RFC.8174'?>
     </references>
 
     <references title="Informative References">
       <!--<?rfc include="reference.RFC.7398"?>-->
-
-      <?rfc include='reference.RFC.2898'?>
 
       <?rfc include='reference.RFC.4086'?>
 
@@ -1250,11 +1001,13 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
 
       <?rfc include='reference.RFC.6241'?>
 
-      <?rfc include='reference.RFC.6536'?>
-
       <?rfc include='reference.RFC.7426'?>
 
+      <?rfc include='reference.RFC.8018'?>
+
       <?rfc include='reference.RFC.8040'?>
+
+      <?rfc include='reference.RFC.8341'?>
 
       <?rfc include='reference.I-D.ietf-ippm-metric-registry'?>
 
@@ -1286,113 +1039,10 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
       <section title="Control-Client">
         <figure>
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <client>
-         <admin-state>true</admin-state>
-         <mode-preference-chain>
-            <priority>0</priority>
-            <mode>authenticated</mode>
-         </mode-preference-chain>
-         <mode-preference-chain>
-            <priority>1</priority>
-            <mode>unauthenticated</mode>
-         </mode-preference-chain>
-         <key-chain>
-            <key-id>KeyClient1ToRouterA</key-id>
-            <secret-key>secret1</secret-key>
-         </key-chain>
-         <key-chain>
-            <key-id>KeyForRouterB</key-id>
-            <secret-key>secret2</secret-key>
-         </key-chain>
-         <ctrl-connection>
-            <name>RouterA</name>
-            <client-ip>203.0.113.1</client-ip>
-            <server-ip>203.0.113.2</server-ip>
-            <dscp>32</dscp>
-            <key-id>KeyClient1ToRouterA</key-id>
-            <test-session-request>
-               <name>Test1</name>
-               <sender-ip>203.0.113.3</sender-ip>
-               <sender-udp-port>54000</sender-udp-port>
-               <reflector-ip>203.0.113.4</reflector-ip>
-               <reflector-udp-port>55000</reflector-udp-port>
-               <padding-length>64</padding-length>
-               <start-time>0</start-time>
-               <state>ok</state>
-               <sid>1232</sid>
-            </test-session-request>
-            <test-session-request>
-               <name>Test2</name>
-               <sender-ip>203.0.113.1</sender-ip>
-               <sender-udp-port>54001</sender-udp-port>
-               <reflector-ip>203.0.113.2</reflector-ip>
-               <reflector-udp-port>55001</reflector-udp-port>
-               <padding-length>128</padding-length>
-               <start-time>0</start-time>
-               <state>ok</state>
-               <sid>178943</sid>
-            </test-session-request>
-         </ctrl-connection>
-      </client>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-a.1.1.xml,68)
 
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <client>
-         <admin-state>true</admin-state>
-         <mode-preference-chain>
-            <priority>0</priority>
-            <mode>authenticated</mode>
-         </mode-preference-chain>
-         <mode-preference-chain>
-            <priority>1</priority>
-            <mode>unauthenticated</mode>
-         </mode-preference-chain>
-         <key-chain>
-            <key-id>KeyClient1ToRouterA</key-id>
-            <secret-key>secret1</secret-key>
-         </key-chain>
-         <key-chain>
-            <key-id>KeyForRouterB</key-id>
-            <secret-key>secret2</secret-key>
-         </key-chain>
-         <ctrl-connection>
-            <name>RouterA</name>
-            <client-ip>2001:DB8:203:0:113::1</client-ip>
-            <server-ip>2001:DB8:203:0:113::2</server-ip>
-            <dscp>32</dscp>
-            <key-id>KeyClient1ToRouterA</key-id>
-            <test-session-request>
-               <name>Test1</name>
-               <sender-ip>2001:DB8:10:1:1::1</sender-ip>
-               <sender-udp-port>54000</sender-udp-port>
-               <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
-               <reflector-udp-port>55000</reflector-udp-port>
-               <padding-length>64</padding-length>
-               <start-time>0</start-time>
-               <state>ok</state>
-               <sid>1232</sid>
-            </test-session-request>
-            <test-session-request>
-               <name>Test2</name>
-               <sender-ip>2001:DB8:203:0:113::1</sender-ip>
-               <sender-udp-port>54001</sender-udp-port>
-               <reflector-ip>2001:DB8:203:0:113::2</reflector-ip>
-               <reflector-udp-port>55001</reflector-udp-port>
-               <padding-length>128</padding-length>
-               <start-time>0</start-time>
-               <state>ok</state>
-               <sid>178943</sid>
-            </test-session-request>
-         </ctrl-connection>
-      </client>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.1.2.xml,68)
+
 ]]></artwork>
         </figure>
       </section>
@@ -1400,73 +1050,10 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
       <section title="Server">
         <figure>
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <server>
-         <admin-state>true</admin-state>
-         <servwait>1800</servwait>
-         <dscp>32</dscp>
-         <modes>authenticated unauthenticated</modes>
-         <count>1024</count>
-         <key-chain>
-            <key-id>KeyClient1ToRouterA</key-id>
-            <secret-key>secret1</secret-key>
-         </key-chain>
-         <key-chain>
-            <key-id>KeyClient10ToRouterA</key-id>
-            <secret-key>secret10</secret-key>
-         </key-chain>
-         <ctrl-connection>
-            <client-ip>203.0.113.1</client-ip>
-            <client-tcp-port>16341</client-tcp-port>
-            <server-ip>203.0.113.2</server-ip>
-            <server-tcp-port>862</server-tcp-port>
-            <state>
-               active
-             </state>
-            <dscp>32</dscp>
-            <selected-mode>unauthenticated</selected-mode>
-            <key-id>KeyClient1ToRouterA</key-id>
-            <count>1024</count>
-         </ctrl-connection>
-      </server>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-a.2.1.xml,68)
 
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <server>
-         <admin-state>true</admin-state>
-         <servwait>1800</servwait>
-         <dscp>32</dscp>
-         <modes>authenticated unauthenticated</modes>
-         <count>1024</count>
-         <key-chain>
-            <key-id>KeyClient1ToRouterA</key-id>
-            <secret-key>secret1</secret-key>
-         </key-chain>
-         <key-chain>
-            <key-id>KeyClient10ToRouterA</key-id>
-            <secret-key>secret10</secret-key>
-         </key-chain>
-         <ctrl-connection>
-            <client-ip>2001:DB8:203:0:113::1</client-ip>
-            <client-tcp-port>16341</client-tcp-port>
-            <server-ip>2001:DB8:203:0:113::2</server-ip>
-            <server-tcp-port>862</server-tcp-port>
-            <state>
-               active
-             </state>
-            <dscp>32</dscp>
-            <selected-mode>unauthenticated</selected-mode>
-            <key-id>KeyClient1ToRouterA</key-id>
-            <count>1024</count>
-         </ctrl-connection>
-      </server>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-a.2.2.xml,68)
+
 ]]></artwork>
         </figure>
       </section>
@@ -1474,41 +1061,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
       <section title="Session-Sender">
         <figure>
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-     <session-sender>
-        <admin-state>true</admin-state>
-        <test-session>
-           <name>Test1</name>
-           <ctrl-connection-name>RouterA</ctrl-connection-name>
-           <fill-mode>zero</fill-mode>
-           <number-of-packets>900</number-of-packets>
-           <periodic-interval>1</periodic-interval>
-           <state>setup</state>
-           <sent-packets>2</sent-packets>
-           <rcv-packets>2</rcv-packets>
-           <last-sent-seq>1</last-sent-seq>
-           <last-rcv-seq>1</last-rcv-seq>
-        </test-session>
-        <test-session>
-           <name>Test2</name>
-           <ctrl-connection-name>
-             RouterA
-           </ctrl-connection-name>
-           <fill-mode>random</fill-mode>
-           <number-of-packets>900</number-of-packets>
-           <lambda>1</lambda>
-           <max-interval>2</max-interval>
-           <state>setup</state>
-           <sent-packets>21</sent-packets>
-           <rcv-packets>21</rcv-packets>
-           <last-sent-seq>20</last-sent-seq>
-           <last-rcv-seq>20</last-rcv-seq>
-        </test-session>
-     </session-sender>
-  </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-a.3.1.xml,68)
+
 ]]></artwork>
         </figure>
       </section>
@@ -1516,121 +1070,10 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
       <section title="Session-Reflector">
         <figure>
           <artwork><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <session-reflector>
-         <admin-state>
-            true
-         </admin-state>
-         <test-session>
-            <sender-ip>203.0.113.3</sender-ip>
-            <sender-udp-port>54000</sender-udp-port>
-            <reflector-ip>203.0.113.4</reflector-ip>
-            <reflector-udp-port>55000</reflector-udp-port>
-            <sid>1232</sid>
-            <parent-connection-client-ip>
-               203.0.113.1
-            </parent-connection-client-ip>
-            <parent-connection-client-tcp-port>
-               16341
-            </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>
-               203.0.113.2
-            </parent-connection-server-ip>
-            <parent-connection-server-tcp-port>
-               862
-            </parent-connection-server-tcp-port>
-            <dscp>32</dscp>
-            <sent-packets>2</sent-packets>
-            <rcv-packets>2</rcv-packets>
-            <last-sent-seq>1</last-sent-seq>
-            <last-rcv-seq>1</last-rcv-seq>
-         </test-session>
-         <test-session>
-            <sender-ip>203.0.113.1</sender-ip>
-            <sender-udp-port>54001</sender-udp-port>
-            <reflector-ip>192.68.0.2</reflector-ip>
-            <reflector-udp-port>55001</reflector-udp-port>
-            <sid>178943</sid>
-            <parent-connection-client-ip>
-               203.0.113.1
-            </parent-connection-client-ip>
-            <parent-connection-client-tcp-port>
-               16341
-            </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>
-               203.0.113.2
-            </parent-connection-server-ip>
-            <parent-connection-server-tcp-port>
-               862
-            </parent-connection-server-tcp-port>
-            <dscp>32</dscp>
-            <sent-packets>21</sent-packets>
-            <rcv-packets>21</rcv-packets>
-            <last-sent-seq>20</last-sent-seq>
-            <last-rcv-seq>20</last-rcv-seq>
-         </test-session>
-      </session-reflector>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-a.4.1.xml,68)
 
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
-      <session-reflector>
-         <admin-state>true</admin-state>
-         <test-session>
-            <sender-ip>2001:DB8:10:1:1::1</sender-ip>
-            <sender-udp-port>54000</sender-udp-port>
-            <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
-            <reflector-udp-port>55000</reflector-udp-port>
-            <sid>1232</sid>
-            <parent-connection-client-ip>
-                2001:DB8:203:0:113::1
-            </parent-connection-client-ip>
-            <parent-connection-client-tcp-port>
-               16341
-            </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>
-                2001:DB8:203:0:113::2
-            </parent-connection-server-ip>
-            <parent-connection-server-tcp-port>
-               862
-            </parent-connection-server-tcp-port>
-            <dscp>32</dscp>
-            <sent-packets>2</sent-packets>
-            <rcv-packets>2</rcv-packets>
-            <last-sent-seq>1</last-sent-seq>
-            <last-rcv-seq>1</last-rcv-seq>
-         </test-session>
-         <test-session>
-            <sender-ip>2001:DB8:203:0:113::1</sender-ip>
-            <sender-udp-port>54001</sender-udp-port>
-            <reflector-ip>2001:DB8:192:68::2</reflector-ip>
-            <reflector-udp-port>55001</reflector-udp-port>
-            <sid>178943</sid>
-            <parent-connection-client-ip>
-                2001:DB8:203:0:113::1
-            </parent-connection-client-ip>
-            <parent-connection-client-tcp-port>
-               16341
-            </parent-connection-client-tcp-port>
-            <parent-connection-server-ip>
-                2001:DB8:203:0:113::2
-            </parent-connection-server-ip>
-            <parent-connection-server-tcp-port>
-               862
-            </parent-connection-server-tcp-port>
-            <dscp>32</dscp>
-            <sent-packets>21</sent-packets>
-            <rcv-packets>21</rcv-packets>
-            <last-sent-seq>20</last-sent-seq>
-            <last-rcv-seq>20</last-rcv-seq>
-         </test-session>
-      </session-reflector>
-   </twamp>
-</data>
+INSERT_TEXT_FROM_FILE(../src/examples/example-a.4.2.xml,68)
+
 ]]></artwork>
         </figure>
       </section>

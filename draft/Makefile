@@ -39,6 +39,8 @@ clean:
 	-rm -f $(draft).txt $(draft).html index.html
 	-rm -f $(next).txt $(next).html
 	-rm -f $(draft)-[0-9][0-9].xml
+	-rm ../src/yang/*\@$(shell date +%Y)-*-*-tree.txt
+	-rm ../src/yang/*\@$(shell date +%Y)-*-*.yang
 ifeq (md,$(draft_type))
 	-rm -f $(draft).xml
 endif
@@ -52,8 +54,6 @@ $(next).xml: $(draft).xml ../src/yang/ietf-twamp.yang
 
 	cd ../src; ./validate-and-gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
-	rm ../src/yang/*-tree.txt
-	rm ../src/yang/ietf-*\@$(shell date +%Y-%m-%d).yang
 
 .INTERMEDIATE: $(draft).xml
 %.xml: %.md

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+    <server>
+      <admin-state>true</admin-state>
+      <ctrl-connection>
+        <client-ip>203.0.113.1</client-ip>
+        <client-tcp-port>16341</client-tcp-port>
+        <server-ip>203.0.113.2</server-ip>
+        <server-tcp-port>862</server-tcp-port>
+        <state>active</state>
+      </ctrl-connection>
+    </server>
+  </twamp>
+</data>

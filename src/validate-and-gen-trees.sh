@@ -26,3 +26,19 @@ do
     fi
 done
 rm yang/*-tree.txt.tmp
+
+echo "Validating examples"
+
+for i in examples/example-*.xml
+do
+    name=$(echo $i | cut -f 1-3 -d '.')
+    echo "Validating $name.xml"
+    response=`yanglint -s -i -t auto -p ../../ yang/ietf-twamp\@$(date +%Y-%m-%d).yang $name.xml`
+    if [ $? -ne 0 ]; then
+       printf "failed (error code: $?)\n"
+       printf "$response\n\n"
+       echo
+       exit 1
+    fi
+done
+

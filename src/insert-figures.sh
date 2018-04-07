@@ -27,8 +27,6 @@ while ( grep INSERT_TEXT_FROM_FILE .tmp.new.txt >> /dev/null ); do
     else
       cat .tmp.pre.txt $file .tmp.post.txt > .tmp.new.txt
     fi
-
-
 done
 
 cat .tmp.new.txt
