@@ -761,7 +761,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt,68)
 
       <section anchor="yangmodule" title="YANG Module">
         <t>This section presents the YANG module for the TWAMP data model
-        defined in this document.</t>
+        defined in this document. The module imports definitions from <xref
+        target="RFC6991">Common YANG Data Types</xref>.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -841,6 +842,8 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.2.1.xml,68)
         <figure>
           <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/examples/example-6.2.2.xml,68)
+
+INSERT_TEXT_FROM_FILE(../src/examples/example-6.2.3.xml,68)
 
 ]]></artwork>
         </figure>
@@ -983,6 +986,8 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.6038'?>
 
+      <?rfc include='reference.RFC.6991'?>
+
       <?rfc include='reference.RFC.7717'?>
 
       <?rfc include='reference.RFC.7950'?>
@@ -1041,7 +1046,7 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
           <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/examples/example-a.1.1.xml,68)
 
-INSERT_TEXT_FROM_FILE(../src/examples/example-6.1.2.xml,68)
+INSERT_TEXT_FROM_FILE(../src/examples/example-a.1.2.xml,68)
 
 ]]></artwork>
         </figure>

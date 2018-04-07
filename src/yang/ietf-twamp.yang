@@ -1,12 +1,13 @@
 module ietf-twamp {
+  yang-version 1.1;
   namespace
     urn:ietf:params:xml:ns:yang:ietf-twamp; 
-
-  prefix
-    ietf-twamp;
+  prefix ietf-twamp;
 
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC 6991: Common YANG Types.";
   }
 
   organization
