@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+    <client>
+      <admin-state>true</admin-state>
+      <ctrl-connection>
+        <name>RouterA</name>
+        <client-ip>2001:DB8:203:0:113::1</client-ip>
+        <server-ip>2001:DB8:203:0:113::2</server-ip>
+        <test-session-request>
+          <name>Test1</name>
+          <sender-ip>2001:DB8:203:1:113::3</sender-ip>
+          <sender-udp-port>54000</sender-udp-port>
+          <reflector-ip>2001:DB8:203:1:113::4</reflector-ip>
+          <reflector-udp-port>55000</reflector-udp-port>
+          <start-time>0</start-time>
+        </test-session-request>
+        <test-session-request>
+          <name>Test2</name>
+          <sender-ip>2001:DB8:203:0:113::1</sender-ip>
+          <sender-udp-port>54001</sender-udp-port>
+          <reflector-ip>2001:DB8:203:0:113::2</reflector-ip>
+          <reflector-udp-port>55001</reflector-udp-port>
+          <start-time>0</start-time>
+        </test-session-request>
+      </ctrl-connection>
+      <ctrl-connection>
+        <name>RouterB</name>
+        <client-ip>2001:DB8:203:0:113::1</client-ip>
+        <server-ip>2001:DB8:203:0:113::3</server-ip>
+      </ctrl-connection>
+    </client>
+  </twamp>
+</config>

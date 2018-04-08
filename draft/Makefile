@@ -20,7 +20,7 @@ draft_type := $(suffix $(firstword $(wildcard $(draft).md $(draft).org $(draft).
 
 current_ver := $(shell git tag | grep '$(draft)-[0-9][0-9]' | tail -1 | sed -e"s/.*-//")
 ifeq "${current_ver}" ""
-next_ver ?= 01
+next_ver ?= 00
 else
 next_ver ?= $(shell printf "%.2d" $$((1$(current_ver)-99)))
 endif
@@ -39,6 +39,8 @@ clean:
 	-rm -f $(draft).txt $(draft).html index.html
 	-rm -f $(next).txt $(next).html
 	-rm -f $(draft)-[0-9][0-9].xml
+	-rm ../src/yang/*\@$(shell date +%Y)-*-*-tree.txt
+	-rm ../src/yang/*\@$(shell date +%Y)-*-*.yang
 ifeq (md,$(draft_type))
 	-rm -f $(draft).xml
 endif
@@ -50,10 +52,8 @@ $(next).xml: $(draft).xml ../src/yang/ietf-twamp.yang
 	sed -e"s/$(basename $<)-latest/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-twamp.yang > ../src/yang/ietf-twamp\@$(shell date +%Y-%m-%d).yang
 
-	cd ../src; ./gen-trees.sh; cd ..;
+	cd ../src; ./validate-and-gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
-	rm ../src/yang/*-tree.txt
-	rm ../src/yang/ietf-*\@$(shell date +%Y-%m-%d).yang
 
 .INTERMEDIATE: $(draft).xml
 %.xml: %.md

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+    <server>
+      <admin-state>true</admin-state>
+    </server>
+  </twamp>
+</config>

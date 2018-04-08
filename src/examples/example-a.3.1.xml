@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+    <session-sender>
+      <admin-state>true</admin-state>
+      <test-session>
+        <name>Test1</name>
+        <ctrl-connection-name>RouterA</ctrl-connection-name>
+        <fill-mode>zero</fill-mode>
+        <number-of-packets>900</number-of-packets>
+        <periodic-interval>1</periodic-interval>
+        <sent-packets>2</sent-packets>
+        <rcv-packets>2</rcv-packets>
+        <last-sent-seq>1</last-sent-seq>
+        <last-rcv-seq>1</last-rcv-seq>
+      </test-session>
+      <test-session>
+        <name>Test2</name>
+        <ctrl-connection-name>RouterA</ctrl-connection-name>
+        <fill-mode>random</fill-mode>
+        <number-of-packets>900</number-of-packets>
+        <lambda>1</lambda>
+        <max-interval>2</max-interval>
+        <sent-packets>21</sent-packets>
+        <rcv-packets>21</rcv-packets>
+        <last-sent-seq>20</last-sent-seq>
+        <last-rcv-seq>20</last-rcv-seq>
+      </test-session>
+    </session-sender>
+  </twamp>
+</data>

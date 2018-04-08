@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <twamp xmlns="urn:ietf:params:xml:ns:yang:ietf-twamp">
+    <session-reflector>
+      <admin-state>true</admin-state>
+      <test-session>
+        <sender-ip>2001:DB8:10:1:1::1</sender-ip>
+        <sender-udp-port>54000</sender-udp-port>
+        <reflector-ip>2001:DB8:10:1:1::2</reflector-ip>
+        <reflector-udp-port>55000</reflector-udp-port>
+        <sid>1232</sid>
+        <parent-connection-client-ip>2001:DB8:203:0:113::1</parent-connection-client-ip>
+        <parent-connection-client-tcp-port>16341</parent-connection-client-tcp-port>
+        <parent-connection-server-ip>2001:DB8:203:0:113::2</parent-connection-server-ip>
+        <parent-connection-server-tcp-port>862</parent-connection-server-tcp-port>
+        <test-packet-dscp>32</test-packet-dscp>
+        <sent-packets>2</sent-packets>
+        <rcv-packets>2</rcv-packets>
+        <last-sent-seq>1</last-sent-seq>
+        <last-rcv-seq>1</last-rcv-seq>
+      </test-session>
+      <test-session>
+        <sender-ip>2001:DB8:203:0:113::1</sender-ip>
+        <sender-udp-port>54001</sender-udp-port>
+        <reflector-ip>2001:DB8:192:68::2</reflector-ip>
+        <reflector-udp-port>55001</reflector-udp-port>
+        <sid>178943</sid>
+        <parent-connection-client-ip>2001:DB8:203:0:113::1</parent-connection-client-ip>
+        <parent-connection-client-tcp-port>16341</parent-connection-client-tcp-port>
+        <parent-connection-server-ip>2001:DB8:203:0:113::2</parent-connection-server-ip>
+        <parent-connection-server-tcp-port>862</parent-connection-server-tcp-port>
+        <test-packet-dscp>32</test-packet-dscp>
+        <sent-packets>21</sent-packets>
+        <rcv-packets>21</rcv-packets>
+        <last-sent-seq>20</last-sent-seq>
+        <last-rcv-seq>20</last-rcv-seq>
+      </test-session>
+    </session-reflector>
+  </twamp>
+</data>
