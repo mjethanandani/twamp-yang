@@ -754,7 +754,7 @@ o-------------------o                       o-------------------o
 
         <figure anchor="fig:yangtree" title="YANG Tree Diagram.">
           <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt,68)
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt)
              ]]></artwork>
         </figure>
       </section>
@@ -768,7 +768,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt,68)
           <artwork><![CDATA[
 <CODE BEGINS> file "ietf-twamp@YYYY-MM-DD.yang"
 
-INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang,68)
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD.yang)
 
 <CODE ENDS>
 ]]></artwork>
