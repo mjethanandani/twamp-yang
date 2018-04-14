@@ -30,15 +30,27 @@ module ietf-twamp {
 
   description
     "This YANG module specifies a vendor-independent data
-    model for the Two-Way Active Measurement Protocol (TWAMP).
+     model for the Two-Way Active Measurement Protocol (TWAMP).
     
-    The data model covers four TWAMP logical entities, namely,
-    Control-Client, Server, Session-Sender, and Session-Reflector,
-    as illustrated in the annotated TWAMP logical model (Fig. 1
-    of RFC XXXX).
+     The data model covers four TWAMP logical entities, namely,
+     Control-Client, Server, Session-Sender, and Session-Reflector,
+     as illustrated in the annotated TWAMP logical model (Fig. 1
+     of RFC XXXX).
 
-    This YANG module uses features to indicate which of the four
-    logical entities are supported by a TWAMP implementation.";
+     This YANG module uses features to indicate which of the four
+     logical entities are supported by a TWAMP implementation.
+
+     Copyright (c) 2018 IETF Trust and the persons identified as
+     the document authors.  All rights reserved.
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject
+     to the license terms contained in, the Simplified BSD
+     License set forth in Section 4.c of the IETF Trust's Legal
+     Provisions Relating to IETF Documents
+     (http://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX; see
+     the RFC itself for full legal notices.";
 
   revision YYYY-MM-DD {
     description
@@ -173,7 +185,7 @@ module ietf-twamp {
       enum accepted {
         value 0;
         description
-          "Indicates that accepted TWAMP-Test session request.";
+          "Indicates an accepted TWAMP-Test session request.";
       }
       enum failed {
         value 1;
@@ -316,7 +328,7 @@ module ietf-twamp {
            authenticate or encrypt'.";
         }
         leaf secret-key {
-          type binary;
+          type string;
           description
             "The secret key corresponding to the KeyID for this
              TWAMP-Control connection.";
@@ -378,11 +390,11 @@ module ietf-twamp {
          meaning 2^10 = 1024.";
       }
    description
-     "Reusable data structure for count which is used both in the
-      Server container.";
+     "Reusable data structure for count, which is used both in the
+      Server and the Control-Client.";
   }
 
-  grouping max-count {
+  grouping max-count-exponent {
     leaf max-count {
       type uint8 {
         range 10..31;
@@ -446,7 +458,7 @@ module ietf-twamp {
 
       leaf admin-state {
         type boolean;
-        mandatory true;
+        default true;
         description
           "Indicates whether the device is allowed to operate as a
            TWAMP Control-Client.";
@@ -547,7 +559,7 @@ module ietf-twamp {
             TWAMP-Control connection.";
         }
 
-        uses max-count;
+        uses max-count-exponent;
 
         leaf client-tcp-port {
           type inet:port-number;
@@ -568,6 +580,9 @@ module ietf-twamp {
              instantiation of the Server started operating.
              The timestamp format follows RFC 1305
              according to Section 4.1.2 of RFC 4656.";
+          reference
+            "RFC 4656: OWAMP, Section 3.1 and 4.1.2,
+             RFC 1305: NTPv3 Specification.";
         }
 
         leaf repeat-count {
@@ -721,17 +736,20 @@ module ietf-twamp {
           }
 
           leaf reflector-udp-port {
-            type uint32 {
+            type inet:port-number {
               range "862 | 49152..65535";
             }
             description
               "This parameter defines the UDP port number that
                will be used by the Session-Reflector for
                this TWAMP-Test session. The default number is
-               within to the dynamic port range and is to be placed
+               within the dynamic port range and is to be placed
                in the Receiver Port field of the Request-TW-Session
-               message. The new well-known port (862) MAY be
+               message. The well-known port (862) MAY be
                used.";
+            reference
+              "draft-ietf-ippm-port-twamp-test: OWAMP and TWAMP
+               Well-Known Port Assignments.";
           }
 
           leaf timeout {
@@ -743,10 +761,12 @@ module ietf-twamp {
                Session-Reflector should continue to respond to
                packets belonging to this TWAMP-Test session after
                a Stop-Sessions TWAMP-Control message has been
-               received (RFC 5357, Section 3.8).
+               received.
 
                This value will be placed in the Timeout field of
                the Request-TW-Session message.";
+            reference
+              "RFC 5357: TWAMP, Section 3.8";
           }
 
           leaf padding-length {
@@ -909,7 +929,7 @@ module ietf-twamp {
 
       leaf admin-state {
         type boolean;
-        mandatory true;
+        default true;
         description
           "Indicates whether the device is allowed to operate
            as a TWAMP Server.";
@@ -970,7 +990,7 @@ module ietf-twamp {
 
       uses count;
 
-      uses max-count;
+      uses max-count-exponent;
 
       leaf modes {
         type twamp-modes;
@@ -1075,7 +1095,7 @@ module ietf-twamp {
              is in use for this TWAMP-Control connection.";
         }
 
-        uses max-count {
+        uses max-count-exponent {
           description
             "This read-only value indicates the actual max-count in
              use for this control connection. Usually this would be
@@ -1117,12 +1137,12 @@ module ietf-twamp {
 
     container session-sender {
       if-feature session-sender;
-      presence  "Enables TWAMP Session-Sender functionality.";
+      presence "Enables TWAMP Session-Sender functionality.";
       description
         "Configuration of the TWAMP Session-Sender logical entity";
       leaf admin-state {
         type boolean;
-        mandatory true;
+        default true;
         description
           "Indicates whether the device is allowed to operate
            as a TWAMP Session-Sender.";
@@ -1241,7 +1261,7 @@ module ietf-twamp {
 
       leaf admin-state {
         type boolean;
-        mandatory true;
+        default true;
         description
           "Indicates whether the device is allowed to operate
            as a TWAMP Session-Reflector.";
@@ -1306,7 +1326,7 @@ module ietf-twamp {
         }
 
         leaf reflector-udp-port {
-          type uint32 {
+          type inet:port-number {
             range "862 | 49152..65535";
             }
           description
