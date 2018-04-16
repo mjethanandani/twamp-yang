@@ -16,7 +16,7 @@
 <!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
 <!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
 ]>
-<rfc category="std" docName="draft-ietf-ippm-twamp-yang-07" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-08" ipr="trust200902">
   <?rfc toc="yes" ?>
 
   <?rfc symrefs="yes" ?>
@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <date day="8" month="April" year="2018"/>
+    <date day="14" month="April" year="2018"/>
 
     <area>Transport</area>
 
@@ -163,14 +163,14 @@
 
   <middle>
     <section title="Introduction">
-      <t>The Two-Way Active Measurement Protocol (TWAMP) <xref
-      target="RFC5357"/> is used to measure network performance parameters
-      such as latency, bandwidth, and packet loss by sending probe packets and
+      <t>The <xref target="RFC5357">Two-Way Active Measurement Protocol
+      (TWAMP) </xref> is used to measure network performance parameters such
+      as latency, bandwidth, and packet loss by sending probe packets and
       measuring their experience in the network. To date, TWAMP
       implementations do not come with a standard management framework, and,
       as such, implementors have no choice except to provide a proprietary
       mechanism. This document addresses this gap by formally specifying the
-      TWAMP data model using YANG.</t>
+      TWAMP data model using <xref target="RFC7950">YANG</xref>.</t>
 
       <section anchor="motivation" title="Motivation">
         <t>In current TWAMP deployments the lack of a standardized data model
@@ -178,10 +178,12 @@
         measurements across equipment from different vendors. In large,
         virtualized, and dynamically instantiated infrastructures where
         network functions are placed according to orchestration algorithms as
-        discussed in <xref target="I-D.unify-nfvrg-challenges"/><xref
-        target="I-D.unify-nfvrg-devops"/>, proprietary mechanisms for managing
-        TWAMP measurements pose severe limitations with respect to
-        programmability.</t>
+        discussed in <xref target="I-D.unify-nfvrg-challenges">Unifying
+        Carrier and Cloud Networks: Problem Statement and Challenges
+        </xref><xref target="I-D.unify-nfvrg-devops"> DevOps For
+        Software-Defined Telecom Infrastructures </xref>, proprietary
+        mechanisms for managing TWAMP measurements pose severe limitations
+        with respect to programmability.</t>
 
         <t>Two major trends call for standardizing TWAMP management aspects.
         First, we expect that in the coming years large-scale and multi-vendor
@@ -191,17 +193,18 @@
         expensive and inefficient. Second, the increasingly software-defined
         and virtualized nature of network infrastructures, based on dynamic
         service chains <xref target="NSC"/> and programmable control and
-        management planes <xref target="RFC7426"/> requires a well-defined
-        data model for TWAMP implementations. This document defines such a
-        TWAMP data model and specifies it formally using the YANG data
-        modeling language <xref target="RFC7950"/>.</t>
+        management planes <xref target="RFC7426">Software-Defined Networking
+        (SDN): Layers and Architecture Terminology </xref> requires a
+        well-defined data model for TWAMP implementations. This document
+        defines such a TWAMP data model and specifies it formally using the
+        <xref target="RFC7950">YANG</xref> data modeling language.</t>
 
         <t>Note to RFC Editor:</t>
 
         <t>Please replace the date YYYY-MM-DD in Section 5.2 of the draft with
         the date of publication of this draft as a RFC. Also, replace
-        reference to RFC XXXX, and draft-ietf-ippm-metric-registry with the
-        RFC numbers assigned to the draft.</t>
+        reference to RFC XXXX, and draft-ietf-port-twamp-test with the RFC
+        numbers assigned to the drafts.</t>
       </section>
 
       <section title="Terminology">
@@ -230,13 +233,13 @@
       vendor-independent data model for TWAMP implementations.</t>
 
       <t><xref target="fig:scope"/> illustrates a redrawn version of the TWAMP
-      logical model found in Section 1.2 of <xref target="RFC5357"/>. The
-      figure is annotated with pointers to the UML diagrams provided in this
-      document and associated with the data model of the four logical entities
-      in a TWAMP deployment, namely the TWAMP Control-Client, Server,
-      Session-Sender and Session-Reflector.</t>
+      logical model found in Section 1.2 of <xref target="RFC5357">TWAMP
+      </xref>. The figure is annotated with pointers to the UML diagrams
+      provided in this document and associated with the data model of the four
+      logical entities in a TWAMP deployment, namely the TWAMP Control-Client,
+      Server, Session-Sender and Session-Reflector.</t>
 
-      <t>As per <xref target="RFC5357"/>, unlabeled links in <xref
+      <t>As per <xref target="RFC5357">TWAMP </xref>, unlabeled links in <xref
       target="fig:scope"/> are left unspecified and may be proprietary
       protocols.</t>
 
@@ -256,14 +259,14 @@
 ]]></artwork>
       </figure>
 
-      <t>As per <xref target="RFC5357"/>, a TWAMP implementation may follow a
-      simplified logical model, in which the same node acts both as
-      Control-Client and Session-Sender, while another node acts at the same
-      time as TWAMP Server and Session-Reflector. <xref target="fig:scope2"/>
-      illustrates this simplified logical model and indicates the interaction
-      between the TWAMP configuration client and server using, for instance,
-      NETCONF <xref target="RFC6241"/> or RESTCONF <xref
-      target="RFC8040"/>.</t>
+      <t>As per <xref target="RFC5357">TWAMP </xref>, a TWAMP implementation
+      may follow a simplified logical model, in which the same node acts both
+      as Control-Client and Session-Sender, while another node acts at the
+      same time as TWAMP Server and Session-Reflector. <xref
+      target="fig:scope2"/> illustrates this simplified logical model and
+      indicates the interaction between the TWAMP configuration client and
+      server using, for instance, <xref target="RFC6241">NETCONF </xref> or
+      <xref target="RFC8040">RESTCONF </xref>.</t>
 
       <figure anchor="fig:scope2" title="Simplified TWAMP model and protocols">
         <artwork><![CDATA[
@@ -293,8 +296,8 @@ o-------------------o                       o-------------------o
       stored results are cleared, and so on, are not addressed by the
       configuration model defined in this document. As noted above, such
       operational actions are not part of the TWAMP specification <xref
-      target="RFC5357"/> and hence are out of scope of this document. See also
-      <xref target="OperationalCommands"/>.</t>
+      target="RFC5357">TWAMP </xref> and hence are out of scope of this
+      document. See also <xref target="OperationalCommands"/>.</t>
     </section>
 
     <section anchor="structure" title="Data Model Overview">
@@ -343,8 +346,9 @@ o-------------------o                       o-------------------o
 
             <t>Authentication and encryption attributes such as KeyID, Token
             and the Client Initialization Vector (Client-IV); see also the
-            last paragraph of Section 6 in <xref target="RFC4656"/> and <xref
-            target="RFC4086"/>.</t>
+            last paragraph of Section 6 in <xref target="RFC4656">OWAMP
+            </xref> and <xref target="RFC4086">Randomness Requirements for
+            Security </xref>.</t>
           </list></t>
 
         <t>Each TWAMP-Control connection, in turn, is associated with zero or
@@ -365,8 +369,8 @@ o-------------------o                       o-------------------o
 
             <t>Information pertaining to the test packet stream, such as the
             test starting time, which performance metric is to be used <xref
-            target="I-D.ietf-ippm-metric-registry"/>, or whether the test
-            should be repeated.</t>
+            target="I-D.ietf-ippm-metric-registry">Registry for Performance
+            Metrics </xref>, or whether the test should be repeated.</t>
           </list></t>
       </section>
 
@@ -399,7 +403,8 @@ o-------------------o                       o-------------------o
 
             <t>Information pertaining to the test packet stream, such as, for
             example, the number of test packets and the packet distribution to
-            be employed; see also <xref target="RFC3432"/>.</t>
+            be employed; see also <xref target="RFC3432">Network performence
+            measurement with periodic streams </xref>.</t>
           </list></t>
       </section>
 
@@ -411,7 +416,7 @@ o-------------------o                       o-------------------o
         <t>Each Session-Reflector is associated with zero or more TWAMP-Test
         sessions. For each test session, the REFWAIT timeout parameter which
         determines whether to discontinue the session if no packets have been
-        received (<xref target="RFC5357"/>, Section 4.2) can be
+        received (<xref target="RFC5357">TWAMP </xref>, Section 4.2) can be
         configured.</t>
 
         <t>Read-only access to other data model parameters, such as the Sender
@@ -490,11 +495,14 @@ o-------------------o                       o-------------------o
 
         <t>Note that the list of preferred Modes may set bit position
         combinations when necessary, such as when referring to the extended
-        TWAMP features in <xref target="RFC5618"/>, <xref target="RFC5938"/>,
-        <xref target="RFC6038"/>, and <xref target="RFC7717"/>. If the
-        Control-Client cannot determine an acceptable Mode, it MUST respond
-        with zero Mode bits set in the Set-up Response message, indicating it
-        will not continue with the control connection.</t>
+        TWAMP features in <xref target="RFC5618">Mixed Security Mode for TWAMP
+        </xref>, <xref target="RFC5938">Individual Session Control Feature for
+        TWAMP </xref>, <xref target="RFC6038">TWAMP Reflect Octets and
+        Symmetrical Size Features </xref>, and <xref
+        target="RFC7717">IKEv2-Derived Shared Secret Key for OWAMP and TWAMP
+        </xref>. If the Control-Client cannot determine an acceptable Mode, it
+        MUST respond with zero Mode bits set in the Set-up Response message,
+        indicating it will not continue with the control connection.</t>
 
         <t>In addition, the client container holds a list named key-chain
         which relates KeyIDs with the respective secret keys. Both the Server
@@ -506,11 +514,12 @@ o-------------------o                       o-------------------o
         keys for different Servers. The secret-key is the shared secret, an
         octet string of arbitrary length whose interpretation as a text string
         is unspecified. The key-id and secret-key encoding SHOULD follow
-        Section 9.4 of <xref target="RFC7950"/>. The derived key length (dkLen
-        in <xref target="RFC8018"/>) MUST be 16 octets for the AES Session-key
-        used for encryption and 32 octets for the HMAC-SHA1 Session-key used
-        for authentication; see also Section 6.10 of <xref
-        target="RFC4656"/>.</t>
+        Section 9.4 of <xref target="RFC7950">YANG </xref>. The derived key
+        length (dkLen in <xref target="RFC8018">PKCS #5: Password-Based
+        Cryptography Specification Version 2.1 </xref>) MUST be 16 octets for
+        the AES Session-key used for encryption and 32 octets for the
+        HMAC-SHA1 Session-key used for authentication; see also Section 6.10
+        of <xref target="RFC4656">OWAMP </xref>.</t>
 
         <t>Each client container also holds a list of control connections,
         where each item in the list describes a TWAMP control connection
@@ -522,7 +531,7 @@ o-------------------o                       o-------------------o
         test-session-request holds information associated with the
         Control-Client for this test session. This includes information
         associated with the Request-TW-Session/Accept-Session message exchange
-        (see Section 3.5 of <xref target="RFC5357"/>).</t>
+        (see Section 3.5 of <xref target="RFC5357">TWAMP </xref>).</t>
 
         <t>There SHALL be one instance of test-session-request for each
         TWAMP-Test session that is to be negotiated by this TWAMP-Control
@@ -713,7 +722,8 @@ o-------------------o                       o-------------------o
         (sid). This value is auto-allocated by the TWAMP Server as test
         session requests are received, and communicated back to the
         Control-Client in the SID field of the Accept-Session message; see
-        Section 4.3 of <xref target="RFC6038"/>.</t>
+        Section 4.3 of <xref target="RFC6038">TWAMP Reflect Octets and
+        Symmetrical Size Features </xref>.</t>
 
         <t>When attempting to retrieve operational data for active test
         sessions from a Session-Reflector device, the user will not know what
@@ -750,7 +760,9 @@ o-------------------o                       o-------------------o
         <t>This section presents a simplified graphical representation of the
         TWAMP data model using a YANG tree diagram. Readers should keep in
         mind that the limit of 72 characters per line forces us to introduce
-        artificial line breaks in some tree diagram nodes.</t>
+        artificial line breaks in some tree diagram nodes. Tree diagrams used
+        in this document follow the notation defined in <xref
+        target="RFC8340">YANG Tree Diagrams</xref>.</t>
 
         <figure anchor="fig:yangtree" title="YANG Tree Diagram.">
           <artwork><![CDATA[
@@ -762,7 +774,17 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt)
       <section anchor="yangmodule" title="YANG Module">
         <t>This section presents the YANG module for the TWAMP data model
         defined in this document. The module imports definitions from <xref
-        target="RFC6991">Common YANG Data Types</xref>.</t>
+        target="RFC1305">NTPv3 Specification</xref>, <xref
+        target="RFC4086">Randomness Requirements for Security</xref>, <xref
+        target="RFC4656">OWAMP</xref>, <xref target="RFC5357">TWAMP</xref>,
+        <xref target="RFC5618">More Features for TWAMP</xref>, <xref
+        target="RFC5938">Individual Session Control Feature</xref>, <xref
+        target="RFC6038">TWAMP Reflect Octets and Symmetrical Size
+        Features</xref>, <xref target="RFC6991">Common YANG Data Types</xref>,
+        <xref target="RFC7312">Advances Stream and Sampling Framework</xref>,
+        <xref target="RFC7717">IKEv2-Derived Shared Secret Key for OWAMP and
+        TWAMP</xref>, and <xref target="I-D.ietf-ippm-port-twamp-test">OWAMP
+        and TWAMP Well-Known Port Assignments</xref>.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -904,13 +926,20 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
     </section>
 
     <section anchor="security" title="Security Considerations">
-      <t>The YANG module defined in <xref target="module"/> is designed to be
-      accessed, among other protocols, via <xref
-      target="RFC6241">NETCONF</xref>. Protocols like NETCONF use a secure
-      transport layer like SSH that is mandatory to implement. The <xref
-      target="RFC8341">NETCONF Access Control Module (NACM)</xref> provides
-      the means to restrict access for particular users to a pre-configured
-      set of NETCONF protocol operations and attributes.</t>
+      <t>The YANG module specified in <xref target="module"/> this document
+      defines a schema for data that is designed to be accessed via network
+      management protocols such as <xref target="RFC6241">NETCONF</xref> or
+      <xref target="RFC8040">RESTCONF</xref>. The lowest <xref
+      target="RFC6241">NETCONF</xref> layer is the secure transport layer, and
+      the mandatory-to-implement secure transport is <xref
+      target="RFC6242">Secure Shell (SSH)</xref>. The lowest RESTCONF layer is
+      HTTPS, and the mandatory-to-implement secure transport is <xref
+      target="RFC5246">TLS</xref>.</t>
+
+      <t>The <xref target="RFC8341">NETCONF Access Control Module
+      (NACM)</xref> provides the means to restrict access for particular
+      NETCONF or RESTCONF users to a preconfigured subset of all available
+      NETCONF or RESTCONF protocol operations and content..</t>
 
       <t>There are a number of nodes defined in this YANG module which are
       writeable. These data nodes may be considered sensitive and vulnerable
@@ -924,9 +953,10 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
     </section>
 
     <section anchor="iana" title="IANA Considerations">
-      <t>This document registers a URI in the IETF XML registry <xref
-      target="RFC3688"/>. Following the format in <xref target="RFC3688"/>,
-      the following registration is requested to be made.</t>
+      <t>This document registers a URI in the <xref target="RFC3688">IETF XML
+      registry </xref>. Following the format in <xref target="RFC3688">IETF
+      XML Registry </xref>, the following registration is requested to be
+      made.</t>
 
       <t>URI: urn:ietf:params:xml:ns:yang:ietf-twamp</t>
 
@@ -935,7 +965,7 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
       <t>XML: N/A, the requested URI is an XML namespace.</t>
 
       <t>This document registers a YANG module in the YANG Module Names
-      registry <xref target="RFC6020"/>.</t>
+      registry <xref target="RFC6020">YANG </xref>.</t>
 
       <t>name: ietf-twamp</t>
 
@@ -972,6 +1002,8 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
   <back>
     <references title="Normative References">
+      <?rfc include='reference.RFC.1305'?>
+
       <?rfc include='reference.RFC.2119'?>
 
       <?rfc include='reference.RFC.3432'?>
@@ -988,11 +1020,15 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.6991'?>
 
+      <?rfc include='reference.RFC.7312'?>
+
       <?rfc include='reference.RFC.7717'?>
 
       <?rfc include='reference.RFC.7950'?>
 
       <?rfc include='reference.RFC.8174'?>
+
+      <?rfc include='reference.I-D.ietf-ippm-port-twamp-test'?>
     </references>
 
     <references title="Informative References">
@@ -1000,11 +1036,15 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.4086'?>
 
+      <?rfc include='reference.RFC.5246'?>
+
       <?rfc include='reference.RFC.5618'?>
 
       <?rfc include='reference.RFC.5938'?>
 
       <?rfc include='reference.RFC.6241'?>
+
+      <?rfc include='reference.RFC.6242'?>
 
       <?rfc include='reference.RFC.7426'?>
 
@@ -1013,6 +1053,8 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
       <?rfc include='reference.RFC.8040'?>
 
       <?rfc include='reference.RFC.8341'?>
+
+      <?rfc include='reference.RFC.8340'?>
 
       <?rfc include='reference.I-D.ietf-ippm-metric-registry'?>
 
@@ -1094,11 +1136,11 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-a.4.2.xml,68)
       stopping control connections or test sessions or groups of sessions;
       retrieving results; clearing stored results, and so on.</t>
 
-      <t>However, <xref target="RFC5357"/> does not attempt to describe such
-      operational actions. Refer also to <xref target="scope"/> and the
-      unlabeled links in <xref target="fig:scope"/>. In actual deployments
-      different TWAMP implementations may support different sets of
-      operational commands, with different restrictions. Therefore, this
+      <t>However, <xref target="RFC5357">TWAMP </xref> does not attempt to
+      describe such operational actions. Refer also to <xref target="scope"/>
+      and the unlabeled links in <xref target="fig:scope"/>. In actual
+      deployments different TWAMP implementations may support different sets
+      of operational commands, with different restrictions. Therefore, this
       document considers it the responsibility of the individual
       implementation to define its corresponding TWAMP operational commands
       data model.</t>
