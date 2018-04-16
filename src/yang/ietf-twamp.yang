@@ -451,7 +451,6 @@ module ietf-twamp {
 
     container client {
       if-feature control-client;
-      presence "Enables TWAMP Control-Client functionality.";
       description
         "Configuration of the TWAMP Control-Client logical
          entity.";
@@ -923,7 +922,6 @@ module ietf-twamp {
 
     container server {
       if-feature server;
-      presence "Enables TWAMP Server functionality.";
       description 
         "Configuration of the TWAMP Server logical entity.";
 
@@ -1137,7 +1135,6 @@ module ietf-twamp {
 
     container session-sender {
       if-feature session-sender;
-      presence "Enables TWAMP Session-Sender functionality.";
       description
         "Configuration of the TWAMP Session-Sender logical entity";
       leaf admin-state {
@@ -1254,7 +1251,6 @@ module ietf-twamp {
 
     container session-reflector {
       if-feature session-reflector;
-      presence "Enables TWAMP Session-Reflector functionality.";
       description
         "Configuration of the TWAMP Session-Reflector logical
          entity";
