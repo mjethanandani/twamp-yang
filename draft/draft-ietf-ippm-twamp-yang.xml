@@ -16,7 +16,7 @@
 <!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
 <!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
 ]>
-<rfc category="std" docName="draft-ietf-ippm-twamp-yang-08" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-09" ipr="trust200902">
   <?rfc toc="yes" ?>
 
   <?rfc symrefs="yes" ?>
@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <date day="14" month="April" year="2018"/>
+    <date day="20" month="April" year="2018"/>
 
     <area>Transport</area>
 
@@ -155,9 +155,9 @@
 
     <abstract>
       <t>This document specifies a data model for client and server
-      implementations of the Two-Way Active Measurement Protocol (TWAMP). We
-      define the TWAMP data model through Unified Modeling Language (UML)
-      class diagrams and formally specify it using YANG.</t>
+      implementations of the Two-Way Active Measurement Protocol (TWAMP). The
+      document defines the TWAMP data model through Unified Modeling Language
+      (UML) class diagrams and formally specifies it using YANG.</t>
     </abstract>
   </front>
 
@@ -186,16 +186,16 @@
         with respect to programmability.</t>
 
         <t>Two major trends call for standardizing TWAMP management aspects.
-        First, we expect that in the coming years large-scale and multi-vendor
-        TWAMP deployments will become the norm. From an operations
-        perspective, using several vendor-specific TWAMP configuration
-        mechanisms when one standard mechanism could provide an alternative is
-        expensive and inefficient. Second, the increasingly software-defined
-        and virtualized nature of network infrastructures, based on dynamic
-        service chains <xref target="NSC"/> and programmable control and
-        management planes <xref target="RFC7426">Software-Defined Networking
-        (SDN): Layers and Architecture Terminology </xref> requires a
-        well-defined data model for TWAMP implementations. This document
+        First, it is expected that in the coming years large-scale and
+        multi-vendor TWAMP deployments will become the norm. From an
+        operations perspective, using several vendor-specific TWAMP
+        configuration mechanisms when one standard mechanism could provide an
+        alternative is expensive and inefficient. Second, the increasingly
+        software-defined and virtualized nature of network infrastructures,
+        based on dynamic service chains <xref target="NSC"/> and programmable
+        control and management planes <xref target="RFC7426">Software-Defined
+        Networking (SDN): Layers and Architecture Terminology </xref> requires
+        a well-defined data model for TWAMP implementations. This document
         defines such a TWAMP data model and specifies it formally using the
         <xref target="RFC7950">YANG</xref> data modeling language.</t>
 
@@ -320,9 +320,9 @@ o-------------------o                       o-------------------o
       <t>Finally, the data model includes attributes that relate to the
       operational state of the TWAMP implementation.</t>
 
-      <t>As we describe the TWAMP data model in the remaining sections of this
-      document, readers should keep in mind the functional entity grouping
-      illustrated in <xref target="fig:scope"/>.</t>
+      <t>As the TWAMP data model is described in the remaining sections of
+      this document, readers should keep in mind the functional entity
+      grouping illustrated in <xref target="fig:scope"/>.</t>
 
       <section anchor="twamp-client" title="Control-Client">
         <t>A TWAMP Control-Client has an administrative status field set at
@@ -352,8 +352,8 @@ o-------------------o                       o-------------------o
           </list></t>
 
         <t>Each TWAMP-Control connection, in turn, is associated with zero or
-        more TWAMP-Test sessions. For each test session we note the following
-        configuration items: <list style="symbols">
+        more TWAMP-Test sessions. For each test session, the following
+        configuration items should be noted: <list style="symbols">
             <t>The test session name that uniquely identifies a particular
             test session at the Control-Client and Session-Sender. Similarly
             to the control connections above, this unique test session name is
@@ -774,17 +774,19 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt)
       <section anchor="yangmodule" title="YANG Module">
         <t>This section presents the YANG module for the TWAMP data model
         defined in this document. The module imports definitions from <xref
+        target="RFC6991">Common YANG Data Types</xref>, and references <xref
         target="RFC1305">NTPv3 Specification</xref>, <xref
+        target="RFC2330">Framework for IP Performance Metrics</xref>, <xref
         target="RFC4086">Randomness Requirements for Security</xref>, <xref
         target="RFC4656">OWAMP</xref>, <xref target="RFC5357">TWAMP</xref>,
         <xref target="RFC5618">More Features for TWAMP</xref>, <xref
         target="RFC5938">Individual Session Control Feature</xref>, <xref
         target="RFC6038">TWAMP Reflect Octets and Symmetrical Size
-        Features</xref>, <xref target="RFC6991">Common YANG Data Types</xref>,
-        <xref target="RFC7312">Advances Stream and Sampling Framework</xref>,
-        <xref target="RFC7717">IKEv2-Derived Shared Secret Key for OWAMP and
-        TWAMP</xref>, and <xref target="I-D.ietf-ippm-port-twamp-test">OWAMP
-        and TWAMP Well-Known Port Assignments</xref>.</t>
+        Features</xref>, <xref target="RFC7312">Advances Stream and Sampling
+        Framework</xref>, <xref target="RFC7717">IKEv2-Derived Shared Secret
+        Key for OWAMP and TWAMP</xref>, and <xref
+        target="I-D.ietf-ippm-port-twamp-test">OWAMP and TWAMP Well-Known Port
+        Assignments</xref>.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -1006,9 +1008,13 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.2119'?>
 
+      <?rfc include='reference.RFC.2330'?>
+
       <?rfc include='reference.RFC.3432'?>
 
       <?rfc include='reference.RFC.3688'?>
+
+      <?rfc include='reference.RFC.4086'?>
 
       <?rfc include='reference.RFC.4656'?>
 
@@ -1026,15 +1032,17 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.7950'?>
 
+      <?rfc include='reference.RFC.8018'?>
+
       <?rfc include='reference.RFC.8174'?>
 
       <?rfc include='reference.I-D.ietf-ippm-port-twamp-test'?>
+
+      <?rfc include='reference.I-D.ietf-ippm-metric-registry'?>
     </references>
 
     <references title="Informative References">
       <!--<?rfc include="reference.RFC.7398"?>-->
-
-      <?rfc include='reference.RFC.4086'?>
 
       <?rfc include='reference.RFC.5246'?>
 
@@ -1048,15 +1056,11 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.7426'?>
 
-      <?rfc include='reference.RFC.8018'?>
-
       <?rfc include='reference.RFC.8040'?>
 
       <?rfc include='reference.RFC.8341'?>
 
       <?rfc include='reference.RFC.8340'?>
-
-      <?rfc include='reference.I-D.ietf-ippm-metric-registry'?>
 
       <?rfc include='reference.I-D.unify-nfvrg-challenges'?>
 

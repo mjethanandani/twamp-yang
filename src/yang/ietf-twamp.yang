@@ -395,7 +395,7 @@ module ietf-twamp {
   }
 
   grouping max-count-exponent {
-    leaf max-count {
+    leaf max-count-exponent {
       type uint8 {
         range 10..31;
       }
@@ -425,7 +425,8 @@ module ietf-twamp {
 
          TWAMP-compliant systems SHOULD have a configuration
          control to limit the maximum count value. The default
-         max-count value SHOULD be 32768.'
+         max-count-exponent value SHOULD be 15 which corresponds
+         to a maximum value of 2**15 or 32768.'
 
          RFC 5357 does not qualify 'significant period' in terms of
          time, but it is clear that this depends on the processing
