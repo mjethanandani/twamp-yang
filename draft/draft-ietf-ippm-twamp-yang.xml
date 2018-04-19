@@ -486,8 +486,8 @@ o-------------------o                       o-------------------o
         the operator of this Control-Client, including the authentication and
         encryption Modes. Specifically, mode-preference-chain lists the mode
         and its corresponding priority, expressed as a 16-bit unsigned
-        integer, where zero is the highest priority and subsequent values are
-        monotonically increasing.</t>
+        integer, where zero is the highest priority and subsequent values
+        integers increase by one.</t>
 
         <t>Depending on the Modes available in the Server Greeting, the
         Control-Client MUST choose the highest priority Mode from the
