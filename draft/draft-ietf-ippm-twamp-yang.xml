@@ -180,7 +180,7 @@
         network functions are placed according to orchestration algorithms as
         discussed in <xref target="I-D.unify-nfvrg-challenges">Unifying
         Carrier and Cloud Networks: Problem Statement and Challenges
-        </xref><xref target="I-D.unify-nfvrg-devops"> DevOps For
+        </xref>, and <xref target="I-D.unify-nfvrg-devops"> DevOps For
         Software-Defined Telecom Infrastructures </xref>, proprietary
         mechanisms for managing TWAMP measurements pose severe limitations
         with respect to programmability.</t>
