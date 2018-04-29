@@ -16,7 +16,7 @@
 <!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
 <!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
 ]>
-<rfc category="std" docName="draft-ietf-ippm-twamp-yang-09" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-10" ipr="trust200902">
   <?rfc toc="yes" ?>
 
   <?rfc symrefs="yes" ?>
@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <date day="20" month="April" year="2018"/>
+    <date day="30" month="April" year="2018"/>
 
     <area>Transport</area>
 
@@ -170,7 +170,7 @@
       implementations do not come with a standard management framework, and,
       as such, implementors have no choice except to provide a proprietary
       mechanism. This document addresses this gap by formally specifying the
-      TWAMP data model using <xref target="RFC7950">YANG</xref>.</t>
+      TWAMP data model using <xref target="RFC7950">YANG 1.1 </xref>.</t>
 
       <section anchor="motivation" title="Motivation">
         <t>In current TWAMP deployments the lack of a standardized data model
@@ -179,11 +179,11 @@
         virtualized, and dynamically instantiated infrastructures where
         network functions are placed according to orchestration algorithms as
         discussed in <xref target="I-D.unify-nfvrg-challenges">Unifying
-        Carrier and Cloud Networks: Problem Statement and Challenges
-        </xref>, and <xref target="I-D.unify-nfvrg-devops"> DevOps For
-        Software-Defined Telecom Infrastructures </xref>, proprietary
-        mechanisms for managing TWAMP measurements pose severe limitations
-        with respect to programmability.</t>
+        Carrier and Cloud Networks: Problem Statement and Challenges </xref>,
+        and <xref target="I-D.unify-nfvrg-devops"> DevOps For Software-Defined
+        Telecom Infrastructures </xref>, proprietary mechanisms for managing
+        TWAMP measurements pose severe limitations with respect to
+        programmability.</t>
 
         <t>Two major trends call for standardizing TWAMP management aspects.
         First, it is expected that in the coming years large-scale and
@@ -197,14 +197,14 @@
         Networking (SDN): Layers and Architecture Terminology </xref> requires
         a well-defined data model for TWAMP implementations. This document
         defines such a TWAMP data model and specifies it formally using the
-        <xref target="RFC7950">YANG</xref> data modeling language.</t>
+        <xref target="RFC7950">YANG 1.1 </xref> data modeling language.</t>
 
         <t>Note to RFC Editor:</t>
 
         <t>Please replace the date YYYY-MM-DD in Section 5.2 of the draft with
         the date of publication of this draft as a RFC. Also, replace
-        reference to RFC XXXX, and draft-ietf-port-twamp-test with the RFC
-        numbers assigned to the drafts.</t>
+        reference to RFC XXXX, and draft-ietf-ippm-port-twamp-test with the
+        RFC numbers assigned to the drafts.</t>
       </section>
 
       <section title="Terminology">
@@ -951,7 +951,8 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <t>Examples of nodes that are particularly vulnerable include several
       timeout values put in the protocol to protect against sessions that are
-      not active but are consuming resources.</t>
+      not active but are consuming resources. Limiting access to these nodes
+      will limit the ability to launch an attack in network environments.</t>
     </section>
 
     <section anchor="iana" title="IANA Considerations">
