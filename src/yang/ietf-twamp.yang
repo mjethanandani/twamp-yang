@@ -328,7 +328,7 @@ module ietf-twamp {
            authenticate or encrypt'.";
         }
         leaf secret-key {
-          type string;
+          type binary;
           description
             "The secret key corresponding to the KeyID for this
              TWAMP-Control connection.";
