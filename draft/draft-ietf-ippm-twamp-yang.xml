@@ -16,7 +16,7 @@
 <!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
 <!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
 ]>
-<rfc category="std" docName="draft-ietf-ippm-twamp-yang-10" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-11" ipr="trust200902">
   <?rfc toc="yes" ?>
 
   <?rfc symrefs="yes" ?>
@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <date day="30" month="April" year="2018"/>
+    <date day="25" month="May" year="2018"/>
 
     <area>Transport</area>
 
@@ -511,15 +511,15 @@ o-------------------o                       o-------------------o
         respectively). The Server, being prepared to conduct sessions with
         more than one Control-Client, uses KeyIDs to choose the appropriate
         secret-key; a Control-Client would typically have different secret
-        keys for different Servers. The secret-key is the shared secret, an
-        octet string of arbitrary length whose interpretation as a text string
-        is unspecified. The key-id and secret-key encoding SHOULD follow
-        Section 9.4 of <xref target="RFC7950">YANG </xref>. The derived key
-        length (dkLen in <xref target="RFC8018">PKCS #5: Password-Based
-        Cryptography Specification Version 2.1 </xref>) MUST be 16 octets for
-        the AES Session-key used for encryption and 32 octets for the
-        HMAC-SHA1 Session-key used for authentication; see also Section 6.10
-        of <xref target="RFC4656">OWAMP </xref>.</t>
+        keys for different Servers. The secret-key is the shared secret, a
+        sequence of octets of arbitrary length whose interpretation is
+        unspecified. The key-id and secret-key encoding SHOULD follow Section
+        9.4 of <xref target="RFC7950">YANG </xref>. The derived key length
+        (dkLen in <xref target="RFC8018">PKCS #5: Password-Based Cryptography
+        Specification Version 2.1 </xref>) MUST be 16 octets for the AES
+        Session-key used for encryption and 32 octets for the HMAC-SHA1
+        Session-key used for authentication; see also Section 6.10 of <xref
+        target="RFC4656">OWAMP </xref>.</t>
 
         <t>Each client container also holds a list of control connections,
         where each item in the list describes a TWAMP control connection
@@ -775,7 +775,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt)
         <t>This section presents the YANG module for the TWAMP data model
         defined in this document. The module imports definitions from <xref
         target="RFC6991">Common YANG Data Types</xref>, and references <xref
-        target="RFC1305">NTPv3 Specification</xref>, <xref
+        target="RFC5905">NTPv3 Specification</xref>, <xref
         target="RFC2330">Framework for IP Performance Metrics</xref>, <xref
         target="RFC4086">Randomness Requirements for Security</xref>, <xref
         target="RFC4656">OWAMP</xref>, <xref target="RFC5357">TWAMP</xref>,
@@ -1005,11 +1005,7 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
   <back>
     <references title="Normative References">
-      <?rfc include='reference.RFC.1305'?>
-
       <?rfc include='reference.RFC.2119'?>
-
-      <?rfc include='reference.RFC.2330'?>
 
       <?rfc include='reference.RFC.3432'?>
 
@@ -1021,19 +1017,17 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.5357'?>
 
+      <?rfc include='reference.RFC.5905'?>
+
       <?rfc include='reference.RFC.6020'?>
 
       <?rfc include='reference.RFC.6038'?>
 
       <?rfc include='reference.RFC.6991'?>
 
-      <?rfc include='reference.RFC.7312'?>
-
       <?rfc include='reference.RFC.7717'?>
 
       <?rfc include='reference.RFC.7950'?>
-
-      <?rfc include='reference.RFC.8018'?>
 
       <?rfc include='reference.RFC.8174'?>
 
@@ -1045,6 +1039,8 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
     <references title="Informative References">
       <!--<?rfc include="reference.RFC.7398"?>-->
 
+      <?rfc include='reference.RFC.2330'?>
+
       <?rfc include='reference.RFC.5246'?>
 
       <?rfc include='reference.RFC.5618'?>
@@ -1055,7 +1051,11 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.6242'?>
 
+      <?rfc include='reference.RFC.7312'?>
+
       <?rfc include='reference.RFC.7426'?>
+
+      <?rfc include='reference.RFC.8018'?>
 
       <?rfc include='reference.RFC.8040'?>
 
