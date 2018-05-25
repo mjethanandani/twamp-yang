@@ -30,7 +30,7 @@ next := $(draft)-$(next_ver)
 
 #latest: $(draft).txt $(draft).html
 
-default: $(next).xml $(next).txt $(next).html
+default: $(next).xml $(next).txt $(next).html idnits
 
 idnits: $(next).txt
 	$(idnits) $<
