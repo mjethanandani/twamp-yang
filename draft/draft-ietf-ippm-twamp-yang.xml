@@ -16,7 +16,7 @@
 <!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
 <!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
 ]>
-<rfc category="std" docName="draft-ietf-ippm-twamp-yang-10" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-11" ipr="trust200902">
   <?rfc toc="yes" ?>
 
   <?rfc symrefs="yes" ?>
@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <date day="30" month="April" year="2018"/>
+    <date day="25" month="May" year="2018"/>
 
     <area>Transport</area>
 
@@ -511,15 +511,15 @@ o-------------------o                       o-------------------o
         respectively). The Server, being prepared to conduct sessions with
         more than one Control-Client, uses KeyIDs to choose the appropriate
         secret-key; a Control-Client would typically have different secret
-        keys for different Servers. The secret-key is the shared secret, an
-        octet string of arbitrary length whose interpretation as a text string
-        is unspecified. The key-id and secret-key encoding SHOULD follow
-        Section 9.4 of <xref target="RFC7950">YANG </xref>. The derived key
-        length (dkLen in <xref target="RFC8018">PKCS #5: Password-Based
-        Cryptography Specification Version 2.1 </xref>) MUST be 16 octets for
-        the AES Session-key used for encryption and 32 octets for the
-        HMAC-SHA1 Session-key used for authentication; see also Section 6.10
-        of <xref target="RFC4656">OWAMP </xref>.</t>
+        keys for different Servers. The secret-key is the shared secret, a
+        sequence of octets of arbitrary length whose interpretation is
+        unspecified. The key-id and secret-key encoding SHOULD follow Section
+        9.4 of <xref target="RFC7950">YANG </xref>. The derived key length
+        (dkLen in <xref target="RFC8018">PKCS #5: Password-Based Cryptography
+        Specification Version 2.1 </xref>) MUST be 16 octets for the AES
+        Session-key used for encryption and 32 octets for the HMAC-SHA1
+        Session-key used for authentication; see also Section 6.10 of <xref
+        target="RFC4656">OWAMP </xref>.</t>
 
         <t>Each client container also holds a list of control connections,
         where each item in the list describes a TWAMP control connection
