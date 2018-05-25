@@ -775,7 +775,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-twamp@YYYY-MM-DD-tree.txt)
         <t>This section presents the YANG module for the TWAMP data model
         defined in this document. The module imports definitions from <xref
         target="RFC6991">Common YANG Data Types</xref>, and references <xref
-        target="RFC1305">NTPv3 Specification</xref>, <xref
+        target="RFC5905">NTPv3 Specification</xref>, <xref
         target="RFC2330">Framework for IP Performance Metrics</xref>, <xref
         target="RFC4086">Randomness Requirements for Security</xref>, <xref
         target="RFC4656">OWAMP</xref>, <xref target="RFC5357">TWAMP</xref>,
@@ -1005,11 +1005,7 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
   <back>
     <references title="Normative References">
-      <?rfc include='reference.RFC.1305'?>
-
       <?rfc include='reference.RFC.2119'?>
-
-      <?rfc include='reference.RFC.2330'?>
 
       <?rfc include='reference.RFC.3432'?>
 
@@ -1021,19 +1017,17 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.5357'?>
 
+      <?rfc include='reference.RFC.5905'?>
+
       <?rfc include='reference.RFC.6020'?>
 
       <?rfc include='reference.RFC.6038'?>
 
       <?rfc include='reference.RFC.6991'?>
 
-      <?rfc include='reference.RFC.7312'?>
-
       <?rfc include='reference.RFC.7717'?>
 
       <?rfc include='reference.RFC.7950'?>
-
-      <?rfc include='reference.RFC.8018'?>
 
       <?rfc include='reference.RFC.8174'?>
 
@@ -1045,6 +1039,8 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
     <references title="Informative References">
       <!--<?rfc include="reference.RFC.7398"?>-->
 
+      <?rfc include='reference.RFC.2330'?>
+
       <?rfc include='reference.RFC.5246'?>
 
       <?rfc include='reference.RFC.5618'?>
@@ -1055,7 +1051,11 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
 
       <?rfc include='reference.RFC.6242'?>
 
+      <?rfc include='reference.RFC.7312'?>
+
       <?rfc include='reference.RFC.7426'?>
+
+      <?rfc include='reference.RFC.8018'?>
 
       <?rfc include='reference.RFC.8040'?>
 
