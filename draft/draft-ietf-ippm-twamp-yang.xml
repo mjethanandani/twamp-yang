@@ -499,8 +499,8 @@ o-------------------o                       o-------------------o
         Control-Client MUST choose the highest priority Mode from the
         configured mode-preference-chain list.</t>
 
-        <t>Note that the list of preferred Modes may set bit multiple bit
-        position independently, such as when referring to the extended TWAMP
+        <t>Note that the list of preferred Modes may set multiple bit
+        positions independently, such as when referring to the extended TWAMP
         features in <xref target="RFC5618">Mixed Security Mode for TWAMP
         </xref>, <xref target="RFC5938">Individual Session Control Feature for
         TWAMP </xref>, <xref target="RFC6038">TWAMP Reflect Octets and

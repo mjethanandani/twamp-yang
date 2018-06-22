@@ -399,7 +399,7 @@ module ietf-twamp {
       type uint8 {
         range 10..31;
       }
-      default 15;
+      default 20;
       description
         "This parameter limits the maximum Count value, which MUST
          be a power of 2 and at least 1024 as per RFC 5357. It is
