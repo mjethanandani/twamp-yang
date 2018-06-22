@@ -419,10 +419,10 @@ o-------------------o                       o-------------------o
         function as such.</t>
 
         <t>Each Session-Reflector is associated with zero or more TWAMP-Test
-        sessions. For each test session, the REFWAIT timeout parameter can be
-        configured, which determines whether to discontinue the session, if no
-        packets have been received (<xref target="RFC5357">TWAMP </xref>,
-        Section 4.2).</t>
+        sessions. For each test session, the REFWAIT timeout parameter, which
+        determines whether to discontinue the session if no packets have been
+        received (<xref target="RFC5357">TWAMP </xref>, Section 4.2), can be
+        configured.</t>
 
         <t>Read-only access to other data model parameters, such as the Sender
         IP address, is foreseen. Each test session can be uniquely identified
