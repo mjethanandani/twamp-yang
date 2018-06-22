@@ -102,8 +102,8 @@ module ietf-twamp {
         position 2;
         description
           "Encrypted mode 'makes it impossible to alter
-           timestamps undetectably.' See also Section 4 of RFC 7717
-           and Section 6 of RFC 4656.";
+           timestamps undetectably' [Section 6 of RFC 4656].
+           See also Section 4 of RFC 7717.";
         reference
           "RFC 4656: A One-way Active Measurement Protocol
            (OWAMP)";
@@ -379,15 +379,15 @@ module ietf-twamp {
       type uint8 {
         range "10..31";
       }
-      default 10;
+      default 15;
       description 
         "Parameter communicated to the Control-Client as part of
          the Server Greeting message and used for deriving a key
          from a shared secret as per Section 3.1 of  RFC 4656:
          MUST be a power of 2 and at least 1024. It is configured
-         by providing said power. For example, configuring 15 here
-         means count 2^15 = 32768. The default is 10,
-         meaning 2^10 = 1024.";
+         by providing said power. For example, configuring 20 here
+         means count 2^20 = 1048576. The default is 15,
+         meaning 2^15 = 32768.";
       }
    description
      "Reusable data structure for count, which is used both in the
@@ -405,7 +405,7 @@ module ietf-twamp {
          be a power of 2 and at least 1024 as per RFC 5357. It is
          configured by providing said power. For example,
          configuring 10 here means max count 2^10 = 1024.
-         The default is 15, meaning 2^15 = 32768.
+         The default is 20, meaning 2^15 = 1048576.
         
          A TWAMP Server uses this configured value in the
          Server-Greeting message sent to the Control-Client.
@@ -471,9 +471,10 @@ module ietf-twamp {
           type uint16;
           description
             "Indicates the Control-Client Mode preference priority
-             expressed as a 16-bit unsigned integer, where zero is
-             the highest priority and subsequent values
-             monotonically increasing.";
+             expressed as a 16-bit unsigned integer. Values for the
+             priority start with zero, the highest priority, and
+             decreasing priority value is indicated by every increase
+             in value by one.";
         }
         leaf mode {
           type twamp-modes;
@@ -488,7 +489,7 @@ module ietf-twamp {
             
            Depending on the Modes available in the TWAMP Server
            Greeting message (see Fig. 2 of RFC 7717), the
-           this Control-Client MUST choose the highest priority
+           Control-Client MUST choose the highest priority
            Mode from the configured mode-preference-chain list.";
       }
 
@@ -574,15 +575,15 @@ module ietf-twamp {
           type uint64;
           config false;
           description
-            "Indicates the Start-Time advertized by the Server in
+            "Indicates the Start-Time advertised by the Server in
              the Server-Start message (RFC 4656, Section 3.1),
              representing the time when the current
              instantiation of the Server started operating.
-             The timestamp format follows RFC 1305
+             The timestamp format follows RFC 5905
              according to Section 4.1.2 of RFC 4656.";
           reference
             "RFC 4656: OWAMP, Section 3.1 and 4.1.2,
-             RFC 1305: NTPv3 Specification.";
+             RFC 5905: NTPv4 Specification.";
         }
 
         leaf repeat-count {
@@ -713,7 +714,7 @@ module ietf-twamp {
                UDP port number for this TWAMP-Test session.
 
                The configured (or auto-allocated) value is
-            	   advertized in the Sender Port field of the
+               advertised in the Sender Port field of the
                Request-TW-session message (see Section 3.5 of
                RFC 5357). Note that in the scenario where a device
                auto-allocates a UDP port number for a session, and
@@ -766,7 +767,7 @@ module ietf-twamp {
                This value will be placed in the Timeout field of
                the Request-TW-Session message.";
             reference
-              "RFC 5357: TWAMP, Section 3.8";
+              "RFC 5357: TWAMP, Section 3.5.";
           }
 
           leaf padding-length {
@@ -811,7 +812,7 @@ module ietf-twamp {
                The start-time value is placed in the Start Time
                field of the Request-TW-Session message.
 
-               The timestamp format follows RFC 1305 as per
+               The timestamp format follows RFC 5905 as per
                Section 3.5 of RFC 4656.
                 
                The default value of 0 indicates that the session
@@ -820,19 +821,8 @@ module ietf-twamp {
           }
 
           leaf repeat {
-            type union {
-              type uint32 {
-                range 0..4294967294;
-              }
-              type enumeration {
-                enum forever {
-                  description
-                    "Indicates that the test session SHALL be
-                     repeated *forever* using the information in
-                     repeat-interval parameter, and SHALL NOT
-                     decrement the value.";
-                }
-              }
+            type uint32 {
+              range 0..4294967295;
             }
             default 0;
             description
@@ -848,7 +838,12 @@ module ietf-twamp {
                information in repeat-interval parameter, and the
                parent TWAMP-Control connection for this test
                session is restarted to negotiate a new instance
-               of this TWAMP-Test session.";
+               of this TWAMP-Test session.
+
+               A value of 4,294,967,295 indicates that the test
+               session SHALL be repeated *forever* using the
+               information in repeat-interval parameter, and SHALL
+               NOT decrement the value.";
           }
 
           leaf repeat-interval  {
