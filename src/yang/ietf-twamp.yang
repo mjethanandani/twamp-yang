@@ -405,7 +405,7 @@ module ietf-twamp {
          be a power of 2 and at least 1024 as per RFC 5357. It is
          configured by providing said power. For example,
          configuring 10 here means max count 2^10 = 1024.
-         The default is 20, meaning 2^15 = 1048576.
+         The default is 20, meaning 2^20 = 1048576.
         
          A TWAMP Server uses this configured value in the
          Server-Greeting message sent to the Control-Client.
