@@ -6,7 +6,7 @@
       <servwait>1800</servwait>
       <control-packet-dscp>32</control-packet-dscp>
       <modes>authenticated unauthenticated</modes>
-      <count>30</count>
+      <count>15</count>
       <key-chain>
         <key-id>KeyClient1ToRouterA</key-id>
         <secret-key>c2VjcmV0MQ==</secret-key>
@@ -23,7 +23,7 @@
         <control-packet-dscp>32</control-packet-dscp>
         <selected-mode>unauthenticated</selected-mode>
         <key-id>KeyClient1ToRouterA</key-id>
-        <count>30</count>
+        <count>15</count>
       </ctrl-connection>
     </server>
   </twamp>

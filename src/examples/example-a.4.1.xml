@@ -22,7 +22,7 @@
       <test-session>
         <sender-ip>203.0.113.1</sender-ip>
         <sender-udp-port>54001</sender-udp-port>
-        <reflector-ip>192.68.0.2</reflector-ip>
+        <reflector-ip>192.0.2.2</reflector-ip>
         <reflector-udp-port>55001</reflector-udp-port>
         <sid>178943</sid>
         <parent-connection-client-ip>203.0.113.1</parent-connection-client-ip>
