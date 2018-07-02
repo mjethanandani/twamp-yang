@@ -16,7 +16,7 @@
 <!ENTITY UNIFY SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-challenges-00.xml">
 <!ENTITY SP-DEVOPS SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-unify-nfvrg-devops-01.xml">
 ]>
-<rfc category="std" docName="draft-ietf-ippm-twamp-yang-12" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ippm-twamp-yang-13" ipr="trust200902">
   <?rfc toc="yes" ?>
 
   <?rfc symrefs="yes" ?>
@@ -147,7 +147,7 @@
       </address>
     </author>
 
-    <date day="21" month="June" year="2018"/>
+    <date day="2" month="July" year="2018"/>
 
     <area>Transport</area>
 
@@ -966,22 +966,30 @@ INSERT_TEXT_FROM_FILE(../src/examples/example-6.4.3.xml,68)
       nodes without proper protection can have a negative effect on the
       devices that support this feature.</t>
 
-      <t>Nodes such as 'admin-state' that cause test sessions to be created,
-      or 'number-of-packets' that dictate how many packets are sent in any
-      particular test session are obvious. Examples of nodes that are
-      particularly vulnerable include several timeout values put in the
-      protocol to protect against sessions that are not active but are
-      consuming resources. Examples include the REFWAIT timeout parameter
-      which determine whether to discontinue the session if no packets are
-      received. Nodes like 'count' and 'max-count-exponent' can cause a long
-      time to be spent on PBKDF2 iterations. In addition, nodes such as 'dscp'
+      <t>If written, the 'admin-state' node can cause unintended test sessions
+      to be created. If the node 'number-of-packets' that dictates how many
+      packets are sent in any particular test session is written with a large
+      value, it can cause a test session to run longer than expected. Nodes
+      that are particularly vulnerable include several timeout values put in
+      the protocol to protect against sessions that are not active but are
+      consuming resources. These are the REFWAIT timeout parameter which
+      determine whether to discontinue the session if no packets are received,
+      and nodes 'count' and 'max-count-exponent&rsquo; which can cause a long
+      time to be spent on PBKDF2 iterations. In addition, 'dscp&rsquo; node
       marked with different DSCP markings, can cause the test traffic on the
       network to be skewed, and the result manipulated. Finally, nodes within
       'mode-preference-chain' which specify the 'mode' and 'priority' values
-      and indicate the preferred order of use by an operator, can for example,
-      be manipulated to send unauthenticated or non-encrypted traffic,
-      enabling a MITM attack. Limiting access to these nodes will limit the
-      ability to launch an attack in network environments.</t>
+      and indicate the preferred order of use by an operator, can be
+      manipulated to send unauthenticated or non-encrypted traffic, enabling a
+      MITM attack. Limiting access to these nodes will limit the ability to
+      launch an attack in network environments.</t>
+
+      <t>The &lsquo;token&rsquo; node defined in the model, containing a
+      concatenation of a Challenge, AES Session-key used for encryption, and
+      HMAC-SHA1 Session-key used for authentication, is sensitive from a
+      privacy perspective, and can be used to disrupt a test session. The
+      ability to read the field should be limited to the administrator of the
+      test network.</t>
     </section>
 
     <section anchor="iana" title="IANA Considerations">
